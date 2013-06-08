@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="0.0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="3" 
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/q3_mea_aa_lax_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/q3_mea_aa_lax" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="0.0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="1" 
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="0.0dip"
+            android:layout_weight="4"
+            android:maxLines="50"
+            android:singleLine="false"            
+            android:text="辨认以下结构:\n1、升主动脉（AscAo）长轴（LAX）\n2、右肺动脉（RPA）短轴（SAX）\n3、心包窦（Pericardial Sinus，PS）横截面" 
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/q3_mea_aa_lax_btn"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="显示所有结构" />
+        
+        "
+    </LinearLayout>
+
+</LinearLayout>

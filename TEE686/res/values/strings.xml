@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TEE686</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="index">Welcome to TEE!</string>
+
+    <string-array name="spinner_list">
+        <item>食道中段升主动脉长轴切面</item>
+        <item>食道中段升主动脉短轴切面</item>
+        <item>食道上段主动脉弓长轴切面</item>
+        <item>食道上段主动脉弓短轴切面</item>
+        <item>食道中段降主动脉长轴切面</item>
+        <item>食道中段降主动脉短轴切面</item>
+        <item>食道中段四腔心切面</item>
+        <item>食道中段二尖瓣交界切面</item>
+        <item>食道中段两腔心切面</item>
+        <item>食道中段左心室长轴切面</item>
+        <item>食道中段主动脉瓣长轴切面</item>
+        <item>食道中段主动脉瓣短轴切面</item>
+        <item>经胃右心室流入道切面</item>
+        <item>食道中段双腔静脉切面</item>
+        <item>经胃底中段心室短轴切面</item>
+        <item>经胃底基底短轴切面</item>
+        <item>经胃底左心室长轴切面</item>
+        <item>经胃底两腔心切面</item>
+        <item>经胃右心室流入道切面</item>
+        <item>深胃底心室长轴切面</item>
+    </string-array>
+    
+    <string name="hd_mea_aa_lax">食道中段升主动脉长轴切面</string>
+    <string name="hd_mea_aa_sax">食道中段升主动脉短轴切面</string>
+    <string name="hd_mea_uaa_lax">食道上段主动脉弓长轴切面</string>
+    <string name="hd_mea_uaa_sax">食道上段主动脉弓短轴切面</string>
+    <string name="hd_mea_da_lax">食道中段降主动脉长轴切面</string>
+    <string name="hd_mea_da_sax">食道中段降主动脉短轴切面</string>
+    <string name="hd_me_fc">食道中段四腔心切面</string>
+    <string name="hd_me_mc">食道中段二尖瓣交界切面</string>
+    <string name="hd_me_tc">食道中段两腔心切面</string>
+    <string name="hd_me_lax">食道中段左心室长轴切面</string>
+    <string name="hd_me_av_lax">食道中段主动脉瓣长轴切面</string>
+    <string name="hd_me_av_sax">食道中段主动脉瓣短轴切面</string>
+    <string name="hd_me_rvio">经胃右心室流入道切面</string>
+    <string name="hd_me_b">食道中段双腔静脉切面</string>
+    <string name="hd_tg_m_sax">经胃底中段心室短轴切面</string>
+    <string name="hd_tg_b_sax">经胃底基底短轴切面</string>
+    <string name="hd_tg_lax">经胃底左心室长轴切面</string>
+    <string name="hd_tg_tc">经胃底两腔心切面</string>
+    <string name="hd_tg_rvi">经胃右心室流入道切面</string>
+    <string name="hd_tg_d_lax">深胃底心室长轴切面</string>
+
+	<string name="hd_sec686">6-8-6心脏超声标准切面</string>
+    <string name="spinner_prompt">请选择跳转界面</string>
+    <string name="header_mea_aa_lax">食道中段升主动脉长轴切面</string>
+    <string name="mea_aa_lax_q1text">如何获得这个图像:\n1、将超声探头置于食管中段，超声深度8—10cm，角度为0°；\n2、找到食管中段主动脉瓣长轴图像（120°）；\n3、退探头直到右肺动脉进入视野；\n4、减小呈像平面角度10—20°，是主动脉壁对称呈像。\n</string>
+    <string name="mea_aa_lax_q2text">食管中段升主动脉长轴图像(90°)的呈像平面始于右肺动脉，从长轴方向观察升主动脉近端。</string>
+    <string name="mea_aa_lax_q3text">辨认以下结构:\n· 升主动脉（AscAo）长轴（LAX）\n· 右肺动脉（RPA）短轴（SAX）\n· 心包窦（Pericardial Sinus，PS）横截面</string>
+    <string name="title_activity_v1__mea__aa__lax">V1_MEA_AA_LaxActivity</string>
+    <string name="title_activity_v2__mea__aa__lax">V2_MEA_AA_LaxActivity</string>
+    <string name="title_activity_seciton6641">Seciton6641Activity</string>
+    <string name="title_activity_section2345">Section2345Activity</string>
+    <string name="title_activity_section223">Section223Activity</string>
+
+</resources>
