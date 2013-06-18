@@ -288,7 +288,13 @@ public class Section686Activity extends Activity{
         View view6 = mLi.inflate(R.layout.sec_me_av_sax, null);  
         View view7 = mLi.inflate(R.layout.sec_me_rvio, null);  
         View view8 = mLi.inflate(R.layout.sec_me_b, null);  
-                  
+        
+      //获得第一幅图四个象限的imageview的id
+        ImageView view1iv1 = (ImageView)view1.findViewById(R.id.iv1_mea_aa_lax);
+        ImageView view1iv2 = (ImageView)view1.findViewById(R.id.iv2_mea_aa_lax);
+        ImageView view1iv3 = (ImageView)view1.findViewById(R.id.iv3_mea_aa_lax);
+        ImageView view1iv4 = (ImageView)view1.findViewById(R.id.iv4_mea_aa_lax);
+        
         //每个页面的view数据   
         views = new ArrayList<View>();  
         views.add(view1);  
@@ -300,6 +306,42 @@ public class Section686Activity extends Activity{
         views.add(view7);  
         views.add(view8);  
 
+        view1iv1.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(Section686Activity.this, Q1_MEA_AA_LaxActivity.class); 
+		        startActivity(intent); 				
+			}
+        });
+        
+        view1iv2.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(Section686Activity.this, Q2_MEA_AA_LaxActivity.class); 
+		        startActivity(intent); 				
+			}
+        });
+        
+        view1iv3.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(Section686Activity.this, Q3_MEA_AA_LaxActivity.class); 
+		        startActivity(intent); 				
+			}
+        });
+        
+        view1iv4.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(Section686Activity.this, Q4_MEA_AA_LaxActivity.class); 
+		        startActivity(intent); 				
+			}
+        });
+        
         //每一个页面的标题   
         titles = new ArrayList<String>();  
         titles.add("①");  
