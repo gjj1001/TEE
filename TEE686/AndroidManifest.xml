@@ -32,11 +32,6 @@
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.tee686.activity.MEA_AA_LaxActivity"
-            android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
-        </activity>
-        <activity
             android:name="com.tee686.activity.Q3_MEA_AA_LaxActivity"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >

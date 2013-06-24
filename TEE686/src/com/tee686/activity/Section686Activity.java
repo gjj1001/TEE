@@ -130,8 +130,8 @@ public class Section686Activity extends Activity{
 	
 	//食道中段大血管水平四象限初始化
 	private void forMEA6() {
-		ImageButton ib = (ImageButton)findViewById(R.id.btn_6861);
-		ib.setBackgroundResource(0);
+		/*ImageButton ib = (ImageButton)findViewById(R.id.btn_6861);
+		ib.setBackgroundResource(0);*/
 		LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.page_mea6, null);
 		rel.removeAllViews();
 		rel.addView(layout);

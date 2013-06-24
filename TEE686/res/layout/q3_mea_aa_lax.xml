@@ -37,14 +37,45 @@
             android:text="辨认以下结构:\n1、升主动脉（AscAo）长轴（LAX）\n2、右肺动脉（RPA）短轴（SAX）\n3、心包窦（Pericardial Sinus，PS）横截面" 
             android:textColor="@color/black" />
 
-        <Button
-            android:id="@+id/q3_mea_aa_lax_btn"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="显示所有结构" />
-        
-        "
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingBottom="2dip"
+                android:paddingRight="2dip">
+            <ImageButton
+                    android:id="@+id/q3_mea_aa_lax_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:background="@android:drawable/bottom_bar"/>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    >
+
+                <ImageView
+                        android:layout_width="0.0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/bottom2"/>
+                <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="显示所有结构"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:id="@+id/q3_mea_aa_lax_tv"/>
+
+                    </LinearLayout>
+
+        </FrameLayout>
+
     </LinearLayout>
 
 </LinearLayout>

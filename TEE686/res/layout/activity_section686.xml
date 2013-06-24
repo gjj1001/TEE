@@ -57,22 +57,35 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
-                        
+
                         <ImageButton
                             android:id="@+id/btn_6861"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#00000000"
+                            android:background="@layout/image_btn_press"
                             android:scaleType="fitXY"
-                            android:src="@drawable/right_s_1" />
-
-                        <TextView
+                            />
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="6\n食道中段大血管水平"
-                            android:textColor="@color/white"
-                            android:textStyle="bold|italic" />
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_height="match_parent"
+                                android:layout_width="0.0dip"
+                                android:layout_weight="1"
+                                android:src="@drawable/right_i1"></ImageView>
+
+                            <TextView
+                                    android:layout_width="0.0dip"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:text="6\n食道中段大血管水平"
+                                    android:textColor="@color/gray"
+                                    android:textStyle="bold|italic" />
+
+                        </LinearLayout>
 
    					</FrameLayout>
 
@@ -86,17 +99,31 @@
                             android:id="@+id/btn_6862"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#00000000"
+                            android:background="@layout/image_btn_press"
                             android:scaleType="fitXY"
-                            android:src="@drawable/right_s_2" />
+                             />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="8\n食道中段心房心室水平"
-                            android:textColor="@color/white"
-                            android:textStyle="bold|italic" />
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                            <ImageView
+                                    android:layout_height="match_parent"
+                                    android:layout_width="0.0dip"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/right_i2"></ImageView>
+
+                            <TextView
+                                    android:layout_width="0.0dip"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:text="8\n食道中段心房心室水平"
+                                    android:textColor="@color/gray"
+                                    android:textStyle="bold|italic" />
+
+                        </LinearLayout>
 
    					</FrameLayout>				
 
@@ -110,17 +137,31 @@
                              android:id="@+id/btn_6863"
                              android:layout_width="match_parent"
                              android:layout_height="match_parent"
-                             android:background="#00000000"
+                             android:background="@layout/image_btn_press"
                              android:scaleType="fitXY"
-                             android:src="@drawable/right_s_3" />
+                              />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="6\n胃底水平"
-                            android:textColor="@color/white"
-                            android:textStyle="bold|italic" />
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                            <ImageView
+                                    android:layout_height="match_parent"
+                                    android:layout_width="0.0dip"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/right_i3"></ImageView>
+
+                            <TextView
+                                    android:layout_width="0.0dip"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:text="6\n胃底水平"
+                                    android:textColor="@color/gray"
+                                    android:textStyle="bold|italic" />
+
+                        </LinearLayout>
 
    					</FrameLayout>                 
                 </LinearLayout>

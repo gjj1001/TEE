@@ -15,6 +15,7 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -36,9 +37,9 @@ public class Q2_MEA_AA_LaxActivity extends Activity{
 		final LinearLayout layouts1 = (LinearLayout)findViewById(R.id.q2_mea_aa_lax_s1);
 		final LinearLayout layouts2 = (LinearLayout)findViewById(R.id.q2_mea_aa_lax_s2);
 		final LinearLayout layouts3 = (LinearLayout)findViewById(R.id.q2_mea_aa_lax_s3);
-		Button s1 = (Button)findViewById(R.id.q2_mea_aa_lax_btnS1);
-		Button s2 = (Button)findViewById(R.id.q2_mea_aa_lax_btnS2);
-		Button s3 = (Button)findViewById(R.id.q2_mea_aa_lax_btnS3);
+        ImageButton s1 = (ImageButton)findViewById(R.id.q2_mea_aa_lax_btnS1);
+        ImageButton s2 = (ImageButton)findViewById(R.id.q2_mea_aa_lax_btnS2);
+        ImageButton s3 = (ImageButton)findViewById(R.id.q2_mea_aa_lax_btnS3);
 		s1.setOnClickListener(new OnClickListener(){
 
 			@Override

@@ -28,6 +28,7 @@ public class Q1_MEA_AA_LaxActivity extends Activity{
 		vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.xinzang3d));
 
 		vv.setMediaController(mc);
+        mc.setMediaPlayer(vv);
 		vv.setOnCompletionListener(onCompListener);
 		vv.start();
 	}
