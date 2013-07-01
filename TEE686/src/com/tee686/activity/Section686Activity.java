@@ -5,11 +5,15 @@
 package com.tee686.activity;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.casit.tee686.R;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
@@ -18,6 +22,8 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
@@ -31,6 +37,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 public class Section686Activity extends Activity{
 	
@@ -46,6 +53,10 @@ public class Section686Activity extends Activity{
     private Spinner spinner;
     private LayoutInflater inflater;
     private RelativeLayout rel;
+    private Dialog dialog;
+    private View dialogView = null;
+    private VideoView vv =null;
+    private final Timer timer = new Timer();
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +91,33 @@ public class Section686Activity extends Activity{
 		ImageButton btn_6862 = (ImageButton)findViewById(R.id.btn_6862);
 		ImageButton btn_6863 = (ImageButton)findViewById(R.id.btn_6863);
 
+        dialogView = getLayoutInflater().inflate(R.layout.demo_index, null);
+        if (dialogView != null) {
+            vv = (VideoView) dialogView.findViewById(R.id.demo_index_vv);
+        }
+        vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.demo));
+        dialog = new Dialog(this);
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(dialogView);
+        vv.start();
+
+        dialog.getWindow().setLayout(this.getWindowManager().getDefaultDisplay().getWidth(),this.getWindowManager().getDefaultDisplay().getHeight());
+        dialog.show();
+        //使dialog弹出后屏幕不变暗
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams lp = window.getAttributes();
+        lp.dimAmount =0f;
+        window.setAttributes(lp);
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                dialog.dismiss();
+                timer.cancel();
+            }
+        },10000);
+
+
 		//初始化686标准切面界面
 		forMEA6();
 		
@@ -90,7 +128,7 @@ public class Section686Activity extends Activity{
 				// TODO Auto-generated method stub
 				currIndex_mea6 = 0;
 				forMEA6();
-				spinner.setSelection(currIndex_mea6, true);
+				spinner.setSelection(0/*currIndex_mea6*/, true);
 			}
         });
 		
@@ -101,7 +139,7 @@ public class Section686Activity extends Activity{
 				// TODO Auto-generated method stub
 				currIndex_me8 = 0;
 				forME8();
-				spinner.setSelection(currIndex_me8+6, true);
+				spinner.setSelection(0/*currIndex_me8+6*/, true);
 			}
         });
 		
@@ -112,7 +150,7 @@ public class Section686Activity extends Activity{
 				// TODO Auto-generated method stub
 				currIndex_tg6 = 0;
 				forTG6();
-				spinner.setSelection(currIndex_tg6+14, true);
+				spinner.setSelection(0/*currIndex_tg6+14*/, true);
 			}
         });     
         
@@ -479,7 +517,7 @@ public class Section686Activity extends Activity{
 			// TODO Auto-generated method stub
 			Intent intent;
 			switch(arg2){
-				case 0:
+				case 1:
 					/*Toast.makeText(arg0.getContext(),"You choose " 
 				+ arg0.getItemAtPosition(arg2).toString(), Toast.LENGTH_LONG).show();
 					//intent = new Intent(Section686Activity.this, Section686Activity.class); 
@@ -488,7 +526,7 @@ public class Section686Activity extends Activity{
 					mViewPager.setCurrentItem(0);
 					currIndex_mea6 = 0;
 					break;
-				case 1:
+				case 2:
 					/*Toast.makeText(arg0.getContext(),"You choose " 
 				+ arg0.getItemAtPosition(arg2).toString(), Toast.LENGTH_LONG).show();
 					intent = new Intent(Section686Activity.this, Section6641Activity.class); 
@@ -497,92 +535,92 @@ public class Section686Activity extends Activity{
 					mViewPager.setCurrentItem(1);
 					currIndex_mea6 = 1;
 					break;
-				case 2:
+				case 3:
 					forMEA6();					
 					mViewPager.setCurrentItem(2);
 					currIndex_mea6 = 2;
 					break;
-				case 3:
+				case 4:
 					forMEA6();					
 					mViewPager.setCurrentItem(3);
 					currIndex_mea6 = 3;
 					break;
-				case 4:
+				case 5:
 					forMEA6();					
 					mViewPager.setCurrentItem(4);
 					currIndex_mea6 = 4;
 					break;
-				case 5:
+				case 6:
 					forMEA6();
 					mViewPager.setCurrentItem(5);
 					currIndex_mea6 = 5;
 					break;
-				case 6:
+				case 7:
 					forME8();				
 					mViewPager.setCurrentItem(0);
 					currIndex_me8 = 0;
 					break;
-				case 7:
+				case 8:
 					forME8();					
 					mViewPager.setCurrentItem(1);
 					currIndex_me8 = 1;
 					break;
-				case 8:
+				case 9:
 					forME8();					
 					mViewPager.setCurrentItem(2);
 					currIndex_me8 = 2;
 					break;
-				case 9:
+				case 10:
 					forME8();
 					mViewPager.setCurrentItem(3);
 					currIndex_me8 = 3;
 					break;
-				case 10:
+				case 11:
 					forME8();
 					mViewPager.setCurrentItem(4);
 					currIndex_me8 = 4;
 					break;
-				case 11:
+				case 12:
 					forME8();
 					mViewPager.setCurrentItem(5);
 					currIndex_me8 = 5;
 					break;
-				case 12:
+				case 13:
 					forME8();
 					mViewPager.setCurrentItem(6);
 					currIndex_me8 = 6;
 					break;
-				case 13:
+				case 14:
 					forME8();
 					mViewPager.setCurrentItem(7);
 					currIndex_me8 = 7;
 					break;
-				case 14:
+				case 15:
 					forTG6();
 					mViewPager.setCurrentItem(0);
 					currIndex_tg6 = 0;
 					break;
-				case 15:
+				case 16:
 					forTG6();
 					mViewPager.setCurrentItem(1);
 					currIndex_tg6 = 1;
 					break;
-				case 16:
+				case 17:
 					forTG6();
 					mViewPager.setCurrentItem(2);
 					currIndex_tg6 = 2;
 					break;
-				case 17:
+				case 18:
 					forTG6();
 					mViewPager.setCurrentItem(3);
 					currIndex_tg6 = 3;
 					break;
-				case 18:
+				case 19:
 					forTG6();
 					mViewPager.setCurrentItem(4);
 					currIndex_tg6 = 4;
 					break;
-				case 19:
+				case 20:
 					forTG6();
 					mViewPager.setCurrentItem(5);
 					currIndex_tg6 = 5;
@@ -728,12 +766,12 @@ public class Section686Activity extends Activity{
             if(mea6_flag!=1)
             {
             	animation.setFillAfter(true);// True:设置图片停在动画结束位置   
-            	animation.setDuration(300);//设置动画持续时间   
+            	animation.setDuration(200);//设置动画持续时间
             }
             currIndex_mea6 = arg0;//设置当前View   
             if(currIndex_mea6!=spinner.getSelectedItemPosition())
             {
-            	spinner.setSelection(currIndex_mea6, true);
+            	spinner.setSelection(0/*currIndex_mea6*/, true);
             }
         }
 
@@ -930,12 +968,12 @@ public class Section686Activity extends Activity{
             if(me8_flag!=1)
             {            	
             	animation.setFillAfter(true);// True:设置图片停在动画结束位置   
-            	animation.setDuration(300);//设置动画持续时间   
+            	animation.setDuration(200);//设置动画持续时间
             }
             currIndex_me8 = arg0;//设置当前View     
             if(currIndex_me8!=spinner.getSelectedItemPosition()-6)
             {
-            	spinner.setSelection(currIndex_me8+6, true);
+            	spinner.setSelection(0/*currIndex_me8+6*/, true);
             }
         }
 
@@ -1080,12 +1118,12 @@ public class Section686Activity extends Activity{
             if(tg6_flag!=1)
             {          	
             	animation.setFillAfter(true);// True:设置图片停在动画结束位置   
-            	animation.setDuration(300);//设置动画持续时间   
+            	animation.setDuration(200);//设置动画持续时间
             }
             currIndex_tg6 = arg0;//设置当前View     
             if(currIndex_tg6!=spinner.getSelectedItemPosition()-14)
             {
-            	spinner.setSelection(currIndex_tg6+14, true);
+            	spinner.setSelection(0/*currIndex_tg6+14*/, true);
             }
         }
 

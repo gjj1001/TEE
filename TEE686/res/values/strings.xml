@@ -7,6 +7,7 @@
     <string name="index">Welcome to TEE!</string>
 
     <string-array name="spinner_list">
+        <item>请选择所需切面</item>
         <item>食道中段升主动脉长轴切面</item>
         <item>食道中段升主动脉短轴切面</item>
         <item>食道上段主动脉弓长轴切面</item>
