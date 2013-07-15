@@ -3,6 +3,7 @@ package com.tee686.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -57,6 +58,8 @@ public class Q3_MEA_AA_LaxActivity extends Activity{
 			}			
 		});
 
+        ib1.setLeft(50);
+        ib1.setTop(200);
         ib1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,13 +67,19 @@ public class Q3_MEA_AA_LaxActivity extends Activity{
                     pw1.dismiss();
                 } else {
                     pw1.showAsDropDown(ib1);
-                    pw1.update(ib1,400,200);
+                    pw1.update(ib1,400,200);//这里必须要加上update，否则无法显示PopupWindow
 //                    pw1.update(0, 15, tv1.getWidth(), tv1.getHeight());
                 }
             }
         });
-
-
 	}
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            overridePendingTransition(R.anim.hold, R.anim.q3_zoomout);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

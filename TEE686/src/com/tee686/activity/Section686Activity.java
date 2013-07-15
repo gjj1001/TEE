@@ -4,40 +4,27 @@
  */
 package com.tee686.activity;
 
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import com.casit.tee686.R;
-
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.VideoView;
+
+import com.casit.tee686.R;
+
+import java.util.ArrayList;
 
 public class Section686Activity extends Activity{
 	
@@ -53,10 +40,7 @@ public class Section686Activity extends Activity{
     private Spinner spinner;
     private LayoutInflater inflater;
     private RelativeLayout rel;
-    private Dialog dialog;
-    private View dialogView = null;
-    private VideoView vv =null;
-    private final Timer timer = new Timer();
+
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,39 +68,14 @@ public class Section686Activity extends Activity{
 		//添加事件Spinner事件监听 
 		spinner.setOnItemSelectedListener(new SpinnerSelectedListener());
 		//设置默认值  
-		spinner.setVisibility(View.VISIBLE);
+		spinner.setVisibility(View.GONE);
 		
 		rel = (RelativeLayout) findViewById(R.id.relativelayout_choose_section);
 		ImageButton btn_6861 = (ImageButton)findViewById(R.id.btn_6861);
 		ImageButton btn_6862 = (ImageButton)findViewById(R.id.btn_6862);
 		ImageButton btn_6863 = (ImageButton)findViewById(R.id.btn_6863);
-
-        dialogView = getLayoutInflater().inflate(R.layout.demo_index, null);
-        if (dialogView != null) {
-            vv = (VideoView) dialogView.findViewById(R.id.demo_index_vv);
-        }
-        vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.demo));
-        dialog = new Dialog(this);
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(dialogView);
-        vv.start();
-
-        dialog.getWindow().setLayout(this.getWindowManager().getDefaultDisplay().getWidth(),this.getWindowManager().getDefaultDisplay().getHeight());
-        dialog.show();
-        //使dialog弹出后屏幕不变暗
-        Window window = dialog.getWindow();
-        WindowManager.LayoutParams lp = window.getAttributes();
-        lp.dimAmount =0f;
-        window.setAttributes(lp);
-        timer.schedule(new TimerTask() {
-
-            @Override
-            public void run() {
-                dialog.dismiss();
-                timer.cancel();
-            }
-        },10000);
-
+		ImageButton btn_6864 = (ImageButton)findViewById(R.id.btn_6864);
+		ImageButton backbtn = (ImageButton)findViewById(R.id.image_backbtn);
 
 		//初始化686标准切面界面
 		forMEA6();
@@ -152,11 +111,244 @@ public class Section686Activity extends Activity{
 				forTG6();
 				spinner.setSelection(0/*currIndex_tg6+14*/, true);
 			}
-        });     
-        
-    } 
-	
-	@Override
+        });
+
+        btn_6864.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                // TODO Auto-generated method stub
+                forEx();
+                spinner.setSelection(0, true);
+            }
+        });
+
+        backbtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Section686Activity.this, MainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+            }
+        });
+    }
+
+    private void forEx() {
+        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.sec_me_rvio, null);
+        rel.removeAllViews();
+        rel.addView(layout);
+        TextView tx = (TextView)findViewById(R.id.text_header);
+        tx.setText(R.string.hd_me_rvio);
+
+        ImageView view1iv1 = (ImageView)layout.findViewById(R.id.iv1_mea_aa_lax);
+        ImageView view1iv2 = (ImageView)layout.findViewById(R.id.iv2_mea_aa_lax);
+        ImageView view1iv3 = (ImageView)layout.findViewById(R.id.iv3_mea_aa_lax);
+        ImageView view1iv4 = (ImageView)layout.findViewById(R.id.iv4_mea_aa_lax);
+
+        view1iv1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q1_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q1_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q2_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q2_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv3.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q3_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q3_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv4.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q4_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q4_zoomin, R.anim.hold);
+            }
+        });
+    }
+
+    private void forMEA6() {
+        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.sec_me_lax, null);
+        rel.removeAllViews();
+        rel.addView(layout);
+        TextView tx = (TextView)findViewById(R.id.text_header);
+        tx.setText(R.string.hd_me_lax);
+
+        ImageView view1iv1 = (ImageView)layout.findViewById(R.id.iv1_mea_aa_lax);
+        ImageView view1iv2 = (ImageView)layout.findViewById(R.id.iv2_mea_aa_lax);
+        ImageView view1iv3 = (ImageView)layout.findViewById(R.id.iv3_mea_aa_lax);
+        ImageView view1iv4 = (ImageView)layout.findViewById(R.id.iv4_mea_aa_lax);
+
+
+        view1iv1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q1_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q1_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q2_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q2_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv3.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q3_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q3_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv4.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q4_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q4_zoomin, R.anim.hold);
+            }
+        });
+    }
+
+    private void forME8() {
+        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.sec_me_fc, null);
+        rel.removeAllViews();
+        rel.addView(layout);
+        TextView tx = (TextView)findViewById(R.id.text_header);
+        tx.setText(R.string.hd_me_fc);
+
+        ImageView view1iv1 = (ImageView)layout.findViewById(R.id.iv1_mea_aa_lax);
+        ImageView view1iv2 = (ImageView)layout.findViewById(R.id.iv2_mea_aa_lax);
+        ImageView view1iv3 = (ImageView)layout.findViewById(R.id.iv3_mea_aa_lax);
+        ImageView view1iv4 = (ImageView)layout.findViewById(R.id.iv4_mea_aa_lax);
+
+
+        view1iv1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q1_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q1_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q2_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q2_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv3.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q3_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q3_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv4.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q4_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q4_zoomin, R.anim.hold);
+            }
+        });
+    }
+
+    private void forTG6() {
+        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.sec_tg_b_sax, null);
+        rel.removeAllViews();
+        rel.addView(layout);
+        TextView tx = (TextView)findViewById(R.id.text_header);
+        tx.setText(R.string.hd_tg_b_sax);
+
+        ImageView view1iv1 = (ImageView)layout.findViewById(R.id.iv1_mea_aa_lax);
+        ImageView view1iv2 = (ImageView)layout.findViewById(R.id.iv2_mea_aa_lax);
+        ImageView view1iv3 = (ImageView)layout.findViewById(R.id.iv3_mea_aa_lax);
+        ImageView view1iv4 = (ImageView)layout.findViewById(R.id.iv4_mea_aa_lax);
+
+
+        view1iv1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q1_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q1_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q2_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q2_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv3.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q3_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q3_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv4.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q4_MEA_AA_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q4_zoomin, R.anim.hold);
+            }
+        });
+    }
+
+    @Override
 	public void onResume()
 	{	
 		spinner.setSelection(0,true);
@@ -167,135 +359,139 @@ public class Section686Activity extends Activity{
 	}
 	
 	//食道中段大血管水平四象限初始化
-	private void forMEA6() {
-		/*ImageButton ib = (ImageButton)findViewById(R.id.btn_6861);
-		ib.setBackgroundResource(0);*/
+	/*private void forMEA6() {
+		*//*ImageButton ib = (ImageButton)findViewById(R.id.btn_6861);
+		ib.setBackgroundResource(0);*//*
 		LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.page_mea6, null);
 		rel.removeAllViews();
 		rel.addView(layout);
-		mViewPager = (ViewPager)layout.findViewById(R.id.viewpager_mea6);            
-        mPagerTitleStrip = (PagerTitleStrip)layout.findViewById(R.id.pagertitle_mea6);   
-          
+		mViewPager = (ViewPager)layout.findViewById(R.id.viewpager_mea6);
+        mPagerTitleStrip = (PagerTitleStrip)layout.findViewById(R.id.pagertitle_mea6);
+
         TextView tx = (TextView)findViewById(R.id.text_header);
-      	tx.setText(R.string.hd_mea_aa_lax);
+      	tx.setText(R.string.hd_me_lax);
 
         //小圆点
-        mSec1 = (ImageView)layout.findViewById(R.id.sec1_mea6);  
-        mSec2 = (ImageView)layout.findViewById(R.id.sec2_mea6);  
-        mSec3 = (ImageView)layout.findViewById(R.id.sec3_mea6);  
-        mSec4 = (ImageView)layout.findViewById(R.id.sec4_mea6);  
-        mSec5 = (ImageView)layout.findViewById(R.id.sec5_mea6);  
-        mSec6 = (ImageView)layout.findViewById(R.id.sec6_mea6);   
-                 
-        //将要分页显示的View装入数组中   
-        LayoutInflater mLi = LayoutInflater.from(getApplicationContext());  
-        View view1 = mLi.inflate(R.layout.sec_mea_aa_lax, null);  
-        View view2 = mLi.inflate(R.layout.sec_mea_aa_sax, null);  
-        View view3 = mLi.inflate(R.layout.sec_mea_da_lax, null);  
-        View view4 = mLi.inflate(R.layout.sec_mea_da_sax, null);  
-        View view5 = mLi.inflate(R.layout.sec_mea_uaa_lax, null);  
+        mSec1 = (ImageView)layout.findViewById(R.id.sec1_mea6);
+        mSec2 = (ImageView)layout.findViewById(R.id.sec2_mea6);
+        mSec3 = (ImageView)layout.findViewById(R.id.sec3_mea6);
+        mSec4 = (ImageView)layout.findViewById(R.id.sec4_mea6);
+        mSec5 = (ImageView)layout.findViewById(R.id.sec5_mea6);
+        mSec6 = (ImageView)layout.findViewById(R.id.sec6_mea6);
+
+        //将要分页显示的View装入数组中
+        LayoutInflater mLi = LayoutInflater.from(getApplicationContext());
+        View view1 = mLi.inflate(R.layout.sec_me_lax, null);
+        View view2 = mLi.inflate(R.layout.sec_mea_aa_sax, null);
+        View view3 = mLi.inflate(R.layout.sec_mea_da_lax, null);
+        View view4 = mLi.inflate(R.layout.sec_mea_da_sax, null);
+        View view5 = mLi.inflate(R.layout.sec_mea_uaa_lax, null);
         View view6 = mLi.inflate(R.layout.sec_mea_uaa_sax, null);
-        
+
         //获得第一幅图四个象限的imageview的id
         ImageView view1iv1 = (ImageView)view1.findViewById(R.id.iv1_mea_aa_lax);
         ImageView view1iv2 = (ImageView)view1.findViewById(R.id.iv2_mea_aa_lax);
         ImageView view1iv3 = (ImageView)view1.findViewById(R.id.iv3_mea_aa_lax);
         ImageView view1iv4 = (ImageView)view1.findViewById(R.id.iv4_mea_aa_lax);
 
-                  
-        //每个页面的view数据   
-        views = new ArrayList<View>();  
-        views.add(view1);  
-        views.add(view2);  
-        views.add(view3);  
-        views.add(view4);  
-        views.add(view5);  
-        views.add(view6);   
+
+        //每个页面的view数据
+        views = new ArrayList<View>();
+        views.add(view1);
+        views.add(view2);
+        views.add(view3);
+        views.add(view4);
+        views.add(view5);
+        views.add(view6);
 
         view1iv1.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(Section686Activity.this, Q1_MEA_AA_LaxActivity.class); 
-		        startActivity(intent); 				
+				Intent intent = new Intent(Section686Activity.this, Q1_MEA_AA_LaxActivity.class);
+		        startActivity(intent);
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 			}
         });
-        
+
         view1iv2.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(Section686Activity.this, Q2_MEA_AA_LaxActivity.class); 
-		        startActivity(intent); 				
+				Intent intent = new Intent(Section686Activity.this, Q2_MEA_AA_LaxActivity.class);
+		        startActivity(intent);
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 			}
         });
-        
+
         view1iv3.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(Section686Activity.this, Q3_MEA_AA_LaxActivity.class); 
-		        startActivity(intent); 				
+				Intent intent = new Intent(Section686Activity.this, Q3_MEA_AA_LaxActivity.class);
+		        startActivity(intent);
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 			}
         });
-        
+
         view1iv4.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(Section686Activity.this, Q4_MEA_AA_LaxActivity.class); 
-		        startActivity(intent); 				
+				Intent intent = new Intent(Section686Activity.this, Q4_MEA_AA_LaxActivity.class);
+		        startActivity(intent);
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 			}
         });
-        
-        //每一个页面的标题   
-        titles = new ArrayList<String>();  
-        titles.add("①");  
-        titles.add("②");  
-        titles.add("③");  
-        titles.add("④");  
-        titles.add("⑤");  
-        titles.add("⑥");  
 
-        
-        
+        //每一个页面的标题
+        titles = new ArrayList<String>();
+        titles.add("①");
+        titles.add("②");
+        titles.add("③");
+        titles.add("④");
+        titles.add("⑤");
+        titles.add("⑥");
+
+
+
       //填充ViewPager的数据适配器
-        PagerAdapter mPagerAdapter = new PagerAdapter() {  
-              
-            @Override  
-            public boolean isViewFromObject(View arg0, Object arg1) {  
-                return arg0 == arg1;  
-            }  
-              
-            @Override  
-            public int getCount() {  
-                return views.size();  
+        PagerAdapter mPagerAdapter = new PagerAdapter() {
+
+            @Override
+            public boolean isViewFromObject(View arg0, Object arg1) {
+                return arg0 == arg1;
             }
-  
-            @Override  
-            public void destroyItem(View container, int position, Object object) {  
-                ((ViewPager)container).removeView(views.get(position));  
-            }  
-              
-            @Override  
-            public CharSequence getPageTitle(int position) {  
+
+            @Override
+            public int getCount() {
+                return views.size();
+            }
+
+            @Override
+            public void destroyItem(View container, int position, Object object) {
+                ((ViewPager)container).removeView(views.get(position));
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
                 return titles.get(position);
-            }  
-              
-            @Override  
-            public Object instantiateItem(View container, int position) {  
-                ((ViewPager)container).addView(views.get(position));  
-                return views.get(position);  
-            }  
-        }; 
-        
-        mViewPager.setOnPageChangeListener(new MyOnPageChangeListener_mea6());  
-        mViewPager.setAdapter(mPagerAdapter);//与ListView用法相同，设置重写的Adapter。这样就实现了ViewPager的滑动效果。   
-        mViewPager.setCurrentItem(0);		
-	}
+            }
+
+            @Override
+            public Object instantiateItem(View container, int position) {
+                ((ViewPager)container).addView(views.get(position));
+                return views.get(position);
+            }
+        };
+
+        mViewPager.setOnPageChangeListener(new MyOnPageChangeListener_mea6());
+        mViewPager.setAdapter(mPagerAdapter);//与ListView用法相同，设置重写的Adapter。这样就实现了ViewPager的滑动效果。
+        mViewPager.setCurrentItem(0);
+	}*/
 	
 	//食道中段心房心室水平四象限初始化
-	private void forME8() {
+	/*private void forME8() {
 		LinearLayout layout = (LinearLayout) inflater.inflate(
                 R.layout.page_me8, null);
 		rel.removeAllViews();
@@ -424,10 +620,10 @@ public class Section686Activity extends Activity{
         mViewPager.setOnPageChangeListener(new MyOnPageChangeListener_me8());  
         mViewPager.setAdapter(mPagerAdapter);//与ListView用法相同，设置重写的Adapter。这样就实现了ViewPager的滑动效果。   
         mViewPager.setCurrentItem(0);		
-	}
+	}*/
 	
 	//胃底水平四象限初始化
-	private void forTG6() {
+	/*private void forTG6() {
 		LinearLayout layout = (LinearLayout) inflater.inflate(
                 R.layout.page_tg6, null);
 		rel.removeAllViews();
@@ -506,7 +702,7 @@ public class Section686Activity extends Activity{
         mViewPager.setOnPageChangeListener(new MyOnPageChangeListener_tg6());  
         mViewPager.setAdapter(mPagerAdapter);//与ListView用法相同，设置重写的Adapter。这样就实现了ViewPager的滑动效果。   
         mViewPager.setCurrentItem(0);		
-	}
+	}*/
 	
 	//下拉菜单
 	public class SpinnerSelectedListener implements OnItemSelectedListener {
@@ -639,7 +835,7 @@ public class Section686Activity extends Activity{
 	}
       
     //食道中段大血管水平界面滑动
-    public class MyOnPageChangeListener_mea6 implements OnPageChangeListener {  
+    /*public class MyOnPageChangeListener_mea6 implements OnPageChangeListener {
     	  
         public void onPageSelected(int arg0) {//参数arg0为选中的View   
   
@@ -648,7 +844,7 @@ public class Section686Activity extends Activity{
             switch (arg0) {  
             case 0: //页面一            
             	TextView tv_mea6_1 = (TextView)findViewById(R.id.text_header);
-            	tv_mea6_1.setText(R.string.hd_mea_aa_lax);
+            	tv_mea6_1.setText(R.string.hd_me_lax);
                 mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused));//进入第一个导航页面，小圆点为选中状态，下一个页面的小圆点是未选中状态。   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
@@ -771,7 +967,7 @@ public class Section686Activity extends Activity{
             currIndex_mea6 = arg0;//设置当前View   
             if(currIndex_mea6!=spinner.getSelectedItemPosition())
             {
-            	spinner.setSelection(0/*currIndex_mea6*/, true);
+            	spinner.setSelection(0*//*currIndex_mea6*//*, true);
             }
         }
 
@@ -786,10 +982,10 @@ public class Section686Activity extends Activity{
 			// TODO Auto-generated method stub
 			
 		}    
-	}
+	}*/
 
 	//食道中段心房心室水平界面滑动
-    public class MyOnPageChangeListener_me8 implements OnPageChangeListener {  
+    /*public class MyOnPageChangeListener_me8 implements OnPageChangeListener {
   
         public void onPageSelected(int arg0) {//参数arg0为选中的View   
   
@@ -973,7 +1169,7 @@ public class Section686Activity extends Activity{
             currIndex_me8 = arg0;//设置当前View     
             if(currIndex_me8!=spinner.getSelectedItemPosition()-6)
             {
-            	spinner.setSelection(0/*currIndex_me8+6*/, true);
+            	spinner.setSelection(0*//*currIndex_me8+6*//*, true);
             }
         }
 
@@ -988,10 +1184,10 @@ public class Section686Activity extends Activity{
 			// TODO Auto-generated method stub
 			
 		}    
-	}
+	}*/
     
     //胃底水平界面滑动
-    public class MyOnPageChangeListener_tg6 implements OnPageChangeListener {  
+    /*public class MyOnPageChangeListener_tg6 implements OnPageChangeListener {
   	  
         public void onPageSelected(int arg0) {//参数arg0为选中的View   
   
@@ -1123,7 +1319,7 @@ public class Section686Activity extends Activity{
             currIndex_tg6 = arg0;//设置当前View     
             if(currIndex_tg6!=spinner.getSelectedItemPosition()-14)
             {
-            	spinner.setSelection(0/*currIndex_tg6+14*/, true);
+            	spinner.setSelection(0*//*currIndex_tg6+14*//*, true);
             }
         }
 
@@ -1138,5 +1334,5 @@ public class Section686Activity extends Activity{
 			// TODO Auto-generated method stub
 			
 		}    
-	}
+	}*/
 }

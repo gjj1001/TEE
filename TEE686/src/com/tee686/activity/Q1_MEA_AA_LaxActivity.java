@@ -5,11 +5,13 @@ import java.io.File;
 import com.casit.tee686.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.KeyEvent;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
@@ -28,7 +30,6 @@ public class Q1_MEA_AA_LaxActivity extends Activity{
 		vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.xinzang3d));
 
 		vv.setMediaController(mc);
-        mc.setMediaPlayer(vv);
 		vv.setOnCompletionListener(onCompListener);
 		vv.start();
 	}
@@ -43,8 +44,21 @@ public class Q1_MEA_AA_LaxActivity extends Activity{
 			vv.seekTo(1);
 		}		
 	};
-	
-    private String getSDPath(){ 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            /*Intent intent = new Intent(this, Section686Activity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY);
+            startActivity(intent);*/
+            finish();
+            overridePendingTransition(R.anim.hold, R.anim.q1_zoomout);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    /*private String getSDPath(){
         File sdDir = null;
       //ÅÐ¶Ïsd¿¨ÊÇ·ñ´æÔÚ 
         boolean sdCardExist = Environment.getExternalStorageState()   
@@ -54,6 +68,6 @@ public class Q1_MEA_AA_LaxActivity extends Activity{
           sdDir = Environment.getExternalStorageDirectory();
         }   
         return sdDir.toString(); 
-    } 
+    } */
     
 }

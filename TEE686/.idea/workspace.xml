@@ -14,9 +14,73 @@
       </config>
     </shared>
     <layouts>
+      <layout url="file://$PROJECT_DIR$/res/layout-large/activity_main.xml">
+        <config>
+          <device>Nexus 7</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout-large/activity_section686.xml">
+        <config>
+          <device>Nexus 7</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout-large/header.xml">
+        <config>
+          <device>Nexus 7</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout-large/page_mea6.xml">
+        <config>
+          <device>Nexus 7</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout-large/q2_mea_aa_lax.xml">
+        <config>
+          <device>Nexus 7</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout-large/q3_mea_aa_lax.xml">
+        <config>
+          <device>Nexus 7</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout-large/sec_me_fc.xml">
+        <config>
+          <device>Nexus 7</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/activity_index.xml">
         <config>
           <device>Nexus 4</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/activity_main.xml">
+        <config>
+          <device>Nexus 4</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/activity_mea_aa_lax.xml">
+        <config>
+          <device>Nexus 4</device>
+          <state>Landscape</state>
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
@@ -41,6 +105,13 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/page_mea6.xml">
+        <config>
+          <device>Nexus 4</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/q1_mea_aa_lax.xml">
         <config>
           <device>Nexus 4</device>
@@ -57,12 +128,61 @@
       </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/q3_mea_aa_lax.xml">
         <config>
+          <device>MEIZU_MX2</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/sec_me_fc.xml">
+        <config>
+          <device>Nexus 4</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/sec_me_lax.xml">
+        <config>
+          <device>Nexus 4</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/sec_me_rvio.xml">
+        <config>
           <device>Nexus 4</device>
           <state>Landscape</state>
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/sec_mea_aa_lax.xml">
+        <config>
+          <device>Nexus 4</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/sec_mea_aa_sax.xml">
+        <config>
+          <device>Nexus 4</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/sec_mea_da_lax.xml">
+        <config>
+          <device>Nexus 4</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/sec_tg_b_sax.xml">
+        <config>
+          <device>Nexus 4</device>
+          <state>Landscape</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/sec_tg_tc.xml">
         <config>
           <device>Nexus 4</device>
           <state>Landscape</state>
@@ -108,18 +228,18 @@
     <ignored path=".idea/workspace.xml" />
     <file path="/a.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1371692465777" ignored="false" />
     <file path="/a.groovy" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1371691540465" ignored="false" />
-    <file path="/Dummy.txt" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372661562957" ignored="false" />
+    <file path="/Dummy.txt" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372992868255" ignored="false" />
     <file path="/sample.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1371692466255" ignored="false" />
-    <file path="/Section686Activity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372689506647" ignored="false" />
+    <file path="/Section686Activity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373356459881" ignored="false" />
     <file path="/colors.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1371712659370" ignored="false" />
-    <file path="/activity_section686.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1371795674080" ignored="false" />
+    <file path="/activity_section686.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373072416673" ignored="false" />
     <file path="/image_btn_press.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1371716642976" ignored="false" />
-    <file path="/q2_mea_aa_lax.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1371802992866" ignored="false" />
+    <file path="/q2_mea_aa_lax.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373443669214" ignored="false" />
     <file path="/q3_mea_aa_lax.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372659743257" ignored="false" />
-    <file path="/fragment.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372680190112" ignored="false" />
-    <file path="/Q3_MEA_AA_LaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372680673301" ignored="false" />
-    <file path="/Q2_MEA_AA_LaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372689086981" ignored="false" />
-    <file path="/Q1_MEA_AA_LaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372061585932" ignored="false" />
+    <file path="/fragment.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373012266786" ignored="false" />
+    <file path="/Q3_MEA_AA_LaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373358958395" ignored="false" />
+    <file path="/Q2_MEA_AA_LaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373504889981" ignored="false" />
+    <file path="/Q1_MEA_AA_LaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373352200123" ignored="false" />
     <file path="C:/Developer/workspace/SeeJoPlayer/src/com/zh_weir/videoplayer/VideoView.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372064740868" ignored="false" />
     <file path="/VideoView.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372064740868" ignored="false" />
     <file path="C:/Developer/workspace/SeeJoPlayer/src/com/zh_weir/videoplayer/VideoPlayerActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372388825196" ignored="false" />
@@ -128,7 +248,21 @@
     <file path="C:/Developer/workspace/SeeJoPlayer/src/com/zh_weir/videoplayer/SoundView.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372237953191" ignored="false" />
     <file path="/SoundView.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372237950232" ignored="false" />
     <file path="/popupwindow_structure.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372320558106" ignored="false" />
-    <file path="/strings.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372560477476" ignored="false" />
+    <file path="/strings.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373078218312" ignored="false" />
+    <file path="/activity_main.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373034260925" ignored="false" />
+    <file path="/MainActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373356059484" ignored="false" />
+    <file path="/IndexActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373003043856" ignored="false" />
+    <file path="/AndroidManifest.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373003815859" ignored="false" />
+    <file path="/FragmentDetail3.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373034967601" ignored="false" />
+    <file path="/Fragment4.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373031284669" ignored="false" />
+    <file path="/a.dummy" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373249536858" ignored="false" />
+    <file path="/header.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373256372329" ignored="false" />
+    <file path="/image_backbtn_press.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373256243597" ignored="false" />
+    <file path="/sec_me_fc.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373266854370" ignored="false" />
+    <file path="/VideoFragment.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373267489601" ignored="false" />
+    <file path="/zoomout.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373355874430" ignored="false" />
+    <file path="/zoomin.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373355795678" ignored="false" />
+    <file path="/q1_zoomout.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373352562648" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,41 +328,65 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Section686Activity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Section686Activity.java">
+      <file leaf-file-name="Q2_MEA_AA_LaxActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q2_MEA_AA_LaxActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="25" selection-start="4180" selection-end="4180" vertical-scroll-proportion="0.6336088">
-              <folding>
-                <element signature="e#5940#5962#0" expanded="true" />
-                <element signature="e#10469#10486#0" expanded="true" />
-                <element signature="e#15471#15491#0" expanded="true" />
-                <element signature="e#21671#21693#0" expanded="true" />
-                <element signature="e#22738#22760#0" expanded="true" />
-                <element signature="e#24018#24041#0" expanded="true" />
-                <element signature="e#25190#25213#0" expanded="true" />
-                <element signature="e#26384#26406#0" expanded="true" />
-                <element signature="e#27555#27577#0" expanded="true" />
-                <element signature="e#29659#29676#0" expanded="true" />
-                <element signature="e#30907#30924#0" expanded="true" />
-                <element signature="e#32369#32386#0" expanded="true" />
-                <element signature="e#33721#33739#0" expanded="true" />
-                <element signature="e#35097#35118#0" expanded="true" />
-                <element signature="e#36451#36472#0" expanded="true" />
-                <element signature="e#37806#37825#0" expanded="true" />
-                <element signature="e#39159#39175#0" expanded="true" />
-                <element signature="e#41328#41348#0" expanded="true" />
-                <element signature="e#42390#42410#0" expanded="true" />
-                <element signature="e#43664#43682#0" expanded="true" />
-                <element signature="e#44827#44844#0" expanded="true" />
-                <element signature="e#46011#46029#0" expanded="true" />
-                <element signature="e#47173#47193#0" expanded="true" />
-              </folding>
+            <state line="299" column="29" selection-start="11246" selection-end="11246" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_section686.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/activity_section686.xml">
+      <file leaf-file-name="q1_zoomin.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/anim/q1_zoomin.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="31" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="q1_zoomout.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/res/anim/q1_zoomout.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="35" selection-start="469" selection-end="469" vertical-scroll-proportion="0.36474696">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Q1_MEA_AA_LaxActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q1_MEA_AA_LaxActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="26" selection-start="933" selection-end="933" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Q3_MEA_AA_LaxActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q3_MEA_AA_LaxActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="61" column="14" selection-start="2073" selection-end="2073" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="q3_mea_aa_lax.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/q3_mea_aa_lax.xml">
+          <provider editor-type-id="text-editor">
+            <state line="8" column="44" selection-start="332" selection-end="332" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="q3_mea_aa_lax.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout-large/q3_mea_aa_lax.xml">
           <provider editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -239,96 +397,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/header.xml">
-          <provider editor-type-id="text-editor">
-            <state line="61" column="37" selection-start="2065" selection-end="2065" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="q3_mea_aa_lax.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/q3_mea_aa_lax.xml">
-          <provider editor-type-id="text-editor">
-            <state line="17" column="41" selection-start="667" selection-end="667" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Q3_MEA_AA_LaxActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q3_MEA_AA_LaxActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="18" selection-start="2332" selection-end="2332" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1583#2000#0" expanded="true" />
-                <element signature="e#1992#1993#0" expanded="true" />
-                <element signature="e#2035#2429#0" expanded="true" />
-                <element signature="e#2418#2419#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Activity.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/android.jar!/android/app/Activity.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="432" column="0" selection-start="19421" selection-end="19421" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="structure1_mea_aa_lax.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/structure1_mea_aa_lax.xml">
-          <provider editor-type-id="text-editor">
-            <state line="7" column="4" selection-start="264" selection-end="264" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="structure_popupwindow_text.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/structure_popupwindow_text.xml">
-          <provider editor-type-id="text-editor">
-            <state line="12" column="24" selection-start="505" selection-end="505" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Q2_MEA_AA_LaxActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q2_MEA_AA_LaxActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="230" column="23" selection-start="9164" selection-end="9164" vertical-scroll-proportion="-43.923077">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="q2_mea_aa_lax.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/q2_mea_aa_lax.xml">
           <provider editor-type-id="text-editor">
-            <state line="103" column="44" selection-start="4068" selection-end="4073" vertical-scroll-proportion="0.0">
+            <state line="120" column="49" selection-start="4732" selection-end="4732" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
           <provider selected="true" editor-type-id="android-designer">
             <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Q4_MEA_AA_LaxActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q4_MEA_AA_LaxActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="60" selection-start="591" selection-end="591" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -350,22 +436,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/res/layout/popupwindow_structure.xml" />
-        <option value="$PROJECT_DIR$/res/layout/structure1_mea_aa_lax.xml" />
-        <option value="$PROJECT_DIR$/res/layout/structure3_mea_aa_lax.xml" />
-        <option value="$PROJECT_DIR$/res/layout/structure2_mea_aa_lax.xml" />
-        <option value="$PROJECT_DIR$/res/layout/demo_index.xml" />
-        <option value="$PROJECT_DIR$/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/res/layout/header.xml" />
-        <option value="$PROJECT_DIR$/res/layout/activity_section686.xml" />
-        <option value="$PROJECT_DIR$/res/layout/q2_mea_aa_lax.xml" />
-        <option value="$PROJECT_DIR$/res/layout/structure_popupWindow_text.xml" />
-        <option value="$PROJECT_DIR$/res/layout/structure_popupwindow_text.xml" />
-        <option value="$PROJECT_DIR$/res/layout/q3_mea_aa_lax.xml" />
-        <option value="$PROJECT_DIR$/src/com/tee686/activity/Q3_MEA_AA_LaxActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/tee686/activity/Q2_MEA_AA_LaxActivity.java" />
+        <option value="$PROJECT_DIR$/res/anim/q4_zoomin.xml" />
+        <option value="$PROJECT_DIR$/res/anim/q4_zoomout.xml" />
+        <option value="$PROJECT_DIR$/res/anim/q2_zoomout.xml" />
+        <option value="$PROJECT_DIR$/res/anim/q2_zoomin.xml" />
+        <option value="$PROJECT_DIR$/res/anim/zoomin.xml" />
+        <option value="$PROJECT_DIR$/res/anim/zoomout.xml" />
+        <option value="$PROJECT_DIR$/src/com/tee686/activity/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/com/tee686/activity/Section686Activity.java" />
+        <option value="$PROJECT_DIR$/src/com/tee686/activity/Q3_MEA_AA_LaxActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/q3_mea_aa_lax.xml" />
+        <option value="$PROJECT_DIR$/res/layout-large/q3_mea_aa_lax.xml" />
+        <option value="$PROJECT_DIR$/res/layout/q2_mea_aa_lax.xml" />
+        <option value="$PROJECT_DIR$/src/com/tee686/activity/Q1_MEA_AA_LaxActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/tee686/activity/Q2_MEA_AA_LaxActivity.java" />
+        <option value="$PROJECT_DIR$/res/anim/q1_zoomin.xml" />
+        <option value="$PROJECT_DIR$/res/anim/q1_zoomout.xml" />
       </list>
     </option>
   </component>
@@ -374,7 +460,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="y" value="-2" />
     <option name="width" value="1040" />
     <option name="height" value="754" />
   </component>
@@ -404,6 +490,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -476,43 +564,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="raw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TEE686" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TEE686" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TEE686" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TEE686" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable-hdpi" />
+              <option name="myItemId" value="anim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -550,8 +602,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -578,6 +628,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Jason\Documents\GitHub\TEE\TEE686\res" />
+      <recent name="C:\Users\Jason\Documents\GitHub\TEE\TEE686\res\anim" />
       <recent name="C:\Users\Jason\Documents\GitHub\TEE\TEE686\res\layout" />
     </key>
   </component>
@@ -676,7 +728,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="USB_DEVICE" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
       <option name="PREFERRED_AVD" value="" />
       <option name="USE_COMMAND_LINE" value="true" />
       <option name="COMMAND_LINE" value="" />
@@ -740,11 +792,19 @@
       <workItem from="1372381988160" duration="40441000" />
       <workItem from="1372557569085" duration="7096000" />
       <workItem from="1372656191402" duration="14979000" />
+      <workItem from="1372987709676" duration="17834000" />
+      <workItem from="1373014555504" duration="17744000" />
+      <workItem from="1373073010122" duration="6514000" />
+      <workItem from="1373092480928" duration="1669000" />
+      <workItem from="1373247900680" duration="15021000" />
+      <workItem from="1373418064335" duration="18523000" />
+      <workItem from="1373504590828" duration="1546000" />
+      <workItem from="1373850128144" duration="37000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122063000" />
+    <option name="totallyTimeSpent" value="227063000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -767,33 +827,33 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1040" height="754" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-2" width="1040" height="754" extended-state="1" />
+    <editor active="false" />
     <layout>
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="648" y="141" width="348" height="231" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17791411" sideWeight="0.67336684" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22290389" sideWeight="0.67336684" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32719836" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39865997" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35845897" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34338358" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946922" sideWeight="0.50087565" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24642126" sideWeight="0.18592964" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924694" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32495812" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43383583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4321608" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283082" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24744377" sideWeight="0.67336684" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32908705" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24642126" sideWeight="0.56616414" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24539877" sideWeight="0.73031825" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2687813" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="623" y="121" width="348" height="231" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17791411" sideWeight="0.73031825" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2208589" sideWeight="0.73031825" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32617587" sideWeight="0.56616414" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32160804" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -862,9 +922,63 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/res/layout/structure2_mea_aa_lax.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="31" selection-start="2832" selection-end="2928" vertical-scroll-proportion="0.047858942">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout-large/activity_section686.xml">
       <provider editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="697" selection-end="697" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout-large/header.xml">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout-large/sec_me_fc.xml">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout-large/page_mea6.xml">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q4_MEA_AA_LaxActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="60" selection-start="591" selection-end="591" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout-large/activity_main.xml">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/q3_mea_aa_lax.xml">
+      <provider editor-type-id="text-editor">
+        <state line="8" column="44" selection-start="332" selection-end="332" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -872,63 +986,17 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/demo_index.xml">
+    <entry file="file://$PROJECT_DIR$/res/layout-large/q2_mea_aa_lax.xml">
       <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="21" selection-start="313" selection-end="313" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/sec_mea_aa_lax.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/page_mea6.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="48" selection-start="3204" selection-end="3204" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/header.xml">
+    <entry file="file://$PROJECT_DIR$/res/layout-large/q3_mea_aa_lax.xml">
       <provider editor-type-id="text-editor">
-        <state line="61" column="37" selection-start="2065" selection-end="2065" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_section686.xml">
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -938,44 +1006,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/q2_mea_aa_lax.xml">
       <provider editor-type-id="text-editor">
-        <state line="103" column="44" selection-start="4068" selection-end="4073" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/android.jar!/android/app/Activity.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="432" column="0" selection-start="19421" selection-end="19421" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/structure1_mea_aa_lax.xml">
-      <provider editor-type-id="text-editor">
-        <state line="7" column="4" selection-start="264" selection-end="264" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/structure_popupwindow_text.xml">
-      <provider editor-type-id="text-editor">
-        <state line="12" column="24" selection-start="505" selection-end="505" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/q3_mea_aa_lax.xml">
-      <provider editor-type-id="text-editor">
-        <state line="17" column="41" selection-start="667" selection-end="667" vertical-scroll-proportion="0.0">
+        <state line="120" column="49" selection-start="4732" selection-end="4732" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -985,52 +1016,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q3_MEA_AA_LaxActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="18" selection-start="2332" selection-end="2332" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1583#2000#0" expanded="true" />
-            <element signature="e#1992#1993#0" expanded="true" />
-            <element signature="e#2035#2429#0" expanded="true" />
-            <element signature="e#2418#2419#0" expanded="true" />
-          </folding>
+        <state line="61" column="14" selection-start="2073" selection-end="2073" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q1_MEA_AA_LaxActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="26" selection-start="933" selection-end="933" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q2_MEA_AA_LaxActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="230" column="23" selection-start="9164" selection-end="9164" vertical-scroll-proportion="-43.923077">
+        <state line="299" column="29" selection-start="11246" selection-end="11246" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Section686Activity.java">
+    <entry file="file://$PROJECT_DIR$/res/anim/q1_zoomin.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="25" selection-start="4180" selection-end="4180" vertical-scroll-proportion="0.6336088">
-          <folding>
-            <element signature="e#5940#5962#0" expanded="true" />
-            <element signature="e#10469#10486#0" expanded="true" />
-            <element signature="e#15471#15491#0" expanded="true" />
-            <element signature="e#21671#21693#0" expanded="true" />
-            <element signature="e#22738#22760#0" expanded="true" />
-            <element signature="e#24018#24041#0" expanded="true" />
-            <element signature="e#25190#25213#0" expanded="true" />
-            <element signature="e#26384#26406#0" expanded="true" />
-            <element signature="e#27555#27577#0" expanded="true" />
-            <element signature="e#29659#29676#0" expanded="true" />
-            <element signature="e#30907#30924#0" expanded="true" />
-            <element signature="e#32369#32386#0" expanded="true" />
-            <element signature="e#33721#33739#0" expanded="true" />
-            <element signature="e#35097#35118#0" expanded="true" />
-            <element signature="e#36451#36472#0" expanded="true" />
-            <element signature="e#37806#37825#0" expanded="true" />
-            <element signature="e#39159#39175#0" expanded="true" />
-            <element signature="e#41328#41348#0" expanded="true" />
-            <element signature="e#42390#42410#0" expanded="true" />
-            <element signature="e#43664#43682#0" expanded="true" />
-            <element signature="e#44827#44844#0" expanded="true" />
-            <element signature="e#46011#46029#0" expanded="true" />
-            <element signature="e#47173#47193#0" expanded="true" />
-          </folding>
+        <state line="10" column="31" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/anim/q1_zoomout.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="35" selection-start="469" selection-end="469" vertical-scroll-proportion="0.36474696">
+          <folding />
         </state>
       </provider>
     </entry>

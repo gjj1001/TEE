@@ -27,6 +27,11 @@
             </intent-filter>
         </activity>
         <activity
+                android:name="com.tee686.activity.MainActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
             android:name="com.tee686.activity.Section686Activity"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >

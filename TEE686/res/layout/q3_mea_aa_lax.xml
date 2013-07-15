@@ -11,21 +11,25 @@
         android:background="@color/white">
 
         <ImageView
-            android:id="@+id/q3_mea_aa_lax_iv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:scaleType="fitCenter"
-            android:src="@drawable/q3_mea_aa_lax" />
+                android:id="@+id/q3_mea_aa_lax_iv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/q3_mea_aa_lax" />
 
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/q3_mea_aa_lax_ib1"
-                android:layout_gravity="center"
                 android:focusable="false"
-                android:src="@drawable/page_indicator_focused"/>
-
+                android:layout_alignParentStart="false"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentBottom="false"
+                android:layout_marginLeft="300dp"
+                android:layout_marginTop="110dp"
+                android:background="@drawable/page_indicator_focused"
+                android:padding="10dp"/>
     </FrameLayout>
 
     <LinearLayout

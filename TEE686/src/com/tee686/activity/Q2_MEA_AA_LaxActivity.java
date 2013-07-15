@@ -10,18 +10,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.VideoView;
 
+import java.io.IOException;
+
 public class Q2_MEA_AA_LaxActivity extends Activity {
 	private VideoView vv;
+    private MediaPlayer mp = null;
 //	private ScaleGestureDetector mScaleGestureDetector = null;
     private PopupWindow structure = null;
     private View dialogView1 = null;
@@ -57,6 +62,7 @@ public class Q2_MEA_AA_LaxActivity extends Activity {
         ImageButton s1 = (ImageButton)findViewById(R.id.q2_mea_aa_lax_btnS1);
         ImageButton s2 = (ImageButton)findViewById(R.id.q2_mea_aa_lax_btnS2);
         ImageButton s3 = (ImageButton)findViewById(R.id.q2_mea_aa_lax_btnS3);
+        ImageButton ib = (ImageButton)findViewById(R.id.q2_mea_aa_lax_ib);
 
         dialogView1 = getLayoutInflater().inflate(R.layout.structure1_mea_aa_lax, null);
         if (dialogView1 != null) {
@@ -156,6 +162,7 @@ public class Q2_MEA_AA_LaxActivity extends Activity {
                 }
                 dialog1.getWindow().setGravity(Gravity.LEFT);
                 dialog1.show();
+                //设置弹出dialog后窗口不变暗
                 Window window = dialog1.getWindow();
                 WindowManager.LayoutParams lp = window.getAttributes();
                 lp.dimAmount =0f;
@@ -233,7 +240,25 @@ public class Q2_MEA_AA_LaxActivity extends Activity {
                 lp.dimAmount =0f;
                 window.setAttributes(lp);
 			}});
-	}
+
+        ib.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if( mp == null || !mp.isPlaying()) {
+                    mp = MediaPlayer.create(Q2_MEA_AA_LaxActivity.this, R.raw.gangnam_style);
+                    try {
+//                    mp.prepare();
+                        mp.seekTo(0);
+                        mp.start();
+                    } catch (IllegalStateException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    mp.stop();
+                }
+            }
+        });
+    }
 	
 	@Override
 	protected void onResume() {
@@ -268,7 +293,19 @@ public class Q2_MEA_AA_LaxActivity extends Activity {
 //        return mScaleGestureDetector.onTouchEvent(event);
 	}
 
-   // @Override
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            if(mp != null) {
+                mp.release();
+            }
+            finish();
+            overridePendingTransition(R.anim.hold, R.anim.q2_zoomout);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+// @Override
    /* protected void onDestroy() {
         super.onDestroy();
         if(mp.isPlaying()){

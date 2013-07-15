@@ -18,7 +18,7 @@ public class IndexActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			Intent intent = new Intent(IndexActivity.this, Section686Activity.class); 
+			Intent intent = new Intent(IndexActivity.this, MainActivity.class);
 	        startActivity(intent); 
 		}
     };

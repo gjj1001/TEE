@@ -82,98 +82,95 @@
 
     </RelativeLayout>
 
-    <FrameLayout
-        android:layout_width="0.0dip"
-        android:layout_height="match_parent"
-        android:layout_weight="1" >
-
-        <LinearLayout
-            android:id="@+id/q2_mea_aa_lax_s1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+    <LinearLayout
             android:orientation="vertical"
-            android:visibility="visible"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
             android:background="@color/gray">
 
-            <ImageView
-                android:id="@+id/q2_mea_aa_lax_s1iv"
+        <ImageButton
+                android:id="@+id/q2_mea_aa_lax_ib"
                 android:layout_width="match_parent"
                 android:layout_height="0.0dip"
                 android:layout_weight="1"
                 android:layout_marginBottom="5dip"
-                android:src="@drawable/music" />
+                android:background="@color/gray"
+                android:src="@drawable/music"/>
 
-            <TextView
-                android:id="@+id/q2_mea_aa_lax_s1tv"
+        <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="0.0dip"
-                android:layout_weight="2"
-                android:maxLines="50"
-                android:singleLine="false"
-                android:text="食道中段升主动脉长轴切面结构一，这是一段测试文字 结构一结构一结构一结构一结构一结构一结构一结构一结构一结构一结构一结构一结构一结构一结构一结构一"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/black"/>
-            
-        </LinearLayout>
+                android:layout_height="0dp"
+                android:layout_weight="2" >
 
-        <LinearLayout
-            android:id="@+id/q2_mea_aa_lax_s2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="invisible"
-            android:background="@color/gray">
-            
-            <ImageView
-                android:id="@+id/q2_mea_aa_lax_s2iv"
-                android:layout_width="match_parent"
-                android:layout_height="0.0dip"
-                android:layout_weight="1"
-                android:layout_marginBottom="5dip"
-                android:src="@drawable/music" />
 
-            <TextView
-                android:id="@+id/q2_mea_aa_lax_s2tv"
-                android:layout_width="match_parent"
-                android:layout_height="0.0dip"
-                android:layout_weight="2"
-                android:maxLines="50"
-                android:singleLine="false"
-                android:text="食道中段升主动脉长轴切面结构二，这是一段测试文字 结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/black"/>
-            
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/q2_mea_aa_lax_s3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="invisible"
-            android:background="@color/gray">
+            <LinearLayout
+                    android:id="@+id/q2_mea_aa_lax_s1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    android:background="@color/gray"
+                    android:layout_weight="2">
 
-            <ImageView
-                android:id="@+id/q2_mea_aa_lax_s3iv"
-                android:layout_width="match_parent"
-                android:layout_height="0.0dip"
-                android:layout_weight="1"
-                android:layout_marginBottom="5dip"
-                android:src="@drawable/music" />
+                <TextView
+                        android:id="@+id/q2_mea_aa_lax_s1tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.0dip"
+                        android:layout_weight="2"
+                        android:maxLines="50"
+                        android:singleLine="false"
+                        android:text="食道中段升主动脉长轴切面结构一，这是一段测试文字 结构一结构一结构一结构一结构一结构一结构一结构一结构一结构一结构一结构一结构一结构一结构一结构一"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/black"/>
 
-            <TextView
-                android:id="@+id/q2_mea_aa_lax_s3tv"
-                android:layout_width="match_parent"
-                android:layout_height="0.0dip"
-                android:layout_weight="2"
-                android:maxLines="50"
-                android:singleLine="false"
-                android:text="食道中段升主动脉长轴切面结构三，这是一段测试文字 结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/black"/>
+            </LinearLayout>
 
-        </LinearLayout>
+            <LinearLayout
+                    android:id="@+id/q2_mea_aa_lax_s2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="invisible"
+                    android:background="@color/gray">
 
-    </FrameLayout>
+                <TextView
+                        android:id="@+id/q2_mea_aa_lax_s2tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.0dip"
+                        android:layout_weight="2"
+                        android:maxLines="50"
+                        android:singleLine="false"
+                        android:text="食道中段升主动脉长轴切面结构二，这是一段测试文字 结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/q2_mea_aa_lax_s3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="invisible"
+                    android:background="@color/gray">
+
+                <TextView
+                        android:id="@+id/q2_mea_aa_lax_s3tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.0dip"
+                        android:layout_weight="2"
+                        android:maxLines="50"
+                        android:singleLine="false"
+                        android:text="食道中段升主动脉长轴切面结构三，这是一段测试文字 结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

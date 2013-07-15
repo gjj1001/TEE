@@ -4,6 +4,7 @@ import com.casit.tee686.R;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 public class Q4_MEA_AA_LaxActivity extends Activity{
 
@@ -13,5 +14,13 @@ public class Q4_MEA_AA_LaxActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.q4_mea_aa_lax);
 	}
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            overridePendingTransition(R.anim.hold, R.anim.q4_zoomout);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

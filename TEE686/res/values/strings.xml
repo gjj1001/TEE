@@ -14,15 +14,15 @@
         <item>食道上段主动脉弓短轴切面</item>
         <item>食道中段降主动脉长轴切面</item>
         <item>食道中段降主动脉短轴切面</item>
-        <item>食道中段四腔心切面</item>
+        <item>食道中段四腔心切面(华西推荐)</item>
         <item>食道中段二尖瓣交界切面</item>
         <item>食道中段两腔心切面</item>
-        <item>食道中段左心室长轴切面</item>
+        <item>食道中段左心室长轴切面(华西推荐)</item>
         <item>食道中段主动脉瓣长轴切面</item>
         <item>食道中段主动脉瓣短轴切面</item>
-        <item>经胃右心室流入道切面</item>
+        <item>食道中段右心室流入流出切面(华西推荐)</item>
         <item>食道中段双腔静脉切面</item>
-        <item>经胃底中段心室短轴切面</item>
+        <item>经胃底中段心室短轴切面(华西推荐)</item>
         <item>经胃底基底短轴切面</item>
         <item>经胃底左心室长轴切面</item>
         <item>经胃底两腔心切面</item>
@@ -42,7 +42,7 @@
     <string name="hd_me_lax">食道中段左心室长轴切面</string>
     <string name="hd_me_av_lax">食道中段主动脉瓣长轴切面</string>
     <string name="hd_me_av_sax">食道中段主动脉瓣短轴切面</string>
-    <string name="hd_me_rvio">经胃右心室流入道切面</string>
+    <string name="hd_me_rvio">食道中段右心室流入流出切面</string>
     <string name="hd_me_b">食道中段双腔静脉切面</string>
     <string name="hd_tg_m_sax">经胃底中段心室短轴切面</string>
     <string name="hd_tg_b_sax">经胃底基底短轴切面</string>
