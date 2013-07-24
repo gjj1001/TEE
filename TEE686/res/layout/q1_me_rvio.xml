@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="horizontal" >
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            >
+
+        <VideoView
+                android:id="@+id/vv_q1_me_rvio"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:visibility="visible" />
+
+        <ImageButton
+                android:id="@+id/me_rvio_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:contentDescription="ENTER"
+                android:background="@android:drawable/ic_menu_send"
+                android:padding="20dp"
+                />
+
+    </RelativeLayout>
+
+</FrameLayout>

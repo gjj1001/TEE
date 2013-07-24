@@ -32,11 +32,12 @@
                         android:background="@color/black"
                         android:orientation="horizontal" >
 
-                    <VideoView
-                            android:id="@+id/vv1_mea_aa_lax"
+                    <ImageView
+                            android:id="@+id/iv_me_lax"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
-                            android:visibility="visible"/>
+                            android:visibility="visible"
+                            android:src="@drawable/me_lax"/>
 
                 </LinearLayout>
 
@@ -49,13 +50,13 @@
                         android:layout_marginLeft="1dip"
                         >
 
-                    <VideoView
-                            android:id="@+id/vv2_mea_aa_lax"
+                    <ImageView
+                            android:id="@+id/iv_me_fc"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fitsSystemWindows="false"
                             android:visibility="visible"
-                            />
+                            android:src="@drawable/me_fc"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -71,13 +72,15 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_marginRight="1dip"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal"
+                        android:background="@color/black">
 
-                    <VideoView
-                            android:id="@+id/vv3_mea_aa_lax"
+                    <ImageView
+                            android:id="@+id/iv_tg_m_sax"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:visibility="visible"/>
+                            android:visibility="visible"
+                            android:src="@drawable/tg_m_sax"/>
 
                 </LinearLayout>
 
@@ -87,13 +90,14 @@
                         android:layout_weight="1"
                         android:layout_marginLeft="1dip"
                         android:orientation="horizontal"
-                        >
+                        android:background="@color/black">
 
-                    <VideoView
-                            android:id="@+id/vv4_mea_aa_lax"
+                    <ImageView
+                            android:id="@+id/iv_me_rvio"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:visibility="visible"/>
+                            android:visibility="visible"
+                            android:src="@drawable/me_rvio"/>
 
                 </LinearLayout>
             </LinearLayout>

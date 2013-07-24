@@ -1,7 +1,4 @@
-/*
- * Ò»¼¶½çÃæ
- *    by lwz
- */
+
 package com.tee686.activity;
 
 import android.app.Activity;
@@ -9,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,13 +26,14 @@ import java.util.ArrayList;
 
 public class Section686Activity extends Activity{
 	
-	private ViewPager mViewPager;//ÉùÃ÷ViewPager¶ÔÏó   
-    private PagerTitleStrip mPagerTitleStrip;//ÉùÃ÷¶¯»­±êÌâ   
-    private ImageView mPageImg;// ¶¯»­Í¼Æ¬   
-    private int currIndex_me8 = 0;//µ±Ç°Ò³Ãæ   
+	private ViewPager mViewPager;
+    private PagerTitleStrip mPagerTitleStrip;
+    private ImageView mPageImg;
+    private int currIndex_me8 = 0;
     private int currIndex_mea6 = 0;
     private int currIndex_tg6 = 0;
-    private ImageView mSec1,mSec2,mSec3,mSec4,mSec5,mSec6,mSec7,mSec8;//ÉùÃ÷µ¼º½Í¼Æ¬¶ÔÏó 
+    private int sec = 1;
+    private ImageView mSec1,mSec2,mSec3,mSec4,mSec5,mSec6,mSec7,mSec8;
     private ArrayList<View> views;
     private ArrayList<String> titles;
     private Spinner spinner;
@@ -56,29 +55,44 @@ public class Section686Activity extends Activity{
 		//final LayoutInflater inflater = getLayoutInflater();  
 		spinner=(Spinner)findViewById(R.id.spinnermenu);
 		String[] spinnerStr = getResources().getStringArray(R.array.spinner_list);
-		//½«¿ÉÑ¡ÄÚÈİÓëArrayAdapterÁ¬½ÓÆğÀ´  
 		//ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.spinner_list, android.R.layout.simple_spinner_item);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerStr);
-		//ÉèÖÃÏÂÀ­ÁĞ±íµÄ·ç¸ñ  
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		//½«adapter Ìí¼Óµ½spinnerÖĞ  
+		//å°†adapteræ·»åŠ åˆ°spinnerä¸­
 		spinner.setAdapter(adapter);
 		
 		spinner.setSelection(0, true);
-		//Ìí¼ÓÊÂ¼şSpinnerÊÂ¼ş¼àÌı 
+		//æ·»åŠ äº‹ä»¶Spinneräº‹ä»¶ç›‘å¬ 
 		spinner.setOnItemSelectedListener(new SpinnerSelectedListener());
-		//ÉèÖÃÄ¬ÈÏÖµ  
+		//è®¾ç½®é»˜è®¤å€¼  
 		spinner.setVisibility(View.GONE);
 		
-		rel = (RelativeLayout) findViewById(R.id.relativelayout_choose_section);
+		rel = (RelativeLayout)findViewById(R.id.relativelayout_choose_section);
 		ImageButton btn_6861 = (ImageButton)findViewById(R.id.btn_6861);
 		ImageButton btn_6862 = (ImageButton)findViewById(R.id.btn_6862);
 		ImageButton btn_6863 = (ImageButton)findViewById(R.id.btn_6863);
 		ImageButton btn_6864 = (ImageButton)findViewById(R.id.btn_6864);
 		ImageButton backbtn = (ImageButton)findViewById(R.id.image_backbtn);
 
-		//³õÊ¼»¯686±ê×¼ÇĞÃæ½çÃæ
-		forMEA6();
+        //åˆå§‹åŒ–686æ ‡å‡†åˆ‡é¢ç•Œé¢
+		Bundle bundle =getIntent().getExtras();
+        if(bundle != null) {
+            sec = bundle.getInt("sec");
+        }
+		switch (sec) {
+            case 1:
+                forMEA6();
+                break;
+            case 2:
+                forME8();
+                break;
+            case 3:
+                forTG6();
+                break;
+            case 4:
+                forEx();
+                break;
+        }
 		
 		btn_6861.setOnClickListener(new OnClickListener() {
 
@@ -140,16 +154,16 @@ public class Section686Activity extends Activity{
         TextView tx = (TextView)findViewById(R.id.text_header);
         tx.setText(R.string.hd_me_rvio);
 
-        ImageView view1iv1 = (ImageView)layout.findViewById(R.id.iv1_mea_aa_lax);
-        ImageView view1iv2 = (ImageView)layout.findViewById(R.id.iv2_mea_aa_lax);
-        ImageView view1iv3 = (ImageView)layout.findViewById(R.id.iv3_mea_aa_lax);
-        ImageView view1iv4 = (ImageView)layout.findViewById(R.id.iv4_mea_aa_lax);
+        ImageView view1iv1 = (ImageView)layout.findViewById(R.id.iv1_me_rvio);
+        ImageView view1iv2 = (ImageView)layout.findViewById(R.id.iv2_me_rvio);
+        ImageView view1iv3 = (ImageView)layout.findViewById(R.id.iv3_me_rvio);
+        ImageView view1iv4 = (ImageView)layout.findViewById(R.id.iv4_me_rvio);
 
         view1iv1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q1_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q1_ME_RvioActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q1_zoomin, R.anim.hold);
             }
@@ -159,7 +173,7 @@ public class Section686Activity extends Activity{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q2_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q2_ME_RvioActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q2_zoomin, R.anim.hold);
             }
@@ -169,7 +183,7 @@ public class Section686Activity extends Activity{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q3_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q3_ME_RvioActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q3_zoomin, R.anim.hold);
             }
@@ -179,7 +193,7 @@ public class Section686Activity extends Activity{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q4_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q4_ME_RvioActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q4_zoomin, R.anim.hold);
             }
@@ -193,17 +207,17 @@ public class Section686Activity extends Activity{
         TextView tx = (TextView)findViewById(R.id.text_header);
         tx.setText(R.string.hd_me_lax);
 
-        ImageView view1iv1 = (ImageView)layout.findViewById(R.id.iv1_mea_aa_lax);
-        ImageView view1iv2 = (ImageView)layout.findViewById(R.id.iv2_mea_aa_lax);
-        ImageView view1iv3 = (ImageView)layout.findViewById(R.id.iv3_mea_aa_lax);
-        ImageView view1iv4 = (ImageView)layout.findViewById(R.id.iv4_mea_aa_lax);
+        ImageView view1iv1 = (ImageView)layout.findViewById(R.id.iv1_me_lax);
+        ImageView view1iv2 = (ImageView)layout.findViewById(R.id.iv2_me_lax);
+        ImageView view1iv3 = (ImageView)layout.findViewById(R.id.iv3_me_lax);
+        ImageView view1iv4 = (ImageView)layout.findViewById(R.id.iv4_me_lax);
 
 
         view1iv1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q1_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q1_ME_LaxActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q1_zoomin, R.anim.hold);
             }
@@ -213,7 +227,7 @@ public class Section686Activity extends Activity{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q2_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q2_ME_LaxActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q2_zoomin, R.anim.hold);
             }
@@ -223,7 +237,7 @@ public class Section686Activity extends Activity{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q3_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q3_ME_LaxActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q3_zoomin, R.anim.hold);
             }
@@ -233,31 +247,31 @@ public class Section686Activity extends Activity{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q4_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q4_ME_LaxActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q4_zoomin, R.anim.hold);
             }
         });
     }
 
-    private void forME8() {
+    public void forME8() {
         LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.sec_me_fc, null);
         rel.removeAllViews();
         rel.addView(layout);
-        TextView tx = (TextView)findViewById(R.id.text_header);
+        TextView tx = (TextView)Section686Activity.this.findViewById(R.id.text_header);
         tx.setText(R.string.hd_me_fc);
 
-        ImageView view1iv1 = (ImageView)layout.findViewById(R.id.iv1_mea_aa_lax);
-        ImageView view1iv2 = (ImageView)layout.findViewById(R.id.iv2_mea_aa_lax);
-        ImageView view1iv3 = (ImageView)layout.findViewById(R.id.iv3_mea_aa_lax);
-        ImageView view1iv4 = (ImageView)layout.findViewById(R.id.iv4_mea_aa_lax);
+        ImageView view1iv1 = (ImageView)layout.findViewById(R.id.iv1_me_fc);
+        ImageView view1iv2 = (ImageView)layout.findViewById(R.id.iv2_me_fc);
+        ImageView view1iv3 = (ImageView)layout.findViewById(R.id.iv3_me_fc);
+        ImageView view1iv4 = (ImageView)layout.findViewById(R.id.iv4_me_fc);
 
 
         view1iv1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q1_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q1_ME_FcActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q1_zoomin, R.anim.hold);
             }
@@ -267,7 +281,7 @@ public class Section686Activity extends Activity{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q2_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q2_ME_FcActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q2_zoomin, R.anim.hold);
             }
@@ -277,7 +291,7 @@ public class Section686Activity extends Activity{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q3_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q3_ME_FcActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q3_zoomin, R.anim.hold);
             }
@@ -287,7 +301,7 @@ public class Section686Activity extends Activity{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q4_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q4_ME_FcActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q4_zoomin, R.anim.hold);
             }
@@ -295,23 +309,23 @@ public class Section686Activity extends Activity{
     }
 
     private void forTG6() {
-        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.sec_tg_b_sax, null);
+        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.sec_tg_m_sax, null);
         rel.removeAllViews();
         rel.addView(layout);
         TextView tx = (TextView)findViewById(R.id.text_header);
-        tx.setText(R.string.hd_tg_b_sax);
+        tx.setText(R.string.hd_tg_m_sax);
 
-        ImageView view1iv1 = (ImageView)layout.findViewById(R.id.iv1_mea_aa_lax);
-        ImageView view1iv2 = (ImageView)layout.findViewById(R.id.iv2_mea_aa_lax);
-        ImageView view1iv3 = (ImageView)layout.findViewById(R.id.iv3_mea_aa_lax);
-        ImageView view1iv4 = (ImageView)layout.findViewById(R.id.iv4_mea_aa_lax);
+        ImageView view1iv1 = (ImageView)layout.findViewById(R.id.iv1_tg_m_sax);
+        ImageView view1iv2 = (ImageView)layout.findViewById(R.id.iv2_tg_m_sax);
+        ImageView view1iv3 = (ImageView)layout.findViewById(R.id.iv3_tg_m_sax);
+        ImageView view1iv4 = (ImageView)layout.findViewById(R.id.iv4_tg_m_sax);
 
 
         view1iv1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q1_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q1_TG_M_SaxActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q1_zoomin, R.anim.hold);
             }
@@ -321,7 +335,7 @@ public class Section686Activity extends Activity{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q2_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q2_TG_M_SaxActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q2_zoomin, R.anim.hold);
             }
@@ -331,7 +345,7 @@ public class Section686Activity extends Activity{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q3_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q3_TG_M_SaxActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q3_zoomin, R.anim.hold);
             }
@@ -341,7 +355,7 @@ public class Section686Activity extends Activity{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q4_MEA_AA_LaxActivity.class);
+                Intent intent = new Intent(Section686Activity.this, Q4_TG_M_SaxActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q4_zoomin, R.anim.hold);
             }
@@ -352,13 +366,26 @@ public class Section686Activity extends Activity{
 	public void onResume()
 	{	
 		spinner.setSelection(0,true);
-	    currIndex_me8 = 0;//µ±Ç°Ò³Ãæ   
+	    currIndex_me8 = 0;//å½“å‰é¡µé¢   
 	    currIndex_mea6 = 0;
 	    currIndex_tg6 = 0;
 		super.onResume();
 	}
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            /*Intent intent = new Intent(this, Section686Activity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY);
+            startActivity(intent);*/
+            finish();
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 	
-	//Ê³µÀÖĞ¶Î´óÑª¹ÜË®Æ½ËÄÏóÏŞ³õÊ¼»¯
+	//é£Ÿé“ä¸­æ®µå¤§è¡€ç®¡æ°´å¹³å››è±¡é™åˆå§‹åŒ–
 	/*private void forMEA6() {
 		*//*ImageButton ib = (ImageButton)findViewById(R.id.btn_6861);
 		ib.setBackgroundResource(0);*//*
@@ -371,7 +398,7 @@ public class Section686Activity extends Activity{
         TextView tx = (TextView)findViewById(R.id.text_header);
       	tx.setText(R.string.hd_me_lax);
 
-        //Ğ¡Ô²µã
+        //å°åœ†ç‚¹
         mSec1 = (ImageView)layout.findViewById(R.id.sec1_mea6);
         mSec2 = (ImageView)layout.findViewById(R.id.sec2_mea6);
         mSec3 = (ImageView)layout.findViewById(R.id.sec3_mea6);
@@ -379,7 +406,7 @@ public class Section686Activity extends Activity{
         mSec5 = (ImageView)layout.findViewById(R.id.sec5_mea6);
         mSec6 = (ImageView)layout.findViewById(R.id.sec6_mea6);
 
-        //½«Òª·ÖÒ³ÏÔÊ¾µÄView×°ÈëÊı×éÖĞ
+        //å°†è¦åˆ†é¡µæ˜¾ç¤ºçš„Viewè£…å…¥æ•°ç»„ä¸­
         LayoutInflater mLi = LayoutInflater.from(getApplicationContext());
         View view1 = mLi.inflate(R.layout.sec_me_lax, null);
         View view2 = mLi.inflate(R.layout.sec_mea_aa_sax, null);
@@ -388,14 +415,14 @@ public class Section686Activity extends Activity{
         View view5 = mLi.inflate(R.layout.sec_mea_uaa_lax, null);
         View view6 = mLi.inflate(R.layout.sec_mea_uaa_sax, null);
 
-        //»ñµÃµÚÒ»·ùÍ¼ËÄ¸öÏóÏŞµÄimageviewµÄid
+        //è·å¾—ç¬¬ä¸€å¹…å›¾å››ä¸ªè±¡é™çš„imageviewçš„id
         ImageView view1iv1 = (ImageView)view1.findViewById(R.id.iv1_mea_aa_lax);
         ImageView view1iv2 = (ImageView)view1.findViewById(R.id.iv2_mea_aa_lax);
         ImageView view1iv3 = (ImageView)view1.findViewById(R.id.iv3_mea_aa_lax);
         ImageView view1iv4 = (ImageView)view1.findViewById(R.id.iv4_mea_aa_lax);
 
 
-        //Ã¿¸öÒ³ÃæµÄviewÊı¾İ
+        //æ¯ä¸ªé¡µé¢çš„viewæ•°æ®
         views = new ArrayList<View>();
         views.add(view1);
         views.add(view2);
@@ -408,7 +435,7 @@ public class Section686Activity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(Section686Activity.this, Q1_MEA_AA_LaxActivity.class);
+				Intent intent = new Intent(Section686Activity.this, Q1_ME_LaxActivity.class);
 		        startActivity(intent);
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 			}
@@ -418,7 +445,7 @@ public class Section686Activity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(Section686Activity.this, Q2_MEA_AA_LaxActivity.class);
+				Intent intent = new Intent(Section686Activity.this, Q2_ME_LaxActivity.class);
 		        startActivity(intent);
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 			}
@@ -428,7 +455,7 @@ public class Section686Activity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(Section686Activity.this, Q3_MEA_AA_LaxActivity.class);
+				Intent intent = new Intent(Section686Activity.this, Q3_ME_LaxActivity.class);
 		        startActivity(intent);
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 			}
@@ -438,24 +465,24 @@ public class Section686Activity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(Section686Activity.this, Q4_MEA_AA_LaxActivity.class);
+				Intent intent = new Intent(Section686Activity.this, Q4_ME_LaxActivity.class);
 		        startActivity(intent);
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 			}
         });
 
-        //Ã¿Ò»¸öÒ³ÃæµÄ±êÌâ
+        //æ¯ä¸€ä¸ªé¡µé¢çš„æ ‡é¢˜
         titles = new ArrayList<String>();
-        titles.add("¢Ù");
-        titles.add("¢Ú");
-        titles.add("¢Û");
-        titles.add("¢Ü");
-        titles.add("¢İ");
-        titles.add("¢Ş");
+        titles.add("â‘ ");
+        titles.add("â‘¡");
+        titles.add("â‘¢");
+        titles.add("â‘£");
+        titles.add("â‘¤");
+        titles.add("â‘¥");
 
 
 
-      //Ìî³äViewPagerµÄÊı¾İÊÊÅäÆ÷
+      //å¡«å……ViewPagerçš„æ•°æ®é€‚é…å™¨
         PagerAdapter mPagerAdapter = new PagerAdapter() {
 
             @Override
@@ -486,11 +513,11 @@ public class Section686Activity extends Activity{
         };
 
         mViewPager.setOnPageChangeListener(new MyOnPageChangeListener_mea6());
-        mViewPager.setAdapter(mPagerAdapter);//ÓëListViewÓÃ·¨ÏàÍ¬£¬ÉèÖÃÖØĞ´µÄAdapter¡£ÕâÑù¾ÍÊµÏÖÁËViewPagerµÄ»¬¶¯Ğ§¹û¡£
+        mViewPager.setAdapter(mPagerAdapter);//ä¸ListViewç”¨æ³•ç›¸åŒï¼Œè®¾ç½®é‡å†™çš„Adapterã€‚è¿™æ ·å°±å®ç°äº†ViewPagerçš„æ»‘åŠ¨æ•ˆæœã€‚
         mViewPager.setCurrentItem(0);
 	}*/
 	
-	//Ê³µÀÖĞ¶ÎĞÄ·¿ĞÄÊÒË®Æ½ËÄÏóÏŞ³õÊ¼»¯
+	//é£Ÿé“ä¸­æ®µå¿ƒæˆ¿å¿ƒå®¤æ°´å¹³å››è±¡é™åˆå§‹åŒ–
 	/*private void forME8() {
 		LinearLayout layout = (LinearLayout) inflater.inflate(
                 R.layout.page_me8, null);
@@ -512,7 +539,7 @@ public class Section686Activity extends Activity{
         mSec7 = (ImageView)layout.findViewById(R.id.sec7_me8);  
         mSec8 = (ImageView)layout.findViewById(R.id.sec8_me8);  
                  
-        //½«Òª·ÖÒ³ÏÔÊ¾µÄView×°ÈëÊı×éÖĞ   
+        //å°†è¦åˆ†é¡µæ˜¾ç¤ºçš„Viewè£…å…¥æ•°ç»„ä¸­   
         LayoutInflater mLi = LayoutInflater.from(getApplicationContext());  
         View view1 = mLi.inflate(R.layout.sec_me_fc, null);  
         View view2 = mLi.inflate(R.layout.sec_me_mc, null);  
@@ -523,13 +550,13 @@ public class Section686Activity extends Activity{
         View view7 = mLi.inflate(R.layout.sec_me_rvio, null);  
         View view8 = mLi.inflate(R.layout.sec_me_b, null);  
         
-      //»ñµÃµÚÒ»·ùÍ¼ËÄ¸öÏóÏŞµÄimageviewµÄid
+      //è·å¾—ç¬¬ä¸€å¹…å›¾å››ä¸ªè±¡é™çš„imageviewçš„id
         ImageView view1iv1 = (ImageView)view1.findViewById(R.id.iv1_mea_aa_lax);
         ImageView view1iv2 = (ImageView)view1.findViewById(R.id.iv2_mea_aa_lax);
         ImageView view1iv3 = (ImageView)view1.findViewById(R.id.iv3_mea_aa_lax);
         ImageView view1iv4 = (ImageView)view1.findViewById(R.id.iv4_mea_aa_lax);
         
-        //Ã¿¸öÒ³ÃæµÄviewÊı¾İ   
+        //æ¯ä¸ªé¡µé¢çš„viewæ•°æ®   
         views = new ArrayList<View>();  
         views.add(view1);  
         views.add(view2);  
@@ -544,7 +571,7 @@ public class Section686Activity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(Section686Activity.this, Q1_MEA_AA_LaxActivity.class); 
+				Intent intent = new Intent(Section686Activity.this, Q1_ME_LaxActivity.class);
 		        startActivity(intent); 				
 			}
         });
@@ -553,7 +580,7 @@ public class Section686Activity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(Section686Activity.this, Q2_MEA_AA_LaxActivity.class); 
+				Intent intent = new Intent(Section686Activity.this, Q2_ME_LaxActivity.class);
 		        startActivity(intent); 				
 			}
         });
@@ -562,7 +589,7 @@ public class Section686Activity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(Section686Activity.this, Q3_MEA_AA_LaxActivity.class); 
+				Intent intent = new Intent(Section686Activity.this, Q3_ME_LaxActivity.class);
 		        startActivity(intent); 				
 			}
         });
@@ -571,23 +598,23 @@ public class Section686Activity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(Section686Activity.this, Q4_MEA_AA_LaxActivity.class); 
+				Intent intent = new Intent(Section686Activity.this, Q4_ME_LaxActivity.class);
 		        startActivity(intent); 				
 			}
         });
         
-        //Ã¿Ò»¸öÒ³ÃæµÄ±êÌâ   
+        //æ¯ä¸€ä¸ªé¡µé¢çš„æ ‡é¢˜   
         titles = new ArrayList<String>();  
-        titles.add("¢Ù");  
-        titles.add("¢Ú");  
-        titles.add("¢Û");  
-        titles.add("¢Ü");  
-        titles.add("¢İ");  
-        titles.add("¢Ş");  
-        titles.add("¢ß");  
-        titles.add("¢à");  
+        titles.add("â‘ ");  
+        titles.add("â‘¡");  
+        titles.add("â‘¢");  
+        titles.add("â‘£");  
+        titles.add("â‘¤");  
+        titles.add("â‘¥");  
+        titles.add("â‘¦");  
+        titles.add("â‘§");  
         
-      //Ìî³äViewPagerµÄÊı¾İÊÊÅäÆ÷
+      //å¡«å……ViewPagerçš„æ•°æ®é€‚é…å™¨
         PagerAdapter mPagerAdapter = new PagerAdapter() {  
               
             @Override  
@@ -618,11 +645,11 @@ public class Section686Activity extends Activity{
         }; 
         
         mViewPager.setOnPageChangeListener(new MyOnPageChangeListener_me8());  
-        mViewPager.setAdapter(mPagerAdapter);//ÓëListViewÓÃ·¨ÏàÍ¬£¬ÉèÖÃÖØĞ´µÄAdapter¡£ÕâÑù¾ÍÊµÏÖÁËViewPagerµÄ»¬¶¯Ğ§¹û¡£   
+        mViewPager.setAdapter(mPagerAdapter);//ä¸ListViewç”¨æ³•ç›¸åŒï¼Œè®¾ç½®é‡å†™çš„Adapterã€‚è¿™æ ·å°±å®ç°äº†ViewPagerçš„æ»‘åŠ¨æ•ˆæœã€‚   
         mViewPager.setCurrentItem(0);		
 	}*/
 	
-	//Î¸µ×Ë®Æ½ËÄÏóÏŞ³õÊ¼»¯
+	//èƒƒåº•æ°´å¹³å››è±¡é™åˆå§‹åŒ–
 	/*private void forTG6() {
 		LinearLayout layout = (LinearLayout) inflater.inflate(
                 R.layout.page_tg6, null);
@@ -642,7 +669,7 @@ public class Section686Activity extends Activity{
         mSec5 = (ImageView)layout.findViewById(R.id.sec5_tg6);  
         mSec6 = (ImageView)layout.findViewById(R.id.sec6_tg6);   
                  
-        //½«Òª·ÖÒ³ÏÔÊ¾µÄView×°ÈëÊı×éÖĞ   
+        //å°†è¦åˆ†é¡µæ˜¾ç¤ºçš„Viewè£…å…¥æ•°ç»„ä¸­   
         LayoutInflater mLi = LayoutInflater.from(getApplicationContext());  
         View view1 = mLi.inflate(R.layout.sec_tg_b_sax, null);  
         View view2 = mLi.inflate(R.layout.sec_tg_d_lax, null);  
@@ -651,7 +678,7 @@ public class Section686Activity extends Activity{
         View view5 = mLi.inflate(R.layout.sec_tg_rvi, null);  
         View view6 = mLi.inflate(R.layout.sec_tg_tc, null);    
                   
-        //Ã¿¸öÒ³ÃæµÄviewÊı¾İ   
+        //æ¯ä¸ªé¡µé¢çš„viewæ•°æ®   
         views = new ArrayList<View>();  
         views.add(view1);  
         views.add(view2);  
@@ -660,16 +687,16 @@ public class Section686Activity extends Activity{
         views.add(view5);  
         views.add(view6);    
 
-        //Ã¿Ò»¸öÒ³ÃæµÄ±êÌâ   
+        //æ¯ä¸€ä¸ªé¡µé¢çš„æ ‡é¢˜   
         titles = new ArrayList<String>();  
-        titles.add("¢Ù");  
-        titles.add("¢Ú");  
-        titles.add("¢Û");  
-        titles.add("¢Ü");  
-        titles.add("¢İ");  
-        titles.add("¢Ş");  
+        titles.add("â‘ ");  
+        titles.add("â‘¡");  
+        titles.add("â‘¢");  
+        titles.add("â‘£");  
+        titles.add("â‘¤");  
+        titles.add("â‘¥");  
         
-      //Ìî³äViewPagerµÄÊı¾İÊÊÅäÆ÷
+      //å¡«å……ViewPagerçš„æ•°æ®é€‚é…å™¨
         PagerAdapter mPagerAdapter = new PagerAdapter() {  
               
             @Override  
@@ -700,11 +727,11 @@ public class Section686Activity extends Activity{
         }; 
         
         mViewPager.setOnPageChangeListener(new MyOnPageChangeListener_tg6());  
-        mViewPager.setAdapter(mPagerAdapter);//ÓëListViewÓÃ·¨ÏàÍ¬£¬ÉèÖÃÖØĞ´µÄAdapter¡£ÕâÑù¾ÍÊµÏÖÁËViewPagerµÄ»¬¶¯Ğ§¹û¡£   
+        mViewPager.setAdapter(mPagerAdapter);//ä¸ListViewç”¨æ³•ç›¸åŒï¼Œè®¾ç½®é‡å†™çš„Adapterã€‚è¿™æ ·å°±å®ç°äº†ViewPagerçš„æ»‘åŠ¨æ•ˆæœã€‚   
         mViewPager.setCurrentItem(0);		
 	}*/
 	
-	//ÏÂÀ­²Ëµ¥
+	//ä¸‹æ‹‰èœå•
 	public class SpinnerSelectedListener implements OnItemSelectedListener {
 		
 		@Override
@@ -834,45 +861,45 @@ public class Section686Activity extends Activity{
 
 	}
       
-    //Ê³µÀÖĞ¶Î´óÑª¹ÜË®Æ½½çÃæ»¬¶¯
+    //é£Ÿé“ä¸­æ®µå¤§è¡€ç®¡æ°´å¹³ç•Œé¢æ»‘åŠ¨
     /*public class MyOnPageChangeListener_mea6 implements OnPageChangeListener {
     	  
-        public void onPageSelected(int arg0) {//²ÎÊıarg0ÎªÑ¡ÖĞµÄView   
+        public void onPageSelected(int arg0) {//å‚æ•°arg0ä¸ºé€‰ä¸­çš„View   
   
         	int mea6_flag=0;
-            Animation animation = null;//ÉùÃ÷¶¯»­¶ÔÏó   
+            Animation animation = null;//å£°æ˜åŠ¨ç”»å¯¹è±¡   
             switch (arg0) {  
-            case 0: //Ò³ÃæÒ»            
+            case 0: //é¡µé¢ä¸€            
             	TextView tv_mea6_1 = (TextView)findViewById(R.id.text_header);
             	tv_mea6_1.setText(R.string.hd_me_lax);
-                mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+                mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec5.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec6.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 if (currIndex_mea6 == arg0+1) {  
-                    animation = new TranslateAnimation(arg0+1, arg0, 0, 0);//Ô²µãÒÆ¶¯Ğ§¹û¶¯»­£¬´Óµ±Ç°ViewÒÆ¶¯µ½ÏÂÒ»¸öView   
+                    animation = new TranslateAnimation(arg0+1, arg0, 0, 0);//åœ†ç‚¹ç§»åŠ¨æ•ˆæœåŠ¨ç”»ï¼Œä»å½“å‰Viewç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªView   
                 } 
                 else
                 {
                 	mea6_flag=1;
                 }
                 break;  
-            case 1: //Ò³Ãæ¶ş   
+            case 1: //é¡µé¢äºŒ   
             	TextView tv_mea6_2 = (TextView)findViewById(R.id.text_header);
             	tv_mea6_2.setText(R.string.hd_mea_aa_sax);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused));
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec5.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec6.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));  
-                if (currIndex_mea6 == arg0-1) {//Èç¹û»¬¶¯µ½ÉÏÒ»¸öView   
-                    animation = new TranslateAnimation(arg0-1, arg0, 0, 0); //Ô²µãÒÆ¶¯Ğ§¹û¶¯»­£¬´Óµ±Ç°ViewÒÆ¶¯µ½ÏÂÒ»¸öView   
+                if (currIndex_mea6 == arg0-1) {//å¦‚æœæ»‘åŠ¨åˆ°ä¸Šä¸€ä¸ªView   
+                    animation = new TranslateAnimation(arg0-1, arg0, 0, 0); //åœ†ç‚¹ç§»åŠ¨æ•ˆæœåŠ¨ç”»ï¼Œä»å½“å‰Viewç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªView   
   
                       
-                } else if (currIndex_mea6 == arg0+1) {//Ô²µãÒÆ¶¯Ğ§¹û¶¯»­£¬´Óµ±Ç°ViewÒÆ¶¯µ½ÏÂÒ»¸öView£¬ÏÂÍ¬¡£   
+                } else if (currIndex_mea6 == arg0+1) {//åœ†ç‚¹ç§»åŠ¨æ•ˆæœåŠ¨ç”»ï¼Œä»å½“å‰Viewç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªViewï¼Œä¸‹åŒã€‚   
   
                     animation = new TranslateAnimation(arg0+1, arg0, 0, 0);  
                 }  
@@ -881,10 +908,10 @@ public class Section686Activity extends Activity{
                 	mea6_flag=1;
                 }
                 break;  
-            case 2: //Ò³ÃæÈı   
+            case 2: //é¡µé¢ä¸‰   
             	TextView tv_mea6_3 = (TextView)findViewById(R.id.text_header);
             	tv_mea6_3.setText(R.string.hd_mea_uaa_lax);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
@@ -900,10 +927,10 @@ public class Section686Activity extends Activity{
                 	mea6_flag=1;
                 }
                 break;  
-            case 3:  //Ò³ÃæËÄ
+            case 3:  //é¡µé¢å››
             	TextView tv_mea6_4 = (TextView)findViewById(R.id.text_header);
             	tv_mea6_4.setText(R.string.hd_mea_uaa_sax);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused));
@@ -920,10 +947,10 @@ public class Section686Activity extends Activity{
                 	mea6_flag=1;
                 }
                 break;  
-            case 4:  //Ò³ÃæÎå
+            case 4:  //é¡µé¢äº”
             	TextView tv_mea6_5 = (TextView)findViewById(R.id.text_header);
             	tv_mea6_5.setText(R.string.hd_mea_da_lax);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
@@ -939,10 +966,10 @@ public class Section686Activity extends Activity{
                 	mea6_flag=1;
                 }
                 break;  
-            case 5:  //Ò³ÃæÁù
+            case 5:  //é¡µé¢å…­
             	TextView tv_mea6_6 = (TextView)findViewById(R.id.text_header);
             	tv_mea6_6.setText(R.string.hd_mea_da_sax);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
@@ -961,10 +988,10 @@ public class Section686Activity extends Activity{
             } 
             if(mea6_flag!=1)
             {
-            	animation.setFillAfter(true);// True:ÉèÖÃÍ¼Æ¬Í£ÔÚ¶¯»­½áÊøÎ»ÖÃ   
-            	animation.setDuration(200);//ÉèÖÃ¶¯»­³ÖĞøÊ±¼ä
+            	animation.setFillAfter(true);// True:è®¾ç½®å›¾ç‰‡åœåœ¨åŠ¨ç”»ç»“æŸä½ç½®   
+            	animation.setDuration(200);//è®¾ç½®åŠ¨ç”»æŒç»­æ—¶é—´
             }
-            currIndex_mea6 = arg0;//ÉèÖÃµ±Ç°View   
+            currIndex_mea6 = arg0;//è®¾ç½®å½“å‰View   
             if(currIndex_mea6!=spinner.getSelectedItemPosition())
             {
             	spinner.setSelection(0*//*currIndex_mea6*//*, true);
@@ -984,18 +1011,18 @@ public class Section686Activity extends Activity{
 		}    
 	}*/
 
-	//Ê³µÀÖĞ¶ÎĞÄ·¿ĞÄÊÒË®Æ½½çÃæ»¬¶¯
+	//é£Ÿé“ä¸­æ®µå¿ƒæˆ¿å¿ƒå®¤æ°´å¹³ç•Œé¢æ»‘åŠ¨
     /*public class MyOnPageChangeListener_me8 implements OnPageChangeListener {
   
-        public void onPageSelected(int arg0) {//²ÎÊıarg0ÎªÑ¡ÖĞµÄView   
+        public void onPageSelected(int arg0) {//å‚æ•°arg0ä¸ºé€‰ä¸­çš„View   
   
-            Animation animation = null;//ÉùÃ÷¶¯»­¶ÔÏó   
+            Animation animation = null;//å£°æ˜åŠ¨ç”»å¯¹è±¡   
             int me8_flag=0;
             switch (arg0) {  
-            case 0: //Ò³ÃæÒ»              
+            case 0: //é¡µé¢ä¸€              
             	TextView tv_me8_1 = (TextView)findViewById(R.id.text_header);
             	tv_me8_1.setText(R.string.hd_me_fc);
-                mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+                mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator)); 
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
@@ -1004,17 +1031,17 @@ public class Section686Activity extends Activity{
                 mSec7.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec8.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 if (currIndex_me8 == arg0+1) {  
-                    animation = new TranslateAnimation(arg0+1, arg0, 0, 0);//Ô²µãÒÆ¶¯Ğ§¹û¶¯»­£¬´Óµ±Ç°ViewÒÆ¶¯µ½ÏÂÒ»¸öView   
+                    animation = new TranslateAnimation(arg0+1, arg0, 0, 0);//åœ†ç‚¹ç§»åŠ¨æ•ˆæœåŠ¨ç”»ï¼Œä»å½“å‰Viewç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªView   
                 }
                 else
                 {
                 	me8_flag=1;
                 }
                 break;  
-            case 1: //Ò³Ãæ¶ş   
+            case 1: //é¡µé¢äºŒ   
             	TextView tv_me8_2 = (TextView)findViewById(R.id.text_header);
             	tv_me8_2.setText(R.string.hd_me_mc);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused)); 
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
@@ -1022,11 +1049,11 @@ public class Section686Activity extends Activity{
                 mSec6.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec7.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec8.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));   
-                if (currIndex_me8 == arg0-1) {//Èç¹û»¬¶¯µ½ÉÏÒ»¸öView   
-                    animation = new TranslateAnimation(arg0-1, arg0, 0, 0); //Ô²µãÒÆ¶¯Ğ§¹û¶¯»­£¬´Óµ±Ç°ViewÒÆ¶¯µ½ÏÂÒ»¸öView   
+                if (currIndex_me8 == arg0-1) {//å¦‚æœæ»‘åŠ¨åˆ°ä¸Šä¸€ä¸ªView   
+                    animation = new TranslateAnimation(arg0-1, arg0, 0, 0); //åœ†ç‚¹ç§»åŠ¨æ•ˆæœåŠ¨ç”»ï¼Œä»å½“å‰Viewç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªView   
   
                       
-                } else if (currIndex_me8 == arg0+1) {//Ô²µãÒÆ¶¯Ğ§¹û¶¯»­£¬´Óµ±Ç°ViewÒÆ¶¯µ½ÏÂÒ»¸öView£¬ÏÂÍ¬¡£   
+                } else if (currIndex_me8 == arg0+1) {//åœ†ç‚¹ç§»åŠ¨æ•ˆæœåŠ¨ç”»ï¼Œä»å½“å‰Viewç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªViewï¼Œä¸‹åŒã€‚   
   
                     animation = new TranslateAnimation(arg0+1, arg0, 0, 0);  
                 }  
@@ -1035,10 +1062,10 @@ public class Section686Activity extends Activity{
                 	me8_flag=1;
                 }
                 break;  
-            case 2: //Ò³ÃæÈı   
+            case 2: //é¡µé¢ä¸‰   
             	TextView tv_me8_3 = (TextView)findViewById(R.id.text_header);
             	tv_me8_3.setText(R.string.hd_me_tc);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator)); 
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
@@ -1056,10 +1083,10 @@ public class Section686Activity extends Activity{
                 	me8_flag=1;
                 }
                 break;  
-            case 3:  //Ò³ÃæËÄ
+            case 3:  //é¡µé¢å››
             	TextView tv_me8_4 = (TextView)findViewById(R.id.text_header);
             	tv_me8_4.setText(R.string.hd_me_lax);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator)); 
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused));
@@ -1078,10 +1105,10 @@ public class Section686Activity extends Activity{
                 	me8_flag=1;
                 }
                 break;  
-            case 4:  //Ò³ÃæÎå
+            case 4:  //é¡µé¢äº”
             	TextView tv_me8_5 = (TextView)findViewById(R.id.text_header);
             	tv_me8_5.setText(R.string.hd_me_av_lax);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator)); 
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
@@ -1099,10 +1126,10 @@ public class Section686Activity extends Activity{
                 	me8_flag=1;
                 }
                 break;  
-            case 5:  //Ò³ÃæÁù
+            case 5:  //é¡µé¢å…­
             	TextView tv_me8_6 = (TextView)findViewById(R.id.text_header);
             	tv_me8_6.setText(R.string.hd_me_av_sax);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator)); 
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
@@ -1120,10 +1147,10 @@ public class Section686Activity extends Activity{
                 	me8_flag=1;
                 }
                 break;  
-            case 6:  //Ò³ÃæÆß
+            case 6:  //é¡µé¢ä¸ƒ
             	TextView tv_me8_7 = (TextView)findViewById(R.id.text_header);
             	tv_me8_7.setText(R.string.hd_me_rvio);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator)); 
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
@@ -1141,10 +1168,10 @@ public class Section686Activity extends Activity{
                 	me8_flag=1;
                 }
                 break;  
-            case 7:  //Ò³Ãæ°Ë
+            case 7:  //é¡µé¢å…«
             	TextView tv_me8_8 = (TextView)findViewById(R.id.text_header);
             	tv_me8_8.setText(R.string.hd_me_b);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator)); 
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
@@ -1163,10 +1190,10 @@ public class Section686Activity extends Activity{
             } 
             if(me8_flag!=1)
             {            	
-            	animation.setFillAfter(true);// True:ÉèÖÃÍ¼Æ¬Í£ÔÚ¶¯»­½áÊøÎ»ÖÃ   
-            	animation.setDuration(200);//ÉèÖÃ¶¯»­³ÖĞøÊ±¼ä
+            	animation.setFillAfter(true);// True:è®¾ç½®å›¾ç‰‡åœåœ¨åŠ¨ç”»ç»“æŸä½ç½®   
+            	animation.setDuration(200);//è®¾ç½®åŠ¨ç”»æŒç»­æ—¶é—´
             }
-            currIndex_me8 = arg0;//ÉèÖÃµ±Ç°View     
+            currIndex_me8 = arg0;//è®¾ç½®å½“å‰View     
             if(currIndex_me8!=spinner.getSelectedItemPosition()-6)
             {
             	spinner.setSelection(0*//*currIndex_me8+6*//*, true);
@@ -1186,45 +1213,45 @@ public class Section686Activity extends Activity{
 		}    
 	}*/
     
-    //Î¸µ×Ë®Æ½½çÃæ»¬¶¯
+    //èƒƒåº•æ°´å¹³ç•Œé¢æ»‘åŠ¨
     /*public class MyOnPageChangeListener_tg6 implements OnPageChangeListener {
   	  
-        public void onPageSelected(int arg0) {//²ÎÊıarg0ÎªÑ¡ÖĞµÄView   
+        public void onPageSelected(int arg0) {//å‚æ•°arg0ä¸ºé€‰ä¸­çš„View   
   
-            Animation animation = null;//ÉùÃ÷¶¯»­¶ÔÏó   
+            Animation animation = null;//å£°æ˜åŠ¨ç”»å¯¹è±¡   
             int tg6_flag=0;
             switch (arg0) {  
-            case 0: //Ò³ÃæÒ»              
+            case 0: //é¡µé¢ä¸€              
             	TextView tv_tg6_1 = (TextView)findViewById(R.id.text_header);
             	tv_tg6_1.setText(R.string.hd_tg_m_sax);
-                mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+                mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator)); 
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec5.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec6.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 if (currIndex_tg6 == arg0+1) {  
-                    animation = new TranslateAnimation(arg0+1, arg0, 0, 0);//Ô²µãÒÆ¶¯Ğ§¹û¶¯»­£¬´Óµ±Ç°ViewÒÆ¶¯µ½ÏÂÒ»¸öView   
+                    animation = new TranslateAnimation(arg0+1, arg0, 0, 0);//åœ†ç‚¹ç§»åŠ¨æ•ˆæœåŠ¨ç”»ï¼Œä»å½“å‰Viewç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªView   
                 } 
                 else
                 {
                 	tg6_flag=1;
                 }
                 break;  
-            case 1: //Ò³Ãæ¶ş   
+            case 1: //é¡µé¢äºŒ   
             	TextView tv_tg6_2 = (TextView)findViewById(R.id.text_header);
             	tv_tg6_2.setText(R.string.hd_tg_b_sax);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused)); 
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec5.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec6.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));   
-                if (currIndex_tg6 == arg0-1) {//Èç¹û»¬¶¯µ½ÉÏÒ»¸öView   
-                    animation = new TranslateAnimation(arg0-1, arg0, 0, 0); //Ô²µãÒÆ¶¯Ğ§¹û¶¯»­£¬´Óµ±Ç°ViewÒÆ¶¯µ½ÏÂÒ»¸öView   
+                if (currIndex_tg6 == arg0-1) {//å¦‚æœæ»‘åŠ¨åˆ°ä¸Šä¸€ä¸ªView   
+                    animation = new TranslateAnimation(arg0-1, arg0, 0, 0); //åœ†ç‚¹ç§»åŠ¨æ•ˆæœåŠ¨ç”»ï¼Œä»å½“å‰Viewç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªView   
   
                       
-                } else if (currIndex_tg6 == arg0+1) {//Ô²µãÒÆ¶¯Ğ§¹û¶¯»­£¬´Óµ±Ç°ViewÒÆ¶¯µ½ÏÂÒ»¸öView£¬ÏÂÍ¬¡£   
+                } else if (currIndex_tg6 == arg0+1) {//åœ†ç‚¹ç§»åŠ¨æ•ˆæœåŠ¨ç”»ï¼Œä»å½“å‰Viewç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªViewï¼Œä¸‹åŒã€‚   
   
                     animation = new TranslateAnimation(arg0+1, arg0, 0, 0);  
                 } 
@@ -1233,10 +1260,10 @@ public class Section686Activity extends Activity{
                 	tg6_flag=1;
                 }
                 break;  
-            case 2: //Ò³ÃæÈı   
+            case 2: //é¡µé¢ä¸‰   
             	TextView tv_tg6_3 = (TextView)findViewById(R.id.text_header);
             	tv_tg6_3.setText(R.string.hd_tg_lax);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator)); 
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
@@ -1252,10 +1279,10 @@ public class Section686Activity extends Activity{
                 	tg6_flag=1;
                 }
                 break;  
-            case 3:  //Ò³ÃæËÄ
+            case 3:  //é¡µé¢å››
             	TextView tv_tg6_4 = (TextView)findViewById(R.id.text_header);
             	tv_tg6_4.setText(R.string.hd_tg_tc);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator)); 
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator_focused));
@@ -1272,10 +1299,10 @@ public class Section686Activity extends Activity{
                 	tg6_flag=1;
                 }
                 break;  
-            case 4:  //Ò³ÃæÎå
+            case 4:  //é¡µé¢äº”
             	TextView tv_tg6_5 = (TextView)findViewById(R.id.text_header);
             	tv_tg6_5.setText(R.string.hd_tg_rvi);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator)); 
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
@@ -1291,10 +1318,10 @@ public class Section686Activity extends Activity{
                 	tg6_flag=1;
                 }
                 break;  
-            case 5:  //Ò³ÃæÁù
+            case 5:  //é¡µé¢å…­
             	TextView tv_tg6_6 = (TextView)findViewById(R.id.text_header);
             	tv_tg6_6.setText(R.string.hd_tg_d_lax);
-            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//½øÈëµÚÒ»¸öµ¼º½Ò³Ãæ£¬Ğ¡Ô²µãÎªÑ¡ÖĞ×´Ì¬£¬ÏÂÒ»¸öÒ³ÃæµÄĞ¡Ô²µãÊÇÎ´Ñ¡ÖĞ×´Ì¬¡£   
+            	mSec1.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));//è¿›å…¥ç¬¬ä¸€ä¸ªå¯¼èˆªé¡µé¢ï¼Œå°åœ†ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸‹ä¸€ä¸ªé¡µé¢çš„å°åœ†ç‚¹æ˜¯æœªé€‰ä¸­çŠ¶æ€ã€‚   
                 mSec2.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator)); 
                 mSec3.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
                 mSec4.setImageDrawable(getResources().getDrawable(R.drawable.page_indicator));
@@ -1313,10 +1340,10 @@ public class Section686Activity extends Activity{
             }  
             if(tg6_flag!=1)
             {          	
-            	animation.setFillAfter(true);// True:ÉèÖÃÍ¼Æ¬Í£ÔÚ¶¯»­½áÊøÎ»ÖÃ   
-            	animation.setDuration(200);//ÉèÖÃ¶¯»­³ÖĞøÊ±¼ä
+            	animation.setFillAfter(true);// True:è®¾ç½®å›¾ç‰‡åœåœ¨åŠ¨ç”»ç»“æŸä½ç½®   
+            	animation.setDuration(200);//è®¾ç½®åŠ¨ç”»æŒç»­æ—¶é—´
             }
-            currIndex_tg6 = arg0;//ÉèÖÃµ±Ç°View     
+            currIndex_tg6 = arg0;//è®¾ç½®å½“å‰View     
             if(currIndex_tg6!=spinner.getSelectedItemPosition()-14)
             {
             	spinner.setSelection(0*//*currIndex_tg6+14*//*, true);

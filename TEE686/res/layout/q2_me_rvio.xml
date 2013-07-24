@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="0.0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="3" >
+
+        <VideoView
+            android:id="@+id/vv_q2_me_rvio"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitCenter"
+            android:visibility="visible" />
+
+        <!--<FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true">
+            <ImageButton
+                    android:id="@+id/q2_mea_aa_lax_btnS1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="结构1"
+                    android:textColorHighlight="@color/red"
+                    android:textStyle="bold"
+                    ></TextView>
+
+        </FrameLayout>
+
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true">
+            <ImageButton
+                    android:id="@+id/q2_mea_aa_lax_btnS2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="结构2"
+                    android:textColorHighlight="@color/red"
+                    android:textStyle="bold"
+                    ></TextView>
+
+        </FrameLayout>
+
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true">
+            <ImageButton
+                    android:id="@+id/q2_mea_aa_lax_btnS3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="结构3"
+                    android:textColorHighlight="@color/red"
+                    android:textStyle="bold"
+                    ></TextView>
+
+        </FrameLayout>-->
+
+    </RelativeLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/gray">
+
+        <ImageButton
+                android:id="@+id/q2_me_rvio_ib"
+                android:layout_width="match_parent"
+                android:layout_height="0.0dip"
+                android:layout_weight="1"
+                android:layout_marginBottom="5dip"
+                android:background="@color/gray"
+                android:src="@drawable/music"/>
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" >
+
+
+
+            <LinearLayout
+                    android:id="@+id/q2_me_rvio_s1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    android:background="@color/gray"
+                    android:layout_weight="2">
+
+                <TextView
+                        android:id="@+id/q2_me_rvio_s1tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.0dip"
+                        android:layout_weight="2"
+                        android:maxLines="50"
+                        android:singleLine="false"
+                        android:text="@string/me_rvio_q2text"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/q2_me_rvio_s2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="invisible"
+                    android:background="@color/gray">
+
+                <TextView
+                        android:id="@+id/q2_me_rvio_s2tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.0dip"
+                        android:layout_weight="2"
+                        android:maxLines="50"
+                        android:singleLine="false"
+                        android:text="食道中段升主动脉长轴切面结构二，这是一段测试文字 结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/q2_me_rvio_s3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="invisible"
+                    android:background="@color/gray">
+
+                <TextView
+                        android:id="@+id/q2_me_rvio_s3tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.0dip"
+                        android:layout_weight="2"
+                        android:maxLines="50"
+                        android:singleLine="false"
+                        android:text="食道中段升主动脉长轴切面结构三，这是一段测试文字 结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三结构三"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -5,15 +5,26 @@
     android:orientation="horizontal"
     tools:context=".IndexActivity" >
 
-    <TextView
-        android:id="@+id/text_welcome"
+    <ImageView
+        android:id="@+id/bg_index"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="BACKGROUND"
+        android:src="@color/gray"/>
+
+    <ImageView
+        android:id="@+id/image_brand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/index"
         android:textColor="@color/white"
-        android:textSize="35sp" />
+        android:textSize="35sp"
+        android:src="@drawable/newlogo"
+            />
 
     <ImageButton
         android:id="@+id/btn_enter"
@@ -24,15 +35,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginBottom="40dp"
         android:contentDescription="ENTER"
-        android:src="@android:drawable/ic_menu_send" />
-
-    <ImageView
-        android:id="@+id/bg_index"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:contentDescription="BACKGROUND"
-        android:src="@android:drawable/screen_background_dark_transparent" />
+        android:background="@android:drawable/ic_menu_send"
+        android:padding="20dp"/>
 
 </RelativeLayout>

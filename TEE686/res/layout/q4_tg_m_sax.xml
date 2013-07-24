@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="0.0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="3" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/q4_tg_m_sax"
+            android:background="@color/white"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="0.0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+    </LinearLayout>
+
+</LinearLayout>

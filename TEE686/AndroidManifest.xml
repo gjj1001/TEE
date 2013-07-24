@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="8"
         android:targetSdkVersion="14" />
 
     <application
@@ -37,39 +37,104 @@
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.tee686.activity.Q3_MEA_AA_LaxActivity"
+            android:name="com.tee686.activity.Q3_ME_LaxActivity"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.tee686.activity.Q1_MEA_AA_LaxActivity"
+            android:name="com.tee686.activity.Q1_ME_LaxActivity"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.tee686.activity.Q2_MEA_AA_LaxActivity"
+            android:name="com.tee686.activity.Q2_ME_LaxActivity"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.tee686.activity.Q4_MEA_AA_LaxActivity"
-            android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
-        </activity>        
-        <activity
-            android:name="com.tee686.activity.Section6641Activity"
-            android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+                android:name="com.tee686.activity.Q4_ME_LaxActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.tee686.activity.Section2345Activity"
-            android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+                android:name="com.tee686.activity.Q4_ME_FcActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.tee686.activity.Section223Activity"
-            android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >        
+                android:name="com.tee686.activity.Q4_ME_RvioActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q4_TG_M_SaxActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q1_TG_M_SaxActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q1_ME_FcActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q1_ME_RvioActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q2_ME_FcActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q2_ME_RvioActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q2_TG_M_SaxActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q3_ME_FcActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q3_ME_RvioActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q3_TG_M_SaxActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.TG_M_SaxActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.ME_FcActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.ME_LaxActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.ME_RvioActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
     </application>
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.VideoView;
 
 import com.casit.tee686.R;
@@ -22,10 +23,10 @@ import java.util.concurrent.Executors;
  * Created by Jason on 13-7-5.
  */
 public class MainActivity extends Activity {
-    private VideoView vv1 = null;
-    private VideoView vv2 = null;
-    private VideoView vv3 = null;
-    private VideoView vv4 = null;
+    private ImageView iv1 = null;
+    private ImageView iv2 = null;
+    private ImageView iv3 = null;
+    private ImageView iv4 = null;
     private ImageButton ib = null;
     private Dialog dialog;
     private View dialogView = null;
@@ -35,32 +36,14 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-//        vv1.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.mea1));
-        vv1.start();
-        vv1.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                vv1.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.xinzang3d));
-                vv1.start();
-            }
-        });
 
-//        vv2.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.mea1));
-        vv2.start();
-        vv2.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                vv2.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.xinzang3d));
-                vv2.start();
-            }
-        });
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //弹出引导动画
         dialogView = getLayoutInflater().inflate(R.layout.demo_index, null);
         if (dialogView != null) {
             vv = (VideoView) dialogView.findViewById(R.id.demo_index_vv);
@@ -73,7 +56,7 @@ public class MainActivity extends Activity {
 
         dialog.getWindow().setLayout(this.getWindowManager().getDefaultDisplay().getWidth(),this.getWindowManager().getDefaultDisplay().getHeight());
         dialog.show();
-        //使dialog弹出后屏幕不变暗
+
         Window window = dialog.getWindow();
         WindowManager.LayoutParams lp = window.getAttributes();
         lp.dimAmount =0f;
@@ -87,74 +70,49 @@ public class MainActivity extends Activity {
             }
         },10000);
 
-        vv1 = (VideoView)findViewById(R.id.vv1_mea_aa_lax);
-        vv2 = (VideoView)findViewById(R.id.vv2_mea_aa_lax);
-        vv3 = (VideoView)findViewById(R.id.vv3_mea_aa_lax);
-        vv4 = (VideoView)findViewById(R.id.vv4_mea_aa_lax);
+        iv1 = (ImageView)findViewById(R.id.iv_me_lax);
+        iv2 = (ImageView)findViewById(R.id.iv_me_fc);
+        iv3 = (ImageView)findViewById(R.id.iv_tg_m_sax);
+        iv4 = (ImageView)findViewById(R.id.iv_me_rvio);
 
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
+
+        iv1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                vv1.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.xinzang3d));
-                vv1.start();
-                vv1.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        vv1.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.xinzang3d));
-                        vv1.start();
-                    }
-                });
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ME_LaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.me_lax_zoomin, R.anim.hold);
             }
         });
 
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
+
+
+        iv2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                vv2.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.xinzang3d));
-                vv2.start();
-                vv2.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        vv2.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.xinzang3d));
-                        vv2.start();
-                    }
-
-                });
-
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ME_FcActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.me_fc_zoomin, R.anim.hold);
             }
         });
 
-        /*Executors.newSingleThreadExecutor().execute(new Runnable() {
+        iv3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                vv3.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.mea1));
-                vv3.start();
-                vv3.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        vv3.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.mea1));
-                        vv3.start();
-                    }
-                });
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, TG_M_SaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q3_zoomin, R.anim.hold);
             }
-        });*/
+        });
 
-        /*Executors.newSingleThreadExecutor().execute(new Runnable() {
+        iv4.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                vv4.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.mea1));
-                vv4.start();
-                vv4.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        vv4.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.mea1));
-                        vv4.start();
-                    }
-
-                });
-
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ME_RvioActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.me_rvio_zoomin, R.anim.hold);
             }
-        });*/
+        });
 
         ib = (ImageButton)findViewById(R.id.imgbtn_enter);
         ib.setOnClickListener(new View.OnClickListener() {
