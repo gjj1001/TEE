@@ -65,5 +65,8 @@
     <string name="title_activity_seciton6641">Seciton6641Activity</string>
     <string name="title_activity_section2345">Section2345Activity</string>
     <string name="title_activity_section223">Section223Activity</string>
+    
+    <string name="remote_call_failed">Failure calling remote service</string>
+    <string name="check_sign_failed">您的订单信息已被非法篡改。</string>
 
 </resources>

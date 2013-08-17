@@ -48,7 +48,7 @@
             android:singleLine="false"            
             android:text="@string/tg_m_sax_q3text"
             android:textColor="@color/black"
-            android:textSize="18dp"/>
+            android:textSize="16dp"/>
 
         <FrameLayout
                 android:layout_width="match_parent"

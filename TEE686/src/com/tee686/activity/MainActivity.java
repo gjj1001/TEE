@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
     private ImageView iv4 = null;
     private ImageButton ib = null;
     private Dialog dialog;
-    private View dialogView = null;
+//    private View dialogView = null;
     private VideoView vv =null;
     private final Timer timer = new Timer();
 
@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dialogView = getLayoutInflater().inflate(R.layout.demo_index, null);
+        /*dialogView = getLayoutInflater().inflate(R.layout.demo_index, null);
         if (dialogView != null) {
             vv = (VideoView) dialogView.findViewById(R.id.demo_index_vv);
         }
@@ -68,7 +68,7 @@ public class MainActivity extends Activity {
                 dialog.dismiss();
                 timer.cancel();
             }
-        },10000);
+        },10000);*/
 
         iv1 = (ImageView)findViewById(R.id.iv_me_lax);
         iv2 = (ImageView)findViewById(R.id.iv_me_fc);

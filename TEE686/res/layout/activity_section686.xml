@@ -193,7 +193,7 @@
                                     android:layout_height="match_parent"
                                     android:gravity="center"
                                     android:layout_weight="1"
-                                    android:text="食道中段右心室流入流出切面"
+                                    android:text="@string/hd_me_rvio"
                                     android:textColor="@color/black"
                                     android:textStyle="bold|italic" />
 

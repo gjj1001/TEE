@@ -17,6 +17,22 @@
             android:scaleType="fitCenter"
             android:visibility="visible" />
 
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:id="@+id/imageView"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:background="@color/silver"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/newlogda"
+                android:scaleType="matrix"/>
         <!--<FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

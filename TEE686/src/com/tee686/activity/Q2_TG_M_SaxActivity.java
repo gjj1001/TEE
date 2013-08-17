@@ -2,6 +2,7 @@ package com.tee686.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.casit.tee686.R;
@@ -26,20 +28,20 @@ public class Q2_TG_M_SaxActivity extends Activity {
 	private VideoView vv;
     private MediaPlayer mp = null;
 //	private ScaleGestureDetector mScaleGestureDetector = null;
-    private PopupWindow structure = null;
-    private View dialogView1 = null;
-    private View dialogView2 = null;
-    private View dialogView3 = null;
-    private ImageView iv = null;
+//    private PopupWindow structure = null;
+//    private View dialogView1 = null;
+//    private View dialogView2 = null;
+//    private View dialogView3 = null;
+//    private ImageView iv = null;
 //    private VideoView vv1 = null;
 //    private SurfaceHolder surfaceHolder;
 //    private MediaPlayer mp;
 //    private VideoView vv2 = null;
 //    private VideoView vv3 = null;
-    private Dialog dialog1;
-    private Dialog dialog2;
-    private Dialog dialog3;
-    private GestureDetector gestureDetector = null;
+//    private Dialog dialog1;
+//    private Dialog dialog2;
+//    private Dialog dialog3;
+//    private GestureDetector gestureDetector = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +65,11 @@ public class Q2_TG_M_SaxActivity extends Activity {
         ImageButton s3 = (ImageButton)findViewById(R.id.q2_mea_aa_lax_btnS3);*/
         ImageButton ib = (ImageButton)findViewById(R.id.q2_tg_m_sax_ib);
 
-        dialogView1 = getLayoutInflater().inflate(R.layout.q2_dialog_iv, null);
+        /*dialogView1 = getLayoutInflater().inflate(R.layout.q2_dialog_iv, null);
         if (dialogView1 != null) {
             iv = (ImageView) dialogView1.findViewById(R.id.me_lax_iv_structure1);
             iv.setImageResource(R.drawable.tg_m_sax);
-        }
+        }*/
 
         /*dialogView2 = getLayoutInflater().inflate(R.layout.structure2_mea_aa_lax, null);
         if (dialogView2 != null) {
@@ -81,9 +83,9 @@ public class Q2_TG_M_SaxActivity extends Activity {
         }
         vv3.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mea1));*/
 
-        dialog1 = new Dialog(Q2_TG_M_SaxActivity.this);
+        /*dialog1 = new Dialog(Q2_TG_M_SaxActivity.this);
         dialog1.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        dialog1.setContentView(dialogView1);
+        dialog1.setContentView(dialogView1);*/
         /*dialog2 = new Dialog(Q2_ME_LaxActivity.this);
         dialog2.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         dialog2.setContentView(dialogView2);
@@ -98,7 +100,7 @@ public class Q2_TG_M_SaxActivity extends Activity {
         surfaceHolder.addCallback(this);  //��Ϊ�����ʵ����SurfaceHolder.Callback�ӿڣ����Իص�����ֱ��this
         surfaceHolder.setFixedSize(350, 286);   //��ʾ�ķֱ���,������Ϊ��ƵĬ��
         surfaceHolder.setKeepScreenOn(true);    //������Ļ����*/
-        gestureDetector = new GestureDetector(this,new GestureDetector.OnGestureListener() {
+        /*gestureDetector = new GestureDetector(vv.getContext(),new GestureDetector.OnGestureListener() {
             @Override
             public boolean onDown(MotionEvent motionEvent) {
                 return false;
@@ -111,12 +113,7 @@ public class Q2_TG_M_SaxActivity extends Activity {
 
             @Override
             public boolean onSingleTapUp(MotionEvent motionEvent) {
-                if(dialog1.isShowing()) {
-                    dialog1.dismiss();
-                    dialog2.dismiss();
-                    dialog3.dismiss();
-//                    Q2_tg_m_saxActivity.this.getWindowManager().removeView(dialogView);
-                }
+
                 return false;
             }
 
@@ -134,9 +131,15 @@ public class Q2_TG_M_SaxActivity extends Activity {
             public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent2, float v, float v2) {
                 return false;
             }
+        });*/
+
+        vv.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Toast.makeText(Q2_TG_M_SaxActivity.this, "hahahaha", Toast.LENGTH_LONG).show();
+                return false;
+            }
         });
-
-
 		/*s1.setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -247,16 +250,16 @@ public class Q2_TG_M_SaxActivity extends Activity {
                 layouts2.setVisibility(View.INVISIBLE);
                 layouts3.setVisibility(View.INVISIBLE);
 
-                dialog1.getWindow().setGravity(Gravity.CENTER);
+                /*dialog1.getWindow().setGravity(Gravity.CENTER);
                 dialog1.show();
                 //防止窗口变暗
                 Window window = dialog1.getWindow();
                 WindowManager.LayoutParams lp = window.getAttributes();
                 lp.dimAmount =0f;
-                window.setAttributes(lp);
+                window.setAttributes(lp);*/
 
                 if( mp == null || !mp.isPlaying()) {
-                    mp = MediaPlayer.create(Q2_TG_M_SaxActivity.this, R.raw.gangnam_style);
+                    mp = MediaPlayer.create(Q2_TG_M_SaxActivity.this, R.raw.tg_m_sax);
                     try {
 //                    mp.prepare();
                         mp.seekTo(0);
@@ -281,28 +284,7 @@ public class Q2_TG_M_SaxActivity extends Activity {
 		vv.start();
 	}
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event)
-	{   //���ظ�GestureDetector������
-        boolean result = gestureDetector.onTouchEvent(event);
 
-        if(!result){
-            if(event.getAction()==MotionEvent.ACTION_UP){
-
-				/*if(!isControllerShow){
-					showController();
-					hideControllerDelay();
-				}else {
-					cancelDelayHide();
-					hideController();
-				}*/
-            }
-            result = super.onTouchEvent(event);
-        }
-
-        return result;
-//        return mScaleGestureDetector.onTouchEvent(event);
-	}
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
