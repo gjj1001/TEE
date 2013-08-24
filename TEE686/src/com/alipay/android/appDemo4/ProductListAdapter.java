@@ -8,6 +8,8 @@ package com.alipay.android.appDemo4;
 
 import java.util.ArrayList;
 
+import com.casit.tee686.R;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

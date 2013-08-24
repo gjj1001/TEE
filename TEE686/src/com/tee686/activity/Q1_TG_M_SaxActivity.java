@@ -43,7 +43,7 @@ public class Q1_TG_M_SaxActivity extends Activity{
 			// TODO Auto-generated method stub
 			vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.q1_tg_m_sax));
 
-			vv.seekTo(1);
+			vv.start();
 		}		
 	};
 

@@ -158,8 +158,8 @@
                         android:layout_weight="2"
                         android:maxLines="50"
                         android:singleLine="false"
-                        android:text="食道中段升主动脉长轴切面结构二，这是一段测试文字 结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二结构二"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/me_lax_q4text"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/black"/>
 
             </LinearLayout>

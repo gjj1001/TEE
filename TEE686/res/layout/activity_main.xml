@@ -93,11 +93,11 @@
                         android:background="@color/black">
 
                     <ImageView
-                            android:id="@+id/iv_me_rvio"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:visibility="visible"
-                            android:src="@drawable/me_rvio"/>
+                        android:id="@+id/iv_me_rvio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/me_rvio640"
+                        android:visibility="visible" />
 
                 </LinearLayout>
             </LinearLayout>

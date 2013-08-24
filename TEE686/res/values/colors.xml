@@ -9,5 +9,7 @@
     <color name="blue">#0000FF</color>
     <color name="green">#00FF00</color>
     <color name="gray">#8a8a8a</color>
+    <color name="BgColor">#ffd1dce9</color>
+    <color name="TextColorBlack">#FF000000</color>
 
 </resources>

@@ -2,14 +2,11 @@ package com.tee686.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.MediaController;
 import android.widget.VideoView;
 
 import com.casit.tee686.R;
@@ -22,15 +19,12 @@ public class TG_M_SaxActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		this.setContentView(R.layout.q1_tg_m_sax);
+		this.setContentView(R.layout.q1_tg_m_sax);		
 		
-		MediaController mc = new MediaController(this);  
 		vv = (VideoView)findViewById(R.id.vv_q1_tg_m_sax);
-
-		vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.q1_tg_m_sax));
-
-		vv.setMediaController(mc);
-		vv.setOnCompletionListener(onCompListener);
+		vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.tg_m_sax));
+		
+//		vv.setOnCompletionListener(onCompListener);
 		vv.start();
 
         ib = (ImageButton)findViewById(R.id.tg_m_sax_btn);
@@ -47,16 +41,16 @@ public class TG_M_SaxActivity extends Activity{
         });
 	}
 	
-	OnCompletionListener onCompListener = new OnCompletionListener(){
+	/*OnCompletionListener onCompListener = new OnCompletionListener(){
 
 		@Override
 		public void onCompletion(MediaPlayer mp) {
 			// TODO Auto-generated method stub
-			vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.q1_tg_m_sax));
+			vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.tg_m_sax));
 
 			vv.start();
 		}		
-	};
+	};*/
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -84,8 +78,8 @@ public class TG_M_SaxActivity extends Activity{
     protected void onResume() {
         super.onResume();
         vv = (VideoView)findViewById(R.id.vv_q1_tg_m_sax);
-        vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.q1_tg_m_sax));
-        vv.setOnCompletionListener(onCompListener);
+        vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.tg_m_sax));
+//        vv.setOnCompletionListener(onCompListener);
         vv.start();
     }
 }

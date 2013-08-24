@@ -29,12 +29,12 @@
                     android:orientation="horizontal" >
 
                 <ImageView
-                        android:id="@+id/iv1_tg_m_sax"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitCenter"
-                        android:visibility="visible"
-                        android:src="@drawable/tg_m_sax" />
+                    android:id="@+id/iv1_tg_m_sax"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/tg_m_sax"
+                    android:visibility="visible" />
 
             </LinearLayout>
 
@@ -74,11 +74,12 @@
                     android:orientation="horizontal" >
 
                 <ImageView
-                        android:id="@+id/iv3_tg_m_sax"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:src="@drawable/q3_tg_m_sax_h" />
+                    android:id="@+id/iv3_tg_m_sax"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/q3_tg_m_sax_h" />
 
             </LinearLayout>
 
@@ -89,12 +90,14 @@
                     android:layout_marginLeft="0.5dip"
                     android:layout_marginRight="1dip"
                     android:orientation="horizontal" >
+
                 <ImageView
-                        android:id="@+id/iv4_tg_m_sax"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:src="@drawable/q4_tg_m_sax" />
+                    android:id="@+id/iv4_tg_m_sax"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/q4_tg_m_sax" />
 
             </LinearLayout>
         </LinearLayout>

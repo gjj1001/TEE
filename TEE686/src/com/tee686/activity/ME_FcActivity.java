@@ -2,14 +2,11 @@ package com.tee686.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.MediaController;
 import android.widget.VideoView;
 
 import com.casit.tee686.R;
@@ -24,14 +21,11 @@ public class ME_FcActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.q1_me_fc);
-		
-		MediaController mc = new MediaController(this);  
+				
 		vv = (VideoView)findViewById(R.id.vv_q1_me_fc);
-
-		vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.q1_me_fc));
-
-		vv.setMediaController(mc);
-		vv.setOnCompletionListener(onCompListener);
+		vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.me_fc));
+		
+//		vv.setOnCompletionListener(onCompListener);
 		vv.start();
 
         ib = (ImageButton)findViewById(R.id.me_fc_btn);
@@ -48,16 +42,16 @@ public class ME_FcActivity extends Activity{
         });
 	}
 	
-	OnCompletionListener onCompListener = new OnCompletionListener(){
+	/*OnCompletionListener onCompListener = new OnCompletionListener(){
 
 		@Override
 		public void onCompletion(MediaPlayer mp) {
 			// TODO Auto-generated method stub
-			vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.q1_me_fc));
+			vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.me_fc));
 
 			vv.start();
 		}		
-	};
+	};*/
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -85,8 +79,8 @@ public class ME_FcActivity extends Activity{
     protected void onResume() {
         super.onResume();
         vv = (VideoView)findViewById(R.id.vv_q1_me_fc);
-        vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.q1_me_fc));
-        vv.setOnCompletionListener(onCompListener);
+        vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.me_fc));
+//        vv.setOnCompletionListener(onCompListener);
         vv.start();
     }
 }

@@ -1,27 +1,41 @@
 package com.tee686.activity;
 
+import java.io.File;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
-import android.widget.MediaController;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import android.widget.VideoView;
+
 import com.alipay.android.appDemo4.AlixId;
 import com.alipay.android.appDemo4.BaseHelper;
 import com.alipay.android.appDemo4.MobileSecurePayHelper;
@@ -30,6 +44,7 @@ import com.alipay.android.appDemo4.PartnerConfig;
 import com.alipay.android.appDemo4.ResultChecker;
 import com.alipay.android.appDemo4.Rsa;
 import com.casit.tee686.R;
+import com.unionpay.UPPayAssistEx;
 
 public class ME_RvioActivity extends Activity{
 
@@ -37,22 +52,67 @@ public class ME_RvioActivity extends Activity{
 	private VideoView vv;
     private ImageButton ib;
 	private ProgressDialog mProgress;
-
+	private static Dialog dialog = null;
+	private View dialogView = null;
+	private SimpleAdapter listAdapter;
+//	private final Timer timer = new Timer();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		this.setContentView(R.layout.q1_me_rvio);
-        
-		performPay();
-        
-		MediaController mc = new MediaController(this);  
+		setContentView(R.layout.q1_me_rvio);
+		if(isPayed()) {
+			contentShow();
+		} else {
+			dialogView = getLayoutInflater().inflate(R.layout.pay_list, null);
+			dialog = new Dialog(this);
+			dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+	        dialog.setContentView(dialogView);
+	        ListView listView = (ListView)dialogView.findViewById(R.id.paylist);
+			initPayList();
+			listView.setAdapter(listAdapter);
+			listView.setOnItemClickListener(new OnItemClickListener() {
+	
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+						long arg3) {
+					// TODO Auto-generated method stub
+					switch(arg2) {
+					case 0:
+						performAliPay();
+						break;
+					case 1:
+						performUpPay();
+						break;
+					}
+				}
+			});
+			
+			dialog.getWindow().setGravity(Gravity.CENTER);
+	        dialog.show();
+	        //防止弹出dialog后窗口变暗
+	        Window window = dialog.getWindow();
+	        WindowManager.LayoutParams lp = window.getAttributes();
+	        lp.dimAmount =0f;
+	        window.setAttributes(lp);
+		}
+	}
+
+	public boolean isPayed() {
+		// TODO Auto-generated method stub
+		File file = new File(Uri.parse("android.resource://"+getPackageName()+"/values/pay.xml").getPath());
+		if(file.exists()) {
+			return true;
+		}
+		return false;
+	}
+
+	private void contentShow() {		  
 		vv = (VideoView)findViewById(R.id.vv_q1_me_rvio);
-
-		vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.q1_me_rvio));
-
-		vv.setMediaController(mc);
-		vv.setOnCompletionListener(onCompListener);
+		vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.me_rvio));
+		
+//		vv.setOnCompletionListener(onCompListener);
 		vv.start();
 
         ib = (ImageButton)findViewById(R.id.me_rvio_btn);
@@ -67,9 +127,61 @@ public class ME_RvioActivity extends Activity{
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
             }
         });
+	}			
+	
+	private void initPayList() {
+		List<Map<String, Object>> contents = new ArrayList<Map<String,Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("PIC", R.drawable.alipay);
+		map.put("CONTENT", "支付宝交易");
+		contents.add(map);
+		map = new HashMap<String, Object>();
+		map.put("PIC", R.drawable.up);
+		map.put("CONTENT", "银联在线交易");
+		contents.add(map);
+		listAdapter = new SimpleAdapter(this, contents, R.layout.pay_list_content, new String[] {"PIC", "CONTENT"}, new int[] {R.id.paylist_pic, R.id.paylist_content});		
 	}
 
-	private void performPay() {
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		if(data == null) {
+			return;
+		}
+		String str = data.getExtras().getString("pay_result");
+		if(str.equalsIgnoreCase("success")) {
+			Toast.makeText(this, "支付成功!", Toast.LENGTH_SHORT).show();
+			contentShow();
+			setPayTag();
+		} else if (str.equalsIgnoreCase("fail")) {
+			Toast.makeText(this, "支付失败!", Toast.LENGTH_SHORT).show();
+			finish();
+			overridePendingTransition(R.anim.hold, R.anim.me_rvio_zoomout);
+		} else if(str.equalsIgnoreCase("cancel")) {
+			Toast.makeText(this, "您已经取消了本次订单的支付", Toast.LENGTH_SHORT).show();
+			finish();
+			overridePendingTransition(R.anim.hold, R.anim.me_rvio_zoomout);
+		}
+	}
+
+	private void setPayTag() {
+		// TODO Auto-generated method stub
+		Uri uri = Uri.parse("android.resource://"+getPackageName()+"/values/pay.xml");
+		getDir(uri.getPath(), 0);
+		
+	}
+
+	private void performUpPay() {
+		// TODO Auto-generated method stub
+		String serverMode = "01";
+		int ret = UPPayAssistEx.startPay(this, null, null, getOutTradeNo(), serverMode);
+		if(ret == UPPayAssistEx.PLUGIN_NOT_FOUND) {
+			//安装assets中提供的银联支付插件
+			UPPayAssistEx.installUPPayPlugin(this);
+		}
+	}
+
+	private void performAliPay() {
 		// check to see if the MobileSecurePay is already installed.
         // 检测安全支付服务是否被安装
         MobileSecurePayHelper mspHelper = new MobileSecurePayHelper(this);
@@ -211,15 +323,23 @@ public class ME_RvioActivity extends Activity{
 									getResources().getString(
 											R.string.check_sign_failed),
 									android.R.drawable.ic_dialog_alert);
+							finish();
+							overridePendingTransition(R.anim.hold, R.anim.me_rvio_zoomout);
 						} else {// 验签成功。验签成功后再判断交易状态码
-							if (tradeStatus.equals("9000"))// 判断交易状态码，只有9000表示交易成功
+							if (tradeStatus.equals("9000")) {// 判断交易状态码，只有9000表示交易成功
 								BaseHelper.showDialog(ME_RvioActivity.this, "提示",
 										"支付成功。交易状态码：" + tradeStatus,
 										R.drawable.infoicon);
-							else
+								contentShow();
+								setPayTag();
+							}
+							else {
 								BaseHelper.showDialog(ME_RvioActivity.this, "提示",
 										"支付失败。交易状态码:" + tradeStatus,
 										R.drawable.infoicon);
+								finish();
+								overridePendingTransition(R.anim.hold, R.anim.me_rvio_zoomout);
+							}
 						}
 
 					} catch (Exception e) {
@@ -238,16 +358,16 @@ public class ME_RvioActivity extends Activity{
 		}
 	};
 
-	OnCompletionListener onCompListener = new OnCompletionListener(){
+	/*OnCompletionListener onCompListener = new OnCompletionListener(){
 
 		@Override
 		public void onCompletion(MediaPlayer mp) {
 			// TODO Auto-generated method stub
-			vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.q1_me_rvio));
+			vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.me_rvio));
 
 			vv.start();
 		}		
-	};
+	};*/
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -274,10 +394,34 @@ public class ME_RvioActivity extends Activity{
     } */
     protected void onResume() {
         super.onResume();
-        vv = (VideoView)findViewById(R.id.vv_q1_me_rvio);
-        vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.q1_me_rvio));
-        vv.setOnCompletionListener(onCompListener);
-        vv.start();
+        if(isPayed()) {
+	        vv = (VideoView)findViewById(R.id.vv_q1_me_rvio);
+	        vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.me_rvio));
+//	        vv.setOnCompletionListener(onCompListener);
+	        vv.start();
+        } else {
+        	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        	builder.setTitle("确认付款");
+        	builder.setMessage("更多精彩内容请付费后开启体验！");
+        	builder.setPositiveButton(android.R.string.ok, new OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					ME_RvioActivity.dialog.show();
+				}
+			});
+        	builder.setNegativeButton(android.R.string.no, new OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					ME_RvioActivity.this.finish();
+					overridePendingTransition(R.anim.hold, R.anim.me_rvio_zoomout);
+				}
+			});
+        	builder.show();
+        }
     }
     
     @Override

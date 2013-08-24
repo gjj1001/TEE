@@ -1,24 +1,17 @@
 package com.tee686.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.GestureDetector;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.casit.tee686.R;
@@ -139,8 +132,11 @@ public class Q2_ME_FcActivity extends Activity {
         vv.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                Toast.makeText(Q2_ME_FcActivity.this, "hahahaha", Toast.LENGTH_LONG).show();
-                return false;
+                Intent intent = new Intent(Q2_ME_FcActivity.this, Q2_ME_Fc_DetailActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+                overridePendingTransition(R.anim.zoomin, R.anim.zoomout);                
+                return true;
             }
         });
 
@@ -263,7 +259,7 @@ public class Q2_ME_FcActivity extends Activity {
                 window.setAttributes(lp);*/
 
                 if( mp == null || !mp.isPlaying()) {
-                    mp = MediaPlayer.create(Q2_ME_FcActivity.this, R.raw.me_fc);
+                    mp = MediaPlayer.create(Q2_ME_FcActivity.this, R.raw.audio_me_fc);
                     try {
 //                    mp.prepare();
                         mp.seekTo(0);
@@ -295,6 +291,8 @@ public class Q2_ME_FcActivity extends Activity {
             if(mp != null) {
                 mp.release();
             }
+           /* Intent intent = new Intent(this, Section686Activity.class);
+            startActivity(intent);*/
             finish();
             overridePendingTransition(R.anim.hold, R.anim.q2_zoomout);
             return true;
@@ -365,6 +363,7 @@ public class Q2_ME_FcActivity extends Activity {
 			vv.start();
 		}		
 	};
+	
 	
    /* private String getSDPath(){
         File sdDir = null;

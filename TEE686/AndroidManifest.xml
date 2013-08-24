@@ -28,6 +28,7 @@
         </activity>
         <activity
                 android:name="com.tee686.activity.MainActivity"
+                android:launchMode="singleTask"
                 android:screenOrientation="landscape"
                 android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
@@ -135,6 +136,54 @@
                 android:name="com.tee686.activity.ME_RvioActivity"
                 android:screenOrientation="landscape"
                 android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="com.tee686.activity.Q2_ME_Lax_DetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q2_ME_Fc_DetailActivity"
+                android:launchMode="singleTask"
+                android:screenOrientation="landscape"                
+                android:theme="@android:style/Theme.Dialog">
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q2_ME_Rvio_DetailActivity"
+                android:launchMode="singleTask"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q2_TG_M_Sax_DetailActivity"
+                android:launchMode="singleTask"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q4_ME_Fc_DetailActivity"
+                android:launchMode="singleTask"
+                android:screenOrientation="landscape"                
+                android:theme="@android:style/Theme.Dialog">
+        </activity>
+        <activity
+            android:name="com.tee686.activity.Q4_ME_Lax_DetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q4_ME_Rvio_DetailActivity"
+                android:launchMode="singleTask"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+                android:name="com.tee686.activity.Q4_TG_M_Sax_DetailActivity"
+                android:launchMode="singleTask"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Dialog" >
         </activity>
     </application>
 

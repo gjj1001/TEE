@@ -11,6 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+
+import com.casit.tee686.R;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ListActivity;

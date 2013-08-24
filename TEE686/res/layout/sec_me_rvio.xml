@@ -28,12 +28,12 @@
                     android:orientation="horizontal" >
 
                 <ImageView
-                        android:id="@+id/iv1_me_rvio"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitCenter"
-                        android:visibility="visible"
-                        android:src="@drawable/me_rvio" />
+                    android:id="@+id/iv1_me_rvio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/me_rvio"
+                    android:visibility="visible" />
 
             </LinearLayout>
 
@@ -73,11 +73,12 @@
                     android:orientation="horizontal" >
 
                 <ImageView
-                        android:id="@+id/iv3_me_rvio"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:src="@drawable/q3_me_rvio_h" />
+                    android:id="@+id/iv3_me_rvio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/q3_me_rvio_h" />
 
             </LinearLayout>
 
@@ -88,12 +89,14 @@
                     android:layout_marginLeft="0.5dip"
                     android:layout_marginRight="1dip"
                     android:orientation="horizontal" >
+
                 <ImageView
-                        android:id="@+id/iv4_me_rvio"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:src="@drawable/q4_me_rvio" />
+                    android:id="@+id/iv4_me_rvio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/q4_me_rvio" />
 
             </LinearLayout>
         </LinearLayout>

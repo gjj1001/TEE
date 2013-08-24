@@ -44,7 +44,7 @@ public class Q1_ME_FcActivity extends Activity{
 			// TODO Auto-generated method stub
 			vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.q1_me_fc));
 
-			vv.seekTo(1);
+			vv.start();
 		}		
 	};
 

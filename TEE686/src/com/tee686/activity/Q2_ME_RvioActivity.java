@@ -1,24 +1,17 @@
 package com.tee686.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.GestureDetector;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.casit.tee686.R;
@@ -139,8 +132,11 @@ public class Q2_ME_RvioActivity extends Activity {
         vv.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                Toast.makeText(Q2_ME_RvioActivity.this, "hahahaha", Toast.LENGTH_LONG).show();
-                return false;
+            	Intent intent = new Intent(Q2_ME_RvioActivity.this, Q2_ME_Rvio_DetailActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            	startActivity(intent);
+                overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+                return true;
             }
         });
 
@@ -263,7 +259,7 @@ public class Q2_ME_RvioActivity extends Activity {
                 window.setAttributes(lp);*/
 
                 if( mp == null || !mp.isPlaying()) {
-                    mp = MediaPlayer.create(Q2_ME_RvioActivity.this, R.raw.me_rvio);
+                    mp = MediaPlayer.create(Q2_ME_RvioActivity.this, R.raw.audio_me_rvio);
                     try {
 //                    mp.prepare();
                         mp.seekTo(0);

@@ -43,7 +43,7 @@ public class Q1_ME_LaxActivity extends Activity{
 			// TODO Auto-generated method stub
 			vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.q1_me_lax));
 
-			vv.seekTo(1);
+			vv.start();
 		}		
 	};
 

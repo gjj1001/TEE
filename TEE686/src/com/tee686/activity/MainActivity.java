@@ -1,23 +1,15 @@
 package com.tee686.activity;
 
+import java.io.File;
+
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.VideoView;
 
 import com.casit.tee686.R;
-
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
 
 /**
  * Created by Jason on 13-7-5.
@@ -27,11 +19,11 @@ public class MainActivity extends Activity {
     private ImageView iv2 = null;
     private ImageView iv3 = null;
     private ImageView iv4 = null;
-    private ImageButton ib = null;
-    private Dialog dialog;
+//    private ImageButton ib = null;
+//    private Dialog dialog;
 //    private View dialogView = null;
-    private VideoView vv =null;
-    private final Timer timer = new Timer();
+//    private VideoView vv =null;
+//    private final Timer timer = new Timer();
 
     @Override
     protected void onResume() {
@@ -69,11 +61,16 @@ public class MainActivity extends Activity {
                 timer.cancel();
             }
         },10000);*/
+        
 
         iv1 = (ImageView)findViewById(R.id.iv_me_lax);
         iv2 = (ImageView)findViewById(R.id.iv_me_fc);
         iv3 = (ImageView)findViewById(R.id.iv_tg_m_sax);
         iv4 = (ImageView)findViewById(R.id.iv_me_rvio);
+        
+		if(isPayed()) {
+			iv4.setImageResource(R.drawable.me_rvio);
+		}
 
 
         iv1.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +111,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        ib = (ImageButton)findViewById(R.id.imgbtn_enter);
+        /*ib = (ImageButton)findViewById(R.id.imgbtn_enter);
         ib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,11 +119,20 @@ public class MainActivity extends Activity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
             }
-        });
+        });*/
 
 
 
     }
+
+
+	private boolean isPayed() {
+		File file = new File(Uri.parse("android.resource://"+getPackageName()+"/values/pay.xml").getPath());
+		if(file.exists()) {
+			return true;
+		}
+		return false;
+	}
 
 
 }

@@ -3,6 +3,7 @@ package com.tee686.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 
 import com.casit.tee686.R;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Section686Activity extends Activity{
@@ -39,8 +41,7 @@ public class Section686Activity extends Activity{
     private Spinner spinner;
     private LayoutInflater inflater;
     private RelativeLayout rel;
-
-    
+            
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -132,8 +133,13 @@ public class Section686Activity extends Activity{
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-                forEx();
-                spinner.setSelection(0, true);
+            	if(isPayed()) {
+	                forEx();
+	                spinner.setSelection(0, true);
+            	} else {
+            		payForEx();
+            		spinner.setSelection(0, true);
+            	}
             }
         });
 
@@ -147,7 +153,15 @@ public class Section686Activity extends Activity{
         });
     }
 
-    private void forEx() {
+    protected boolean isPayed() {
+    	File file = new File(Uri.parse("android.resource://"+getPackageName()+"/values/pay.xml").getPath());
+		if(file.exists()) {
+			return true;
+		}
+		return false;
+	}
+
+	private void forEx() {
         LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.sec_me_rvio, null);
         rel.removeAllViews();
         rel.addView(layout);
@@ -385,6 +399,14 @@ public class Section686Activity extends Activity{
         return super.onKeyDown(keyCode, event);
     }
 	
+	private void payForEx() {
+		LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.blank, null);
+		rel.removeAllViews();
+		rel.addView(layout);
+		TextView tx = (TextView)findViewById(R.id.text_header);
+		tx.setText(R.string.hd_me_rvio);
+	}
+
 	//食道中段大血管水平四象限初始化
 	/*private void forMEA6() {
 		*//*ImageButton ib = (ImageButton)findViewById(R.id.btn_6861);

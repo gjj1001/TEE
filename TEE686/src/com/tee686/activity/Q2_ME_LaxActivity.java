@@ -3,46 +3,23 @@ package com.tee686.activity;
 import com.casit.tee686.R;
 
 import android.app.Activity;
-import android.app.Dialog;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.GestureDetector;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 public class Q2_ME_LaxActivity extends Activity {
 	private VideoView vv;
     private MediaPlayer mp = null;
-//	private ScaleGestureDetector mScaleGestureDetector = null;
-    private PopupWindow structure = null;
-//    private View dialogView1 = null;
-//    private View dialogView2 = null;
-//    private View dialogView3 = null;
-    private ImageView iv = null;
-//    private VideoView vv1 = null;
-//    private SurfaceHolder surfaceHolder;
-//    private MediaPlayer mp;
-//    private VideoView vv2 = null;
-//    private VideoView vv3 = null;
-//    private Dialog dialog1;
-//    private Dialog dialog2;
-//    private Dialog dialog3;
-//    private GestureDetector gestureDetector = null;
-
-	@Override
+@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		
@@ -138,8 +115,11 @@ public class Q2_ME_LaxActivity extends Activity {
         vv.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                Toast.makeText(Q2_ME_LaxActivity.this, "hahahaha", Toast.LENGTH_LONG).show();
-                return false;
+            	Intent intent = new Intent(Q2_ME_LaxActivity.this, Q2_ME_Lax_DetailActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            	startActivity(intent);
+                overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+                return true;
             }
         });
 
@@ -262,7 +242,7 @@ public class Q2_ME_LaxActivity extends Activity {
                 window.setAttributes(lp);*/
 
                 if( mp == null || !mp.isPlaying()) {
-                    mp = MediaPlayer.create(Q2_ME_LaxActivity.this, R.raw.me_lax);
+                    mp = MediaPlayer.create(Q2_ME_LaxActivity.this, R.raw.audio_me_lax);
                     try {
 //                    mp.prepare();
                         mp.seekTo(0);

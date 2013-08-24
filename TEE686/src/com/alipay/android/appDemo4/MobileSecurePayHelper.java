@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.alipay.android.appDemo4.FileDownloader.IDownloadProgress;
+import com.casit.tee686.R;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
