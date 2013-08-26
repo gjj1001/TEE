@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:scaleType="center"
+            android:scaleType="centerCrop"
             android:src="@drawable/q3_me_fc2" />
     </RelativeLayout>
 

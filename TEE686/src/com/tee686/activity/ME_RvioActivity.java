@@ -264,7 +264,7 @@ public class ME_RvioActivity extends Activity{
 		strOrderInfo += "body=" + "\"" + "食道中段右心室流入流出切面" + "\"";
 		strOrderInfo += "&";
 		strOrderInfo += "total_fee=" + "\""
-				+ "10" + "\"";
+				+ "6" + "\"";
 		strOrderInfo += "&";
 		strOrderInfo += "notify_url=" + "\""
 				+ "http://notify.java.jpxx.org/index.jsp" + "\"";
