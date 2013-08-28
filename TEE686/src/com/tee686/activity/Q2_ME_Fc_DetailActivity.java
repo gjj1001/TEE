@@ -85,13 +85,13 @@ public class Q2_ME_Fc_DetailActivity extends Activity{
                 } else {
                     pw1.showAtLocation(iv, Gravity.CENTER, 50, -200);
                     pw1.update(160,60);
-                    pw2.showAtLocation(iv, Gravity.CENTER, 230, 100);
+                    pw2.showAtLocation(iv, Gravity.CENTER, 180, 100);
                     pw2.update(160, 60);
                     pw3.showAtLocation(iv, Gravity.CENTER, -200, -100);
                     pw3.update(160, 60);
                     pw4.showAtLocation(iv, Gravity.CENTER, -100, 120);
                     pw4.update(160, 60);
-                    pw5.showAtLocation(iv, Gravity.CENTER, 100, 80);
+                    pw5.showAtLocation(iv, Gravity.CENTER, 100, 60);
                     pw5.update(160, 60);
 //                    pw6.showAtLocation(iv, Gravity.CENTER, 0, 50);
 //                    pw6.update(210, 70);

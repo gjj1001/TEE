@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="中科院成都信息技术股份有限公司"
+        android:textAppearance="?android:attr/textAppearanceLarge" >
+
+        <requestFocus />
+    </TextView>
+
+    <ImageView        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/divider_horizontal_line" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="地址：中国成都市人民南路四段9号科分院"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="电话：028-85249933-8310"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="传真：028-85228129"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="邮编：610041"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Http://www.casit.com.cn"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="E-mail:gaojunjia@casit.com.cn"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</LinearLayout>

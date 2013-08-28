@@ -2,28 +2,33 @@ package com.tee686.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageButton;
+import android.view.Window;
+import android.widget.ImageView;
 
 import com.casit.tee686.R;
 
 //import android.widget.Button;
 
 public class IndexActivity extends Activity {
-
+	private ImageView imgBrand;
     private OnClickListener enterListener = new OnClickListener()
     {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			Intent intent = new Intent(IndexActivity.this, MainActivity.class);
-	        startActivity(intent); 
+	        startActivity(intent);
+//	        overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
 		}
     };
     
@@ -32,8 +37,8 @@ public class IndexActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_index);
 		
-        ImageButton btn_enter = (ImageButton)findViewById(R.id.btn_enter);
-        btn_enter.setOnClickListener(enterListener);
+        imgBrand = (ImageView)findViewById(R.id.image_brand);
+        imgBrand.setOnClickListener(enterListener);
         
 	}
 
@@ -43,8 +48,20 @@ public class IndexActivity extends Activity {
 		getMenuInflater().inflate(R.menu.index, menu);
 		return true;
 	}
-
+	
     @Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		Dialog dialog = new Dialog(this);
+		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		dialog.setContentView(R.layout.contact_info);
+		dialog.getWindow().setGravity(Gravity.CENTER);		
+		dialog.getWindow().setDimAmount(0);
+		dialog.show();
+		return true;
+	}
+
+	@Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
        if(keyCode == KeyEvent.KEYCODE_BACK) {
            final AlertDialog.Builder builder = new AlertDialog.Builder(this);

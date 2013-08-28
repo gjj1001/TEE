@@ -26,16 +26,4 @@
         android:src="@drawable/newlogo"
             />
 
-    <ImageButton
-        android:id="@+id/btn_enter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="40dp"
-        android:contentDescription="ENTER"
-        android:background="@android:drawable/ic_menu_send"
-        android:padding="20dp"/>
-
 </RelativeLayout>

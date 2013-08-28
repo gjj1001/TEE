@@ -80,10 +80,10 @@ public class Q4_TG_M_Sax_DetailActivity extends Activity{
                 } else {
                 	pw1.showAtLocation(iv, Gravity.CENTER, 100, -20);
                     pw1.update(220,60);
-                    pw2.showAtLocation(iv, Gravity.CENTER, 150, 150);
-                    pw2.update(130, 60);
+                    pw2.showAtLocation(iv, Gravity.CENTER, 130, 150);
+                    pw2.update(110, 60);
                     pw3.showAtLocation(iv, Gravity.CENTER, -20, -80);
-                    pw3.update(130, 60);
+                    pw3.update(110, 60);
                     pw4.showAtLocation(iv, Gravity.CENTER, -200, 100);
                     pw4.update(160, 60);
                     pw5.showAtLocation(iv, Gravity.CENTER, 30, 50);
