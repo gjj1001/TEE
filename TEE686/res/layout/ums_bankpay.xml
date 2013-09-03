@@ -1,0 +1,920 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff" >
+
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
+    <RelativeLayout
+        android:id="@+id/re_main_log"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bg" >
+
+        <Button
+            android:id="@+id/esc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ums_btn_tuichu" />
+
+        <ImageView
+            android:id="@+id/ig_main_log1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dip"
+            android:background="@drawable/logo" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ums_btn_user" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_order"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/re_main_log"
+        android:orientation="vertical" >
+
+        <!-- 商户 -->
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="35dip"
+            android:background="#f5f5f5" >
+
+            <ImageView
+                android:id="@+id/icon1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dip"
+                android:background="@drawable/dd_icon_1" />
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="6dip"
+                android:layout_toRightOf="@id/icon1"
+                android:text="商户名称："
+                android:textColor="#767676"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_merchant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="2dip"
+                android:layout_toRightOf="@id/tv1"
+                android:text="京东商城"
+                android:textColor="#767676"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip"
+            android:background="#e9e9e9" />
+        <!-- 金额 -->
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="35dip"
+            android:background="#f5f5f5" >
+
+            <ImageView
+                android:id="@+id/icon2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dip"
+                android:background="@drawable/dd_icon_2" />
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="6dip"
+                android:layout_toRightOf="@id/icon2"
+                android:text="订单金额："
+                android:textColor="#767676"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="2dip"
+                android:layout_toRightOf="@id/tv2"
+                android:text="0.01"
+                android:textColor="#ad1000"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="2dip"
+                android:layout_toRightOf="@id/tv_money"
+                android:text="元"
+                android:textColor="#767676"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imagedd"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dd_bgtwo" />
+    </LinearLayout>
+    <!-- 输入银行卡界面 -->
+
+    <LinearLayout
+        android:id="@+id/re_shuruka"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/re_main_log"
+        android:layout_marginTop="100dip"
+        android:orientation="vertical"
+        android:visibility="visible" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/ig_bankicon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:background="@drawable/zf_icon1_big"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dip"
+                android:layout_toRightOf="@id/ig_bankicon"
+                android:text="银行卡号支付"
+                android:textColor="#ad1000"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="30dip"
+                android:layout_marginRight="5dip"
+                android:paddingBottom="-5dip"
+                android:background="@drawable/ums_btn_bank" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dip"
+            android:layout_marginRight="8dip"
+            android:background="@drawable/input" >
+
+            <ImageView
+                android:id="@+id/ig_icon3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dip"
+                android:background="@drawable/input_icon3" />
+
+            <EditText
+                android:id="@+id/et_cardnumber"
+                android:layout_width="200dip"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dip"
+                android:layout_toLeftOf="@+id/xx"
+                android:layout_toRightOf="@id/ig_icon3"
+                android:background="@null"
+                android:hint="信用卡/借记卡"
+                android:maxLength="23"
+                android:numeric="integer"
+                android:singleLine="true"
+                android:textSize="16sp" />
+
+            <ImageButton
+                android:id="@+id/xx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dip"
+                android:background="@drawable/xx"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dip"
+            android:layout_marginRight="8dip"
+            android:layout_marginTop="15dip"
+            android:background="@drawable/input" >
+
+            <ImageView
+                android:id="@+id/ig_icon2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dip"
+                android:background="@drawable/input_icon2" />
+
+            <EditText
+                android:id="@+id/et_cardphone"
+                android:layout_width="220dip"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dip"
+                android:layout_toRightOf="@id/ig_icon2"
+                android:background="@null"
+                android:hint="银行预留手机号"
+                android:maxLength="11"
+                android:numeric="integer"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/re_next_bt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dip"
+            android:layout_marginRight="8dip"
+            android:layout_marginTop="15dip"
+            android:background="@drawable/ums_btn_paynext" >
+
+            <ImageView
+                android:id="@+id/ig_btn_icon1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_icon1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dip"
+                android:layout_toRightOf="@id/ig_btn_icon1"
+                android:text="下 一 步"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dip"
+                android:background="@drawable/btn_icon2" />
+        </RelativeLayout>
+    </LinearLayout>
+    <!-- 输银行卡end -->
+
+    <ScrollView
+        android:id="@+id/re_shuaka"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/re_shuakapay_bt"
+        android:layout_below="@id/re_main_log"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="100dip"
+        android:visibility="gone" >
+
+        <!-- 刷卡银行卡界面 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/ig_bankicon2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dip"
+                    android:background="@drawable/zf_icon2_big"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/shuakatv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dip"
+                    android:layout_toRightOf="@id/ig_bankicon2"
+                    android:text="刷卡支付"
+                    android:textColor="#ad1000"
+                    android:textSize="22sp" />
+            </RelativeLayout>
+
+            <!-- 没有登录 -->
+
+            <LinearLayout
+                android:id="@+id/ll_nolog"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible" >
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dip"
+                    android:layout_marginRight="8dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="支持全民付和银联在线用户登录"
+                        android:textColor="#666666"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dip"
+                    android:layout_marginRight="8dip"
+                    android:layout_marginTop="5dip"
+                    android:background="@drawable/input" >
+
+                    <ImageView
+                        android:id="@+id/ig_input_icon2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:background="@drawable/input_icon1" />
+
+                    <EditText
+                        android:id="@+id/et_user_main"
+                        android:layout_width="220dip"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:layout_toRightOf="@id/ig_input_icon2"
+                        android:background="@null"
+                        android:hint="手机号/邮箱名/登录名"
+                        android:maxLength="40"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id="@+id/xx2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dip"
+                        android:background="@drawable/xx" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dip"
+                    android:layout_marginRight="8dip"
+                    android:layout_marginTop="15dip"
+                    android:background="@drawable/input" >
+
+                    <ImageView
+                        android:id="@+id/ig_input_icon4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:background="@drawable/input_icon4" />
+
+                    <Button
+                        android:id="@+id/et_mima_main"
+                        android:layout_width="220dip"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:layout_toRightOf="@id/ig_input_icon4"
+                        android:background="@null"
+                        android:gravity="left"
+                        android:hint="6-20位密码"
+                        android:password="true"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/re_log"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:layout_marginLeft="8dip"
+                    android:layout_marginRight="8dip"
+                    android:layout_marginTop="8dip" >
+
+                    <Button
+                        android:id="@+id/ig_input_icon55"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/input_select_on" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:layout_toRightOf="@id/ig_input_icon55"
+                        android:hint="记住密码"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/bt_forgetps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:hint="忘记密码？"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/re_next_bt2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dip" >
+
+                    <Button
+                        android:id="@+id/ig_btn_icon12"
+                        android:layout_width="140dip"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="8dip"
+                        android:background="@drawable/ums_btn_paynext"
+                        android:text="登 录"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp" />
+
+                    <Button
+                        android:id="@+id/ig_btn_icon13"
+                        android:layout_width="140dip"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="8dip"
+                        android:background="@drawable/ums_btn_reg"
+                        android:text="注 册"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!-- 已经登录过 -->
+
+            <LinearLayout
+                android:id="@+id/ll_yeslog"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <RelativeLayout
+                    android:id="@+id/re_yonghu"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dip"
+                    android:layout_marginRight="8dip"
+                    android:layout_marginTop="12dip"
+                    android:background="#e0e0e0" >
+
+                    <ImageView
+                        android:id="@+id/huitiaotop"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/info_bg_top" />
+
+                    <RelativeLayout
+                        android:id="@+id/huitiaozhong"
+                        android:layout_width="fill_parent"
+                        android:layout_height="38dip"
+                        android:layout_below="@id/huitiaotop" >
+
+                        <ImageView
+                            android:id="@+id/ig_input_icon1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dip"
+                            android:background="@drawable/info_icon3" />
+
+                        <TextView
+                            android:id="@+id/tv_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dip"
+                            android:layout_toRightOf="@id/ig_input_icon1"
+                            android:text="1388888888"
+                            android:textColor="#767676"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/bt_qiehuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/info_icon4" />
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/huitiaozhong"
+                        android:background="@drawable/info_bg_bot" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/re_et_main_xingm"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dip"
+                    android:layout_marginRight="8dip"
+                    android:layout_marginTop="12dip"
+                    android:background="@drawable/input" >
+
+                    <ImageView
+                        android:id="@+id/ig_input_icon11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:background="@drawable/input_icon1" />
+
+                    <EditText
+                        android:id="@+id/et_main_xingm"
+                        android:layout_width="220dip"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:layout_toRightOf="@id/ig_input_icon11"
+                        android:background="@null"
+                        android:hint="姓名"
+                        android:maxLength="6"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/re_et_main_shenf"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dip"
+                    android:layout_marginRight="8dip"
+                    android:layout_marginTop="12dip"
+                    android:background="@drawable/input" >
+
+                    <ImageView
+                        android:id="@+id/ig_input_icon5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:background="@drawable/input_icon5" />
+
+                    <EditText
+                        android:id="@+id/et_main_shenf"
+                        android:layout_width="230dip"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:layout_toRightOf="@id/ig_input_icon5"
+                        android:background="@null"
+                        android:digits="0123456789xX"
+                        android:hint="身份证"
+                        android:maxLength="19"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dip"
+                    android:layout_marginRight="8dip"
+                    android:layout_marginTop="12dip"
+                    android:background="@drawable/input" >
+
+                    <ImageView
+                        android:id="@+id/ig_input_icon556"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:background="@drawable/input_icon3" />
+
+                    <Button
+                        android:id="@+id/et_shuacard_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:layout_toRightOf="@id/ig_input_icon556"
+                        android:background="@null"
+                        android:gravity="left"
+                        android:hint="刷卡获取银行卡号"
+                        android:maxLength="23"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/et_shuacard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="1dip"
+                        android:background="@drawable/input_btn_sk" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/re_next_bt22"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dip"
+                    android:layout_marginRight="8dip"
+                    android:layout_marginTop="12dip"
+                    android:background="@drawable/ums_btn_paynext" >
+
+                    <ImageView
+                        android:id="@+id/ig_btn_icon15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_icon1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dip"
+                        android:layout_toRightOf="@id/ig_btn_icon15"
+                        android:text="下 一 步"
+                        android:textColor="#ffffff"
+                        android:textSize="22sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="8dip"
+                        android:background="@drawable/btn_icon2" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <!-- 刷卡银行卡界面end -->
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/re_shuakapay_bt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/zf_bot_bg" >
+
+        <ImageView
+            android:id="@+id/ig_zf_icon1_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dip"
+            android:background="@drawable/zf_icon2_gray"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_ig_zf_icon1_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dip"
+            android:layout_toRightOf="@id/ig_zf_icon1_small"
+            android:text="刷卡支付"
+            android:textColor="#757575"
+            android:textSize="22sp" />
+    </RelativeLayout>
+
+    <!-- 遮盖层 -->
+
+    <RelativeLayout
+        android:id="@+id/re_huise"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/ll_order"
+        android:background="#7f000000"
+        android:visibility="gone" >
+    </RelativeLayout>
+
+    <!-- 动画部分 -->
+
+    <RelativeLayout
+        android:id="@+id/re_donghua"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_order"
+        android:visibility="gone" >
+
+        <!-- 订单编号 时间 信息 -->
+
+        <LinearLayout
+            android:id="@+id/ll_order_two"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:background="#e9e9e9" />
+
+            <!-- 订单编号 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="35dip"
+                android:background="#f5f5f5" >
+
+                <ImageView
+                    android:id="@+id/icon3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dip"
+                    android:background="@drawable/dd_icon_3" />
+
+                <TextView
+                    android:id="@+id/tv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="6dip"
+                    android:layout_toRightOf="@id/icon3"
+                    android:text="订单编号："
+                    android:textColor="#767676"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_orderId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="2dip"
+                    android:layout_toRightOf="@id/tv3"
+                    android:text="74874807478"
+                    android:textColor="#767676"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:background="#e9e9e9" />
+
+            <!-- 订单時間 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="35dip"
+                android:background="#f5f5f5" >
+
+                <ImageView
+                    android:id="@+id/icon4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dip"
+                    android:background="@drawable/dd_icon_4" />
+
+                <TextView
+                    android:id="@+id/tv4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="6dip"
+                    android:layout_toRightOf="@id/icon4"
+                    android:text="订单时间："
+                    android:textColor="#767676"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_ordertime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="2dip"
+                    android:layout_toRightOf="@id/tv4"
+                    android:text="2013-02-02 15:30"
+                    android:textColor="#767676"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:background="#e9e9e9" />
+
+            <!-- 商品信息 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#f5f5f5" >
+
+                <ImageView
+                    android:id="@+id/icon5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dip"
+                    android:layout_marginTop="11dip"
+                    android:background="@drawable/dd_icon_5" />
+
+                <TextView
+                    android:id="@+id/tv5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginTop="8dip"
+                    android:layout_toRightOf="@id/icon5"
+                    android:text="商品信息："
+                    android:textColor="#767676"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_orderinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dip"
+                    android:layout_marginRight="8dip"
+                    android:layout_marginTop="8dip"
+                    android:layout_toRightOf="@id/tv5"
+                    android:text="N7100 GALAXY Note2"
+                    android:textColor="#767676"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dd_bg" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/bt_donghua"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/re_main_log"
+        android:layout_marginRight="8dip"
+        android:layout_marginTop="22dip"
+        android:background="@drawable/ums_btn_anima" />
+
+    <ImageView
+        android:id="@+id/tuding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/bt_donghua"
+        android:layout_marginRight="14dip"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/dd_bg2" />
+
+</RelativeLayout>

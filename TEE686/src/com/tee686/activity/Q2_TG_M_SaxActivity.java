@@ -288,7 +288,7 @@ public class Q2_TG_M_SaxActivity extends Activity {
                 mp.release();
             }
             finish();
-            overridePendingTransition(R.anim.hold, R.anim.q2_zoomout);
+            overridePendingTransition(R.anim.hold, R.anim.q4_zoomout);
             return true;
         }
         return super.onKeyDown(keyCode, event);

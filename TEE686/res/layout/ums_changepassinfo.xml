@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/re_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ums_info_bg" >
+
+    <RelativeLayout
+        android:id="@+id/re_main_log"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bg" >
+
+        <TextView
+            android:id="@+id/ig_main_log1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="密码修改"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/esc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ums_btn_esc" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/re_main_log" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:background="@drawable/zh_input" >
+
+                <ImageView
+                    android:id="@+id/yuanmima"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dip"
+                    android:background="@drawable/zh_input_icon1" />
+
+                <Button
+                    android:id="@+id/bt_changeps_yuan"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dip"
+                    android:layout_toRightOf="@+id/yuanmima"
+                    android:background="@null"
+                    android:gravity="left|center_vertical"
+                    android:hint="原密码"
+                    android:password="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dip"
+                android:background="@drawable/zh_input" >
+
+                <ImageView
+                    android:id="@+id/xinmima"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dip"
+                    android:background="@drawable/input_icon4" />
+
+                <Button
+                    android:id="@+id/bt_chang_xinps"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dip"
+                    android:layout_toRightOf="@+id/xinmima"
+                    android:background="@null"
+                    android:gravity="left"
+                    android:hint="6-20位密码"
+                    android:maxLength="20"
+                    android:password="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dip"
+                android:background="@drawable/zh_input" >
+
+                <ImageView
+                    android:id="@+id/xinmima2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dip"
+                    android:background="@drawable/input_icon7" />
+
+                <Button
+                    android:id="@+id/bt_chang_xinpque"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dip"
+                    android:layout_toRightOf="@+id/xinmima2"
+                    android:background="@null"
+                    android:gravity="left"
+                    android:hint="确认密码"
+                    android:maxLength="20"
+                    android:password="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/re_daunxinma"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dip"
+                android:background="@drawable/zh_input" >
+
+                <ImageView
+                    android:id="@+id/xinmima6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dip"
+                    android:background="@drawable/input_icon6" />
+
+                <Button
+                    android:id="@+id/duanxinma"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dip"
+                    android:layout_toRightOf="@+id/xinmima6"
+                    android:background="@null"
+                    android:gravity="left"
+                    android:hint="短信验证码"
+                    android:maxLength="6"
+                    android:numeric="integer"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/huoqu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="2dip"
+                    android:background="@drawable/input_btn_yzm"
+                    android:text="获取"
+                    android:textColor="#767676" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/re_shoujihao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dip" >
+
+                <ImageView
+                    android:id="@+id/xinmima1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dip"
+                    android:background="@drawable/zh_icon1" />
+
+                <TextView
+                    android:id="@+id/tvduanxin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dip"
+                    android:layout_toRightOf="@+id/xinmima1"
+                    android:text="验证码将发送到："
+                    android:textColor="#555555" />
+
+                <TextView
+                    android:id="@+id/tvshouji"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dip"
+                    android:layout_toRightOf="@id/tvduanxin"
+                    android:text="1388888888"
+                    android:textColor="#555555" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dip" >
+
+                <Button
+                    android:id="@+id/queding"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/ums_btn_xiug"
+                    android:text="确定修改"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -21,6 +21,7 @@ import com.casit.tee686.R;
 
 public class IndexActivity extends Activity {
 	private ImageView imgBrand;
+	
     private OnClickListener enterListener = new OnClickListener()
     {
 		@Override
@@ -38,7 +39,7 @@ public class IndexActivity extends Activity {
 		setContentView(R.layout.activity_index);
 		
         imgBrand = (ImageView)findViewById(R.id.image_brand);
-        imgBrand.setOnClickListener(enterListener);
+        imgBrand.setOnClickListener(enterListener);	
         
 	}
 
@@ -52,12 +53,24 @@ public class IndexActivity extends Activity {
     @Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
-		Dialog dialog = new Dialog(this);
-		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-		dialog.setContentView(R.layout.contact_info);
-		dialog.getWindow().setGravity(Gravity.CENTER);		
-		dialog.getWindow().setDimAmount(0);
-		dialog.show();
+		switch(item.getItemId()) {
+			case R.id.action_settings:
+				Dialog dialog = new Dialog(this);
+				dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+				dialog.setContentView(R.layout.contact_info);
+				dialog.getWindow().setGravity(Gravity.CENTER);		
+				dialog.getWindow().setDimAmount(0);
+				dialog.show();
+				break;
+			case R.id.teaching_consultant:
+				Dialog dialog1 = new Dialog(this);
+				dialog1.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+				dialog1.setContentView(R.layout.about_me);
+				dialog1.getWindow().setGravity(Gravity.CENTER);		
+				dialog1.getWindow().setDimAmount(0);
+				dialog1.show();
+				break;
+		}
 		return true;
 	}
 

@@ -55,7 +55,7 @@ public class Q1_ME_FcActivity extends Activity{
             intent.setFlags(Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY);
             startActivity(intent);*/
             finish();
-            overridePendingTransition(R.anim.hold, R.anim.q1_zoomout);
+            overridePendingTransition(R.anim.hold, R.anim.q3_zoomout);
             return true;
         }
         return super.onKeyDown(keyCode, event);

@@ -3,6 +3,7 @@
 
     <string name="app_name">TEE</string>
     <string name="action_settings">联系我们</string>
+    <string name="teaching_consultant">教学顾问</string>
     <string name="hello_world">Hello world!</string>
     <string name="index">Welcome to TEE!</string>
 
@@ -96,4 +97,13 @@
     <string name="q2_tg_m_sax_alpm">前侧乳头肌</string>
     <string name="q2_tg_m_sax_pmpm">后中乳头肌</string>
    
+    <string name="menu_settings">Settings</string>
+
+    <string name="upomp_bypay_keyboard_clear">清除</string>
+    <string name="upomp_bypay_keyboard_number">数字</string>
+    <string name="upomp_bypay_keyboard_letter">字母</string>
+    <string name="upomp_bypay_keyboard_symbol">符号</string>
+    <string name="upomp_bypay_affirm">确认</string>
+    <string name="upomp_bypay_splash_version">版本1.0.0</string>
+    <string name="upomp_bypay_splash_info">中国银联股份有限公司版权所有</string>
 </resources>

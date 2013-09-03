@@ -62,6 +62,7 @@ public class Q2_ME_Lax_DetailActivity extends Activity{
                 	for(PopupWindow pw : pwList) {
                     	pw.dismiss();
                     }
+                	pwList.clear();
                 } else {
                 	pw1.showAtLocation(iv, Gravity.CENTER, -100, -150);
                     pw1.update(160,60);
@@ -73,6 +74,7 @@ public class Q2_ME_Lax_DetailActivity extends Activity{
                     pw4.update(160, 60);
                     pw5.showAtLocation(iv, Gravity.CENTER, -100, 180);
                     pw5.update(160, 60);
+                    pwList.clear();
                 }
             }
         });

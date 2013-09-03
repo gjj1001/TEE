@@ -1,0 +1,194 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff" >
+
+    <RelativeLayout
+        android:id="@+id/re_main_log"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bg" >
+
+        <ImageView
+            android:id="@+id/ig_main_log1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dip"
+            android:background="@drawable/logo" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+	
+             <Button
+                android:id="@+id/esc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ums_btn_esc" />
+            
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- 刷卡银行卡界面 -->
+
+    <LinearLayout
+        android:id="@+id/re_shuaka"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/re_main_log"
+        android:layout_marginTop="20dip"
+        android:orientation="vertical"
+        android:visibility="visible" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/ig_bankicon2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:visibility="gone"
+                android:background="@drawable/zf_icon2_big" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dip"
+                android:layout_toRightOf="@id/ig_bankicon2"
+                android:text="刷卡支付"
+                android:textColor="#ad1000"
+                android:textSize="22sp" />
+        </RelativeLayout>
+        <!-- 已经登录过 -->
+
+        <LinearLayout
+            android:id="@+id/ll_yeslog"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:layout_marginRight="8dip"
+                android:layout_marginTop="12dip"
+                android:background="#e0e0e0" >
+
+                <ImageView
+                    android:id="@+id/huitiaotop"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/info_bg_top" />
+
+                <RelativeLayout
+                    android:id="@+id/huitiaozhong"
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dip"
+                    android:layout_below="@id/huitiaotop" >
+
+                    <ImageView
+                        android:id="@+id/ig_input_icon1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:background="@drawable/input_icon3" />
+
+                    <TextView
+                        android:id="@+id/tv_bankname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:layout_toRightOf="@id/ig_input_icon1"
+                        android:text="招商银行 -  信用卡 - 8888"
+                        android:textColor="#767676"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/huitiaozhong"
+                    android:background="@drawable/info_bg_bot" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:layout_marginRight="8dip"
+                android:layout_marginTop="12dip"
+                android:background="@drawable/input" >
+
+                <ImageView
+                    android:id="@+id/ig_input_icon5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dip"
+                    android:background="@drawable/input_icon4" />
+
+                <Button
+                    android:id="@+id/et_shua"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dip"
+                    android:layout_toRightOf="@id/ig_input_icon5"
+                    android:background="@null"
+                    android:gravity="left"
+                    android:hint="请输入交易密码"
+                    android:maxLength="6"
+                    android:password="true"
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/re_next_bt22"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:layout_marginRight="8dip"
+                android:layout_marginTop="12dip"
+                android:background="@drawable/ums_btn_paynext" >
+
+                <ImageView
+                    android:id="@+id/ig_btn_icon15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_icon1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dip"
+                    android:layout_toRightOf="@id/ig_btn_icon15"
+                    android:text="确定支付"
+                    android:textColor="#ffffff"
+                    android:textSize="22sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="8dip"
+                    android:background="@drawable/btn_icon2" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

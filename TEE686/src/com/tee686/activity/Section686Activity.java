@@ -281,33 +281,13 @@ public class Section686Activity extends Activity{
         ImageView view1iv4 = (ImageView)layout.findViewById(R.id.iv4_me_fc);
 
 
-        view1iv1.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q1_ME_FcActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.q1_zoomin, R.anim.hold);
-            }
-        });
-
-        view1iv2.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q2_ME_FcActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.q2_zoomin, R.anim.hold);
-            }
-        });
-
         view1iv3.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent(Section686Activity.this, Q3_ME_FcActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.q3_zoomin, R.anim.hold);
+                overridePendingTransition(R.anim.q1_zoomin, R.anim.hold);
             }
         });
 
@@ -316,6 +296,26 @@ public class Section686Activity extends Activity{
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent(Section686Activity.this, Q4_ME_FcActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q2_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q1_ME_FcActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q3_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q2_ME_FcActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q4_zoomin, R.anim.hold);
             }
@@ -335,33 +335,13 @@ public class Section686Activity extends Activity{
         ImageView view1iv4 = (ImageView)layout.findViewById(R.id.iv4_tg_m_sax);
 
 
-        view1iv1.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q1_TG_M_SaxActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.q1_zoomin, R.anim.hold);
-            }
-        });
-
-        view1iv2.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent intent = new Intent(Section686Activity.this, Q2_TG_M_SaxActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.q2_zoomin, R.anim.hold);
-            }
-        });
-
         view1iv3.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent(Section686Activity.this, Q3_TG_M_SaxActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.q3_zoomin, R.anim.hold);
+                overridePendingTransition(R.anim.q1_zoomin, R.anim.hold);
             }
         });
 
@@ -370,6 +350,26 @@ public class Section686Activity extends Activity{
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent(Section686Activity.this, Q4_TG_M_SaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q2_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q1_TG_M_SaxActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.q3_zoomin, R.anim.hold);
+            }
+        });
+
+        view1iv2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(Section686Activity.this, Q2_TG_M_SaxActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.q4_zoomin, R.anim.hold);
             }

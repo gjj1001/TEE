@@ -1,0 +1,160 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ebebeb" >
+
+    <ImageView
+        android:id="@+id/ig_main_log1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/loading_logo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/reshuru"
+        android:layout_alignRight="@+id/reshuru"
+        android:layout_marginBottom="5dip"
+        android:text="支持全民付和银联在线用户登录"
+        android:textSize="13sp" />
+
+    <RelativeLayout
+        android:id="@+id/reshuru"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ig_main_log1"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/login_bg" >
+
+        <EditText
+            android:id="@+id/et_user"
+            android:layout_width="220dip"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dip"
+            android:background="@null"
+            android:hint="手机号/邮箱名/登录名"
+            android:maxLength="40"
+            android:singleLine="true"
+            android:textSize="14sp" />
+
+        <ImageButton
+            android:id="@+id/xx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dip"
+            android:layout_toRightOf="@+id/et_user"
+            android:background="@drawable/xx" />
+
+        <Button
+            android:id="@+id/et_mima"
+            android:layout_width="220dip"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_user"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dip"
+            android:background="@null"
+            android:gravity="left"
+            android:hint="6-20位密码"
+            android:password="true"
+            android:singleLine="true"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/reshuru"
+        android:layout_alignRight="@+id/reshuru"
+        android:layout_below="@+id/reshuru" >
+
+        <RelativeLayout
+            android:id="@+id/re_log"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_marginTop="8dip" >
+
+            <Button
+                android:id="@+id/ig_input_icon55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/input_select_on" />
+
+            <TextView
+                android:id="@+id/et_shuacard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dip"
+                android:layout_toRightOf="@id/ig_input_icon55"
+                android:hint="记住密码"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/bt_forgetps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:hint="忘记密码？"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/re_next_bt2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/re_log"
+            android:layout_marginTop="8dip" >
+
+            <Button
+                android:id="@+id/ig_btn_icon12"
+                android:layout_width="140dip"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/ums_btn_paynext"
+                android:text="登 录"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/ig_btn_icon13"
+                android:layout_width="140dip"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ums_btn_reg"
+                android:text="注册"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dip" >
+
+        <TextView
+            android:id="@+id/ylian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="银联商务有限公司 "
+            android:textColor="#767676" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ylian"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dip"
+            android:text="©2002-2013"
+            android:textColor="#767676" />
+    </RelativeLayout>
+
+</RelativeLayout>

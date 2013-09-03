@@ -27,13 +27,13 @@
     <TextView        
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="电话：028-85249933-8310"
+        android:text="技术支持:+86-15680557316"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView        
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="传真：028-85228129"
+        android:text="商务合作:+86-13036690675"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView        

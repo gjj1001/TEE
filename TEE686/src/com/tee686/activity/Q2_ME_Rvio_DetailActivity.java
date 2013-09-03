@@ -76,6 +76,7 @@ public class Q2_ME_Rvio_DetailActivity extends Activity{
                 	for(PopupWindow pw : pwList) {
                     	pw.dismiss();
                     }
+                	pwList.clear();
                 } else {
                 	pw1.showAtLocation(iv, Gravity.CENTER, 0, -150);
                     pw1.update(160,60);
@@ -89,6 +90,7 @@ public class Q2_ME_Rvio_DetailActivity extends Activity{
                     pw5.update(160, 60);
                     pw6.showAtLocation(iv, Gravity.CENTER, 0, 150);
                     pw6.update(220, 60);
+                    pwList.clear();
                 }
             }
         });

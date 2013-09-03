@@ -294,7 +294,7 @@ public class Q4_ME_FcActivity extends Activity {
                 mp.release();
             }
             finish();
-            overridePendingTransition(R.anim.hold, R.anim.q4_zoomout);
+            overridePendingTransition(R.anim.hold, R.anim.q2_zoomout);
             return true;
         }
         return super.onKeyDown(keyCode, event);
