@@ -154,7 +154,7 @@ public class Section686Activity extends Activity{
     }
 
     protected boolean isPayed() {
-    	File file = new File(Uri.parse("android.resource://"+getPackageName()+"/values/pay.xml").getPath());
+    	File file = getFileStreamPath("pay.xml");
 		if(file.exists()) {
 			return true;
 		}

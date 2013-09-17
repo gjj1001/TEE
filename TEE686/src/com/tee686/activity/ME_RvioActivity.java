@@ -1,6 +1,9 @@
 package com.tee686.activity;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,6 +13,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -52,10 +60,11 @@ public class ME_RvioActivity extends Activity{
 	private VideoView vv;
     private ImageButton ib;
 	private ProgressDialog mProgress;
-	private static Dialog dialog = null;
+	private Dialog dialog = new Dialog(this);
 	private View dialogView = null;
 	private SimpleAdapter listAdapter;
-//	private final Timer timer = new Timer();
+	protected String transid;	
+	private String result;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +75,58 @@ public class ME_RvioActivity extends Activity{
 			contentShow();
 		} else {
 			dialogView = getLayoutInflater().inflate(R.layout.pay_list, null);
-			dialog = new Dialog(this);
+			//dialog = new Dialog(this);
 			dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 	        dialog.setContentView(dialogView);
 	        ListView listView = (ListView)dialogView.findViewById(R.id.paylist);
 			initPayList();
-			listView.setAdapter(listAdapter);
+			dialog.getWindow().setGravity(Gravity.CENTER);
+	        //dialog.show();
+	        //防止弹出dialog后窗口变暗
+	        Window window = dialog.getWindow();
+	        WindowManager.LayoutParams lp = window.getAttributes();
+	        lp.dimAmount =0f;
+	        window.setAttributes(lp);
+			
+			//确认是否付款	        
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        	builder.setTitle("确认付款");
+        	builder.setMessage("更多精彩内容请付费后开启体验！");
+        	builder.setPositiveButton(android.R.string.ok, new OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					ME_RvioActivity.this.dialog.show();
+					String url = HttpUtil.BASE_URL + "servlet/TradeServlet";
+					//使用NameValuePair来保存要传递的Post参数  
+					List<NameValuePair> params = new ArrayList<NameValuePair>();  
+					//添加要传递的参数  
+					params.add(new BasicNameValuePair("orderDesc", this.getClass().getSimpleName()));
+					HttpPost request = HttpUtil.getHttpPost(url);
+					try {						
+						request.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+					} catch (UnsupportedEncodingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					result = HttpUtil.queryStringForPost(request);
+					
+				}
+			});
+        	builder.setNegativeButton(android.R.string.no, new OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					ME_RvioActivity.this.finish();
+					overridePendingTransition(R.anim.hold, R.anim.me_rvio_zoomout);
+				}
+			});
+        	builder.show();
+	        
+			
+        	listView.setAdapter(listAdapter);
 			listView.setOnItemClickListener(new OnItemClickListener() {
 	
 				@Override
@@ -83,25 +138,27 @@ public class ME_RvioActivity extends Activity{
 						performAliPay();
 						break;
 					case 1:
-						performUpPay();
+						if(result != null && !result.equals("网络异常！")) {
+							String queryUrl = HttpUtil.BASE_URL + "servlet/CallbackServlet";
+							HttpPost queryRequest = HttpUtil.getHttpPost(queryUrl);
+							transid = HttpUtil.queryStringForPost(queryRequest);
+						}
+						if(transid != null) {
+							performUpPay();
+						} else {
+							Toast.makeText(ME_RvioActivity.this, "系统忙，请稍后再试", Toast.LENGTH_SHORT).show();
+						}
 						break;
 					}
 				}
-			});
+			});			
 			
-			dialog.getWindow().setGravity(Gravity.CENTER);
-	        dialog.show();
-	        //防止弹出dialog后窗口变暗
-	        Window window = dialog.getWindow();
-	        WindowManager.LayoutParams lp = window.getAttributes();
-	        lp.dimAmount =0f;
-	        window.setAttributes(lp);
 		}
 	}
 
-	public boolean isPayed() {
-		// TODO Auto-generated method stub
-		File file = new File(Uri.parse("android.resource://"+getPackageName()+"/values/pay.xml").getPath());
+	public boolean isPayed() {		
+		// TODO Auto-generated method stub		
+		File file = getFileStreamPath("pay.xml");
 		if(file.exists()) {
 			return true;
 		}
@@ -151,8 +208,9 @@ public class ME_RvioActivity extends Activity{
 		String str = data.getExtras().getString("pay_result");
 		if(str.equalsIgnoreCase("success")) {
 			Toast.makeText(this, "支付成功!", Toast.LENGTH_SHORT).show();
-			contentShow();
 			setPayTag();
+			dialog.dismiss();
+			contentShow();			
 		} else if (str.equalsIgnoreCase("fail")) {
 			Toast.makeText(this, "支付失败!", Toast.LENGTH_SHORT).show();
 			finish();
@@ -166,15 +224,23 @@ public class ME_RvioActivity extends Activity{
 
 	private void setPayTag() {
 		// TODO Auto-generated method stub
-		Uri uri = Uri.parse("android.resource://"+getPackageName()+"/values/pay.xml");
-		getDir(uri.getPath(), 0);
+		//Uri uri = Uri.parse("android.resource://"+getPackageName()+"/pay.xml");		
+		try {
+			FileOutputStream fos = openFileOutput("pay.xml", MODE_PRIVATE);
+			fos.write(1);
+			fos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//getDir(uri.getPath(), MODE_PRIVATE).mkdir();
 		
 	}
 
 	private void performUpPay() {
 		// TODO Auto-generated method stub
 		String serverMode = "01";
-		int ret = UPPayAssistEx.startPay(this, null, null, getOutTradeNo(), serverMode);
+		int ret = UPPayAssistEx.startPay(this, null, null, transid, serverMode);
 		if(ret == UPPayAssistEx.PLUGIN_NOT_FOUND) {
 			//安装assets中提供的银联支付插件
 			UPPayAssistEx.installUPPayPlugin(this);
@@ -328,10 +394,11 @@ public class ME_RvioActivity extends Activity{
 						} else {// 验签成功。验签成功后再判断交易状态码
 							if (tradeStatus.equals("9000")) {// 判断交易状态码，只有9000表示交易成功
 								BaseHelper.showDialog(ME_RvioActivity.this, "提示",
-										"支付成功。交易状态码：" + tradeStatus,
+										"支付成功",
 										R.drawable.infoicon);
-								contentShow();
 								setPayTag();
+								dialog.dismiss();
+								contentShow();
 							}
 							else {
 								BaseHelper.showDialog(ME_RvioActivity.this, "提示",
@@ -344,8 +411,8 @@ public class ME_RvioActivity extends Activity{
 
 					} catch (Exception e) {
 						e.printStackTrace();
-						BaseHelper.showDialog(ME_RvioActivity.this, "提示", ret,
-								R.drawable.infoicon);
+						/*BaseHelper.showDialog(ME_RvioActivity.this, "提示", ret,
+								R.drawable.infoicon);*/
 					}
 				}
 					break;
@@ -392,36 +459,12 @@ public class ME_RvioActivity extends Activity{
         }   
         return sdDir.toString(); 
     } */
-    protected void onResume() {
-        super.onResume();
-        if(isPayed()) {
-	        vv = (VideoView)findViewById(R.id.vv_q1_me_rvio);
-	        vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.me_rvio));
+    protected void onRestart() {
+        super.onResume();        
+        vv = (VideoView)findViewById(R.id.vv_q1_me_rvio);
+        vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.me_rvio));
 //	        vv.setOnCompletionListener(onCompListener);
-	        vv.start();
-        } else {
-        	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        	builder.setTitle("确认付款");
-        	builder.setMessage("更多精彩内容请付费后开启体验！");
-        	builder.setPositiveButton(android.R.string.ok, new OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					ME_RvioActivity.dialog.show();
-				}
-			});
-        	builder.setNegativeButton(android.R.string.no, new OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					ME_RvioActivity.this.finish();
-					overridePendingTransition(R.anim.hold, R.anim.me_rvio_zoomout);
-				}
-			});
-        	builder.show();
-        }
+        vv.start();        
     }
     
     @Override

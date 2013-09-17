@@ -258,80 +258,6 @@
     <list default="true" readonly="true" id="218001bd-cbf1-4a48-a63d-e667344df60f" name="Default" comment="" />
     <ignored path="TEE686.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/a.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1371692465777" ignored="false" />
-    <file path="/a.groovy" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1371691540465" ignored="false" />
-    <file path="/Dummy.txt" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1376553731644" ignored="false" />
-    <file path="/sample.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1371692466255" ignored="false" />
-    <file path="/Section686Activity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374564254995" ignored="false" />
-    <file path="/colors.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1371712659370" ignored="false" />
-    <file path="/activity_section686.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1376641052410" ignored="false" />
-    <file path="/image_btn_press.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1371716642976" ignored="false" />
-    <file path="/q2_mea_aa_lax.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373443669214" ignored="false" />
-    <file path="/q3_mea_aa_lax.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372659743257" ignored="false" />
-    <file path="/fragment.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374561845438" ignored="false" />
-    <file path="/Q3_MEA_AA_LaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373358958395" ignored="false" />
-    <file path="/Q2_MEA_AA_LaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373504889981" ignored="false" />
-    <file path="/Q1_MEA_AA_LaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373352200123" ignored="false" />
-    <file path="C:/Developer/workspace/SeeJoPlayer/src/com/zh_weir/videoplayer/VideoView.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372064740868" ignored="false" />
-    <file path="/VideoView.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372064740868" ignored="false" />
-    <file path="C:/Developer/workspace/SeeJoPlayer/src/com/zh_weir/videoplayer/VideoPlayerActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372388825196" ignored="false" />
-    <file path="/VideoPlayerActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372302808990" ignored="false" />
-    <file path="C:/Developer/workspace/SeeJoPlayer/res/layout/extral.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372237774519" ignored="false" />
-    <file path="C:/Developer/workspace/SeeJoPlayer/src/com/zh_weir/videoplayer/SoundView.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372237953191" ignored="false" />
-    <file path="/SoundView.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372237950232" ignored="false" />
-    <file path="/popupwindow_structure.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1372320558106" ignored="false" />
-    <file path="/strings.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374548751686" ignored="false" />
-    <file path="/activity_main.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374473448107" ignored="false" />
-    <file path="/MainActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374479541611" ignored="false" />
-    <file path="/IndexActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374734732029" ignored="false" />
-    <file path="/AndroidManifest.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374542586304" ignored="false" />
-    <file path="/FragmentDetail3.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373034967601" ignored="false" />
-    <file path="/Fragment4.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373031284669" ignored="false" />
-    <file path="/a.dummy" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373249536858" ignored="false" />
-    <file path="/header.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373960735330" ignored="false" />
-    <file path="/image_backbtn_press.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373256243597" ignored="false" />
-    <file path="/sec_me_fc.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374485195067" ignored="false" />
-    <file path="/VideoFragment.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373267489601" ignored="false" />
-    <file path="/zoomout.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373355874430" ignored="false" />
-    <file path="/zoomin.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373355795678" ignored="false" />
-    <file path="/q1_zoomout.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373352562648" ignored="false" />
-    <file path="$USER_HOME$/Dropbox/doc/MainActivity/src/com/menu/aliserun/GledeForDraw.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373958138545" ignored="false" />
-    <file path="/activity_mea_aa_lax.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1373960700285" ignored="false" />
-    <file path="/Q4_MEA_FcActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374398125434" ignored="false" />
-    <file path="/Q4_TG_M_SaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374398192484" ignored="false" />
-    <file path="/q1_me_fc.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374556280497" ignored="false" />
-    <file path="/q1_me_rvio.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374564798494" ignored="false" />
-    <file path="/q1_tg_m_sax.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374565254329" ignored="false" />
-    <file path="/Q1_ME_LaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374638453422" ignored="false" />
-    <file path="/Q1_ME_FcActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374638426207" ignored="false" />
-    <file path="/Q1_ME_RvioActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374638476077" ignored="false" />
-    <file path="/Q1_TG_M_SaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374638496120" ignored="false" />
-    <file path="/Q2_ME_LaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1376558184084" ignored="false" />
-    <file path="/structure1_mea_aa_lax.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374477434185" ignored="false" />
-    <file path="/q2_me_fc.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1376546860527" ignored="false" />
-    <file path="/q2_me_rvio.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374547277330" ignored="false" />
-    <file path="/q2_tg_m_sax.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374547400586" ignored="false" />
-    <file path="/Q2_ME_FcActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1376558285959" ignored="false" />
-    <file path="/sec_me_rvio.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374483382693" ignored="false" />
-    <file path="/ME_FcActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374638574431" ignored="false" />
-    <file path="/ME_RvioActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374638626960" ignored="false" />
-    <file path="/ME_LaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374638601416" ignored="false" />
-    <file path="/TG_M_SaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374638666751" ignored="false" />
-    <file path="/q2_me_lax.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374546758709" ignored="false" />
-    <file path="/q3_me_lax.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374547966469" ignored="false" />
-    <file path="/q3_me_fc.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374548380454" ignored="false" />
-    <file path="/q3_me_rvio.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374548579644" ignored="false" />
-    <file path="/q3_tg_m_sax.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374548793172" ignored="false" />
-    <file path="/q1_me_lax.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374551251954" ignored="false" />
-    <file path="/SEC.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374562746886" ignored="false" />
-    <file path="/Q2_ME_RvioActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1376558238773" ignored="false" />
-    <file path="/Q2_TG_M_SaxActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1376557773674" ignored="false" />
-    <file path="/q3_popupwindow_text.xml" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374643237180" ignored="false" />
-    <file path="/Q3_ME_FcActivity.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1374643485338" ignored="false" />
-    <file path="$USER_HOME$/kuaipan/code/WS_SECURE_PAY/WS_SECURE_PAY(20130725)/客户端文档及demo/Android(20130328)/AppDemo4_20130328/src/com/alipay/android/appDemo4/ResultChecker.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1376642543630" ignored="false" />
-    <file path="/AlixDemo.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1376643520080" ignored="false" />
-    <file path="$USER_HOME$/kuaipan/code/WS_SECURE_PAY/WS_SECURE_PAY(20130725)/客户端文档及demo/Android(20130328)/AppDemo4_20130328/src/com/alipay/android/appDemo4/AlixDemo.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1376644394131" ignored="false" />
-    <file path="$PROJECT_DIR$/gen/com/casit/tee686/R.java" changelist="218001bd-cbf1-4a48-a63d-e667344df60f" time="1377221736807" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -343,6 +269,9 @@
     <leftPanel />
     <rightPanel />
     <splitter proportion="0.5" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="USE_COMPILE_SERVER" value="false" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -400,7 +329,7 @@
       <file leaf-file-name="Q2_ME_FcActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q2_ME_FcActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="113" column="29" selection-start="4876" selection-end="4876" vertical-scroll-proportion="0.0">
+            <state line="113" column="29" selection-start="4876" selection-end="4876" vertical-scroll-proportion="0.0" vertical-offset="2128" max-vertical-offset="7296">
               <folding />
             </state>
           </provider>
@@ -409,7 +338,7 @@
       <file leaf-file-name="Q2_ME_RvioActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q2_ME_RvioActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="286" column="0" selection-start="11326" selection-end="11326" vertical-scroll-proportion="0.0">
+            <state line="286" column="0" selection-start="11326" selection-end="11326" vertical-scroll-proportion="0.0" vertical-offset="5415" max-vertical-offset="7239">
               <folding />
             </state>
           </provider>
@@ -418,7 +347,7 @@
       <file leaf-file-name="Q2_TG_M_SaxActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q2_TG_M_SaxActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="136" column="11" selection-start="5622" selection-end="5622" vertical-scroll-proportion="0.0">
+            <state line="136" column="11" selection-start="5622" selection-end="5622" vertical-scroll-proportion="0.0" vertical-offset="2565" max-vertical-offset="7163">
               <folding />
             </state>
           </provider>
@@ -427,7 +356,7 @@
       <file leaf-file-name="Q2_ME_LaxActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q2_ME_LaxActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="106" column="0" selection-start="4529" selection-end="4529" vertical-scroll-proportion="0.0">
+            <state line="106" column="0" selection-start="4529" selection-end="4529" vertical-scroll-proportion="0.0" vertical-offset="1995" max-vertical-offset="6916">
               <folding />
             </state>
           </provider>
@@ -436,25 +365,25 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="6" selection-start="580" selection-end="580" vertical-scroll-proportion="0.0">
+            <state line="24" column="6" selection-start="580" selection-end="580" vertical-scroll-proportion="0.0" vertical-offset="266" max-vertical-offset="2337">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ME_RvioActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ME_RvioActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/ME_RvioActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="254" column="59" selection-start="7758" selection-end="7758" vertical-scroll-proportion="0.0">
+            <state line="46" column="0" selection-start="1479" selection-end="1479" vertical-scroll-proportion="0.33213645" vertical-offset="689" max-vertical-offset="8094">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PartnerConfig.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PartnerConfig.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/alipay/android/appDemo4/PartnerConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="0" selection-start="1598" selection-end="1598" vertical-scroll-proportion="0.54480284">
+            <state line="16" column="0" selection-start="1598" selection-end="1598" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="418">
               <folding />
             </state>
           </provider>
@@ -462,37 +391,37 @@
       </file>
       <file leaf-file-name="q3_me_fc.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/q3_me_fc.xml">
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
           <provider editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="551">
               <folding />
             </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="q3_me_fc2.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/q3_me_fc2.xml">
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
           <provider editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="1" column="0" selection-start="39" selection-end="39" vertical-scroll-proportion="0.0" vertical-offset="19" max-vertical-offset="551">
               <folding />
             </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="activity_section686.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/activity_section686.xml">
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
           <provider editor-type-id="text-editor">
-            <state line="190" column="28" selection-start="8493" selection-end="8493" vertical-scroll-proportion="0.0">
+            <state line="190" column="28" selection-start="8493" selection-end="8493" vertical-scroll-proportion="0.0" vertical-offset="3591" max-vertical-offset="4085">
               <folding />
             </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -591,6 +520,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -627,86 +558,16 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TEE686" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TEE686" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TEE686" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TEE686" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TEE686" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TEE686" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TEE686" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TEE686" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="libs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-support-v4.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -728,11 +589,11 @@
     <property name="AndroidRunProguardForReleaseBuild" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="ip4S" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -748,24 +609,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Android Application.TEE686">
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <method />
-    </configuration>
     <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -786,6 +629,24 @@
           </MavenRunnerParameters>
         </option>
       </MavenSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -994,27 +855,28 @@
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17791411" sideWeight="0.6566164" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1799591" sideWeight="0.6566164" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32581967" sideWeight="0.56616414" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1799591" sideWeight="0.6566164" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34338358" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31825796" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946922" sideWeight="0.50087565" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24642126" sideWeight="0.18592964" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924694" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24642126" sideWeight="0.18592964" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3752094" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283082" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24744377" sideWeight="0.67336684" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20654397" sideWeight="0.67336684" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32908705" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22801636" sideWeight="0.6566164" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22801636" sideWeight="0.6566164" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24623115" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="671" y="37" width="348" height="231" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32581967" sideWeight="0.56616414" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32495812" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3115578" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1087,116 +949,114 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Section686Activity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="13" selection-start="791" selection-end="791" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="28" column="13" selection-start="791" selection-end="791" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/android.jar!/java/lang/reflect/Method.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="0" selection-start="2320" selection-end="2320" vertical-scroll-proportion="2.7762039" />
+        <state line="54" column="0" selection-start="2320" selection-end="2320" vertical-scroll-proportion="2.7762039" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/android.jar!/android/os/Looper.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="968" selection-end="968" vertical-scroll-proportion="0.6885246" />
+        <state line="30" column="0" selection-start="968" selection-end="968" vertical-scroll-proportion="0.6885246" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/android.jar!/android/os/Handler.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="0" selection-start="3379" selection-end="3379" vertical-scroll-proportion="0.6770538" />
+        <state line="78" column="0" selection-start="3379" selection-end="3379" vertical-scroll-proportion="0.6770538" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/q2_tg_m_sax.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="8" selection-start="381" selection-end="381" vertical-scroll-proportion="0.0">
+        <state line="11" column="8" selection-start="381" selection-end="381" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q2_TG_M_SaxActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="136" column="11" selection-start="5622" selection-end="5622" vertical-scroll-proportion="0.0">
+        <state line="136" column="11" selection-start="5622" selection-end="5622" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q2_ME_RvioActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="286" column="0" selection-start="11326" selection-end="11326" vertical-scroll-proportion="0.0">
+        <state line="286" column="0" selection-start="11326" selection-end="11326" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/data/res/values-de/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="655" column="10" selection-start="96963" selection-end="96963" vertical-scroll-proportion="1.8655914" />
+        <state line="655" column="10" selection-start="96963" selection-end="96963" vertical-scroll-proportion="1.8655914" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q2_ME_FcActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="29" selection-start="4876" selection-end="4876" vertical-scroll-proportion="0.0">
+        <state line="113" column="29" selection-start="4876" selection-end="4876" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_section686.xml">
+      <provider editor-type-id="text-editor">
+        <state line="190" column="28" selection-start="8493" selection-end="8493" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/q3_me_fc.xml">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/q3_me_fc2.xml">
+      <provider editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="39" selection-end="39" vertical-scroll-proportion="0.0" vertical-offset="19" max-vertical-offset="551">
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q2_ME_LaxActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="106" column="0" selection-start="4529" selection-end="4529" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="6" selection-start="580" selection-end="580" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_section686.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="190" column="28" selection-start="8493" selection-end="8493" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/q3_me_fc.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/q3_me_fc2.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/Q2_ME_LaxActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="0" selection-start="4529" selection-end="4529" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/ME_RvioActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="254" column="59" selection-start="7758" selection-end="7758" vertical-scroll-proportion="0.0">
+        <state line="24" column="6" selection-start="580" selection-end="580" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/alipay/android/appDemo4/PartnerConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="1598" selection-end="1598" vertical-scroll-proportion="0.54480284">
+        <state line="16" column="0" selection-start="1598" selection-end="1598" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="418">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tee686/activity/ME_RvioActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="0" selection-start="1479" selection-end="1479" vertical-scroll-proportion="0.33213645" vertical-offset="689" max-vertical-offset="8094">
           <folding />
         </state>
       </provider>
