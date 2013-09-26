@@ -8,10 +8,10 @@
         android:showAsAction="ifRoom"
         android:title="@string/action_settings"/>
     
-    <item
+    <!-- <item
         android:id="@+id/teaching_consultant"
         android:orderInCategory="100"
         android:showAsAction="ifRoom"
-        android:title="@string/teaching_consultant"/>
+        android:title="@string/teaching_consultant"/> -->
 
 </menu>

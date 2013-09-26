@@ -60,11 +60,11 @@ public class ME_RvioActivity extends Activity{
 	private VideoView vv;
     private ImageButton ib;
 	private ProgressDialog mProgress;
-	private Dialog dialog = new Dialog(this);
+	private Dialog dialog = null;
 	private View dialogView = null;
 	private SimpleAdapter listAdapter;
-	protected String transid;	
-	private String result;
+//	protected String transid;	
+//	private String result;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,7 @@ public class ME_RvioActivity extends Activity{
 			contentShow();
 		} else {
 			dialogView = getLayoutInflater().inflate(R.layout.pay_list, null);
-			//dialog = new Dialog(this);
+			dialog = new Dialog(this);
 			dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 	        dialog.setContentView(dialogView);
 	        ListView listView = (ListView)dialogView.findViewById(R.id.paylist);
@@ -98,7 +98,7 @@ public class ME_RvioActivity extends Activity{
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
 					ME_RvioActivity.this.dialog.show();
-					String url = HttpUtil.BASE_URL + "servlet/TradeServlet";
+					/*String url = HttpUtil.BASE_URL + "servlet/TradeServlet";
 					//使用NameValuePair来保存要传递的Post参数  
 					List<NameValuePair> params = new ArrayList<NameValuePair>();  
 					//添加要传递的参数  
@@ -110,7 +110,7 @@ public class ME_RvioActivity extends Activity{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					result = HttpUtil.queryStringForPost(request);
+					result = HttpUtil.queryStringForPost(request);*/
 					
 				}
 			});
@@ -138,7 +138,8 @@ public class ME_RvioActivity extends Activity{
 						performAliPay();
 						break;
 					case 1:
-						if(result != null && !result.equals("网络异常！")) {
+						performUpPay();
+						/*if(result != null && !result.equals("网络异常！")) {
 							String queryUrl = HttpUtil.BASE_URL + "servlet/CallbackServlet";
 							HttpPost queryRequest = HttpUtil.getHttpPost(queryUrl);
 							transid = HttpUtil.queryStringForPost(queryRequest);
@@ -147,7 +148,8 @@ public class ME_RvioActivity extends Activity{
 							performUpPay();
 						} else {
 							Toast.makeText(ME_RvioActivity.this, "系统忙，请稍后再试", Toast.LENGTH_SHORT).show();
-						}
+						}*/
+						
 						break;
 					}
 				}
@@ -192,10 +194,10 @@ public class ME_RvioActivity extends Activity{
 		map.put("PIC", R.drawable.alipay);
 		map.put("CONTENT", "支付宝交易");
 		contents.add(map);
-		map = new HashMap<String, Object>();
+		/*map = new HashMap<String, Object>();
 		map.put("PIC", R.drawable.up);
 		map.put("CONTENT", "银联在线交易");
-		contents.add(map);
+		contents.add(map);*/
 		listAdapter = new SimpleAdapter(this, contents, R.layout.pay_list_content, new String[] {"PIC", "CONTENT"}, new int[] {R.id.paylist_pic, R.id.paylist_content});		
 	}
 
@@ -240,7 +242,7 @@ public class ME_RvioActivity extends Activity{
 	private void performUpPay() {
 		// TODO Auto-generated method stub
 		String serverMode = "01";
-		int ret = UPPayAssistEx.startPay(this, null, null, transid, serverMode);
+		int ret = UPPayAssistEx.startPay(this, null, null, getOutTradeNo(), serverMode);
 		if(ret == UPPayAssistEx.PLUGIN_NOT_FOUND) {
 			//安装assets中提供的银联支付插件
 			UPPayAssistEx.installUPPayPlugin(this);

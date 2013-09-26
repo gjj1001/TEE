@@ -82,6 +82,7 @@ public class Q4_ME_Fc_DetailActivity extends Activity{
                     for(PopupWindow pw : pwList) {
                     	pw.dismiss();
                     }
+                    pwList.clear();
                 } else {
                     pw1.showAtLocation(iv, Gravity.CENTER, -100, -150);
                     pw1.update(160,60);
@@ -99,6 +100,7 @@ public class Q4_ME_Fc_DetailActivity extends Activity{
                     pw7.update(220, 60);
                     pw8.showAtLocation(iv, Gravity.CENTER, 200, 100);
                     pw8.update(220, 60);
+                    pwList.clear();
                 }
             }
         });

@@ -52,24 +52,26 @@ public class IndexActivity extends Activity {
 	
     @Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		switch(item.getItemId()) {
 			case R.id.action_settings:
-				Dialog dialog = new Dialog(this);
+				/*Dialog dialog = new Dialog(this);
 				dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-				dialog.setContentView(R.layout.contact_info);
+				dialog.setContentView(R.layout.about_me);
 				dialog.getWindow().setGravity(Gravity.CENTER);		
 				dialog.getWindow().setDimAmount(0);
-				dialog.show();
+				dialog.show();*/
+				Intent intent = new Intent(IndexActivity.this, InfoActivity.class);
+				startActivity(intent);
 				break;
-			case R.id.teaching_consultant:
+			/*case R.id.teaching_consultant:
 				Dialog dialog1 = new Dialog(this);
 				dialog1.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 				dialog1.setContentView(R.layout.about_me);
 				dialog1.getWindow().setGravity(Gravity.CENTER);		
 				dialog1.getWindow().setDimAmount(0);
 				dialog1.show();
-				break;
+				break;*/
 		}
 		return true;
 	}

@@ -77,6 +77,7 @@ public class Q4_TG_M_Sax_DetailActivity extends Activity{
                 	for(PopupWindow pw : pwList) {
                     	pw.dismiss();
                     }
+                	pwList.clear();
                 } else {
                 	pw1.showAtLocation(iv, Gravity.CENTER, 100, -20);
                     pw1.update(220,60);
@@ -90,6 +91,7 @@ public class Q4_TG_M_Sax_DetailActivity extends Activity{
                     pw5.update(160, 60);
                     pw6.showAtLocation(iv, Gravity.CENTER, 20, 100);
                     pw6.update(220, 60);
+                    pwList.clear();
                 }
             }
         });

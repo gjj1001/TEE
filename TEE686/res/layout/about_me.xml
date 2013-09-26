@@ -2,66 +2,92 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
-
+    android:orientation="vertical" >    
+             
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:orientation="vertical" >
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal" >
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="match_parent"
-            android:layout_height="125dp"
-            android:src="@drawable/song" />
-
-    </LinearLayout>
-
-	<LinearLayout
-	    android:layout_width="0dp"
-	    android:layout_height="match_parent"
-	    android:layout_weight="4"
-	    android:orientation="vertical" >
+	    <LinearLayout
+	        android:layout_width="0dp"
+	        android:layout_height="match_parent"
+	        android:layout_weight="3"
+	        android:orientation="vertical" >
 	
-	    <TextView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="四川大学华西医院麻醉科"
-	        android:textAppearance="?android:attr/textAppearanceLarge" >
+	        <ImageView
+	            android:id="@+id/imageView1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="match_parent"
+	            android:scaleType="matrix"
+	            android:src="@drawable/ic_launcher" />
 	
-	        <requestFocus />
-	    </TextView>
+	    </LinearLayout>
 	
-	    <ImageView        
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:src="@drawable/divider_horizontal_line" />
-
-	    <TextView
-	        android:id="@+id/textView1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="宋海波	博士"
-	        android:textAppearance="?android:attr/textAppearanceMedium" />
+		<LinearLayout
+		    android:layout_width="0dp"
+		    android:layout_height="match_parent"
+		    android:layout_weight="4"
+		    android:orientation="vertical" >
+		
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="TEE-Mobile"
+		        android:textAppearance="?android:attr/textAppearanceLarge" >
+		
+		        <requestFocus />
+		    </TextView>
+		
+		    <ImageView
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:src="@drawable/divider_horizontal_line" />
 	
-	    <TextView        
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="电话：13981837226"
-	        android:textAppearance="?android:attr/textAppearanceMedium" />
-	
-	    <TextView        
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="E-mail:pdasonghaibo@163.com"
-	        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-	    <TextView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="地址：中国成都市电信南街10号"
-	        android:textAppearance="?android:attr/textAppearanceMedium" />
-	
+		    <TextView
+		        android:id="@+id/textView1"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="版本:1.3"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+		
+		</LinearLayout>
 	</LinearLayout>
+    
+	<ScrollView
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="4"
+	    android:scrollbars="vertical" >
+
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    android:layout_weight="3"
+		    android:orientation="vertical" >
+	
+			<TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_marginLeft="50dp"
+			    android:layout_marginRight="50dp"
+			    android:layout_marginTop="20dp"
+			    android:text="@string/about_intro"
+			    android:textAppearance="?android:attr/textAppearanceMedium" />
+			
+			<TextView
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_marginLeft="50dp"
+			    android:layout_marginRight="50dp"
+			    android:layout_marginTop="20dp"
+			    android:text="@string/about_contact"
+			    android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+		</LinearLayout>
+	</ScrollView>
 </LinearLayout>
