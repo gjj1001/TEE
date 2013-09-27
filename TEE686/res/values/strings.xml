@@ -6,7 +6,7 @@
     <string name="teaching_consultant">教学顾问</string>
     <string name="hello_world">Hello world!</string>
     <string name="index">Welcome to TEE!</string>
-    <string name="about_intro">[应用简介]\n维思模-TEE Mobile由四川大学华西医院和中科院成都信息技术股份有限公司联合研发，与目前已有的维思模-TEE Simulator模拟教学平台构成一个完整的产品体系，作为维思模-TEE Simulator模拟教学平台的相应补充。\n本产品包含四川大学华西医院推荐的四个TEE标准切面，用户通过四象限图像可以同时浏览3D模型图、超声图以及切面图，再结合适当的文字说明和音频介绍，可以得到良好的学习体验。本产品既可用于老师对小组进行教学，也可以用于学生自学和复习。</string>
+    <string name="about_intro">[应用简介]\n维思模-TEE Mobile由四川大学华西医院和中科院成都信息技术股份有限公司联合研发，与目前已有的维思模-TEE Simulator模拟教学平台构成一个完整的产品体系，在经食管超声模拟教学培训体系中具有重要作用。\n本产品包含四川大学华西医院推荐的四个TEE标准切面，用户通过四象限图像可以同时浏览3D模型图、超声图以及切面图，再结合适当的文字说明和音频介绍，可以得到良好的学习体验。本产品既可用于老师对小组进行教学，也可以用于学生自学和复习。</string>
     <string name="about_thanks">[声明]\n维思模-TEE Mobile由四川大学华西医院和中科院成都信息技术股份有限公司联合研发，与目前已有的维思模-TEE Simulator模拟教学平台构成一个完整的产品体系，本产品作为维思模-TEE Simulator模拟教学平台的相应补充。</string>
     <string name="about_contact">研发单位:\n四川大学华西医院\n中科院成都信息技术股份有限公司\n联系电话:\n(028)85249933-8031	(028)85423593</string>
 
