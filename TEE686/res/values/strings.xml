@@ -1,11 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TEE</string>
+    <string name="app_name">TEE教学</string>
     <string name="action_settings">关于</string>
-    <string name="teaching_consultant">教学顾问</string>
+    <string name="feedback">反馈</string>
+    <string name="login">用户登陆</string>
     <string name="hello_world">Hello world!</string>
     <string name="index">Welcome to TEE!</string>
+    
+    <!-- 用户中心 -->
+    <string name="user_center">个人中心</string>
+    <string name="user_login_alert">你终于来啦，快登录吧</string>
+    <string name="user_key_alert">输入你的密钥</string>
+    <string name="user_bind_btn">绑定</string>
+    <string name="user_qr_scan_btn">二维码扫描登陆</string>
+    <string name="user_alert">n会员中心>设置>客户端密钥（如下图）</string>
+    <string name="user_button_alert">登陆后，你可以享有以下功能</string>
+    <string name="user_level_alert">社区勋章</string>
+    <string name="user_login_another">换一种方式登录</string>
+    <string name="user_logout">注销</string>
+    <string name="user_center_get_info_error">获取信息错误</string>
+    <string name="user_center_my_Collect">我的收藏</string>
+    <string name="user_center_my_Intro">个人简介</string>
+    <string name="user_center_exit">退出功能</string>
+    <string name="user_center_e_coin">v币:%s</string>
+    <string name="user_center_e_reputation">v望:%s</string>
+
+    <!-- 登录 -->
+    <string name="user_title">TEE</string>
+    <string name="user_cancel">取消</string>
+    <string name="user_remember">记住密码</string>
+    <string name="user_enter">立即登录</string>
+    <string name="user_register">用户注册</string>
+    <string name="user_user_empty">用户名不能为空!</string>
+    <string name="user_pwd_empty">密码不能为空!</string>
+    <string name="user_login_prompt">请先登录</string>
+    <string name="user_login_enter_key">请先输入密钥</string>
+    
+    <!-- 错误提示 -->
+    <string name="httpError">连接失败</string>
+    <string name="httpisNull">没有网络</string>
+    <string name="user_center_error">请先登录再进入用户中心</string>
+    <string name="user_username">输入用户名</string>
+    <string name="user_pwd">输入密码</string>
+    <string name="user_login_error">用户名或者密码错误!</string>
+    <string name="user_loginKey_error">错误密钥!</string>
+    <string name="user_loginInfo_error">获取信息失败，请尝试重新登录。</string>
+    <string name="user_3rdloginInfo_error">获取第三方账号信息失败，请再次点击同一登录按钮。</string>
     <string name="about_intro">[应用简介]\n维思模-TEE Mobile由四川大学华西医院和中科院成都信息技术股份有限公司联合研发，与目前已有的维思模-TEE Simulator模拟教学平台构成一个完整的产品体系，在经食管超声模拟教学培训体系中具有重要作用。\n本产品包含四川大学华西医院推荐的四个TEE标准切面，用户通过四象限图像可以同时浏览3D模型图、超声图以及切面图，再结合适当的文字说明和音频介绍，可以得到良好的学习体验。本产品既可用于老师对小组进行教学，也可以用于学生自学和复习。</string>
     <string name="about_thanks">[声明]\n维思模-TEE Mobile由四川大学华西医院和中科院成都信息技术股份有限公司联合研发，与目前已有的维思模-TEE Simulator模拟教学平台构成一个完整的产品体系，本产品作为维思模-TEE Simulator模拟教学平台的相应补充。</string>
     <string name="about_contact">研发单位:\n四川大学华西医院\n中科院成都信息技术股份有限公司\n联系电话:\n(028)85249933-8031	(028)85423593</string>
@@ -32,6 +73,44 @@
         <item>经胃底两腔心切面</item>
         <item>经胃右心室流入道切面</item>
         <item>深胃底心室长轴切面</item>
+    </string-array>
+    
+    <!-- 省份选择 -->
+    <string-array name="province">
+        <item >北京市</item>
+        <item >天津市</item>
+        <item >上海市</item>
+        <item >重庆市</item>
+        <item >河北省</item>
+        <item >河南省</item>
+        <item >云南省</item>
+        <item >辽宁省</item>
+        <item >黑龙江省</item>
+        <item >湖南省</item>
+        <item >安徽省</item>
+        <item >山东省</item>
+        <item >新疆</item>
+        <item >江苏省</item>
+        <item >浙江省</item>
+        <item >江西省</item>
+        <item >湖北省</item>
+        <item >广西省</item>
+        <item >甘肃省</item>
+        <item >山西省</item>
+        <item >内蒙古</item>
+        <item >陕西省</item>
+        <item >吉林省</item>
+        <item >福建省</item>
+        <item >贵州省</item>
+        <item >广东省</item>
+        <item >青海省</item>
+        <item >西藏</item>
+        <item >四川省</item>
+        <item >宁夏</item>
+        <item >海南省</item>
+        <item >台湾省</item>
+        <item >香港特别行政区</item>
+        <item >澳门特别行政区</item>
     </string-array>
     
     <string name="hd_mea_aa_lax">食道中段升主动脉长轴切面</string>

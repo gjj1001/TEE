@@ -9,9 +9,11 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import android.util.Log;
+
 public class HttpUtil {
 
-	public static final String BASE_URL = "http://192.168.1.45:19840/payment/";
+	public static final String BASE_URL = "http://210.75.239.227/payment/";
 
 	public static HttpGet getHttpGet(String url) {
 		HttpGet request = new HttpGet(url);
@@ -88,10 +90,12 @@ public class HttpUtil {
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 			result = "网络异常！";
+			Log.e("CPE", result);
 			return result;
 		} catch (IOException e) {
 			e.printStackTrace();
 			result = "网络异常！";
+			Log.e("IO", result);
 			return result;
 		}
 		return null;

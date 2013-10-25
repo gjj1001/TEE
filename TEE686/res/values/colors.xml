@@ -12,6 +12,9 @@
     <color name="BgColor">#ffd1dce9</color>
     <color name="TextColorBlack">#FF000000</color>
     <color name="transparent">#00FF00FF</color>
+    <color name="backColor">#2000</color>
+    
+    <color name="defaultTextColor">#666</color>
 
     <drawable name="myactivity_dialog">#32000000</drawable>
  	<drawable name="myactivity_dialog2222">#32000000</drawable>

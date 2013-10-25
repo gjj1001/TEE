@@ -335,7 +335,7 @@ public class ME_RvioActivity extends Activity{
 				+ "6" + "\"";
 		strOrderInfo += "&";
 		strOrderInfo += "notify_url=" + "\""
-				+ "http://notify.java.jpxx.org/index.jsp" + "\"";
+				+ "http://210.75.239.227/payment/servlet/NotifyReceiverServlet" + "\"";
 
 		return strOrderInfo;
 	}
