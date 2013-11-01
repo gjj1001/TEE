@@ -10,7 +10,7 @@ import android.provider.BaseColumns;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-	private static final String DB_NAME = "tee686";
+	private static final String DB_NAME = "tee686.db";
 	private static final int DB_VERSION = 2;
 
 	private SQLiteDatabase db;

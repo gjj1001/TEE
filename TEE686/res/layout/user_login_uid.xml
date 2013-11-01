@@ -89,9 +89,8 @@
         android:layout_gravity="bottom|left"
         android:layout_marginBottom="100dp"
         android:layout_marginLeft="100dp"
-        android:background="@drawable/qq"
-        android:paddingLeft="80dp"
-        android:paddingTop="30dp" />
+        android:background="@drawable/qqlan"        
+        android:paddingTop="20dp" />
 
     <ImageButton
         android:id="@+id/weiboLogin"
@@ -100,9 +99,8 @@
         android:layout_gravity="bottom|left"
         android:layout_marginBottom="100dp"
         android:layout_marginLeft="250dp"
-        android:background="@drawable/weibo"
-        android:paddingLeft="80dp"
-        android:paddingTop="30dp"
+        android:background="@drawable/sinacheng"
+        android:paddingTop="20dp"
         android:scaleType="centerCrop" />
 
 </FrameLayout>

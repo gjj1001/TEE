@@ -258,6 +258,8 @@ public class UserLoginActivity extends BaseActivity {
 
 	class LoginAsyncTask extends AsyncTask<String, Void, Boolean> {
 
+		private boolean flag = false;
+
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
@@ -278,7 +280,10 @@ public class UserLoginActivity extends BaseActivity {
 				result = HttpUtils.getByHttpClient(UserLoginActivity.this, params[0]);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				e1.printStackTrace();				
+			}
+			if(null == result) {
+				flag = true;
 				return false;
 			}
 			try {
@@ -313,10 +318,13 @@ public class UserLoginActivity extends BaseActivity {
 						UserCenterActivity.class);
 				finish();
 			} else {
-				showLongToast(getResources().getString(
-						R.string.user_login_error));
-				editUserID.setText("");
-				editPwd.setText("");
+				if(flag) {
+					showLongToast("网络连接失败，请稍后再试");
+				} else {
+					showLongToast(getResources().getString(R.string.user_login_error));
+					editUserID.setText("");
+					editPwd.setText("");
+				}				
 			}
 		}
 

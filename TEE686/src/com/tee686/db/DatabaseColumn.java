@@ -23,8 +23,7 @@ public abstract class DatabaseColumn implements BaseColumns {
 	 * Classes's name extends from this class.
 	 */
 	public static final String[] SUBCLASSES = new String[] {
-			"com.tee686.db.BlogColumn", "com.tee686.db.NewsColumn",
-			"com.tee686.db.DetailColumn", "com.tee686.db.ImageCacheColumn",
+			"com.tee686.db.PushCacheColumn", "com.tee686.db.ImageCacheColumn",
 			"com.tee686.db.RequestCacheColumn" };
 
 	public String getTableCreateor() {

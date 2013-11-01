@@ -33,7 +33,6 @@ import org.apache.http.util.EntityUtils;
 
 import android.content.Context;
 import android.util.Log;
-
 import com.casit.tee686.R;
 import com.tee686.utils.CommonLog;
 import com.tee686.utils.LogFactory;
@@ -42,7 +41,7 @@ public class CustomHttpClient {
 	private static String TAG = "CustomHttpClient";
 	private static final CommonLog log = LogFactory.createLog();
 	private static final String CHARSET_UTF8 = HTTP.UTF_8;
-	private static final String CHARSET_GB2312 = "GB2312";
+//	private static final String CHARSET_GB2312 = "GB2312";
 	private static HttpClient customerHttpClient;
 
 	private CustomHttpClient() {
@@ -84,8 +83,9 @@ public class CustomHttpClient {
 			Log.w(TAG, e.getMessage());
 			return null;
 		} catch (IOException e) {
-			throw new RuntimeException(context.getResources().getString(
-					R.string.httpError), e);
+			/*throw new RuntimeException(context.getResources().getString(
+					R.string.httpError), e);*/
+			return null;
 		} 
 	}
 
@@ -128,9 +128,10 @@ public class CustomHttpClient {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			log.e("IOException ");
-			e.printStackTrace();
-			throw new RuntimeException(context.getResources().getString(
-					R.string.httpError),e);
+			e.printStackTrace();			
+			/*throw new RuntimeException(context.getResources().getString(
+					R.string.httpError),e);*/
+			return null;
 		} 	
 	}
 

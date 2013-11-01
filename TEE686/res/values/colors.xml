@@ -14,6 +14,7 @@
     <color name="transparent">#00FF00FF</color>
     <color name="backColor">#2000</color>
     
+    <color name="detail_bgColor">#f5f5f5</color>
     <color name="defaultTextColor">#666</color>
 
     <drawable name="myactivity_dialog">#32000000</drawable>
