@@ -6,6 +6,8 @@ import java.util.Date;
 import com.casit.tee686.R;
 import com.tee686.db.DBHelper;
 import com.tee686.db.PushCacheColumn;
+
+import cn.jpush.android.api.InstrumentedActivity;
 import cn.jpush.android.api.JPushInterface;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -20,7 +22,7 @@ import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
-public class DisplayActivity extends Activity {
+public class DisplayActivity extends InstrumentedActivity {
 
 	public static final String PUSH = "pushNews";
 	public static final String NOTIFICATION_TITLE = "ntitle";

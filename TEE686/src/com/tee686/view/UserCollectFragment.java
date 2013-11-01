@@ -163,7 +163,8 @@ public class UserCollectFragment extends Fragment implements OnItemClickListener
 		@Override
 		protected Void doInBackground(Integer... params) {
 			DBHelper dbHelper = DBHelper.getInstance(getActivity());			
-      	    dbHelper.delete(PushCacheColumn.TABLE_NAME, cursor.getInt(5));  
+      	    dbHelper.delete(PushCacheColumn.TABLE_NAME, cursor.getInt(5)); 
+      	    cursor.requery();
       	    mlist.remove(params[0].intValue());
 			return null;
 		}
