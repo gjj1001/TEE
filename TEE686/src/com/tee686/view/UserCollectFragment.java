@@ -88,7 +88,7 @@ public class UserCollectFragment extends Fragment implements OnItemClickListener
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {		
-		cursor.moveToPosition(arg2);
+		cursor.moveToPosition(cursor.getCount()-1-arg2);//修正降序排序指针位置
 		new ShareAsyncTask().execute();
 		// 转到详情页面
 		IntentUtil.start_activity(mActivity, DisplayActivity.class);		
@@ -104,7 +104,7 @@ public class UserCollectFragment extends Fragment implements OnItemClickListener
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
          	   ad.dismiss();
-         	   cursor.moveToPosition(arg2);
+         	   cursor.moveToPosition(cursor.getCount()-1-arg2);
          	   new DeleteAsyncTask().execute(arg2);
          	   Toast.makeText(getActivity(), "删除成功", Toast.LENGTH_SHORT).show();
             }
