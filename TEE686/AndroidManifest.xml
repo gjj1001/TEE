@@ -257,6 +257,12 @@
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
         </activity>
         <activity
+            android:name="com.tee686.activity.BulletinDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
             android:name="com.tee686.activity.EditActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"

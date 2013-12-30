@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f5"
+    android:orientation="vertical"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    android:paddingTop="20dp" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/user_imageview_icon"
+            android:layout_width="@dimen/user_icon_height"
+            android:layout_height="@dimen/user_icon_height"
+            android:layout_marginRight="20dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/zh_icon3"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/user_textview_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/user_imageview_icon"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@id/user_imageview_icon"
+            android:text="casit"
+            android:textColor="@color/black"
+            android:textSize="@dimen/user_title_size" />
+
+        <TextView
+            android:id="@+id/user_textview_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_textview_name"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@id/user_imageview_icon"
+            android:paddingRight="15dp"
+            android:text="实习生"
+            android:textColor="@color/black"
+            android:textSize="@dimen/user_alert_size" />
+
+        <TextView
+            android:id="@+id/user_textview_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_textview_level"
+            android:layout_toRightOf="@id/user_imageview_icon"
+            android:text="★"
+            android:textColor="#f00"
+            android:textSize="@dimen/user_alert_size" />
+        
+        <TextView
+            android:id="@+id/user_textview_zone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_textview_img"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@id/user_imageview_icon"
+            android:paddingRight="15dp"
+            android:text="地区"
+            android:textColor="@color/black"
+            android:textSize="@dimen/user_alert_size" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="2dp"
+            android:text="注册时间："
+            android:textColor="@color/defaultTextColor" />
+
+        <TextView
+            android:id="@+id/user_textview_reg_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="2dp"
+            android:text="2013-9-1"
+            android:textColor="@color/defaultTextColor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_corner_border"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/user_textview_e_p"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="v望："
+            android:textColor="@color/defaultTextColor" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/dis_behind_verticalside" />
+
+        <TextView
+            android:id="@+id/user_textview_e_m"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="v币："
+            android:textColor="@color/defaultTextColor" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingTop="8dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape_corner_border"
+            android:orientation="horizontal"
+            android:padding="12dp" >
+
+            <ImageView
+                android:id="@+id/iv_user_info_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/back_user_icon" />
+
+            <TextView
+                android:id="@+id/user_textView_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:text="此人很懒，什么都没留下"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="#f5f5f5"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/user_level_alert"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="@dimen/user_alert_size" />
+    </FrameLayout>
+    
+    <Button
+        android:id="@+id/button_add_user"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/back_submit_style"
+        android:text="@string/add_user" />
+
+</LinearLayout>

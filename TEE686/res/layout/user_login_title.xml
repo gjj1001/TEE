@@ -39,7 +39,7 @@
         android:background="@drawable/back_above_menushow_style"
         android:clickable="true"
         android:gravity="center"
-        android:text="社区"
+        android:text="公告栏"
         android:textColor="#fff" />
 
 </FrameLayout>

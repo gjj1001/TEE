@@ -120,7 +120,8 @@ public class CustomHttpClient {
 				throw new RuntimeException(context.getResources().getString(
 						R.string.httpError));
 			}
-			return EntityUtils.toString(httpResponse.getEntity());
+			String result = EntityUtils.toString(httpResponse.getEntity());
+			return result;
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			throw new RuntimeException(context.getResources().getString(

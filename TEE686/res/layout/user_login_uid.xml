@@ -59,7 +59,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button_user_login"
+                android:id="@+id/button_add_user"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_marginRight="2dp"

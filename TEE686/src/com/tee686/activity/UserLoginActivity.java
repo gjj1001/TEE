@@ -189,7 +189,7 @@ public class UserLoginActivity extends BaseActivity {
 		weiboButton = (ImageButton) findViewById(R.id.weiboLogin);
 		editUserID = (EditText) findViewById(R.id.edittext_user_username);
 		editPwd = (EditText) findViewById(R.id.edittext_user_pwd);
-		btnEnter = (Button) findViewById(R.id.button_user_login);
+		btnEnter = (Button) findViewById(R.id.button_add_user);
 //		btnRegister = (Button) findViewById(R.id.button_user_register);
 		goHome = (LinearLayout) findViewById(R.id.Linear_above_toHome);
 		mCommunity = (Button) findViewById(R.id.btn_community);

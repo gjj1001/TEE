@@ -30,6 +30,8 @@ public class Urls {
 	public static final String USER_PUBLISH = BASIC_URL + "/UserPublishServlet";
 	public static final String USER_UPLOAD_IMAGE = BASIC_URL + "/UserUploadImageServlet";
 	public static final String USER_DOAWLOAD_IMAGE = BASIC_URL + "/UserDownloadImageServlet";
+	public static final String USER_COMMENT = BASIC_URL + "/UserCommentServlet";
+	public static final String USER_COMMENT_DATA = BASIC_URL + "/UserCommentServlet?pubtime=%s";
 
 	/**
 	 * 1 k 2 act 3 model 4 itemid

@@ -136,7 +136,7 @@ public final class DateUtil implements Serializable {
 	 * @return ��ʽΪyyyy-MM-dd HH:mm:ss���ܹ�19λ��
 	 */
 	public static String getCurrentDateTime() {
-		return getFormatDateTime(new Date(), "yyyy-MM-dd HH:mm:ss");
+		return getFormatDateTime(new Date(), "yyyy-MM-dd,HH:mm:ss");
 	}
 
 	/**

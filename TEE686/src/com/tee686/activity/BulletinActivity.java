@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.message.BasicNameValuePair;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -11,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -19,6 +21,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -26,6 +30,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+
+
+
+
 
 
 
@@ -67,7 +76,7 @@ public class BulletinActivity extends BaseActivity {
 		initControl();
 		mCommunity.setVisibility(View.GONE);	
 		initSharePreferences();	
-		new CheckCacheTask().execute();
+		new CheckCacheTask().execute();		
 		new DataAsyncTask().execute(Urls.USER_DOAWLOAD_IMAGE);
 
 				/*new SimpleAdapter(this, mlist, R.layout.bulletin_board, new String[] {"userhead", 
@@ -113,6 +122,51 @@ public class BulletinActivity extends BaseActivity {
 		
 	}
 	
+	/*@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if(mPubContents.isEmpty()) {
+			new DataAsyncTask().execute(Urls.USER_DOAWLOAD_IMAGE);
+		} else {
+			mAdapter = new MyAdapter(mPubContents);
+			lv.setAdapter(mAdapter);
+			lv.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					// TODO Auto-generated method stub
+					PubContent pubContent = (PubContent) mAdapter.getItem(position);
+					IntentUtil.startActivity(BulletinActivity.this, BulletinDetailActivity.class,
+							new BasicNameValuePair("sendtime", pubContent.getSendtime()),
+							new BasicNameValuePair("userhead", pubContent.getHeadimage()),
+							new BasicNameValuePair("imagefile", pubContent.getImageFile()),
+							new BasicNameValuePair("username", pubContent.getUsername()),
+							new BasicNameValuePair("content", pubContent.getContent()),
+							new BasicNameValuePair("position", String.valueOf(position)));					
+				}
+			});
+		}
+		
+		
+	}*/
+
+	/*@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(resultCode==RESULT_OK) {
+			switch (requestCode) {
+			case 1:
+				lv.setSelection(Integer.valueOf(data.getStringExtra("pos")));
+				break;
+
+			default:
+				break;
+			}
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}*/
+
 	private void initSharePreferences() {
 		// TODO Auto-generated method stub
 		share = getSharedPreferences(UserLoginActivity.SharedName, Context.MODE_PRIVATE);
@@ -211,9 +265,25 @@ public class BulletinActivity extends BaseActivity {
 			super.onPostExecute(result);
 			mAlertDialog.dismiss();
 			if(!result.isEmpty()) {
-				mAdapter = new MyAdapter();
-				mAdapter.appendToList(result);
+				mAdapter = new MyAdapter(result);
+//				mAdapter.appendToList(result);		
 				lv.setAdapter(mAdapter);
+				lv.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						// TODO Auto-generated method stub
+						PubContent pubContent = (PubContent) mAdapter.getItem(position);
+						IntentUtil.startActivity(BulletinActivity.this, BulletinDetailActivity.class,
+								new BasicNameValuePair("sendtime", pubContent.getSendtime()),
+								new BasicNameValuePair("userhead", pubContent.getHeadimage()),
+								new BasicNameValuePair("imagefile", pubContent.getImageFile()),
+								new BasicNameValuePair("username", pubContent.getUsername()),
+								new BasicNameValuePair("content", pubContent.getContent()),
+								new BasicNameValuePair("position", String.valueOf(position)));
+					}
+				});
 				listContent.setVisibility(View.VISIBLE);
 				loadFailed.setVisibility(View.GONE);
 //				result.clear();
@@ -263,13 +333,16 @@ public class BulletinActivity extends BaseActivity {
 		
 		public MyAdapter() {}		
 		
-		public void appendToList(List<PubContent> lists) {
+		public MyAdapter(List<PubContent> pubContents) {
+			this.pubContents = pubContents;
+		}
+		/*public void appendToList(List<PubContent> lists) {
 			if (lists == null) {
 				return;
 			}
 			pubContents.addAll(lists);
 			notifyDataSetChanged();
-		}
+		}*/
 		
 		@Override
 		public int getCount() {

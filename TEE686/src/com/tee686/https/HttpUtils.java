@@ -1,6 +1,14 @@
 package com.tee686.https;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.apache.http.NameValuePair;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import android.content.Context;
 import android.util.Log;
@@ -29,6 +37,52 @@ public class HttpUtils {
 		return CustomHttpClient.getFromWebByHttpClient(context,strUrl, nameValuePairs);
 	}
 
+	/**把实例对象转换成json数据格式传输
+	 * @param strUrl 请求地址
+	 * @param entity 实例对象
+	 * @return 请求结果
+	 */
+	public static String postByHttpURLConnection(String strUrl, Object entity) {
+		//json格式数据网络传输		
+		StringBuffer result = new StringBuffer();		
+		HttpURLConnection conn;
+		try {
+			byte[] data = new ObjectMapper().writeValueAsBytes(entity);
+			URL url = new URL(strUrl);
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setDoOutput(true);
+			conn.setUseCaches(false);
+			conn.setDoInput(true);
+			conn.setRequestMethod("POST");
+			conn.setReadTimeout(5000);
+			conn.setRequestProperty("Content-Type",	"text/plain; charset=UTF-8");
+			conn.setRequestProperty("Content-Length", String.valueOf(data.length));
+			OutputStream out = conn.getOutputStream();
+			out.write(data);
+			out.flush();
+			out.close();
+			if (conn.getResponseCode() == 200) {
+				byte[] connbuffer = new byte[1024];
+				InputStream in = conn.getInputStream();
+				while (in.read(connbuffer) != -1) {
+					result.append(new String(connbuffer, "utf-8"));
+				}
+				String info = result.toString();
+				in.close();
+				conn.disconnect();
+				return info;
+			}
+
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "网络问题，请稍后再试";
+	}
+	
 	// ------------------------------------------------------------------------------------------
 	// 网络连接判断
 	// 判断是否有网络
