@@ -11,8 +11,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -23,6 +24,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -30,16 +32,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
-
-
-
-
-
-
-
 import com.tee686.activity.UserCenterActivity;
 import com.tee686.config.Urls;
+import com.tee686.entity.Collection;
 import com.tee686.entity.PubContent;
 import com.tee686.https.HttpUtils;
 import com.tee686.utils.ImageUtil;
@@ -100,16 +95,20 @@ public class BulletinActivity extends BaseActivity {
 				}
 			}
 		});
+		if(share.contains(UserLoginActivity.UID)) {
+			newBulletin.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					IntentUtil.start_activity(BulletinActivity.this,
+							EditActivity.class);
+				}
+			});
+		} else {
+			showShortToast("请先登录");
+		}
 		
-		newBulletin.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				IntentUtil.start_activity(BulletinActivity.this,
-						EditActivity.class);
-			}
-		});
 		
 		refresh.setOnClickListener(new OnClickListener() {
 			
@@ -284,6 +283,43 @@ public class BulletinActivity extends BaseActivity {
 								new BasicNameValuePair("position", String.valueOf(position)));
 					}
 				});
+				lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+					@Override
+					public boolean onItemLongClick(AdapterView<?> parent,
+							View view, int position, long id) {
+						final PubContent pubContent = (PubContent) mAdapter.getItem(position);
+						final AlertDialog.Builder builder = new AlertDialog.Builder(BulletinActivity.this);
+				        final AlertDialog ad = builder.create();
+				        ad.show();        
+				        builder.setMessage("是否要收藏此条公告?").setPositiveButton("是", new DialogInterface.OnClickListener() {
+				            @Override
+				            public void onClick(DialogInterface dialogInterface, int i) {
+				         	   ad.dismiss();				         	  
+				         	   if(share.contains(UserLoginActivity.UID)) {
+				         		   Collection collection = new Collection();
+				         		   collection.setContent(pubContent.getContent());
+				         		   collection.setHeadimage(pubContent.getHeadimage());
+				         		   collection.setImageFile(pubContent.getImageFile());
+				         		   collection.setSendtime(pubContent.getSendtime());
+				         		   collection.setUsername(pubContent.getUsername());
+				         		   collection.setUname(share.getString(UserLoginActivity.UID, ""));
+				         		   new CollectionTask().execute(collection);
+				         	   } else {
+				         		   showShortToast("请先登录后再收藏");
+				         	   }
+				            }
+				        }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+				            @Override
+				            public void onClick(DialogInterface dialogInterface, int i) {
+				                ad.dismiss();
+				            }
+				        });
+				        //dialog.setCancelable(true);
+				        builder.show();
+				        return true;
+					}
+				});
 				listContent.setVisibility(View.VISIBLE);
 				loadFailed.setVisibility(View.GONE);
 //				result.clear();
@@ -303,6 +339,27 @@ public class BulletinActivity extends BaseActivity {
 		protected Void doInBackground(Void... params) {
 			ImageUtil.checkCache(BulletinActivity.this);
 			return null;
+		}
+		
+	}
+	
+	class CollectionTask extends AsyncTask<Collection, Void, String> {
+
+		@Override
+		protected String doInBackground(Collection... params) {
+			String result = HttpUtils.postByHttpURLConnection(Urls.USER_COLLECTION, params[0]);
+			return result;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result!=null) {
+				showShortToast(result);
+			} else {
+				showShortToast("网络问题，请稍后再试");
+			}
 		}
 		
 	}

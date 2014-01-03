@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.casit.tee686.R;
 import com.tee686.config.Urls;
 import com.tee686.entity.UserInfoItem;
@@ -30,6 +31,7 @@ import com.tee686.indicator.PageIndicator;
 import com.tee686.ui.base.BaseFragmentActivity;
 import com.tee686.utils.IntentUtil;
 import com.tee686.view.UserCollectFragment;
+import com.tee686.view.UserCollectionFragment;
 import com.tee686.view.UserIntroFragment;
 import com.tee686.view.UserLogOutFragment;
 
@@ -239,13 +241,15 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 			}
 			
 			mTabsAdapter.addTab(getString(R.string.user_center_my_Collect),
-					new UserCollectFragment(UserCenterActivity.this));			 
+					new UserCollectFragment(UserCenterActivity.this));		
+			mTabsAdapter.addTab(getString(R.string.user_center_collection),
+					new UserCollectionFragment(UserCenterActivity.this));
 			mTabsAdapter.addTab(getString(R.string.user_center_my_Intro),
 					new UserIntroFragment(result));
 			mTabsAdapter.addTab(getString(R.string.user_center_exit),
 					new UserLogOutFragment(UserCenterActivity.this, false));
 			mTabsAdapter.notifyDataSetChanged();
-			mViewPager.setCurrentItem(1);
+			mViewPager.setCurrentItem(2);
 		}
 	}
 
@@ -272,7 +276,11 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 			case 0: 
 				ImgLeft.setVisibility(8);				
 				break;
-			case 2:
+			case 1:
+				ImgRight.setVisibility(0);	
+				ImgLeft.setVisibility(0);
+				break;
+			case 3:
 				ImgRight.setVisibility(8);				
 				break;
 			default:

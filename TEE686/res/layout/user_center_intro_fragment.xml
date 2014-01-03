@@ -84,10 +84,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/shape_corner_border"
         android:orientation="horizontal" >
 
+         <TextView
+            android:id="@+id/user_textview_e_m"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="v币："
+            android:textColor="@color/defaultTextColor" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/dis_behind_verticalside" />
+
+       
         <TextView
             android:id="@+id/user_textview_e_p"
             android:layout_width="0dp"
@@ -98,30 +115,14 @@
             android:gravity="center"
             android:text="v望："
             android:textColor="@color/defaultTextColor" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/dis_behind_verticalside" />
-
-        <TextView
-            android:id="@+id/user_textview_e_m"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_marginTop="6dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="v币："
-            android:textColor="@color/defaultTextColor" />
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:paddingBottom="10dp"
-        android:paddingTop="8dp" >
+        android:paddingTop="5dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -130,20 +131,23 @@
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/shape_corner_border"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:padding="12dp" >
 
-            <com.tee686.widget.CustomGridView
-                android:id="@+id/user_gridview_medal"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:horizontalSpacing="10dp"
-                android:numColumns="4"
-                android:scrollbars="none"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="10dp" />
+            <ImageView
+                android:id="@+id/iv_user_info_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/back_user_icon" />
+
+            <TextView
+                android:id="@+id/user_textView_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:text="此人很懒，什么都没留下"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
 
         <TextView

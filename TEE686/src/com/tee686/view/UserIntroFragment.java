@@ -1,51 +1,43 @@
 package com.tee686.view;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.message.BasicNameValuePair;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.casit.tee686.R;
+import com.tee686.activity.UserInfoActivity;
 import com.tee686.activity.UserLoginActivity;
+import com.tee686.activity.UserPubContentsActivity;
+import com.tee686.config.Urls;
+import com.tee686.entity.PubContent;
 import com.tee686.entity.UserInfoItem;
+import com.tee686.https.HttpUtils;
 import com.tee686.utils.ImageUtil;
+import com.tee686.utils.IntentUtil;
 import com.tee686.utils.ImageUtil.ImageCallback;
 import com.tee686.utils.UserHeadUtil;
 
@@ -53,15 +45,18 @@ import com.tee686.utils.UserHeadUtil;
 public class UserIntroFragment extends Fragment {
 	UserInfoItem mUserInfoItem;
 	private ImageView img;
+	private ImageView info_img;
 	private TextView txtName;
 	private TextView txtRegTime;
 	private TextView txtEP;
 	private TextView txtEM;
+	private TextView content;
 	private GridView gvGrid;
 	SimpleAdapter mAdapter;
 	private List<Map<String, Object>> mList;
 	private Context mContext;
 	private byte[] data;
+	private PubContent pubContent;
 //	private String[] items = new String[] { "选择本地图片", "拍照" };
 	SharedPreferences share;
 	LayoutInflater inflater;
@@ -88,6 +83,8 @@ public class UserIntroFragment extends Fragment {
 		initControl(v);
 //		initGridView();
 		setControl();
+		String urlString = String.format(Urls.USER_RECENTLY_PUBLISH, mUserInfoItem.getUsername());
+		new PubAsyncTask().execute(urlString);
 		return v;
 	}
 
@@ -116,7 +113,8 @@ public class UserIntroFragment extends Fragment {
 		txtRegTime = (TextView) v.findViewById(R.id.user_textview_reg_time);
 		txtEP = (TextView) v.findViewById(R.id.user_textview_e_p);
 		txtEM = (TextView) v.findViewById(R.id.user_textview_e_m);
-		gvGrid = (GridView) v.findViewById(R.id.user_gridview_medal);
+		content = (TextView) v.findViewById(R.id.user_textView_add);
+		info_img = (ImageView) v.findViewById(R.id.iv_user_info_img);
 		share = getActivity().getSharedPreferences(UserLoginActivity.SharedName, 0);
 	}
 
@@ -302,5 +300,68 @@ public class UserIntroFragment extends Fragment {
 			img.setBackgroundDrawable(drawable);
 		}
 	}*/
+	class PubAsyncTask extends AsyncTask<String, Void, PubContent> {
+
+		private String result;
+		@Override
+		protected PubContent doInBackground(String... params) {
+			try {
+				result = HttpUtils.getByHttpClient(getActivity(), params[0]);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				pubContent = new ObjectMapper().readValue(result, PubContent.class);
+			} catch (JsonParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return pubContent;
+		}
+		
+		@Override
+		protected void onPostExecute(PubContent result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result!=null) {
+				content.setText(result.getContent());
+				if(result.getImageFile()!=null) {
+					ImageUtil.setThumbnailView(result.getImageFile(), UserIntroFragment.this.info_img,
+							getActivity(), callback, true);
+				}
+				content.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						IntentUtil.start_activity(
+								getActivity(), UserPubContentsActivity.class,
+								new BasicNameValuePair("uname", pubContent.getUsername()));
+					}
+				});
+			}
+		}
+		
+	}
 	
+	ImageCallback callback = new ImageCallback() {
+
+		@Override
+		public void loadImage(Bitmap bitmap, String imagePath) {
+			// TODO Auto-generated method stub
+			try {
+				ImageView img = (ImageView) info_img.findViewWithTag(imagePath);
+				img.setImageBitmap(bitmap);
+			} catch (NullPointerException ex) {
+				Log.e("error", "ImageView = null");
+			}
+		}
+	};
 }

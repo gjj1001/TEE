@@ -100,7 +100,11 @@ public class BulletinDetailActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(!editText.getText().toString().equals("")) {
+				if(!share.contains(UserLoginActivity.UID)) {
+					showShortToast("请先登录后再评论");					
+				} else if(editText.getText().toString().equals("")) {
+					showShortToast("请输入评论内容");
+				} else {
 					new CommentAsyncTask().execute(Urls.USER_COMMENT);
 				}
 			}
@@ -250,7 +254,7 @@ public class BulletinDetailActivity extends BaseActivity {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			Comment comment = comList.get(position);
+			final Comment comment = comList.get(position);
 			ViewHolder viewHolder;
 			convertView = null;
 			convertView = getLayoutInflater().inflate(R.layout.bulletin_detail_adapter, null);
@@ -280,7 +284,16 @@ public class BulletinDetailActivity extends BaseActivity {
 				}
 				
 			}		
-			
+			viewHolder.ivHeadimage.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					IntentUtil.start_activity(BulletinDetailActivity.this, UserInfoActivity.class,
+							new BasicNameValuePair("userhead", comment.getHeadimage()), 
+							new BasicNameValuePair("username", comment.getUsername()));
+				}
+			});
 			
 			return convertView;
 		}
@@ -390,7 +403,7 @@ public class BulletinDetailActivity extends BaseActivity {
 				adapter = new DetailAdapter(result);
 				bdListView.setAdapter(adapter);
 				bdListView.setSelection(result.size()-1);
-//				mAdapter.appendToList(result);				
+//				mAdapter.appendToList(result);	
 				bdListView.setOnItemClickListener(new OnItemClickListener() {
 
 					@Override
@@ -413,8 +426,8 @@ public class BulletinDetailActivity extends BaseActivity {
 
 		@Override
 		protected String doInBackground(String... params) {
-			Comment value = new Comment(headimage, editText.getText().toString(),
-					uname, pubtime, DateUtil.getCurrentDateTime());
+			Comment value = new Comment(share.getString(UserLoginActivity.PIC, ""), editText.getText().toString(),
+					share.getString(UserLoginActivity.UID, ""), pubtime, DateUtil.getCurrentDateTime());
 			return HttpUtils.postByHttpURLConnection(params[0], value);	
 		}
 

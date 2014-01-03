@@ -32,6 +32,8 @@ public class Urls {
 	public static final String USER_DOAWLOAD_IMAGE = BASIC_URL + "/UserDownloadImageServlet";
 	public static final String USER_COMMENT = BASIC_URL + "/UserCommentServlet";
 	public static final String USER_COMMENT_DATA = BASIC_URL + "/UserCommentServlet?pubtime=%s";
+	public static final String USER_RECENTLY_PUBLISH = BASIC_URL + "/UserRecentlyPubServlet?uname=%s";
+	public static final String USER_COLLECTION = BASIC_URL + "/UserCollectionServlet";
 
 	/**
 	 * 1 k 2 act 3 model 4 itemid
