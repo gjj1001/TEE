@@ -26,6 +26,9 @@
     <string name="user_center_collection">个人收藏</string>
     <string name="user_center_e_coin">v币:%s</string>
     <string name="user_center_e_reputation">v望:%s</string>
+    <string name="user_center_student">学员</string>
+    <string name="user_center_assistant">助教</string>
+    <string name="user_center_lecturer">讲师</string>
     <string name="send_message">发送消息</string>
 
     <!-- 登录 -->

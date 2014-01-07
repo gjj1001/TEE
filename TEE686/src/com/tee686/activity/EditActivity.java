@@ -22,6 +22,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.map.ObjectMapper;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -51,6 +52,7 @@ import com.alipay.android.appDemo4.Base64;
 import com.casit.tee686.R;
 import com.tee686.config.Urls;
 import com.tee686.entity.PubContent;
+import com.tee686.https.HttpUtils;
 import com.tee686.ui.base.BaseActivity;
 import com.tee686.utils.DateUtil;
 
@@ -518,7 +520,9 @@ private String info = "上传失败";//服务器返回的信息
 			super.onPostExecute(result);
 			mAlertDialog.dismiss();
 			if (result) {
-				showLongToast(info);				
+				showLongToast(info);	
+				String url = String.format(Urls.USER_LEVEL, shared.getString(UserLoginActivity.UID, ""), 5);
+				new UpdateTmAsyncTask().execute(url);
 				Intent intent = new Intent(EditActivity.this, BulletinActivity.class);
 				startActivity(intent);
 				overridePendingTransition(R.anim.umeng_fb_slide_in_from_left, 
@@ -528,6 +532,33 @@ private String info = "上传失败";//服务器返回的信息
 			}
 		}		
 		
+	}
+	
+	public class UpdateTmAsyncTask extends AsyncTask<String, Void, String> {
+
+		String result;
+		@Override
+		protected String doInBackground(String... params) {
+			try {
+				result = HttpUtils.getByHttpClient(EditActivity.this,
+						params[0]);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			return result;
+
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if (result != null) {
+				showShortToast(result);
+			}
+		}
 	}
 
 	/**图片上传服务器

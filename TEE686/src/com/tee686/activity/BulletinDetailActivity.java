@@ -42,6 +42,7 @@ import com.tee686.utils.DateUtil;
 import com.tee686.utils.ImageUtil;
 import com.tee686.utils.ImageUtil.ImageCallback;
 import com.tee686.utils.IntentUtil;
+import com.tee686.utils.PopupWindowUtils;
 
 public class BulletinDetailActivity extends BaseActivity {
 
@@ -404,15 +405,36 @@ public class BulletinDetailActivity extends BaseActivity {
 				bdListView.setAdapter(adapter);
 				bdListView.setSelection(result.size()-1);
 //				mAdapter.appendToList(result);	
-				bdListView.setOnItemClickListener(new OnItemClickListener() {
+				if(share.getInt(UserLoginActivity.LEVEL, 0)>=100) {
+					bdListView.setOnItemClickListener(new OnItemClickListener() {
 
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						// TODO Auto-generated method stub
-						
-					}
-				});
+						@Override
+						public void onItemClick(AdapterView<?> parent, View view,
+								int position, long id) {
+							Comment comment = (Comment) adapter.getItem(position);
+							List<String> tabs = new ArrayList<String>();
+							tabs.add("回复");
+							tabs.add("删除");
+							PopupWindowUtils<String> util = new PopupWindowUtils<String>(BulletinDetailActivity.this, 
+									 comment, share, adapter, adapter.comList, editText);
+							util.showActionWindow(view, tabs);
+						}
+					});
+				} else {
+					bdListView.setOnItemClickListener(new OnItemClickListener() {
+
+						@Override
+						public void onItemClick(AdapterView<?> parent, View view,
+								int position, long id) {
+							Comment comment = (Comment) adapter.getItem(position);
+							List<String> tabs = new ArrayList<String>();
+							tabs.add("回复");
+							PopupWindowUtils<String> util = new PopupWindowUtils<String>(BulletinDetailActivity.this, 
+									 comment, share, adapter, adapter.comList, editText);
+							util.showActionWindow(view, tabs);
+						}
+					});
+				}
 				
 			} else {
 				showShortToast("没有评论");				
@@ -435,10 +457,17 @@ public class BulletinDetailActivity extends BaseActivity {
 		protected void onPostExecute(String result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			showShortToast(result);
-			editText.setText("");
-//			adapter.notifyDataSetChanged();
-			new DataAsyncTask().execute(userComment);
+			if(result!=null) {
+				showShortToast(result);
+				editText.setText("");
+//				adapter.notifyDataSetChanged();
+				new DataAsyncTask().execute(userComment);
+				String url = String.format(Urls.USER_LEVEL, share.getString(UserLoginActivity.UID, ""), 1);
+				new UpdateTmAsyncTask().execute(url);
+			} else {
+				showShortToast("网络连接失败，请稍后再试");
+			}
+			
 		}
 		
 	}
@@ -452,5 +481,28 @@ public class BulletinDetailActivity extends BaseActivity {
 		return super.onKeyDown(keyCode, event);
 	}
 	
-	
+	public class UpdateTmAsyncTask extends AsyncTask<String, Void, String> {	
+		
+		@Override
+		protected String doInBackground(String... params) {
+			try {
+				result = HttpUtils.getByHttpClient(BulletinDetailActivity.this, params[0]);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			return result;		
+			
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result!=null) {
+				showShortToast(result);
+			}
+		}
+	}
 }

@@ -32,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.tee686.activity.UserCenterActivity;
 import com.tee686.config.Urls;
 import com.tee686.entity.Collection;
@@ -40,14 +41,13 @@ import com.tee686.https.HttpUtils;
 import com.tee686.utils.ImageUtil;
 import com.tee686.utils.ImageUtil.ImageCallback;
 import com.tee686.utils.IntentUtil;
+import com.tee686.utils.PopupWindowUtil;
 import com.tee686.ui.base.BaseActivity;
 import com.casit.tee686.R;
 
 //import android.widget.Button;
 
-public class BulletinActivity extends BaseActivity {
-
-	
+public class BulletinActivity extends BaseActivity {	
 	
 	private ImageButton newBulletin;
 	private Button mCommunity;
@@ -95,19 +95,22 @@ public class BulletinActivity extends BaseActivity {
 				}
 			}
 		});
-		if(share.contains(UserLoginActivity.UID)) {
-			newBulletin.setOnClickListener(new OnClickListener() {
 				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					IntentUtil.start_activity(BulletinActivity.this,
-							EditActivity.class);
+		newBulletin.setOnClickListener(new OnClickListener() {				
+			@Override
+			public void onClick(View v) {
+				if(share.contains(UserLoginActivity.UID)) {	
+					if(share.getInt(UserLoginActivity.LEVEL, 0)>=50) {
+						IntentUtil.start_activity(BulletinActivity.this, EditActivity.class);
+					} else {
+						showShortToast("学员不能发布公告");
+					}
+				}else {
+					showShortToast("请先登录");
 				}
-			});
-		} else {
-			showShortToast("请先登录");
-		}
+			}
+		});			
+		
 		
 		
 		refresh.setOnClickListener(new OnClickListener() {
@@ -283,43 +286,71 @@ public class BulletinActivity extends BaseActivity {
 								new BasicNameValuePair("position", String.valueOf(position)));
 					}
 				});
-				lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+				//权限管理：讲师以上级别才能拥有删除权限
+				if(share.getInt(UserLoginActivity.LEVEL, 0)>=100) {
+					lv.setOnItemLongClickListener(new OnItemLongClickListener() {
 
-					@Override
-					public boolean onItemLongClick(AdapterView<?> parent,
-							View view, int position, long id) {
-						final PubContent pubContent = (PubContent) mAdapter.getItem(position);
-						final AlertDialog.Builder builder = new AlertDialog.Builder(BulletinActivity.this);
-				        final AlertDialog ad = builder.create();
-				        ad.show();        
-				        builder.setMessage("是否要收藏此条公告?").setPositiveButton("是", new DialogInterface.OnClickListener() {
-				            @Override
-				            public void onClick(DialogInterface dialogInterface, int i) {
-				         	   ad.dismiss();				         	  
-				         	   if(share.contains(UserLoginActivity.UID)) {
-				         		   Collection collection = new Collection();
-				         		   collection.setContent(pubContent.getContent());
-				         		   collection.setHeadimage(pubContent.getHeadimage());
-				         		   collection.setImageFile(pubContent.getImageFile());
-				         		   collection.setSendtime(pubContent.getSendtime());
-				         		   collection.setUsername(pubContent.getUsername());
-				         		   collection.setUname(share.getString(UserLoginActivity.UID, ""));
-				         		   new CollectionTask().execute(collection);
-				         	   } else {
-				         		   showShortToast("请先登录后再收藏");
-				         	   }
-				            }
-				        }).setNegativeButton("否", new DialogInterface.OnClickListener() {
-				            @Override
-				            public void onClick(DialogInterface dialogInterface, int i) {
-				                ad.dismiss();
-				            }
-				        });
-				        //dialog.setCancelable(true);
-				        builder.show();
-				        return true;
-					}
-				});
+						@Override
+						public boolean onItemLongClick(AdapterView<?> parent,
+								View view, int position, long id) {
+							PubContent pubContent = (PubContent) mAdapter.getItem(position);
+							List<String> tabs = new ArrayList<String>();
+							tabs.add("收藏");
+							tabs.add("删除");
+							PopupWindowUtil<String> util = new PopupWindowUtil<String>(BulletinActivity.this, 
+									pubContent, share, mAdapter, mAdapter.pubContents);
+							util.showActionWindow(view, tabs);
+							return true;
+						}
+					});
+				} else {
+					lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+						@Override
+						public boolean onItemLongClick(AdapterView<?> parent,
+								View view, int position, long id) {
+							/*final PubContent pubContent = (PubContent) mAdapter.getItem(position);
+							final AlertDialog.Builder builder = new AlertDialog.Builder(BulletinActivity.this);
+					        final AlertDialog ad = builder.create();
+					        ad.show();        
+					        builder.setMessage("是否要收藏此条公告?").setPositiveButton("是", new DialogInterface.OnClickListener() {
+					            @Override
+					            public void onClick(DialogInterface dialogInterface, int i) {
+					         	   ad.dismiss();				         	  
+					         	   if(share.contains(UserLoginActivity.UID)) {
+					         		   Collection collection = new Collection();
+					         		   collection.setContent(pubContent.getContent());
+					         		   collection.setHeadimage(pubContent.getHeadimage());
+					         		   collection.setImageFile(pubContent.getImageFile());
+					         		   collection.setSendtime(pubContent.getSendtime());
+					         		   collection.setUsername(pubContent.getUsername());
+					         		   collection.setUname(share.getString(UserLoginActivity.UID, ""));
+					         		   new CollectionTask().execute(collection);
+					         	   } else {
+					         		   showShortToast("请先登录后再收藏");
+					         	   }
+					            }
+					        }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+					            @Override
+					            public void onClick(DialogInterface dialogInterface, int i) {
+					                ad.dismiss();
+					            }
+					        });
+					        //dialog.setCancelable(true);
+					        builder.show();
+					        return true;*/
+							PubContent pubContent = (PubContent) mAdapter.getItem(position);
+							List<String> tabs = new ArrayList<String>();
+							tabs.add("收藏");
+//							tabs.add("删除");
+							PopupWindowUtil<String> util = new PopupWindowUtil<String>(BulletinActivity.this, 
+									pubContent, share, mAdapter, mAdapter.pubContents);
+							util.showActionWindow(view, tabs);
+							return true;
+						}
+					});
+				}
+				
 				listContent.setVisibility(View.VISIBLE);
 				loadFailed.setVisibility(View.GONE);
 //				result.clear();
@@ -422,7 +453,7 @@ public class BulletinActivity extends BaseActivity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			PubContent pubContent = pubContents.get(position);
-			ViewHolder viewHolder;
+			final ViewHolder viewHolder;
 			convertView = null;
 			convertView = getLayoutInflater().inflate(R.layout.bulletin_board, null);
 			viewHolder = new ViewHolder();
@@ -461,7 +492,14 @@ public class BulletinActivity extends BaseActivity {
 					
 				}
 			}		
-			
+			/*viewHolder.ivImagefile.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					viewHolder.ivImagefile.setImageResource(R.drawable.umeng_update_close_bg_normal);
+				}
+			});*/
 			
 			return convertView;
 		}

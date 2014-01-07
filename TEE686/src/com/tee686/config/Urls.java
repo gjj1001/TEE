@@ -27,8 +27,9 @@ public class Urls {
 	public static final String USER_LOGIN = BASIC_URL + "/UserloginServlet?uname=%s&pwd=%s";
 	public static final String USER_REGISTER = BASIC_URL + "/UserRegisterServlet";
 	public static final String USER_INFO = BASIC_URL + "/UserInfoServlet?uname=%s";
+	public static final String USER_LEVEL = BASIC_URL + "/UserLevelServlet?uname=%s&num=%s";
 	public static final String USER_PUBLISH = BASIC_URL + "/UserPublishServlet";
-	public static final String USER_UPLOAD_IMAGE = BASIC_URL + "/UserUploadImageServlet";
+	public static final String USER_DELETE_PUBLISH = BASIC_URL + "/UserDeletePubServlet?sendtime=%s";
 	public static final String USER_DOAWLOAD_IMAGE = BASIC_URL + "/UserDownloadImageServlet";
 	public static final String USER_COMMENT = BASIC_URL + "/UserCommentServlet";
 	public static final String USER_COMMENT_DATA = BASIC_URL + "/UserCommentServlet?pubtime=%s";

@@ -80,7 +80,7 @@ public class HttpUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "网络问题，请稍后再试";
+		return null;
 	}
 	
 	// ------------------------------------------------------------------------------------------

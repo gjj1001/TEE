@@ -37,11 +37,11 @@ public class UserInfoActivity extends BaseActivity {
 	private TextView txtRegTime;
 	private TextView txtEP;
 	private TextView txtEM;
-//	private TextView title;
 //	private TextView brand;
 	private TextView zone;
 	private TextView content;
 	private TextView title;
+	private TextView level;
 	private Button button;
 	
 	private String headimg;
@@ -90,7 +90,7 @@ public class UserInfoActivity extends BaseActivity {
 		txtRegTime = (TextView) findViewById(R.id.user_textview_reg_time);
 		txtEP = (TextView) findViewById(R.id.user_textview_e_p);
 		txtEM = (TextView) findViewById(R.id.user_textview_e_m);
-//		title = (TextView) findViewById(R.id.user_textview_level);
+		level = (TextView) findViewById(R.id.user_textview_level);
 //		brand = (TextView) findViewById(R.id.user_textview_img);
 		zone = (TextView) findViewById(R.id.user_textview_zone);
 		content = (TextView) findViewById(R.id.user_textView_add);
@@ -172,6 +172,11 @@ public class UserInfoActivity extends BaseActivity {
 				txtEM.setText("v币："+result.getTm());
 				txtEP.setText("v望："+result.getTp());
 				zone.setText("地区: "+result.getProvince()+result.getCity());
+				if(result.getTp()>=100) {
+					level.setText(R.string.user_center_lecturer);
+				} else if(result.getTp()>=50) {
+					level.setText(R.string.user_center_assistant);
+				}
 			}
 		}
 		

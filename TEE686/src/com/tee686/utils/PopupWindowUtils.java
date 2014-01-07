@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -25,29 +26,32 @@ import com.tee686.activity.UserLoginActivity;
 import com.tee686.config.Urls;
 import com.tee686.entity.CategorysEntity;
 import com.tee686.entity.Collection;
+import com.tee686.entity.Comment;
 import com.tee686.entity.PubContent;
 import com.tee686.https.HttpUtils;
 
-public class PopupWindowUtil<T> implements OnClickListener {
+public class PopupWindowUtils<T> implements OnClickListener {
 	Context context;
 	PopupWindow popupWindow;
 	ViewPager mViewpager;
 	Object obj;
 	SharedPreferences share;
 	BaseAdapter adapter;
-	List<PubContent> list;
+	List<Comment> list;
+	EditText editText;
 
-	public PopupWindowUtil(ViewPager viewpager) {
+	public PopupWindowUtils(ViewPager viewpager) {
 		mViewpager = viewpager;
 	}
 	
-	public PopupWindowUtil(Context context, Object obj, SharedPreferences share, 
-			BaseAdapter adapter, List<PubContent> list) {
+	public PopupWindowUtils(Context context, Object obj, SharedPreferences share, 
+			BaseAdapter adapter, List<Comment> list, EditText editText) {
 		this.context = context;
 		this.obj = obj;
 		this.share = share;
 		this.adapter = adapter;
 		this.list = list;
+		this.editText = editText;
 	}
 
 	int width = 0;
@@ -137,22 +141,15 @@ public class PopupWindowUtil<T> implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch(Integer.parseInt(v.getTag().toString())) {
-		case 0://收藏
+		case 0://回复
 			if (share.contains(UserLoginActivity.UID)) {
-				PubContent pubContent = (PubContent) obj;
-				Collection collection = new Collection();
-				collection.setContent(pubContent.getContent());
-				collection.setHeadimage(pubContent.getHeadimage());
-				collection.setImageFile(pubContent.getImageFile());
-				collection.setSendtime(pubContent.getSendtime());
-				collection.setUsername(pubContent.getUsername());
-				collection.setUname(share.getString(UserLoginActivity.UID, ""));
-				new CollectionTask().execute(collection);
+				Comment comment = (Comment) obj;
+				editText.setText("回复"+comment.getUsername()+":");
 				break;
 			}
 		case 1://删除
-			PubContent pubContent = (PubContent) obj;
-			String urlString = String.format(Urls.USER_DELETE_PUBLISH, pubContent.getSendtime());
+			Comment comment = (Comment) obj;
+			String urlString = String.format(Urls.USER_COMMENT+"?comtime=%s", comment.getComtime());
 			new DeleteTask().execute(urlString);
 			break;
 		}

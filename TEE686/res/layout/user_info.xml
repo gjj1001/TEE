@@ -41,10 +41,9 @@
             android:layout_marginBottom="5dp"
             android:layout_toRightOf="@id/user_imageview_icon"
             android:paddingRight="15dp"
-            android:text="实习生"
+            android:text="@string/user_center_student"
             android:textColor="@color/black"
-            android:textSize="@dimen/user_alert_size" 
-            android:visibility="gone"/>
+            android:textSize="@dimen/user_alert_size"/>
 
         <TextView
             android:id="@+id/user_textview_img"

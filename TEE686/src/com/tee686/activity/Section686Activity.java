@@ -133,13 +133,13 @@ public class Section686Activity extends Activity{
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-            	if(isPayed()) {
+            	if(true) {
 	                forEx();
 	                spinner.setSelection(0, true);
-            	} else {
+            	}/* else {
             		payForEx();
             		spinner.setSelection(0, true);
-            	}
+            	}*/
             }
         });
 

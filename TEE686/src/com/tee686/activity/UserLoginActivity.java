@@ -49,6 +49,8 @@ public class UserLoginActivity extends BaseActivity {
 	public static String SEX = "sex";// 性别
 	public static String PIC = "pic";// 头像图片地址
 	public static String PLA = "plat";//第三方登陆平台
+	public static String LEVEL = "level";//v望
+	public static String MONEY = "money";//v币
 	public static String Scope_Basic = "basic";// 用户基本权限，可以获取用户的基本信息
 	 public static String Scope_Netdisk = "netdisk";// 获取用户在个人云存储中存放的数据
 

@@ -1,9 +1,6 @@
 package com.tee686.view;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.http.message.BasicNameValuePair;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -12,6 +9,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -22,14 +20,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.casit.tee686.R;
-import com.tee686.activity.UserInfoActivity;
 import com.tee686.activity.UserLoginActivity;
 import com.tee686.activity.UserPubContentsActivity;
 import com.tee686.config.Urls;
@@ -51,9 +47,8 @@ public class UserIntroFragment extends Fragment {
 	private TextView txtEP;
 	private TextView txtEM;
 	private TextView content;
-	private GridView gvGrid;
+	private TextView level;
 	SimpleAdapter mAdapter;
-	private List<Map<String, Object>> mList;
 	private Context mContext;
 	private byte[] data;
 	private PubContent pubContent;
@@ -114,6 +109,7 @@ public class UserIntroFragment extends Fragment {
 		txtEP = (TextView) v.findViewById(R.id.user_textview_e_p);
 		txtEM = (TextView) v.findViewById(R.id.user_textview_e_m);
 		content = (TextView) v.findViewById(R.id.user_textView_add);
+		level = (TextView) v.findViewById(R.id.user_textview_level);
 		info_img = (ImageView) v.findViewById(R.id.iv_user_info_img);
 		share = getActivity().getSharedPreferences(UserLoginActivity.SharedName, 0);
 	}
@@ -164,8 +160,17 @@ public class UserIntroFragment extends Fragment {
 	private void setControl() {
 		txtName.setText(mUserInfoItem.getUsername());
 		txtRegTime.setText(mUserInfoItem.getRegtime());
-		txtEP.setText(getString(R.string.user_center_e_coin, mUserInfoItem.getTp()));
-		txtEM.setText(getString(R.string.user_center_e_reputation,  mUserInfoItem.getTm()));		
+		txtEP.setText(getString(R.string.user_center_e_reputation, mUserInfoItem.getTp()));
+		txtEM.setText(getString(R.string.user_center_e_coin,  mUserInfoItem.getTm()));
+		if(mUserInfoItem.getTp()>=100) {
+			level.setText(R.string.user_center_lecturer);
+		} else if(mUserInfoItem.getTp()>=50) {
+			level.setText(R.string.user_center_assistant);
+		}
+		Editor editor = share.edit();
+		editor.putInt(UserLoginActivity.LEVEL, mUserInfoItem.getTp());
+		editor.putInt(UserLoginActivity.MONEY, mUserInfoItem.getTm());
+		editor.commit();
 		String imgUrl = share.getString(UserLoginActivity.PIC, "");
 		if(null != imgUrl && !"".equals(imgUrl)) {			
 			new imgAsyncTask().execute(imgUrl);			
