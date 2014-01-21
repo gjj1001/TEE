@@ -22,7 +22,7 @@ public class TestCase extends AndroidTestCase {
 	public void testRegister() {
 		StringBuffer result = new StringBuffer();
 		userInfoItem = new UserInfoItem("13808005693", "新", "321",
-				"FEMALE", "19850405", "", "", format.format(new Date()), "QQ");
+				"FEMALE", "19850405", "", "", format.format(new Date()), "QQ","");
 		try {
 			URL url = new URL(Urls.USER_REGISTER);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();

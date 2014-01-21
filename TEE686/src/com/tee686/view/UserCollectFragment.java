@@ -126,6 +126,20 @@ public class UserCollectFragment extends Fragment implements OnItemClickListener
 			getData();
 			return null;
 		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			mAdapter = new SimpleAdapter(inflater.getContext(), mlist,
+					R.layout.user_collect_list_item, new String[] { "content",
+							"time" }, new int[] {
+							R.id.user_textview_collectContent,
+							R.id.user_textview_collectTitle });
+			mlv.setAdapter(mAdapter);
+			mlv.setOnItemClickListener(UserCollectFragment.this);
+			mlv.setOnItemLongClickListener(UserCollectFragment.this);
+		}
 		
 	}
 	
@@ -161,15 +175,7 @@ public class UserCollectFragment extends Fragment implements OnItemClickListener
 			DBHelper dbHelper = DBHelper.getInstance(getActivity());			
       	    dbHelper.delete(PushCacheColumn.TABLE_NAME, cursor.getInt(5)); 
       	    cursor.requery();
-      	    mlist.remove(params[0].intValue());
-			mAdapter = new SimpleAdapter(inflater.getContext(), mlist,
-					R.layout.user_collect_list_item, new String[] { "content",
-							"time" }, new int[] {
-							R.id.user_textview_collectContent,
-							R.id.user_textview_collectTitle });
-			mlv.setAdapter(mAdapter);
-			mlv.setOnItemClickListener(UserCollectFragment.this);
-			mlv.setOnItemLongClickListener(UserCollectFragment.this);
+      	    mlist.remove(params[0].intValue());			
 			return null;
 		}
 

@@ -18,4 +18,9 @@ public class Constants {
 		public static final String Json="json";
 		public static final String Xml="xml";
 	}
+	
+	public static final class ReceiverAction {
+		public static final String CHECK_NEW_PUB = "com.tee686.checkPub";
+		public static final String CHECK_NEW_FAN = "com.tee686.checkfan";
+	}
 }

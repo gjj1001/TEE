@@ -18,6 +18,8 @@ public class Urls {
 	public static final String BLOGS_LIST = BASIC_URL + "/blog?k=lists";
 	public static final String NEWS_LIST = BASIC_URL + "/news?k=lists";
 	public static final String WIKI_LIST = BASIC_URL + "/wiki?k=lists";
+	
+	public static final String CHECK_NEW_PUBCONTENT = BASIC_URL + "/CheckNewPubContentServlet";
 
 	/**
 	 * searchURL
@@ -35,6 +37,9 @@ public class Urls {
 	public static final String USER_COMMENT_DATA = BASIC_URL + "/UserCommentServlet?pubtime=%s";
 	public static final String USER_RECENTLY_PUBLISH = BASIC_URL + "/UserRecentlyPubServlet?uname=%s";
 	public static final String USER_COLLECTION = BASIC_URL + "/UserCollectionServlet";
+	public static final String USER_REPLY = BASIC_URL + "/UserReplyServlet";
+	public static final String USER_OBSERVER = BASIC_URL + "/UserObserverServlet";
+	public static final String USER_FAN = BASIC_URL + "/UserFanServlet";
 
 	/**
 	 * 1 k 2 act 3 model 4 itemid

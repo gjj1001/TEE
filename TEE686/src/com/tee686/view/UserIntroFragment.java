@@ -1,13 +1,20 @@
 package com.tee686.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.http.message.BasicNameValuePair;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONArray;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
@@ -22,14 +29,20 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.casit.tee686.R;
+import com.readystatesoftware.viewbadger.BadgeView;
+import com.tee686.activity.UserFanActivity;
 import com.tee686.activity.UserLoginActivity;
+import com.tee686.activity.UserObserverActivity;
 import com.tee686.activity.UserPubContentsActivity;
+import com.tee686.config.Constants;
 import com.tee686.config.Urls;
 import com.tee686.entity.PubContent;
+import com.tee686.entity.Observer;
 import com.tee686.entity.UserInfoItem;
 import com.tee686.https.HttpUtils;
 import com.tee686.utils.ImageUtil;
@@ -48,10 +61,17 @@ public class UserIntroFragment extends Fragment {
 	private TextView txtEM;
 	private TextView content;
 	private TextView level;
+	private TextView observers;
+	private TextView fans;
+	private LinearLayout layout;
 	SimpleAdapter mAdapter;
 	private Context mContext;
 	private byte[] data;
 	private PubContent pubContent;
+	private List<Observer> listobservers = new ArrayList<Observer>();
+	private List<Observer> listfans = new ArrayList<Observer>();
+	private BadgeView fanBadgeView;
+//	private BadgeView ObserveBadgeView;
 //	private String[] items = new String[] { "选择本地图片", "拍照" };
 	SharedPreferences share;
 	LayoutInflater inflater;
@@ -76,11 +96,30 @@ public class UserIntroFragment extends Fragment {
 		mContext = inflater.getContext();
 		View v = inflater.inflate(R.layout.user_center_intro_fragment, null);
 		initControl(v);
-//		initGridView();
+//		initGridView();		
 		setControl();
-		String urlString = String.format(Urls.USER_RECENTLY_PUBLISH, mUserInfoItem.getUsername());
-		new PubAsyncTask().execute(urlString);
+		String url2 = String.format(Urls.USER_RECENTLY_PUBLISH, mUserInfoItem.getUsername());
+		new PubAsyncTask().execute(url2);
 		return v;
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if(!listobservers.isEmpty()) {
+			listobservers.clear();
+		}
+		if(!listfans.isEmpty()) {
+			listfans.clear();
+		}
+		String url1 = String.format(Urls.USER_OBSERVER+"?uname=%s", mUserInfoItem.getUsername());
+		new CheckObserverTask().execute(url1);
+		String url3 = String.format(Urls.USER_OBSERVER+"?username=%s", mUserInfoItem.getUsername());
+		new CheckFanTask().execute(url3);
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Constants.ReceiverAction.CHECK_NEW_FAN);
+		getActivity().registerReceiver(checkNewReceiver, filter);
 	}
 
 	@Override
@@ -110,8 +149,13 @@ public class UserIntroFragment extends Fragment {
 		txtEM = (TextView) v.findViewById(R.id.user_textview_e_m);
 		content = (TextView) v.findViewById(R.id.user_textView_add);
 		level = (TextView) v.findViewById(R.id.user_textview_level);
+		observers = (TextView) v.findViewById(R.id.user_textview_observers);
+		fans = (TextView) v.findViewById(R.id.user_textview_fans);
 		info_img = (ImageView) v.findViewById(R.id.iv_user_info_img);
 		share = getActivity().getSharedPreferences(UserLoginActivity.SharedName, 0);
+		layout = (LinearLayout) v.findViewById(R.id.ll_badgeview);
+		fanBadgeView = new BadgeView(getActivity(), layout);
+//		ObserveBadgeView = new BadgeView(getActivity(), observers);
 	}
 
 	/*private void initGridView() {
@@ -170,6 +214,7 @@ public class UserIntroFragment extends Fragment {
 		Editor editor = share.edit();
 		editor.putInt(UserLoginActivity.LEVEL, mUserInfoItem.getTp());
 		editor.putInt(UserLoginActivity.MONEY, mUserInfoItem.getTm());
+		editor.putString(UserLoginActivity.PIC, mUserInfoItem.getHeadimgurl());
 		editor.commit();
 		String imgUrl = share.getString(UserLoginActivity.PIC, "");
 		if(null != imgUrl && !"".equals(imgUrl)) {			
@@ -367,6 +412,102 @@ public class UserIntroFragment extends Fragment {
 			} catch (NullPointerException ex) {
 				Log.e("error", "ImageView = null");
 			}
+		}
+	};
+	
+	class CheckObserverTask extends AsyncTask<String, Void, Integer> {
+
+		private String result;
+		@Override
+		protected Integer doInBackground(String... params) {
+			try {
+				result = HttpUtils.getByHttpClient(getActivity(), params[0]);
+				StringBuilder sb = new StringBuilder(result);
+				result = sb.deleteCharAt(result.lastIndexOf(",")).toString();
+//				share.edit().putString("pubContents", result).commit();		
+				JSONArray jsonArray = new JSONArray(result);
+				for(int i=0; i<jsonArray.length(); i++) {
+					String json = jsonArray.getString(i);
+					Observer observer = new ObjectMapper().readValue(json, Observer.class);
+					listobservers.add(observer);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return listobservers.size();
+		}
+		@Override
+		protected void onPostExecute(Integer result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result!=null) {
+				observers.setText("关注："+result);
+				observers.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						IntentUtil.start_activity(
+								getActivity(), UserObserverActivity.class,
+								new BasicNameValuePair("uname", mUserInfoItem.getUsername()));
+					}
+				});
+				
+			}
+		}		
+	}
+	
+	class CheckFanTask extends AsyncTask<String, Void, Integer> {
+
+		private String result;
+		@Override
+		protected Integer doInBackground(String... params) {
+			try {
+				result = HttpUtils.getByHttpClient(getActivity(), params[0]);
+				StringBuilder sb = new StringBuilder(result);
+				result = sb.deleteCharAt(result.lastIndexOf(",")).toString();
+//				share.edit().putString("pubContents", result).commit();		
+				JSONArray jsonArray = new JSONArray(result);
+				for(int i=0; i<jsonArray.length(); i++) {
+					String json = jsonArray.getString(i);
+					Observer observer = new ObjectMapper().readValue(json, Observer.class);
+					listfans.add(observer);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return listfans.size();
+		}
+		@Override
+		protected void onPostExecute(Integer result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result!=null) {
+				fans.setText("粉丝："+result);
+				fans.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						fanBadgeView.hide(true);
+						IntentUtil.start_activity(
+								getActivity(), UserFanActivity.class,
+								new BasicNameValuePair("uname", mUserInfoItem.getUsername()));
+					}
+				});
+				
+			}
+		}		
+	}
+	
+	BroadcastReceiver checkNewReceiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			// badgeView.setBackgroundResource(R.drawable.umeng_xp_point_selected);
+			fanBadgeView.setText(String.valueOf(intent.getIntExtra("num", 0)));
+			fanBadgeView.show(true);
 		}
 	};
 }

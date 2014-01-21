@@ -1,13 +1,17 @@
 package com.tee686.activity;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONArray;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,6 +24,7 @@ import android.widget.TextView;
 
 import com.casit.tee686.R;
 import com.tee686.config.Urls;
+import com.tee686.entity.Observer;
 import com.tee686.entity.PubContent;
 import com.tee686.entity.UserInfoItem;
 import com.tee686.https.HttpUtils;
@@ -42,11 +47,18 @@ public class UserInfoActivity extends BaseActivity {
 	private TextView content;
 	private TextView title;
 	private TextView level;
-	private Button button;
+	private TextView observers;
+	private TextView fans;
+	private Button observ;
+	private Button sendmsg;
 	
-	private String headimg;
+	private String headimage;
 	private String username;
 	private PubContent pubContent;
+	private List<Observer> listobservers = new ArrayList<Observer>();
+	private List<Observer> listfans = new ArrayList<Observer>();
+	private SharedPreferences share;
+	private int total;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,17 +69,30 @@ public class UserInfoActivity extends BaseActivity {
 		title.setText("个人资料");
 		Intent intent = getIntent();
 		getStringExtra(intent);
+		initSharedPreference();			
+		String url2 = String.format(Urls.USER_OBSERVER+"?uname=%s&username=%s&check=%s", 
+				share.getString(UserLoginActivity.UID, ""),username,true);
+		new CheckObserverTask().execute(url2);
 		String urlString = String.format(Urls.USER_INFO, username);
 		new DataAsyncTask().execute(urlString);
 		String urlString2 = String.format(Urls.USER_RECENTLY_PUBLISH, username);
 		new PubAsyncTask().execute(urlString2);
 		
-		button.setOnClickListener(new OnClickListener() {
+		observ.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
+				if(share.contains(UserLoginActivity.KEY)) {
+					if(!observ.getText().toString().equals("已关注")) {
+						String urlString = String.format(Urls.USER_OBSERVER+
+								"?uname=%s&username=%s&headimage=%s&headimg=%s&add=%s",
+								share.getString(UserLoginActivity.UID, ""), username, headimage,
+								share.getString(UserLoginActivity.PIC, ""), "true");
+						new AddObserverTask().execute(urlString);
+					} 
+				} else {
+					showShortToast("登陆后可关注");
+				}
 			}
 		});
 		
@@ -82,6 +107,30 @@ public class UserInfoActivity extends BaseActivity {
 		
 	}
 	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if(!listobservers.isEmpty()) {
+			listobservers.clear();
+		}
+		if(!listfans.isEmpty()) {
+			listfans.clear();
+		}
+		String url1 = String.format(Urls.USER_OBSERVER+"?uname=%s", username);	
+		new CheckObserverNumTask().execute(url1);
+		String url3 = String.format(Urls.USER_OBSERVER+"?username=%s", username);	
+		new CheckFanTask().execute(url3);
+	}
+
+	private void initSharedPreference() {
+		share = getSharedPreferences(UserLoginActivity.SharedName, MODE_PRIVATE);
+		if(share.getString(UserLoginActivity.UID, "").equals(username)) {
+			observ.setVisibility(View.GONE);
+			sendmsg.setVisibility(View.GONE);
+		}
+	}
+
 	private void initControl() {
 		// TODO Auto-generated method stub
 		userHead = (ImageView) findViewById(R.id.user_imageview_icon);
@@ -94,18 +143,21 @@ public class UserInfoActivity extends BaseActivity {
 //		brand = (TextView) findViewById(R.id.user_textview_img);
 		zone = (TextView) findViewById(R.id.user_textview_zone);
 		content = (TextView) findViewById(R.id.user_textView_add);
-		button = (Button) findViewById(R.id.button_add_user);
+		observers = (TextView) findViewById(R.id.user_textview_observers);
+		fans = (TextView) findViewById(R.id.user_textview_fans);
+		observ = (Button) findViewById(R.id.button_add_user);
+		sendmsg = (Button) findViewById(R.id.button_send_message);
 		gohome = (ImageView) findViewById(R.id.details_imageview_gohome);
 		title = (TextView) findViewById(R.id.details_textview_title);
 	}
 
 	private void getStringExtra(Intent intent) {
-		headimg = intent.getStringExtra("userhead");
+		headimage = intent.getStringExtra("userhead");
 		username = intent.getStringExtra("username");
 		
 		txtName.setText(username);
-		if(!headimg.equals("")) {
-			ImageUtil.setThumbnailView(headimg, this.userHead, this, callback2, true);
+		if(!headimage.equals("")) {
+			ImageUtil.setThumbnailView(headimage, this.userHead, this, callback2, true);
 		}		
 	}
 	
@@ -230,7 +282,166 @@ public class UserInfoActivity extends BaseActivity {
 				});
 				
 			}
+		}		
+	}
+	
+	/**
+	 * @author Jason
+	 *查询关注者数量
+	 */
+	class CheckObserverNumTask extends AsyncTask<String, Void, Integer> {
+
+		private String result;
+		@Override
+		protected Integer doInBackground(String... params) {
+			try {
+				result = HttpUtils.getByHttpClient(UserInfoActivity.this, params[0]);
+				StringBuilder sb = new StringBuilder(result);
+				result = sb.deleteCharAt(result.lastIndexOf(",")).toString();
+//				share.edit().putString("pubContents", result).commit();		
+				JSONArray jsonArray = new JSONArray(result);
+				for(int i=0; i<jsonArray.length(); i++) {
+					String json = jsonArray.getString(i);
+					Observer observer = new ObjectMapper().readValue(json, Observer.class);
+					listobservers.add(observer);
+				}
+			} catch (JsonParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return listobservers.size();
 		}
-		
+		@Override
+		protected void onPostExecute(Integer result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result!=null) {
+				observers.setText("关注："+result);
+				observers.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						IntentUtil.start_activity(
+								UserInfoActivity.this, UserObserverActivity.class,
+								new BasicNameValuePair("uname", username));
+					}
+				});
+				
+			}
+		}		
+	}
+	
+	class AddObserverTask extends AsyncTask<String, Void, String> {
+
+		private String result;
+		@Override
+		protected String doInBackground(String... params) {
+			try {
+				result = HttpUtils.getByHttpClient(UserInfoActivity.this, params[0]);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return result;
+		}
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result!=null) {
+				showShortToast(result);
+				observ.setText("已关注");
+				fans.setText("粉丝： "+(total+1));
+			} else {
+				showShortToast("网络问题，请稍后再试");
+			}
+		}		
+	}
+	
+	/**
+	 * @author Jason
+	 *检查是否已关注
+	 */
+	class CheckObserverTask extends AsyncTask<String, Void, Integer> {
+
+		private String result;
+		@Override
+		protected Integer doInBackground(String... params) {
+			try {
+				result = HttpUtils.getByHttpClient(UserInfoActivity.this, params[0]);
+					
+			} catch (JsonParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return Integer.parseInt(result);
+		}
+		@Override
+		protected void onPostExecute(Integer result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result==1) {
+				observ.setText("已关注");				
+			}
+		}		
+	}
+	
+	class CheckFanTask extends AsyncTask<String, Void, Integer> {
+
+		private String result;
+		@Override
+		protected Integer doInBackground(String... params) {
+			try {
+				result = HttpUtils.getByHttpClient(UserInfoActivity.this, params[0]);
+				StringBuilder sb = new StringBuilder(result);
+				result = sb.deleteCharAt(result.lastIndexOf(",")).toString();
+//				share.edit().putString("pubContents", result).commit();		
+				JSONArray jsonArray = new JSONArray(result);
+				for(int i=0; i<jsonArray.length(); i++) {
+					String json = jsonArray.getString(i);
+					Observer observer = new ObjectMapper().readValue(json, Observer.class);
+					listfans.add(observer);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			total = listfans.size();
+			return total;
+		}
+		@Override
+		protected void onPostExecute(Integer result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result!=null) {
+				fans.setText("粉丝："+result);
+				fans.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						IntentUtil.start_activity(
+								UserInfoActivity.this, UserFanActivity.class,
+								new BasicNameValuePair("uname", username));
+					}
+				});
+				
+			}
+		}		
 	}
 }

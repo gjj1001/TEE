@@ -187,7 +187,7 @@ public class UserCollectionFragment extends Fragment implements OnItemClickListe
 		protected void onPostExecute(List<Collection> result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			if(!result.isEmpty()) {				
+			if(!result.isEmpty()) {								
 				for(int i=0; i<result.size(); i++) {
 					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("content", result.get(i).getContent());
@@ -224,6 +224,7 @@ public class UserCollectionFragment extends Fragment implements OnItemClickListe
 				e.printStackTrace();
 			}
       	    mlist.remove(params[0].intValue());
+//      	    mAdapter.notifyDataSetChanged();
 			return result;
 		}
 
@@ -232,8 +233,8 @@ public class UserCollectionFragment extends Fragment implements OnItemClickListe
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);			
 			if(result!=null) {
+				mAdapter.notifyDataSetChanged();
 				Toast.makeText(getActivity(), "删除成功", Toast.LENGTH_SHORT).show();
-				mAdapter.notifyDataSetChanged();			
 			} else {
 				Toast.makeText(getActivity(), "网络问题，请稍后再试", Toast.LENGTH_SHORT).show();
 			}

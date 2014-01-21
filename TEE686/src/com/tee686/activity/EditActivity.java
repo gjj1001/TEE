@@ -86,11 +86,7 @@ private String info = "上传失败";//服务器返回的信息
 		setContentView(R.layout.publish_bulletin);
 		initControl();
 		initSharePreferences();		
-//		mStorage = Frontia.getStorage();
-		if(null != savedInstanceState) {
-			ivPic.setImageBitmap((Bitmap) savedInstanceState.getParcelable("image"));
-			content.setText(savedInstanceState.getString("content"));
-		}
+//		mStorage = Frontia.getStorage();		
 		
 		ivBack.setOnClickListener(new OnClickListener() {
             @Override
@@ -178,6 +174,16 @@ private String info = "上传失败";//服务器返回的信息
 				}
 			}
 		});
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onRestoreInstanceState(savedInstanceState);
+		if(cropBitmap!=null) {
+			ivPic.setImageBitmap((Bitmap) savedInstanceState.getParcelable("image"));
+		}
+		content.setText(savedInstanceState.getString("content"));
 	}
 
 	private void initControl() {
@@ -311,7 +317,9 @@ private String info = "上传失败";//服务器返回的信息
 	protected void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
-		outState.putParcelable("image", cropBitmap);
+		if(cropBitmap!=null) {
+			outState.putParcelable("image", cropBitmap);
+		}
 		outState.putString("content", content.getText().toString());
 	}
 	

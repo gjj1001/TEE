@@ -136,6 +136,7 @@ public class UserLoginActivity extends BaseActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				IntentUtil.start_activity(UserLoginActivity.this, BulletinActivity.class);
+				finish();
 			}
 		});
 
@@ -411,5 +412,15 @@ public class UserLoginActivity extends BaseActivity {
 		});		
 
 	}
+	
+	/*@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if(NetWorkHelper.isNetworkAvailable(this)) {
+			Intent intent = new Intent(this, CheckNewService.class);
+			startService(intent);
+		}		
+	}*/
 
 }

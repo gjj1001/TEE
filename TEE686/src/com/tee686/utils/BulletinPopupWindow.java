@@ -28,7 +28,7 @@ import com.tee686.entity.Collection;
 import com.tee686.entity.PubContent;
 import com.tee686.https.HttpUtils;
 
-public class PopupWindowUtil<T> implements OnClickListener {
+public class BulletinPopupWindow<T> implements OnClickListener {
 	Context context;
 	PopupWindow popupWindow;
 	ViewPager mViewpager;
@@ -37,11 +37,11 @@ public class PopupWindowUtil<T> implements OnClickListener {
 	BaseAdapter adapter;
 	List<PubContent> list;
 
-	public PopupWindowUtil(ViewPager viewpager) {
+	public BulletinPopupWindow(ViewPager viewpager) {
 		mViewpager = viewpager;
 	}
 	
-	public PopupWindowUtil(Context context, Object obj, SharedPreferences share, 
+	public BulletinPopupWindow(Context context, Object obj, SharedPreferences share, 
 			BaseAdapter adapter, List<PubContent> list) {
 		this.context = context;
 		this.obj = obj;
@@ -147,9 +147,11 @@ public class PopupWindowUtil<T> implements OnClickListener {
 				collection.setSendtime(pubContent.getSendtime());
 				collection.setUsername(pubContent.getUsername());
 				collection.setUname(share.getString(UserLoginActivity.UID, ""));
-				new CollectionTask().execute(collection);
-				break;
-			}
+				new CollectionTask().execute(collection);				
+			} else {
+				Toast.makeText(context, "登陆后可收藏", Toast.LENGTH_SHORT).show();
+			}			
+			break;
 		case 1://删除
 			PubContent pubContent = (PubContent) obj;
 			String urlString = String.format(Urls.USER_DELETE_PUBLISH, pubContent.getSendtime());

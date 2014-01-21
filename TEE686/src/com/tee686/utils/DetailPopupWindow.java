@@ -30,7 +30,7 @@ import com.tee686.entity.Comment;
 import com.tee686.entity.PubContent;
 import com.tee686.https.HttpUtils;
 
-public class PopupWindowUtils<T> implements OnClickListener {
+public class DetailPopupWindow<T> implements OnClickListener {
 	Context context;
 	PopupWindow popupWindow;
 	ViewPager mViewpager;
@@ -40,11 +40,11 @@ public class PopupWindowUtils<T> implements OnClickListener {
 	List<Comment> list;
 	EditText editText;
 
-	public PopupWindowUtils(ViewPager viewpager) {
+	public DetailPopupWindow(ViewPager viewpager) {
 		mViewpager = viewpager;
 	}
 	
-	public PopupWindowUtils(Context context, Object obj, SharedPreferences share, 
+	public DetailPopupWindow(Context context, Object obj, SharedPreferences share, 
 			BaseAdapter adapter, List<Comment> list, EditText editText) {
 		this.context = context;
 		this.obj = obj;
@@ -144,9 +144,11 @@ public class PopupWindowUtils<T> implements OnClickListener {
 		case 0://回复
 			if (share.contains(UserLoginActivity.UID)) {
 				Comment comment = (Comment) obj;
-				editText.setText("回复"+comment.getUsername()+":");
-				break;
+				editText.setText("回复"+comment.getUsername()+":");				
+			} else {
+				Toast.makeText(context, "登陆后可回复", Toast.LENGTH_SHORT).show();
 			}
+			break;
 		case 1://删除
 			Comment comment = (Comment) obj;
 			String urlString = String.format(Urls.USER_COMMENT+"?comtime=%s", comment.getComtime());
@@ -157,7 +159,7 @@ public class PopupWindowUtils<T> implements OnClickListener {
 		popupWindow.dismiss();
 	}
 	
-	class CollectionTask extends AsyncTask<Collection, Void, String> {
+	/*class CollectionTask extends AsyncTask<Collection, Void, String> {
 
 		@Override
 		protected String doInBackground(Collection... params) {
@@ -175,7 +177,7 @@ public class PopupWindowUtils<T> implements OnClickListener {
 				Toast.makeText(context, "网络问题，请稍后再试", Toast.LENGTH_SHORT).show();
 			}
 		}		
-	}
+	}*/
 	
 	class DeleteTask extends AsyncTask<String, Void, String> {
 

@@ -3,12 +3,16 @@ package com.tee686.activity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,13 +20,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 import com.casit.tee686.R;
+import com.readystatesoftware.viewbadger.BadgeView;
+import com.tee686.config.Constants;
 import com.tee686.config.Urls;
 import com.tee686.entity.UserInfoItem;
 import com.tee686.https.HttpUtils;
@@ -42,11 +51,13 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 	private Button mCommunity;
 	private Button ref_buButton;
 	private String result = "";
+	private BadgeView badgeView;
 
 	ViewPager mViewPager;
 	TabPageAdapter mTabsAdapter;
 	PageIndicator mIndicator;
 	LinearLayout llGoHome;
+//	Intent intent;
 	private LinearLayout loadLayout;
 	private LinearLayout loadFaillayout;
 
@@ -65,7 +76,7 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 		initControl();
 		share = getSharedPreferences(UserLoginActivity.SharedName,
 				Context.MODE_PRIVATE);
-		if (savedInstanceState != null) {
+		/*if (savedInstanceState != null) {
 			try {
 				mUserInfoItem = new ObjectMapper().readValue(
 						savedInstanceState.getString("json"),
@@ -102,7 +113,8 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 					new UserLogOutFragment(UserCenterActivity.this, false));
 			mTabsAdapter.notifyDataSetChanged();
 			mViewPager.setCurrentItem(0);
-		} else if (!NetWorkHelper.checkNetState(this)) {
+		}*/ 
+		if (!NetWorkHelper.checkNetState(this)) {
 			loadLayout.setVisibility(View.GONE);
 			loadFaillayout.setVisibility(View.VISIBLE);
 		}
@@ -142,6 +154,8 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 		llGoHome.setOnClickListener(this);
 		loadLayout = (LinearLayout) findViewById(R.id.view_loading);
 		loadFaillayout = (LinearLayout) findViewById(R.id.view_load_fail);
+		badgeView = new BadgeView(UserCenterActivity.this, mCommunity);
+//		intent = new Intent(this, CheckNewService.class);
 	}
 
 	private void initViewPager() {
@@ -240,8 +254,8 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 				return;
 			}
 			
-			mTabsAdapter.addTab(getString(R.string.user_center_my_Collect),
-					new UserCollectFragment(UserCenterActivity.this));		
+//			mTabsAdapter.addTab(getString(R.string.user_center_my_Collect),
+//					new UserCollectFragment(UserCenterActivity.this));		
 			mTabsAdapter.addTab(getString(R.string.user_center_collection),
 					new UserCollectionFragment(UserCenterActivity.this));
 			mTabsAdapter.addTab(getString(R.string.user_center_my_Intro),
@@ -249,7 +263,7 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 			mTabsAdapter.addTab(getString(R.string.user_center_exit),
 					new UserLogOutFragment(UserCenterActivity.this, false));
 			mTabsAdapter.notifyDataSetChanged();
-			mViewPager.setCurrentItem(2);
+			mViewPager.setCurrentItem(1);
 		}
 	}
 
@@ -276,11 +290,11 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 			case 0: 
 				ImgLeft.setVisibility(8);				
 				break;
-			case 1:
-				ImgRight.setVisibility(0);	
-				ImgLeft.setVisibility(0);
-				break;
-			case 3:
+//			case 1:
+//				ImgRight.setVisibility(0);	
+//				ImgLeft.setVisibility(0);
+//				break;
+			case 2:
 				ImgRight.setVisibility(8);				
 				break;
 			default:
@@ -298,7 +312,9 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.btn_community:
+				badgeView.hide(true);
 				IntentUtil.start_activity(UserCenterActivity.this, BulletinActivity.class);
+				finish();
 				break;
 			}
 		}
@@ -313,5 +329,49 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 			break;
 		}
 	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if(NetWorkHelper.isNetworkAvailable(this)) {
+			Intent intent = new Intent(this, CheckNewService.class);
+			startService(intent);
+		}		
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Constants.ReceiverAction.CHECK_NEW_PUB);
+		registerReceiver(checkNewReceiver, filter);
+        JPushInterface.setAliasAndTags(this, share.getString(UserLoginActivity.UID, "tee"), null, new TagAliasCallback() {
+			
+			@Override
+			public void gotResult(int code, String alias, Set<String> tags) {
+				// TODO Auto-generated method stub
+				switch(code) {
+				case 0:
+					Log.d("alias", "set alias success");
+				default:
+					Log.d("alias", "errorCode:"+code);	
+				}
+			}
+		});
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		unregisterReceiver(checkNewReceiver);
+	}
+
+	BroadcastReceiver checkNewReceiver = new BroadcastReceiver() {
+		
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub			
+//			badgeView.setBackgroundResource(R.drawable.umeng_xp_point_selected);
+			badgeView.setText(String.valueOf(intent.getIntExtra("num", 0)));
+			badgeView.show(true);
+		}
+	};
 
 }

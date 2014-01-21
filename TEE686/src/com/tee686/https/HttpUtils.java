@@ -54,7 +54,8 @@ public class HttpUtils {
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setRequestMethod("POST");
-			conn.setReadTimeout(5000);
+			conn.setReadTimeout(4000);
+			conn.setConnectTimeout(5000);
 			conn.setRequestProperty("Content-Type",	"text/plain; charset=UTF-8");
 			conn.setRequestProperty("Content-Length", String.valueOf(data.length));
 			OutputStream out = conn.getOutputStream();

@@ -5,6 +5,7 @@ import java.util.Set;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -28,6 +29,7 @@ public class IndexActivity extends BaseActivity {
 	protected String mAppId;
 	protected String mUserId;
 	protected String mChannelId;
+	SharedPreferences share;
 	
     private OnClickListener enterListener = new OnClickListener()
     {
@@ -44,11 +46,24 @@ public class IndexActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_index);
+		initSharedPreference();
 		imgBrand = (ImageView)findViewById(R.id.image_brand);
         imgBrand.setOnClickListener(enterListener);	
+		
+		UmengUpdateAgent.setUpdateOnlyWifi(false);
+		UmengUpdateAgent.setUpdateAutoPopup(true);
+		UmengUpdateAgent.update(this);
+		FeedbackAgent agent = new FeedbackAgent(this);
+		agent.sync();        
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 		JPushInterface.setDebugMode(true); 	//设置开启日志,发布时请关闭日志
         JPushInterface.init(this); 
-        JPushInterface.setAliasAndTags(this, "tee686", null, new TagAliasCallback() {
+        /*JPushInterface.setAliasAndTags(this, share.getString(UserLoginActivity.UID, "tee"), null, new TagAliasCallback() {
 			
 			@Override
 			public void gotResult(int code, String alias, Set<String> tags) {
@@ -60,11 +75,12 @@ public class IndexActivity extends BaseActivity {
 					Log.d("alias", "errorCode:"+code);	
 				}
 			}
-		});
-		UmengUpdateAgent.setUpdateOnlyWifi(false);
-		UmengUpdateAgent.update(this);
-		FeedbackAgent agent = new FeedbackAgent(this);
-		agent.sync();        
+		});*/
+	}
+
+	private void initSharedPreference() {
+		// TODO Auto-generated method stub
+		share = getSharedPreferences(UserLoginActivity.SharedName, MODE_PRIVATE);
 	}
 
 	@Override
@@ -111,6 +127,9 @@ public class IndexActivity extends BaseActivity {
                @Override
                public void onClick(DialogInterface dialogInterface, int i) {
             	   ad.dismiss();
+            	   Intent intent = new Intent(IndexActivity.this, CheckNewService.class);
+            	   stopService(intent);
+            	   android.os.Process.killProcess(android.os.Process.myPid());
             	   IndexActivity.this.finish();
                }
            }).setNegativeButton("否", new DialogInterface.OnClickListener() {

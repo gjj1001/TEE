@@ -1,5 +1,6 @@
 package com.tee686.receiver;
 
+import com.tee686.activity.BulletinDetailActivity;
 import com.tee686.activity.DisplayActivity;
 
 import cn.jpush.android.api.JPushInterface;
@@ -7,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 public class MyReceiver extends BroadcastReceiver {
 
@@ -15,6 +17,8 @@ public class MyReceiver extends BroadcastReceiver {
 		Bundle bundle = intent.getExtras();
 		if(JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
 			processCustomMessage(context, bundle);
+		} else if(JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
+			Toast.makeText(context, bundle.getString(JPushInterface.EXTRA_ALERT), Toast.LENGTH_SHORT).show();
 		} else if(JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
 			openNotification(context, bundle);
 		}
@@ -26,7 +30,7 @@ public class MyReceiver extends BroadcastReceiver {
 		Intent intent = new Intent();
 		intent.putExtras(bundle);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intent.setClass(context, DisplayActivity.class);
+		intent.setClass(context, BulletinDetailActivity.class);
 		context.startActivity(intent);
 	}
 
