@@ -4,8 +4,8 @@ import java.io.File;
 import android.os.Environment;
 public class FileDealTool {
 	public static void delRecordFile() {
-		File dir = new File(Environment.getExternalStorageDirectory()
-				+ "/recordMsg/");
+		File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+				+File.separatorChar+"recordMsg"+File.separatorChar);
 		if (dir.exists()) {
 			File[] fileList = dir.listFiles();
 			if (fileList != null)

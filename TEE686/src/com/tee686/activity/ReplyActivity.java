@@ -5,11 +5,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.Service;
 import android.content.Intent;
@@ -42,6 +45,7 @@ import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -49,25 +53,23 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
 
-import com.alipay.android.appDemo4.Base64;
 import com.casit.tee686.R;
 import com.tee686.adapter.ChatMsgViewAdapter;
 import com.tee686.adapter.ExpressionGvAdapter;
 import com.tee686.config.ContentFlag;
 import com.tee686.config.Urls;
-import com.tee686.entity.Comment;
 import com.tee686.entity.Message;
 import com.tee686.https.HttpUtils;
 import com.tee686.service.base.MessageService;
+import com.tee686.service.base.RecordPlayService;
 import com.tee686.ui.base.BaseActivity;
+import com.tee686.utils.ConversationPopupWindow;
 import com.tee686.utils.DateUtil;
 import com.tee686.utils.ExpressionUtil;
 import com.tee686.utils.FileDealTool;
@@ -76,7 +78,6 @@ import com.tee686.utils.SystemConstant;
 public class ReplyActivity extends BaseActivity {
 
 	private MessageService msgService;
-	private Comment comment;
 	private TextView title;
 	private ListView lvMsgLisr;
 	private EditText etCtn;
@@ -88,9 +89,9 @@ public class ReplyActivity extends BaseActivity {
 	private Dialog recordDialog;
 	private Dialog recordSendDialog;
 	private ChatMsgViewAdapter ctAdapter;
-	private PopupWindow optionWindow;
-	private PopupWindow convertWindow;
-	private View parent;
+//	private PopupWindow optionWindow;
+//	private PopupWindow convertWindow;
+//	private View parent;
 	private View record_view;
 	private View record_send_view;
 	private View viewpager_layout;
@@ -103,17 +104,18 @@ public class ReplyActivity extends BaseActivity {
 	private List<Message> msgList = new ArrayList<Message>();	//保存所有消息内容
 	private ViewPager viewPager;	//实现表情的滑动翻页
 	private int imageIds[] = ExpressionUtil.getExpressRcIds();	//保存所有表情资源的id
-	private String pubtime;
-	private String comtime;
-	private String headimage;
+//	private String comtime;
+//	private String headimage;
 	private String uname;
-	private String content;
+	private String result;
+//	private String content;
 	SharedPreferences share;
 	Bundle bundle;
-	Message message = new Message();
+	RecordPlayService playService = new RecordPlayService();
 	/**
 	 * 消息处理器
 	 */
+	@SuppressLint("HandlerLeak")
 	private Handler handle = new Handler(){
 		public void handleMessage(android.os.Message msg) {
 			super.handleMessage(msg);
@@ -166,9 +168,49 @@ public class ReplyActivity extends BaseActivity {
         setContentView(R.layout.reply_main);         
         initControl();
         initSharePreferenced();
+        title.setBackgroundResource(0);
         title.setText("会话");
         getFromBundle();
-        initMessage();
+//        initMessage();
+        if(savedInstanceState!=null) {
+			result = savedInstanceState.getString("result");			
+//			share.edit().putString("pubContents", result).commit();		
+			List<Message> messages = new ArrayList<Message>();
+			try {
+				JSONArray jsonArray = new JSONArray(result);
+				for(int i=0; i<jsonArray.length(); i++) {
+					String json = jsonArray.getString(i);
+					Message message = new ObjectMapper().readValue(json, Message.class);
+					messages.add(message);
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			ctAdapter = new ChatMsgViewAdapter(ReplyActivity.this, uname, msgList, lvMsgLisr);
+			lvMsgLisr.setAdapter(ctAdapter);
+			lvMsgLisr.setSelection(messages.size()-1);
+//			mAdapter.appendToList(result);	
+			
+			lvMsgLisr.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+				@Override
+				public boolean onItemLongClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					Message message = (Message) ctAdapter.getItem(position);
+					List<String> tabs = new ArrayList<String>();
+					tabs.add("删除");
+					ConversationPopupWindow<String> util = new ConversationPopupWindow<String>(ReplyActivity.this, 
+							 message.getReply_person(), message, share, ctAdapter, ctAdapter.msgList);
+					util.showActionWindow(view, tabs);
+					return true;
+				}
+			});
+        } else {
+        	 String url1 = String.format(Urls.USER_MESSAGE+"?send_person=%s&reply_person=%s", 
+     				share.getString(UserLoginActivity.UID, ""), uname);
+     		new DataAsyncTask().execute(url1);
+        }
+       
         etCtn.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if(viewpager_layout.getVisibility() == View.VISIBLE){
@@ -180,33 +222,39 @@ public class ReplyActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				finish();
+				defaultFinish();
 				overridePendingTransition(R.anim.hold, R.anim.umeng_fb_slide_out_from_right);
 			}
 		});
 	}
 
-	private void initMessage() {
+	/*private void initMessage() {
 		message.setBitmap(headimage);
 		message.setSend_ctn(content);
 		message.setSend_date(comtime);
-		message.setSend_person(uname);
-	}
+		message.setSend_person(share.getString(UserLoginActivity.UID, ""));
+		message.setReply_person(uname);
+	}*/
 
 	private void getFromBundle() {
 		Intent intent = getIntent();
         bundle = intent.getExtras();
-        String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+        /*String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
 		try {
 			JSONObject json = new JSONObject(extras);
-			pubtime = json.optString("pubtime");
 			comtime = json.optString("comtime");
 			headimage = json.optString("headimage");
 		} catch (JSONException e) {			
 			e.printStackTrace();
-		}		
-		uname = bundle.getString(JPushInterface.EXTRA_TITLE);
-		content = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+		}	*/	
+		if(bundle.containsKey(JPushInterface.EXTRA_NOTIFICATION_TITLE)) {
+			uname = bundle.getString(JPushInterface.EXTRA_NOTIFICATION_TITLE);
+		} else if(bundle.containsKey(JPushInterface.EXTRA_TITLE)){
+			uname = bundle.getString(JPushInterface.EXTRA_TITLE);
+		} else {
+			uname = intent.getStringExtra("uname");
+		}
+//		content = bundle.getString(JPushInterface.EXTRA_MESSAGE);
 	}
 
 	private void initSharePreferenced() {		
@@ -217,7 +265,7 @@ public class ReplyActivity extends BaseActivity {
 		LayoutInflater inflater = this.getLayoutInflater();
         //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);	//自定义标题布局文件
         mVibrator = (Vibrator)getApplication().getSystemService(VIBRATOR_SERVICE);
-        parent = findViewById(R.id.reply_main);
+//        parent = findViewById(R.id.reply_main);
         lvMsgLisr = (ListView) findViewById(R.id.lv_message);
         lvMsgLisr.setOnTouchListener(new MyOnTouchListener());
         gohome = (ImageView) findViewById(R.id.details_imageview_gohome);
@@ -225,7 +273,7 @@ public class ReplyActivity extends BaseActivity {
         ivRecord = (ImageView) record_view.findViewById(R.id.iv_record);
         record_send_view = inflater.inflate(R.layout.record_send_dialog, null);
         btn_send = (Button) findViewById(R.id.sendMsg);
-        title = (TextView) findViewById(R.id.details_textview_title);
+        title = (TextView) findViewById(R.id.tv_detail_title);
         btn_open_record = (ImageButton) findViewById(R.id.btn_open_record);
         etCtn = (EditText) findViewById(R.id.content);
         viewpager_layout = findViewById(R.id.viewpager_layout);
@@ -279,7 +327,7 @@ public class ReplyActivity extends BaseActivity {
 				Toast.makeText(ReplyActivity.this, R.string.tip_input, Toast.LENGTH_SHORT).show();
 				return;
 			}
-			new SendMsgTask().execute(Urls.USER_REPLY);
+			new SendMsgTask().execute(Urls.USER_CONTEXT);
 		}
     }
     
@@ -291,7 +339,7 @@ public class ReplyActivity extends BaseActivity {
 			viewpager_layout.setVisibility(View.GONE);
 			return;
 		}
-		finish();
+		defaultFinish();
 		overridePendingTransition(R.anim.hold, R.anim.umeng_fb_slide_out_from_right);
 	}
 
@@ -305,37 +353,30 @@ public class ReplyActivity extends BaseActivity {
 	}
 	
 	@Override
-	protected void onResume() {
-		buildConnection();
-		ctAdapter = new ChatMsgViewAdapter(this, uname, msgList);
-		lvMsgLisr.setAdapter(ctAdapter);
-		super.onResume();
-	}
+	protected void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+		outState.putString("result", result);
+	}	
 
 	@Override
 	protected void onPause() {
 		super.onPause();
 	}
 	/**
-	 * 建立连接
-	 * @param isLogin 是否已经登录
+	 * 语音UI变更
+	 * @param
 	 */
-    private void buildConnection() {
-    	
-    	//存在当前用户，尝试连接服务器
-		if (null != uname) {
-			// 此处开启线程防止UI阻塞
-			progressDialog.show();
-			new Thread(new Runnable() {
-				public void run() {
-					android.os.Message msg = handle.obtainMessage();
-					msg.what = 1;
-					msg.obj = message;
-					handle.sendMessage(msg); 
-				}
-			}).start();
-		}
-	}
+    /*private void updateUI(final Message message) {    	
+		new Thread(new Runnable() {
+			public void run() {
+				android.os.Message msg = handle.obtainMessage();
+				msg.what = 1;
+				msg.obj = message;
+				handle.sendMessage(msg);
+			}
+		}).start();
+	}*/
     
     /**
      * 打开语音聊天页面
@@ -368,7 +409,7 @@ public class ReplyActivity extends BaseActivity {
     private final class MyRecordTouchListener implements View.OnTouchListener{
     	private MediaPlayer mediaPlayer;
     	private File file = null;
-    	private FileOutputStream dos = null;
+    	private FileOutputStream os = null;
     	private long startTime;
     	private boolean ifexit = true;	//SD卡是否存在的标识
     	private RecordThread thread = null;
@@ -382,10 +423,24 @@ public class ReplyActivity extends BaseActivity {
 					mediaPlayer.start();
 					mVibrator.vibrate( new long[]{100,50}, -1);
 					if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-						file = new File(
-								Environment.getExternalStorageDirectory(),
-								System.currentTimeMillis()+Base64.encode(uname.getBytes()) + ".pcm");
-						dos = new FileOutputStream(file);  
+						File tmpFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separatorChar+
+								"recordMsg"+File.separatorChar);
+						if(!tmpFile.exists()) {
+							tmpFile.mkdirs();
+						}
+						file = new File(tmpFile, System.currentTimeMillis()+".pcm");
+						os = new FileOutputStream(file); 
+						
+						/*if(!file.exists()) {
+							file.mkdirs();
+							file = new File(file, System.currentTimeMillis()+
+								Base64.encode(uname.getBytes()) + ".pcm");
+							dos = new FileOutputStream(file); 
+						} else {
+							file = new File(file, System.currentTimeMillis()+
+									Base64.encode(uname.getBytes()) + ".pcm");
+							dos = new FileOutputStream(file); 
+						}*/												
 					} else {
 						Toast.makeText(ReplyActivity.this, R.string.sd_noexit,
 								Toast.LENGTH_SHORT).show();
@@ -399,7 +454,7 @@ public class ReplyActivity extends BaseActivity {
 					}
 					recordDialog.show();
 					//开启声音捕捉监听线程
-					thread = new RecordThread(dos);
+					thread = new RecordThread(os);
 					thread.start();
 					startTime = System.currentTimeMillis();
 					break;
@@ -417,19 +472,32 @@ public class ReplyActivity extends BaseActivity {
 					final long recordTime = endTime - startTime;
 					if(recordTime < 1000){
 						handle.sendEmptyMessage(3);
-						file.delete();
+//						file.delete();
 					}else{
 						recordSendDialog.show();
 						new Thread(new Runnable() {
 							@Override
 							public void run() {
 								try {
+									msgService = new MessageService(ReplyActivity.this);
+									String send_date = DateUtil.getCurrentDateTime();
+									msgService.sendRecordMsg(file, recordTime, uname, send_date, 
+											share.getString(UserLoginActivity.UID, ""), 
+											share.getString(UserLoginActivity.PIC, ""));
+									Message message = new Message("", share.getString(UserLoginActivity.UID, ""), 
+											send_date, share.getString(UserLoginActivity.PIC, ""),
+											uname);
+									message.setIfyuyin(true);
 									message.setRecordTime(recordTime);
-//									msgService.sendRecordMsg(file, recordTime);
+									message.setRecord_path(file.getAbsolutePath());
+									android.os.Message msg = handle.obtainMessage();
+									msg.what = 1;
+									msg.obj = message;
+									handle.sendMessage(msg);
 								} catch (Exception e) {
 									e.printStackTrace();
 									if(recordSendDialog.isShowing()) recordSendDialog.dismiss();
-									if(null!= file) file.delete();
+//									if(null!= file) file.delete();
 									if(null!= mediaPlayer) mediaPlayer.release();
 								}
 							}
@@ -440,7 +508,7 @@ public class ReplyActivity extends BaseActivity {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				if(null!= file) file.delete();
+//				if(null!= file) file.delete();
 				if(null!= mediaPlayer) mediaPlayer.release();
 			}
 			return true;
@@ -547,13 +615,14 @@ public class ReplyActivity extends BaseActivity {
     	//获取屏幕当前分辨率
         Display currDisplay = getWindowManager().getDefaultDisplay();
         int displayWidth = currDisplay.getWidth();
+        int displayHeight = currDisplay.getHeight();
         //获得表情图片的宽度/高度
         Bitmap express = BitmapFactory.decodeResource(getResources(), R.drawable.f000);
     	int headWidth = express.getWidth();
     	int headHeight = express.getHeight();
     	Log.d(ContentFlag.TAG, displayWidth+":" + headWidth);
     	final int colmns = displayWidth/headWidth > 7 ? 7 : displayWidth/headWidth;	//每页显示的列数
-    	final int rows = 170/headHeight > 3 ? 3 : 170/headHeight;	//每页显示的行数
+    	final int rows = displayHeight/headHeight > 4 ? 4 : displayHeight/headHeight;	//每页显示的行数
     	final int pageItemCount = colmns * rows;		//每页显示的条目数
     	//计算总页数
 		int totalPage = SystemConstant.express_counts % pageItemCount == 0 ? 
@@ -666,15 +735,15 @@ public class ReplyActivity extends BaseActivity {
 		private boolean isRun = true;
 		private FileOutputStream output;  
 		private int BLOW_BOUNDARY = 30;		  // 到达该值之后 触发事件
-		public RecordThread(FileOutputStream output) {
-			this.output = output;
+		public RecordThread(FileOutputStream os) {
+			this.output = os;
 			bufferSize = AudioRecord.getMinBufferSize(SystemConstant.SAMPLE_RATE_IN_HZ,
-					SystemConstant.CHANNEL_CONFIG,
+					SystemConstant.CHANNEL_CONFIG_IN,
 					SystemConstant.AUDIO_FORMAT);
 			// 设置音频的录制的声道CHANNEL_IN_STEREO为双声道，CHANNEL_CONFIGURATION_MONO为单声道
 			// 音频数据格式:PCM 16位每个样本。保证设备支持。PCM 8位每个样本。不一定能得到设备支持。
 			audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC,
-					SystemConstant.SAMPLE_RATE_IN_HZ, SystemConstant.CHANNEL_CONFIG,
+					SystemConstant.SAMPLE_RATE_IN_HZ, SystemConstant.CHANNEL_CONFIG_IN,
 					SystemConstant.AUDIO_FORMAT, bufferSize);
 		}
 
@@ -694,7 +763,7 @@ public class ReplyActivity extends BaseActivity {
 					int r = audioRecord.read(buffer, 0, bufferSize);// 读取到的数据
 					int v = 0;
 					for (int i = 0; i < buffer.length; i++) {
-						v += Math.abs(buffer[i]);//取绝对值，因为可能为负
+						v += Math.abs(buffer[i]);//取绝对值，因为可能为负						
 					}
 					output.write(buffer, 0, r);
 					int value = Integer.valueOf(v / r);//算得当前所有值的平均值
@@ -720,13 +789,9 @@ public class ReplyActivity extends BaseActivity {
 			} catch (Exception e) {
 				Log.d(ContentFlag.TAG, "stop recording!");
 			} finally {
-				try {
-					output.close();
-					audioRecord.stop();
-					audioRecord.release();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				audioRecord.stop();
+				audioRecord.release();
+//					output.close();
 			}
 		}
 
@@ -747,12 +812,11 @@ public class ReplyActivity extends BaseActivity {
 	}
 	
 	class SendMsgTask extends AsyncTask<String, Void, String> {
-
-		String result;
 		@Override
 		protected String doInBackground(String... params) {
-			Comment value = new Comment(share.getString(UserLoginActivity.PIC, ""), etCtn.getText().toString(),
-					share.getString(UserLoginActivity.UID, ""), pubtime, DateUtil.getCurrentDateTime(), uname, null, null, null);
+			Message value = new Message(etCtn.getText().toString(), share.getString(UserLoginActivity.UID, ""),
+					DateUtil.getCurrentDateTime(), share.getString(UserLoginActivity.PIC, ""), uname);
+			msgList.add(value);
 			return HttpUtils.postByHttpURLConnection(params[0], value);	
 		}
 		
@@ -762,10 +826,129 @@ public class ReplyActivity extends BaseActivity {
 			super.onPostExecute(result);
 			if(result!=null) {				
 				etCtn.setText("");
-				showShortToast(result);				
+				showShortToast(result);	
+				ctAdapter.notifyDataSetChanged();
+//				msgList.clear();
+//				String url1 = String.format(Urls.USER_MESSAGE+"?send_person=%s&reply_person=%s", 
+//						share.getString(UserLoginActivity.UID, ""), uname);
+//				new DataAsyncTask().execute(url1);
 			} else {
 				showShortToast("网络连接失败，请稍后再试");
 			}
+		}		
+	}
+	
+	/**
+	 * @author Jason
+	 *获得聊天列表数据
+	 */
+	class DataAsyncTask extends AsyncTask<String, Void, List<Message>> {
+//		private HttpURLConnection conn;
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+//			showAlertDialog("温馨提示", "正在加载列表信息请稍后");
+		}
+
+		@Override
+		protected List<Message> doInBackground(String... params) {				
+			
+			try {				
+				/*byte[] data = params[1].getBytes("utf-8");
+				URL url = new URL(params[0]);
+				conn = (HttpURLConnection) url.openConnection();
+				conn.setDoOutput(true);
+				conn.setUseCaches(false);
+				conn.setDoInput(true);
+				conn.setRequestMethod("POST");
+				conn.setReadTimeout(5000);
+				conn.setRequestProperty("Content-Type",
+						"text/plain; charset=UTF-8");
+				conn.setRequestProperty("Content-Length",
+						String.valueOf(data.length));
+				OutputStream out = conn.getOutputStream();
+				out.write(data);
+				out.flush();
+				out.close();
+				if (conn.getResponseCode() == 200) {
+					byte[] connbuffer = new byte[1024];
+					ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+					InputStream in = conn.getInputStream();
+					int len = 0;
+					while ((len=in.read(connbuffer)) != -1) {
+						outStream.write(connbuffer, 0, len);
+					}
+					result = new String(outStream.toByteArray());
+					in.close();
+					conn.disconnect();					
+				}						*/
+				result = HttpUtils.getByHttpClient(ReplyActivity.this, params[0]);	
+				StringBuilder sb = new StringBuilder(result);
+				result = sb.deleteCharAt(result.lastIndexOf(",")).toString();
+//				share.edit().putString("pubContents", result).commit();		
+				JSONArray jsonArray = new JSONArray(result);
+				for(int i=0; i<jsonArray.length(); i++) {
+					String json = jsonArray.getString(i);
+					Message message = new ObjectMapper().readValue(json, Message.class);
+					msgList.add(message);
+				}
+				
+			} catch (JsonParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			/*for(PubContent pubContent : mPubContents) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("userhead", pubContent.getHeadimage());
+				map.put("bulletincontent", pubContent.getContent());
+				map.put("username", pubContent.getUsername());
+				map.put("image", pubContent.getImageFile());
+				map.put("sendtime", pubContent.getSendtime());
+				mlist.add(map);
+			}*/ 
+			
+			
+			return msgList;
+		}
+
+		@Override
+		protected void onPostExecute(List<Message> result) {
+			ctAdapter = new ChatMsgViewAdapter(ReplyActivity.this, uname, msgList, lvMsgLisr);
+			lvMsgLisr.setAdapter(ctAdapter);
+			lvMsgLisr.setSelection(result.size()-1);
+//			mAdapter.appendToList(result);	
+			
+			lvMsgLisr.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+				@Override
+				public boolean onItemLongClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					Message message = (Message) ctAdapter.getItem(position);
+					List<String> tabs = new ArrayList<String>();
+					tabs.add("删除");
+					ConversationPopupWindow<String> util = new ConversationPopupWindow<String>(ReplyActivity.this, 
+							 message.getReply_person(), message, share, ctAdapter, ctAdapter.msgList);
+					util.showActionWindow(view, tabs);
+					return true;
+				}
+			});	
+//			mAlertDialog.dismiss();
+			if(result.isEmpty()) {				
+				showShortToast("没有消息");				
+			}			
 		}
 		
 	}

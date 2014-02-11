@@ -38,6 +38,7 @@ import com.tee686.entity.PubContent;
 import com.tee686.https.HttpUtils;
 import com.tee686.utils.ImageUtil;
 import com.tee686.utils.ImageUtil.ImageCallback;
+import com.tee686.utils.ImageUtil.ImageCallback1;
 import com.tee686.utils.IntentUtil;
 import com.tee686.utils.BulletinPopupWindow;
 import com.tee686.ui.base.BaseActivity;
@@ -57,7 +58,7 @@ public class BulletinActivity extends BaseActivity {
 //	private List<Map<String, Object>> mlist;
 	private MyAdapter mAdapter;
 	SharedPreferences share;	
-	
+	Context context;
 	private String result;
 	
 
@@ -522,13 +523,27 @@ public class BulletinActivity extends BaseActivity {
 		outState.putString("result", result);
 	}
 
-	ImageCallback callback1 = new ImageCallback() {
-		
+	ImageCallback callback = new ImageCallback() {
+
 		@Override
 		public void loadImage(Bitmap bitmap, String imagePath) {
 			// TODO Auto-generated method stub
 			try {
 				ImageView img = (ImageView) lv.findViewWithTag(imagePath);
+				img.setImageBitmap(bitmap);
+			} catch (NullPointerException ex) {
+				Log.e("error", "ImageView = null");
+			}
+		}
+	};
+	
+	ImageCallback1 callback1 = new ImageCallback1() {
+		
+		@Override
+		public void loadImage(Bitmap bitmap, String imagePath, View v) {
+			// TODO Auto-generated method stub
+			try {
+				ImageView img = (ImageView) v.findViewWithTag(imagePath);
 				img.setImageBitmap(bitmap);
 			} catch (NullPointerException ex) {
 				Log.e("error", "ImageView = null");
@@ -574,8 +589,7 @@ public class BulletinActivity extends BaseActivity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			PubContent pubContent = pubContents.get(position);
-			final ViewHolder viewHolder;
-			convertView = null;
+			ViewHolder viewHolder = null;
 			convertView = getLayoutInflater().inflate(R.layout.bulletin_board, null);
 			viewHolder = new ViewHolder();
 			viewHolder.ivHeadimage = (ImageView) convertView
@@ -588,8 +602,8 @@ public class BulletinActivity extends BaseActivity {
 					.findViewById(R.id.tv_pub_username);
 			viewHolder.tvSendtime = (TextView) convertView
 					.findViewById(R.id.tv_sendtime);
-			convertView.setTag(viewHolder);
-			 /*else {
+//			convertView.setTag(viewHolder);
+			/*} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}*/
 			viewHolder.tvContent.setText(pubContent.getContent());
@@ -597,22 +611,22 @@ public class BulletinActivity extends BaseActivity {
 			viewHolder.tvUsername.setText(pubContent.getUsername());
 //			viewHolder.ivHeadimage.setTag(pubContent.getHeadimage());
 //			viewHolder.ivImagefile.setTag(pubContent.getImageFile());
-			synchronized (viewHolder) {
-				if (!"".equals(pubContent.getHeadimage())) {
-					// new HeadImgAsyncTask().execute(pubContent.getHeadimage());
-					ImageUtil.setThumbnailView(pubContent.getHeadimage(),
-							viewHolder.ivHeadimage, BulletinActivity.this, callback1, true);
-				}
-				if (pubContent.getImageFile() != null) {
-					ImageUtil.setThumbnailView(pubContent.getImageFile(),
-							viewHolder.ivImagefile, BulletinActivity.this, callback1, true);
-					
-					/*if(headImage!=null) {
-						viewHolder.ivHeadimage.setImageBitmap(headImage);
-					}*/
-					
-				}
-			}		
+		
+			if (!"".equals(pubContent.getHeadimage())) {
+				// new HeadImgAsyncTask().execute(pubContent.getHeadimage());
+				ImageUtil.setThumbnailView(pubContent.getHeadimage(),
+						viewHolder.ivHeadimage, BulletinActivity.this, callback, true);
+			}
+			if (pubContent.getImageFile() != null) {					
+				ImageUtil.setThumbnailView(pubContent.getImageFile(),
+						viewHolder.ivImagefile, BulletinActivity.this, callback1, true, viewHolder.ivImagefile);
+				
+				/*if(headImage!=null) {
+					viewHolder.ivHeadimage.setImageBitmap(headImage);
+				}*/
+				
+			}
+			
 			/*viewHolder.ivImagefile.setOnClickListener(new OnClickListener() {
 				
 				@Override

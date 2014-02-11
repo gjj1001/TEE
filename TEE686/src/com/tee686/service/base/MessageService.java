@@ -1,38 +1,40 @@
 package com.tee686.service.base;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
-import java.util.HashMap;
-import java.util.Map;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.tee686.config.ContentFlag;
+import com.tee686.config.Urls;
 import com.tee686.db.MessageDbHelper.MessageColumns;
 import com.tee686.entity.Message;
-import com.tee686.utils.StreamTool;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Environment;
-import android.util.Log;
+import android.widget.Toast;
 
 public class MessageService {
 	private Context context;
-	private String user;
-	private Socket socket;
-	private DataOutputStream output;
-	private DataInputStream input;
-	private Map<Integer, Bitmap> imgMap = new HashMap<Integer, Bitmap>();	//缓存在线用户头像数据
+//	private String user;
+//	private Socket socket;
+//	private DataOutputStream output;
+//	private DataInputStream input;
+//	private Map<Integer, Bitmap> imgMap = new HashMap<Integer, Bitmap>();	//缓存在线用户头像数据
 	public MessageService(Context context) {
 		this.context = context;
 	}
@@ -73,7 +75,7 @@ public class MessageService {
 	/**
 	 * 应用退出
 	 */
-	public void quitApp() {
+	/*public void quitApp() {
 		String sendStr="";
 		if(null!= user){
 			sendStr = ContentFlag.OFFLINE_FLAG + user;
@@ -97,7 +99,7 @@ public class MessageService {
 				}
 			}
 		}
-	}
+	}*/
 	
 	/**
 	 * 接收消息
@@ -154,13 +156,13 @@ public class MessageService {
 	 * @param input2
 	 * @throws IOException 
 	 */
-	private void saveRecordFile(File file) throws IOException {
+	/*private void saveRecordFile(File file) throws IOException {
 		if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
 			byte[] datas = StreamTool.readStream(input);
 			FileOutputStream outputStream = new FileOutputStream(file);
 			outputStream.write(datas);
 		}
-	}
+	}*/
 
 	/**
 	 * 解析json字符串
@@ -197,20 +199,60 @@ public class MessageService {
 	 * @param ctn
 	 * @throws IOException 
 	 */
-	public void sendMsg(String ctn) throws Exception {
+	/*public void sendMsg(String ctn) throws Exception {
 		output.writeUTF(ctn);
-	}
+	}*/
 	
 	/**
 	 * 发送语音消息
 	 * @param file
 	 * @throws Exception 
 	 */
-	public void sendRecordMsg(File file, long recordTime) throws Exception{
+	public void sendRecordMsg(File file, long recordTime, String reply_person, String send_date,
+			String send_person, String bitmap) throws Exception{
 		FileInputStream inputStream = null;
+		HttpURLConnection conn = null;
+		int length = 0;
 		try {
+			// 将语音流以字符串形式存储下来
+			String audioFlag = "no";
+			HttpClient client = new DefaultHttpClient();
+			// 设置上传参数
+			List<NameValuePair> formparams = new ArrayList<NameValuePair>();
+			formparams.add(new BasicNameValuePair("audioflag", audioFlag));
+			formparams.add(new BasicNameValuePair("recordtime", Long.toString(recordTime)));
+			formparams.add(new BasicNameValuePair("reply_person", reply_person));
+			formparams.add(new BasicNameValuePair("send_person", send_person));
+			formparams.add(new BasicNameValuePair("bitmap", bitmap));
+			formparams.add(new BasicNameValuePair("send_date", send_date));
+			HttpPost post = new HttpPost(Urls.USER_CONVERSATION);	
+			UrlEncodedFormEntity entity;
+			try {
+				entity = new UrlEncodedFormEntity(formparams, "UTF-8");
+				post.addHeader("Accept",
+						"text/javascript, text/html, application/xml, text/xml");
+				post.addHeader("Accept-Charset", "GBK,utf-8;q=0.7,*;q=0.3");
+				post.addHeader("Accept-Encoding", "gzip,deflate,sdch");
+				post.addHeader("Connection", "Keep-Alive");
+				post.addHeader("Cache-Control", "no-cache");
+				post.addHeader("Content-Type",
+						"application/x-www-form-urlencoded");
+				post.setEntity(entity);
+				HttpResponse response = client.execute(post);
+				HttpEntity e = response.getEntity();
+				if (200 == response.getStatusLine().getStatusCode()) {
+					client.getConnectionManager().shutdown();
+//					Toast.makeText(context, EntityUtils.toString(e), Toast.LENGTH_SHORT).show();
+				} else {
+					client.getConnectionManager().shutdown();
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			//上传音频文件
 			inputStream = new FileInputStream(file);
-			String flagLine = ContentFlag.RECORD_FLAG + file.getName();
+			/*String flagLine = ContentFlag.RECORD_FLAG + file.getName();
 			//写入标识行
 			output.writeUTF(flagLine);
 			//写入语音时间
@@ -218,16 +260,44 @@ public class MessageService {
 			byte[] buffer = new byte[2048];
 			int length = 0;
 			//写入文件的大小
-			output.writeInt((int) file.length());
-			while ((length = inputStream.read(buffer)) != -1) {
-				output.write(buffer, 0, length);
+			output.writeInt((int) file.length());*/
+			
+			try {
+				URL url = new URL(Urls.USER_CONVERSATION);
+				conn = (HttpURLConnection) url.openConnection();
+				conn.setDoOutput(true);
+				conn.setUseCaches(false);
+				conn.setDoInput(true);
+				conn.setRequestMethod("POST");
+				conn.setReadTimeout(5000);
+				conn.setRequestProperty("Content-Type",	"text/plain; charset=UTF-8");
+				conn.setRequestProperty("Content-Length", String.valueOf(file.length()));
+				DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
+				byte[] buffer = new byte[2048];
+				while ((length = inputStream.read(buffer)) != -1) {
+					dos.write(buffer, 0, length);
+				}
+				dos.flush();
+				dos.close();
+				if (conn.getResponseCode() == 200) {
+//					Toast.makeText(context, "语音发送成功", Toast.LENGTH_SHORT).show();
+				}
+
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				conn.disconnect();
 			}
-			output.flush();
+			
 		} catch (Exception e) {
 			throw new Exception();
 		}finally{
 			try {
-				if (file != null) file.delete();
+//				if (file != null) file.delete();
 				if (inputStream != null) inputStream.close();
 			} catch (IOException e) {
 				e.printStackTrace();

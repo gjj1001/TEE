@@ -2,7 +2,9 @@ package com.tee686.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.codehaus.jackson.JsonParseException;
@@ -32,6 +34,8 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 import com.casit.tee686.R;
 import com.readystatesoftware.viewbadger.BadgeView;
@@ -71,6 +75,7 @@ public class UserIntroFragment extends Fragment {
 	private List<Observer> listobservers = new ArrayList<Observer>();
 	private List<Observer> listfans = new ArrayList<Observer>();
 	private BadgeView fanBadgeView;
+	private Set<String> tags = new HashSet<String>();
 //	private BadgeView ObserveBadgeView;
 //	private String[] items = new String[] { "选择本地图片", "拍照" };
 	SharedPreferences share;
@@ -120,13 +125,14 @@ public class UserIntroFragment extends Fragment {
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Constants.ReceiverAction.CHECK_NEW_FAN);
 		getActivity().registerReceiver(checkNewReceiver, filter);
+		
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putByteArray("bitmap", data);
-		
+		tags.clear();
 	}
 	
 
@@ -457,11 +463,11 @@ public class UserIntroFragment extends Fragment {
 		}		
 	}
 	
-	class CheckFanTask extends AsyncTask<String, Void, Integer> {
+	class CheckFanTask extends AsyncTask<String, Void, List<Observer>> {
 
 		private String result;
 		@Override
-		protected Integer doInBackground(String... params) {
+		protected List<Observer> doInBackground(String... params) {
 			try {
 				result = HttpUtils.getByHttpClient(getActivity(), params[0]);
 				StringBuilder sb = new StringBuilder(result);
@@ -477,14 +483,14 @@ public class UserIntroFragment extends Fragment {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return listfans.size();
+			return listfans;
 		}
 		@Override
-		protected void onPostExecute(Integer result) {
+		protected void onPostExecute(List<Observer> result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			if(result!=null) {
-				fans.setText("粉丝："+result);
+				fans.setText("粉丝："+result.size());
 				fans.setOnClickListener(new OnClickListener() {
 					
 					@Override
@@ -495,7 +501,25 @@ public class UserIntroFragment extends Fragment {
 								new BasicNameValuePair("uname", mUserInfoItem.getUsername()));
 					}
 				});
-				
+				for(Observer observer : result) {
+					tags.add(observer.getUname()+"_fans");
+				}
+				JPushInterface.setAliasAndTags(getActivity(),
+						share.getString(UserLoginActivity.UID, "tee"), tags,
+						new TagAliasCallback() {
+
+							@Override
+							public void gotResult(int code, String alias,
+									Set<String> tags) {
+								// TODO Auto-generated method stub
+								switch (code) {
+								case 0:
+									Log.d("alias", "set alias success");
+								default:
+									Log.d("alias", "errorCode:" + code);
+								}
+							}
+						});
 			}
 		}		
 	}

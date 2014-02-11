@@ -62,6 +62,7 @@ public class UserObserverActivity extends BaseActivity {
 		setContentView(R.layout.user_list);
 		initControl();
 		initSharedPreference();
+		title.setBackgroundResource(0);
 		title.setText("全部关注");
 		intent = getIntent();
 		if(savedInstanceState!=null) {
@@ -178,7 +179,7 @@ public class UserObserverActivity extends BaseActivity {
 		listContent = (LinearLayout) findViewById(R.id.list_content);
 		loadFailed = (LinearLayout) findViewById(R.id.view_load_fail);
 		goback = (ImageView) findViewById(R.id.details_imageview_gohome);
-		title = (TextView) findViewById(R.id.details_textview_title);
+		title = (TextView) findViewById(R.id.tv_detail_title);
 	}
 	
 	/**

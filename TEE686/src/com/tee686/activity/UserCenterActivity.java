@@ -3,8 +3,6 @@ package com.tee686.activity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -20,15 +18,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
-
 import com.casit.tee686.R;
 import com.readystatesoftware.viewbadger.BadgeView;
 import com.tee686.config.Constants;
@@ -39,7 +33,6 @@ import com.tee686.https.NetWorkHelper;
 import com.tee686.indicator.PageIndicator;
 import com.tee686.ui.base.BaseFragmentActivity;
 import com.tee686.utils.IntentUtil;
-import com.tee686.view.UserCollectFragment;
 import com.tee686.view.UserCollectionFragment;
 import com.tee686.view.UserIntroFragment;
 import com.tee686.view.UserLogOutFragment;
@@ -341,19 +334,7 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Constants.ReceiverAction.CHECK_NEW_PUB);
 		registerReceiver(checkNewReceiver, filter);
-        JPushInterface.setAliasAndTags(this, share.getString(UserLoginActivity.UID, "tee"), null, new TagAliasCallback() {
-			
-			@Override
-			public void gotResult(int code, String alias, Set<String> tags) {
-				// TODO Auto-generated method stub
-				switch(code) {
-				case 0:
-					Log.d("alias", "set alias success");
-				default:
-					Log.d("alias", "errorCode:"+code);	
-				}
-			}
-		});
+       
 	}
 	
 	@Override

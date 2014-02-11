@@ -2,12 +2,14 @@ package com.tee686.service.base;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 
 import com.tee686.config.ContentFlag;
 import com.tee686.utils.SystemConstant;
 
 import android.media.AudioManager;
-import android.media.AudioRecord;
 import android.media.AudioTrack;
 import android.util.Log;
 
@@ -17,19 +19,30 @@ public class RecordPlayThread extends Thread{
 	private String path;
 	private boolean runFlag = false;
 	public RecordPlayThread() {
-		bufferSize = AudioRecord.getMinBufferSize(
+		bufferSize = AudioTrack.getMinBufferSize(
 				SystemConstant.SAMPLE_RATE_IN_HZ,
-				SystemConstant.CHANNEL_CONFIG,
+				SystemConstant.CHANNEL_CONFIG_IN,
 				SystemConstant.AUDIO_FORMAT);
 		track = new AudioTrack(AudioManager.STREAM_MUSIC,
 				SystemConstant.SAMPLE_RATE_IN_HZ,
-				SystemConstant.CHANNEL_CONFIG,
+				SystemConstant.CHANNEL_CONFIG_IN,
 				SystemConstant.AUDIO_FORMAT, bufferSize*2,
 				AudioTrack.MODE_STREAM);
 	}
 	public void run() {
 		try {
-			BufferedInputStream dis = new BufferedInputStream(new FileInputStream(path));
+			InputStream in;
+			if(path.startsWith("http")) {
+				URL url = new URL(path);
+				URLConnection conn = url.openConnection();
+				conn.setConnectTimeout(5000);
+				conn.setReadTimeout(5000);
+				conn.connect();
+				in = conn.getInputStream();				
+			} else {
+				in = new FileInputStream(path);
+			}
+			BufferedInputStream dis = new BufferedInputStream(in);
 			byte[] buffer = new byte[bufferSize];
 			// 由于AudioTrack播放的是流，所以，我们需要一边播放一边读取
 			int length = 0;
@@ -50,6 +63,7 @@ public class RecordPlayThread extends Thread{
 		} catch (Exception e) {
 			Log.i(ContentFlag.TAG, "thread is closed");
 			e.printStackTrace();
+			track = null;
 		}
 	
 	}

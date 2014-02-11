@@ -2,7 +2,7 @@ package com.tee686.entity;
 
 public class Observer {
 
-	private String uname;//关注者
+	private String uname;//关注者(粉丝)
 	private String username;//被关注者
 	private String headimg;//关注者头像
 	private String headimage;//被关注者头像

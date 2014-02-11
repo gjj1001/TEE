@@ -8,7 +8,8 @@ public class SystemConstant {
 	//录制频率
 	public final static int SAMPLE_RATE_IN_HZ = 8000;
 	//录制通道
-	public final static int CHANNEL_CONFIG = AudioFormat.CHANNEL_CONFIGURATION_MONO;
+	public final static int CHANNEL_CONFIG_IN = AudioFormat.CHANNEL_CONFIGURATION_MONO;
+	public final static int CHANNEL_CONFIG_OUT = AudioFormat.CHANNEL_OUT_MONO;
 	//编码格式
 	public final static int AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
 }

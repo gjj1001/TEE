@@ -66,6 +66,7 @@ public class UserInfoActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.user_info);
 		initControl();
+		title.setBackgroundResource(0);
 		title.setText("个人资料");
 		Intent intent = getIntent();
 		getStringExtra(intent);
@@ -105,6 +106,23 @@ public class UserInfoActivity extends BaseActivity {
             }
         });		
 		
+		sendmsg.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(share.contains(UserLoginActivity.KEY)) {
+					if(observ.getText().toString().equals("已关注")) {
+						IntentUtil.startActivity(UserInfoActivity.this, ReplyActivity.class,
+								new BasicNameValuePair("uname", username));
+					} else {
+						showShortToast("关注后可发送消息");
+					}					
+				} else {
+					showShortToast("登陆加关注后可发送消息");
+				}
+				
+			}
+		});
 	}
 	
 	@Override
@@ -148,7 +166,7 @@ public class UserInfoActivity extends BaseActivity {
 		observ = (Button) findViewById(R.id.button_add_user);
 		sendmsg = (Button) findViewById(R.id.button_send_message);
 		gohome = (ImageView) findViewById(R.id.details_imageview_gohome);
-		title = (TextView) findViewById(R.id.details_textview_title);
+		title = (TextView) findViewById(R.id.tv_detail_title);
 	}
 
 	private void getStringExtra(Intent intent) {

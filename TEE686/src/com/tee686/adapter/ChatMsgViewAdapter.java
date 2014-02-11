@@ -21,9 +21,11 @@ import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 /**
  * 聊天页面ListView内容适配器
@@ -31,15 +33,17 @@ import android.widget.TextView;
 public class ChatMsgViewAdapter extends BaseAdapter{
 	private Context context;
     private LayoutInflater mInflater;
-    private List<Message> msgList;
+    public List<Message> msgList;
+    private ListView lv;
     private String uname;
     private Timer timer = new Timer();
     RecordPlayService playService = new RecordPlayService();
     public static String currMsgId="";		//当前正在播放语音的ID
-    public ChatMsgViewAdapter(Context context, String uname, List<Message> msgList) {
+    public ChatMsgViewAdapter(Context context, String uname, List<Message> msgList, ListView lv) {
         this.context = context;
         this.msgList = msgList;
         this.uname = uname;
+        this.lv = lv;
         mInflater = LayoutInflater.from(this.context);
     }
 
@@ -105,10 +109,10 @@ public class ChatMsgViewAdapter extends BaseAdapter{
 					final String path = msg.getRecord_path();
 					if(null!= path && !"".equals(path)){
 						try {
-							if(currMsgId.equals(msg.getMsgId())){
+							if(currMsgId.equals(msg.getSend_person())){
 								Log.i(ContentFlag.TAG, "playService.ifThreadRun:"+playService.ifThreadRun());
 							}
-							if(currMsgId.equals(msg.getMsgId()) && playService.ifThreadRun()) {
+							if(currMsgId.equals(msg.getSend_person()) && playService.ifThreadRun()) {
 								playService.stop();
 								return;
 							}
@@ -143,17 +147,26 @@ public class ChatMsgViewAdapter extends BaseAdapter{
 				}
 			});
 	    }
+	    viewHolder.msgBgView.setOnLongClickListener(new OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View v) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		});
 
 	    if(null!= msg.getBitmap()){
 	    	ImageUtil.setThumbnailView(msg.getBitmap(), viewHolder.ivUserImage, context, new ImageCallback() {
-
+				
 				@Override
 				public void loadImage(Bitmap bitmap, String imagePath) {
-					// TODO Auto-generated method stub
+					
+						ImageView img = (ImageView) lv.findViewWithTag(imagePath);
+						img.setImageBitmap(bitmap);
 					
 				}
-	    		
-	    	}, true);
+			}, true);
 	    }
 	    return convertView;
     }

@@ -61,13 +61,11 @@ public class BulletinDetailActivity extends BaseActivity {
 	private ImageButton ok;
 	private DetailAdapter adapter;
 	private String pubtime;
-	private String comtime;
 	private String headimage;
 	private String uname;
 	private String author;
 	private String imagefile;
 	private String pubContent;
-	private String comContent;
 	private String result;
 	private List<Comment> mComments = new ArrayList<Comment>();
 	
@@ -169,11 +167,10 @@ public class BulletinDetailActivity extends BaseActivity {
 		Intent intent = getIntent();
         bundle = intent.getExtras();
         if(bundle.containsKey(JPushInterface.EXTRA_NOTIFICATION_TITLE)) {
-        	 String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+        	String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
      		try {
      			JSONObject json = new JSONObject(extras);
      			pubtime = json.optString("pubtime");
-     			comtime = json.optString("comtime");
      			headimage = json.optString("headimage");
      			imagefile = json.optString("imagefile");
      			uname = json.optString("author");
@@ -571,7 +568,6 @@ public class BulletinDetailActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			if(!"".equals(result)) {
-				
 				editText.setText("");
 				mComments.clear();
 				showShortToast(result);				

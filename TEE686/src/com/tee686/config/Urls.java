@@ -38,7 +38,11 @@ public class Urls {
 	public static final String USER_RECENTLY_PUBLISH = BASIC_URL + "/UserRecentlyPubServlet?uname=%s";
 	public static final String USER_COLLECTION = BASIC_URL + "/UserCollectionServlet";
 	public static final String USER_REPLY = BASIC_URL + "/UserReplyServlet";
+	public static final String USER_CONVERSATION = BASIC_URL + "/UserConversationServlet";
+	public static final String USER_CONTEXT = BASIC_URL + "/UserConTextServlet";
+	public static final String USER_NOTIFY_FANS = BASIC_URL + "/UserNotifyFansServlet";
 	public static final String USER_OBSERVER = BASIC_URL + "/UserObserverServlet";
+	public static final String USER_MESSAGE = BASIC_URL + "/UserMessageServlet";
 	public static final String USER_FAN = BASIC_URL + "/UserFanServlet";
 
 	/**

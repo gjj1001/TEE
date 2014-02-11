@@ -9,7 +9,8 @@ package com.tee686.entity;
 public class Message {
 	private int id;
 	private String send_ctn;
-	private String send_person;
+	private String send_person;//发送消息的人
+	private String reply_person;//接收消息的人
 	private String send_date;
 	private String record_path;
 	private boolean ifyuyin = false; // 是否是语音消息
@@ -49,12 +50,13 @@ public class Message {
 	}
 
 	public Message(String send_ctn, String send_person, String send_date,
-			String bitmap) {
+			String bitmap, String reply_person) {
 		super();
 		this.send_ctn = send_ctn;
 		this.send_person = send_person;
 		this.send_date = send_date;
 		this.bitmap = bitmap;
+		this.reply_person = reply_person;
 	}
 
 	public Message() {
@@ -99,6 +101,14 @@ public class Message {
 
 	public void setMsgId(String msgId) {
 		this.msgId = msgId;
+	}
+
+	public String getReply_person() {
+		return reply_person;
+	}
+
+	public void setReply_person(String reply_person) {
+		this.reply_person = reply_person;
 	}
 	
 }
