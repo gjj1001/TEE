@@ -22,6 +22,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.map.ObjectMapper;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -50,7 +51,9 @@ import android.widget.Toast;
 import com.alipay.android.appDemo4.Base64;
 import com.casit.tee686.R;
 import com.tee686.config.Urls;
+import com.tee686.entity.Comment;
 import com.tee686.entity.PubContent;
+import com.tee686.https.HttpUtils;
 import com.tee686.ui.base.BaseActivity;
 import com.tee686.utils.DateUtil;
 
@@ -73,9 +76,11 @@ public class EditActivity extends BaseActivity {
 	private Uri cropImageUri; //裁剪图片存储位置
 	protected Intent intent = null;
 	private PubContent pubContent;
+	private String pubtime;
 	SharedPreferences shared;	
 	
-private String info = "上传失败";//服务器返回的信息
+	private String info = null;//服务器返回的信息
+	private String imagefile;//服务器返回的上传图片路径
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,12 +88,8 @@ private String info = "上传失败";//服务器返回的信息
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.publish_bulletin);
 		initControl();
-		initSharePreferences();		
-//		mStorage = Frontia.getStorage();
-		if(null != savedInstanceState) {
-			ivPic.setImageBitmap((Bitmap) savedInstanceState.getParcelable("image"));
-			content.setText(savedInstanceState.getString("content"));
-		}
+		initSharePreferences();	
+//		mStorage = Frontia.getStorage();		
 		
 		ivBack.setOnClickListener(new OnClickListener() {
             @Override
@@ -169,13 +170,24 @@ private String info = "上传失败";//服务器返回的信息
 			@Override
 			public void onClick(View v) {
 				if(!content.getText().toString().equals("")) {
-					new PublishTaskAsync().execute(Urls.USER_PUBLISH);
+					pubtime = DateUtil.getCurrentDateTime();
+					new PublishTaskAsync().execute(Urls.USER_PUBLISH);					
 //					saveData();
 				} else {
 					showShortToast("请输入内容后再发布");
 				}
 			}
 		});
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onRestoreInstanceState(savedInstanceState);
+		if(cropBitmap!=null) {
+			ivPic.setImageBitmap((Bitmap) savedInstanceState.getParcelable("image"));
+		}
+		content.setText(savedInstanceState.getString("content"));
 	}
 
 	private void initControl() {
@@ -309,7 +321,9 @@ private String info = "上传失败";//服务器返回的信息
 	protected void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
-		outState.putParcelable("image", cropBitmap);
+		if(cropBitmap!=null) {
+			outState.putParcelable("image", cropBitmap);
+		}
 		outState.putString("content", content.getText().toString());
 	}
 	
@@ -461,7 +475,7 @@ private String info = "上传失败";//服务器返回的信息
 			//json格式数据网络传输			
 			StringBuffer result = new StringBuffer();
 			pubContent = new PubContent(content.getText().toString(),
-					DateUtil.getCurrentDateTime(), shared.getString(
+					pubtime, shared.getString(
 							UserLoginActivity.PIC, ""), shared.getString(
 							UserLoginActivity.UID, ""));
 			try {
@@ -487,7 +501,7 @@ private String info = "上传失败";//服务器返回的信息
 					while (in.read(connbuffer) != -1) {
 						result.append(new String(connbuffer, "utf-8"));
 					}
-					info = result.toString();
+//					info = result.toString();
 					in.close();
 					conn.disconnect();
 					flag = true;
@@ -518,16 +532,48 @@ private String info = "上传失败";//服务器返回的信息
 			super.onPostExecute(result);
 			mAlertDialog.dismiss();
 			if (result) {
-				showLongToast(info);				
+				showLongToast("发布成功");
+				imagefile = info;
+				String url = String.format(Urls.USER_LEVEL, shared.getString(UserLoginActivity.UID, ""), 5);
+				new UpdateTmAsyncTask().execute(url);
+				new SendMsgTask().execute(Urls.USER_NOTIFY_FANS);
 				Intent intent = new Intent(EditActivity.this, BulletinActivity.class);
 				startActivity(intent);
 				overridePendingTransition(R.anim.umeng_fb_slide_in_from_left, 
-						R.anim.umeng_fb_slide_out_from_right);				
+						R.anim.umeng_fb_slide_out_from_right);	
+				defaultFinish();
 			} else {
 				showLongToast("网络出现问题，请稍后再试");				
 			}
 		}		
 		
+	}
+	
+	public class UpdateTmAsyncTask extends AsyncTask<String, Void, String> {
+
+		String result;
+		@Override
+		protected String doInBackground(String... params) {
+			try {
+				result = HttpUtils.getByHttpClient(EditActivity.this,
+						params[0]);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			return result;
+
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if (result != null) {
+				showShortToast(result);
+			}
+		}
 	}
 
 	/**图片上传服务器
@@ -572,5 +618,32 @@ private String info = "上传失败";//服务器返回的信息
 		return "图片上传失败";
 	}
 	
+	/**
+	 * @author Jason
+	 *向粉丝发送发布公告通知
+	 */
+	class SendMsgTask extends AsyncTask<String, Void, String> {
+		@Override
+		protected String doInBackground(String... params) {
+			Comment value = new Comment(shared.getString(UserLoginActivity.PIC, ""),null,
+					shared.getString(UserLoginActivity.UID, ""), pubtime, DateUtil.getCurrentDateTime(),
+					shared.getString(UserLoginActivity.UID, "")+"_fans", imagefile, content.getText().toString(),
+					shared.getString(UserLoginActivity.UID, ""));
+			return HttpUtils.postByHttpURLConnection(params[0], value);	
+		}
+		
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(!"".equals(result)) {
+				showShortToast(result);				
+//				adapter.notifyDataSetChanged();
+				
+			} else {
+				showShortToast("通知粉丝发布公告失败");
+			}
+		}		
+	}	
 	
 }

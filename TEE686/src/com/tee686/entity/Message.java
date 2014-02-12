@@ -1,7 +1,5 @@
 package com.tee686.entity;
 
-import android.graphics.Bitmap;
-
 /**
  * 消息pojo
  * 
@@ -11,12 +9,13 @@ import android.graphics.Bitmap;
 public class Message {
 	private int id;
 	private String send_ctn;
-	private String send_person;
+	private String send_person;//发送消息的人
+	private String reply_person;//接收消息的人
 	private String send_date;
 	private String record_path;
 	private boolean ifyuyin = false; // 是否是语音消息
 	private long recordTime; // 语音消息持续的时间
-	private Bitmap bitmap;
+	private String bitmap; //用户头像
 	private String msgId;
 	public String getSend_ctn() {
 		return send_ctn;
@@ -42,21 +41,22 @@ public class Message {
 		this.send_date = send_date;
 	}
 
-	public Bitmap getBitmap() {
+	public String getBitmap() {
 		return bitmap;
 	}
 
-	public void setBitmap(Bitmap bitmap) {
+	public void setBitmap(String bitmap) {
 		this.bitmap = bitmap;
 	}
 
 	public Message(String send_ctn, String send_person, String send_date,
-			Bitmap bitmap) {
+			String bitmap, String reply_person) {
 		super();
 		this.send_ctn = send_ctn;
 		this.send_person = send_person;
 		this.send_date = send_date;
 		this.bitmap = bitmap;
+		this.reply_person = reply_person;
 	}
 
 	public Message() {
@@ -101,6 +101,14 @@ public class Message {
 
 	public void setMsgId(String msgId) {
 		this.msgId = msgId;
+	}
+
+	public String getReply_person() {
+		return reply_person;
+	}
+
+	public void setReply_person(String reply_person) {
+		this.reply_person = reply_person;
 	}
 	
 }

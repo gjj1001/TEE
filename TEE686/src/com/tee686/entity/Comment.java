@@ -4,20 +4,27 @@ package com.tee686.entity;
 public class Comment {
 	
 	private String headimage;
-	private String content;
+	private String imagefile;
+	private String comContent;
+	private String pubContent;
 	private String username;
+	private String author;
+	private String reply;
 	private String pubtime;
 	private String comtime;
 	private Integer comid;
 	
-	public Comment(String headimage, String content, String username,String pubtime,
-			String comtime) {
+	public Comment(String headimage, String comContent, String username,String pubtime,
+			String comtime, String reply, String imagefile, String pubContent, String author) {
 		this.headimage = headimage;
-		this.content = content;
+		this.comContent = comContent;
 		this.username = username;
 		this.pubtime = pubtime;
 		this.comtime = comtime;
-		
+		this.reply = reply;
+		this.imagefile = imagefile;
+		this.pubContent = pubContent;
+		this.author = author;
 	}
 	
 	public Comment() {}
@@ -28,12 +35,7 @@ public class Comment {
 	public void setHeadimage(String headimage) {
 		this.headimage = headimage;
 	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -57,6 +59,46 @@ public class Comment {
 	}
 	public void setComid(Integer comid) {
 		this.comid = comid;
+	}
+
+	public String getReply() {
+		return reply;
+	}
+
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
+
+	public String getImagefile() {
+		return imagefile;
+	}
+
+	public void setImagefile(String imagefile) {
+		this.imagefile = imagefile;
+	}
+
+	public String getComContent() {
+		return comContent;
+	}
+
+	public void setComContent(String comContent) {
+		this.comContent = comContent;
+	}
+
+	public String getPubContent() {
+		return pubContent;
+	}
+
+	public void setPubContent(String pubContent) {
+		this.pubContent = pubContent;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 	
 	

@@ -5,6 +5,7 @@ import java.util.Locale;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
@@ -49,6 +50,8 @@ public class UserLoginActivity extends BaseActivity {
 	public static String SEX = "sex";// 性别
 	public static String PIC = "pic";// 头像图片地址
 	public static String PLA = "plat";//第三方登陆平台
+	public static String LEVEL = "level";//v望
+	public static String MONEY = "money";//v币
 	public static String Scope_Basic = "basic";// 用户基本权限，可以获取用户的基本信息
 	 public static String Scope_Netdisk = "netdisk";// 获取用户在个人云存储中存放的数据
 
@@ -134,6 +137,7 @@ public class UserLoginActivity extends BaseActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				IntentUtil.start_activity(UserLoginActivity.this, BulletinActivity.class);
+				finish();
 			}
 		});
 
@@ -179,8 +183,14 @@ public class UserLoginActivity extends BaseActivity {
 			editUserID.setText(share.getString(UID, ""));
 			editPwd.setText(share.getString(PWD, ""));
 		}
+		if(!share.contains(KEY)) {
+			Intent intent = new Intent(this, DisclaimerActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+			startActivity(intent);
+//			overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+		}
 	}
-
+ 
 	/**
 	 * 
 	 */
@@ -409,5 +419,15 @@ public class UserLoginActivity extends BaseActivity {
 		});		
 
 	}
+	
+	/*@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if(NetWorkHelper.isNetworkAvailable(this)) {
+			Intent intent = new Intent(this, CheckNewService.class);
+			startService(intent);
+		}		
+	}*/
 
 }

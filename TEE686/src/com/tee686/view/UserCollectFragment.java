@@ -39,6 +39,7 @@ public class UserCollectFragment extends Fragment implements OnItemClickListener
 	private SimpleAdapter mAdapter;
 	private Activity mActivity;		
 	private Cursor cursor;	
+	private LayoutInflater inflater;
 	
 	public UserCollectFragment(Activity activity) {
 		mActivity = activity;
@@ -49,18 +50,13 @@ public class UserCollectFragment extends Fragment implements OnItemClickListener
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreateView(inflater, container, savedInstanceState);
+		this.inflater = inflater;
 		inflater.getContext();
 		View view = inflater.inflate(R.layout.user_collect_list, null);
 		mlv = (ListView) view.findViewById(R.id.user_listview_collect);
 		mlist = new ArrayList<Map<String, Object>>();
 		new DataAsyncTask().execute();
-		mAdapter = new SimpleAdapter(inflater.getContext(), mlist,
-				R.layout.user_collect_list_item, new String[] { "content",
-						"time" }, new int[] {R.id.user_textview_collectContent, 
-			R.id.user_textview_collectTitle});		
-		mlv.setAdapter(mAdapter);
-		mlv.setOnItemClickListener(this);
-		mlv.setOnItemLongClickListener(this);
+		
 		return view;
 	}
 
@@ -130,6 +126,20 @@ public class UserCollectFragment extends Fragment implements OnItemClickListener
 			getData();
 			return null;
 		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			mAdapter = new SimpleAdapter(inflater.getContext(), mlist,
+					R.layout.user_collect_list_item, new String[] { "content",
+							"time" }, new int[] {
+							R.id.user_textview_collectContent,
+							R.id.user_textview_collectTitle });
+			mlv.setAdapter(mAdapter);
+			mlv.setOnItemClickListener(UserCollectFragment.this);
+			mlv.setOnItemLongClickListener(UserCollectFragment.this);
+		}
 		
 	}
 	
@@ -165,7 +175,7 @@ public class UserCollectFragment extends Fragment implements OnItemClickListener
 			DBHelper dbHelper = DBHelper.getInstance(getActivity());			
       	    dbHelper.delete(PushCacheColumn.TABLE_NAME, cursor.getInt(5)); 
       	    cursor.requery();
-      	    mlist.remove(params[0].intValue());
+      	    mlist.remove(params[0].intValue());			
 			return null;
 		}
 

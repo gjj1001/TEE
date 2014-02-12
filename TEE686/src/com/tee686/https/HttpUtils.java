@@ -54,7 +54,8 @@ public class HttpUtils {
 			conn.setUseCaches(false);
 			conn.setDoInput(true);
 			conn.setRequestMethod("POST");
-			conn.setReadTimeout(5000);
+			conn.setReadTimeout(4000);
+			conn.setConnectTimeout(5000);
 			conn.setRequestProperty("Content-Type",	"text/plain; charset=UTF-8");
 			conn.setRequestProperty("Content-Length", String.valueOf(data.length));
 			OutputStream out = conn.getOutputStream();
@@ -80,7 +81,7 @@ public class HttpUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "网络问题，请稍后再试";
+		return null;
 	}
 	
 	// ------------------------------------------------------------------------------------------

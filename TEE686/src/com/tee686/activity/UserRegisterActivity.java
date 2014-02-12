@@ -159,7 +159,7 @@ public class UserRegisterActivity extends BaseActivity {
 			StringBuffer result = new StringBuffer();
 			userInfoItem = new UserInfoItem(mobile.getText().toString(), username.getText().toString(),
 					pwd.getText().toString(), share.getString(SEX, ""), share.getString(BIR, ""), share.getString(PVC, ""), 
-					share.getString(CITY, ""), format.format(new Date()), share.getString(PLA, ""));
+					share.getString(CITY, ""), format.format(new Date()), share.getString(PLA, ""), share.getString(PIC, ""));
 			try {				
 				byte[] data = new ObjectMapper().writeValueAsBytes(userInfoItem);
 				URL url = new URL(params[0]);

@@ -60,7 +60,8 @@ public class UserLogOutFragment extends Fragment implements OnClickListener {
 			SharedPreferences share = mContext.getSharedPreferences(
 					UserLoginActivity.SharedName, Context.MODE_PRIVATE);
 			SharedPreferences.Editor edit = share.edit();
-			edit.clear().commit();
+			edit.remove(UserLoginActivity.UID).remove(UserLoginActivity.PWD)
+			.remove(UserLoginActivity.KEY).remove(UserLoginActivity.LEVEL).commit();
 			mActivity.finish();
 			break;
 		}

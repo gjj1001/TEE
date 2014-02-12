@@ -79,6 +79,38 @@ public class ImageUtil {
 			iv_item_image.setTag(imagePath);
 		}
 	}
+	
+	/**
+	 * 入口
+	 * 
+	 * @param imageUrl
+	 * @param iv_item_image
+	 * @param context
+	 * @param callback
+	 * @param b
+	 * @param v
+	 */
+	public static void setThumbnailView(String imageUrl,
+			ImageView iv_item_image, Context context, ImageCallback1 callback,
+			boolean b, View v) {
+		DBHelper dbHelper = DBHelper.getInstance(context);
+		String md5 = ImageUtil.md5(imageUrl);
+		
+		
+		// 缓存目录
+
+		if (!CommonUtil.sdCardIsAvailable())/* true 为可用 */{
+			String cachePath = context.getCacheDir().getAbsolutePath() + "/" + md5; // data里的缓存
+			setThumbnailImage(iv_item_image, imageUrl, cachePath, dbHelper,
+					callback, b, v, context);
+			iv_item_image.setTag(cachePath);
+		} else {
+			String imagePath = getExternalCacheDir(context) + File.separator + md5; // sd卡
+			setThumbnailImage(iv_item_image, imageUrl, imagePath, dbHelper,
+					callback, b, v, context);
+			iv_item_image.setTag(imagePath);
+		}
+	}
 
 	/**
 	 * 获得程序在sd卡上的cahce目录
@@ -115,12 +147,38 @@ public class ImageUtil {
 	 * @param callback
 	 * @param b
 	 */
-	private static void setThumbnailImage(ImageView view, String imageUrl,
+	public static void setThumbnailImage(ImageView view, String imageUrl,
 			String cachePath, DBHelper dbHelper, ImageCallback callback,
 			boolean b) {
 		Bitmap bitmap = null;
 		bitmap = ImageUtil.loadThumbnailImage(cachePath, imageUrl, dbHelper,
 				callback, b);
+		if (bitmap == null) {// 先查找数据库，再查找本地sd卡,若没有.再从网站加载，若网站上没有图片或错误时返回null
+			// 设置默认图片
+//			view.setVisibility(View.GONE);
+		} else {
+			// 设置本地SD卡缓存图片
+			view.setImageBitmap(bitmap);
+			
+		}
+	}
+	
+	/**
+	 * 设置图片函数
+	 * 
+	 * @param view
+	 * @param imageUrl
+	 * @param cachePath
+	 * @param callback
+	 * @param b
+	 * @param v Adapter中视图控件
+	 */
+	public static void setThumbnailImage(ImageView view, String imageUrl,
+			String cachePath, DBHelper dbHelper, ImageCallback1 callback,
+			boolean b, View v, Context context) {
+		Bitmap bitmap = null;
+		bitmap = ImageUtil.loadThumbnailImage(cachePath, imageUrl, dbHelper,
+				callback, b, v, context);
 		if (bitmap == null) {// 先查找数据库，再查找本地sd卡,若没有.再从网站加载，若网站上没有图片或错误时返回null
 			// 设置默认图片
 //			view.setVisibility(View.GONE);
@@ -348,6 +406,78 @@ public class ImageUtil {
 		}
 		return null;
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public static Bitmap loadThumbnailImage(final String imagePath,
+			final String imgUrl, final DBHelper dbHelper,
+			final ImageCallback1 callback, final boolean b, final View v, final Context context) {
+		// 在软链接缓存中，则返回Bitmap对象
+		if (imageCache.containsKey(imgUrl)) {
+			SoftReference reference = imageCache.get(imgUrl);
+			Bitmap bitmap = (Bitmap) reference.get();
+			if (bitmap != null) {
+				return bitmap;
+			}
+		}
+		// 若软链接缓存没有
+		Bitmap bitmap = null;
+		// 查询数据库 返回bitmap
+		bitmap = getImageFromDB(imagePath, imgUrl, dbHelper);// 从本地加载
+		if (bitmap != null) {
+			return bitmap;
+		} else {
+			/*if("".equals(imgUrl)) {
+				Bitmap headimg = BitmapFactory.decodeResource(context.getResources(), R.drawable.zh_icon3);
+				return headimg;
+			}*/
+			// 从网上加载
+			final Handler handler = new Handler() {
+				@Override
+				public void handleMessage(Message msg) {
+					if (msg.obj != null) {
+						Bitmap bitmap = (Bitmap) msg.obj;
+						callback.loadImage(bitmap, imagePath, v);
+					}
+				}
+			};
+			Runnable runnable = new Runnable() {
+				@SuppressWarnings("unchecked")
+				@Override
+				public void run() {
+					try {						
+						URL url = new URL(imgUrl);
+						URLConnection conn = url.openConnection();
+						conn.setConnectTimeout(5000);
+						conn.setReadTimeout(5000);
+						conn.connect();
+						InputStream in = conn.getInputStream();
+						BitmapFactory.Options options = new Options();
+						options.inSampleSize = 2;
+						Bitmap bitmap = BitmapFactory.decodeStream(in,
+								new Rect(0, 0, 0, 0), options);
+						imageCache.put(imgUrl, new SoftReference(bitmap));
+
+						Message msg = handler.obtainMessage();
+						msg.obj = bitmap;
+						handler.sendMessage(msg);
+						if (bitmap != null) {
+							// 保存文件到sd卡
+							saveImage(imagePath, bitmap);
+							// 保存到数据库
+							saveImageByDb(imgUrl, dbHelper);
+						}
+					} catch (MalformedURLException e) {
+						e.printStackTrace();
+						Log.e(ImageUtil.class.getName(), "图片url不存在");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			};
+			ThreadPoolManager.getInstance().addTask(runnable);
+		}
+		return null;
+	}
 
 	/**
 	 * MD5
@@ -355,13 +485,17 @@ public class ImageUtil {
 	 * @param paramString
 	 * @return
 	 */
-	private static String md5(String paramString) {
+	public static String md5(String paramString) {
 		return MD5.encode(paramString);
 	}
 
 	// ///////////////////////////////////////////////////////////////////////
 	// 公共方法
 
+	public interface ImageCallback1 {
+		public void loadImage(Bitmap bitmap, String imagePath, View v);
+	}
+	
 	public interface ImageCallback {
 		public void loadImage(Bitmap bitmap, String imagePath);
 	}

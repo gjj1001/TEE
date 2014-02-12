@@ -12,11 +12,11 @@
         android:src="@drawable/button_details_gohome" />
 
     <TextView
-        android:id="@+id/details_textview_title"
+        android:id="@+id/tv_detail_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="精选资讯"
+        android:background="@drawable/newlogda"
         android:textColor="#fff"
         android:textSize="20sp" />
 

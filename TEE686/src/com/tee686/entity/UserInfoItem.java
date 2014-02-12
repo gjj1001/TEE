@@ -18,7 +18,7 @@ public class UserInfoItem implements Serializable {
 	private Integer tp = 0; //用户威望
 	private Integer userid;
 	private String regtime;
-//	private String head_image_url;
+	private String headimgurl;
 	private String platform;//第三方登陆平台
 //	private Integer flag = 0;
 //	private Integer myselfid;
@@ -27,7 +27,7 @@ public class UserInfoItem implements Serializable {
 	
 	public UserInfoItem(String mobile, String username, String pwd, String sex,
 			String birthday, String province, String city, String regtime,
-			String platform) {
+			String platform, String headimgurl) {
 		super();
 		this.mobile = mobile;
 		this.username = username;
@@ -38,6 +38,7 @@ public class UserInfoItem implements Serializable {
 		this.city = city;
 		this.regtime = regtime;		
 		this.platform = platform;
+		this.headimgurl = headimgurl;
 	}
 	
 	public UserInfoItem() {
@@ -117,6 +118,14 @@ public class UserInfoItem implements Serializable {
 	}
 	public void setPlatform(String platform) {
 		this.platform = platform;
+	}
+
+	public String getHeadimgurl() {
+		return headimgurl;
+	}
+
+	public void setHeadimgurl(String headimgurl) {
+		this.headimgurl = headimgurl;
 	}
 
 	/*public String getHead_image_url() {

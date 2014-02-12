@@ -3,14 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f5f5f5"
-    android:orientation="vertical"
-    android:paddingLeft="30dp"
-    android:paddingRight="30dp"
-    android:paddingTop="20dp" >
+    android:orientation="vertical" >
+
+    <include layout="@layout/detail_title" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingTop="5dp" >
 
         <ImageView
             android:id="@+id/user_imageview_icon"
@@ -40,9 +41,9 @@
             android:layout_marginBottom="5dp"
             android:layout_toRightOf="@id/user_imageview_icon"
             android:paddingRight="15dp"
-            android:text="实习生"
+            android:text="@string/user_center_student"
             android:textColor="@color/black"
-            android:textSize="@dimen/user_alert_size" />
+            android:textSize="@dimen/user_alert_size"/>
 
         <TextView
             android:id="@+id/user_textview_img"
@@ -52,7 +53,8 @@
             android:layout_toRightOf="@id/user_imageview_icon"
             android:text="★"
             android:textColor="#f00"
-            android:textSize="@dimen/user_alert_size" />
+            android:textSize="@dimen/user_alert_size"
+            android:visibility="gone" />
         
         <TextView
             android:id="@+id/user_textview_zone"
@@ -65,12 +67,49 @@
             android:text="地区"
             android:textColor="@color/black"
             android:textSize="@dimen/user_alert_size" />
+        
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_textview_zone"
+            android:layout_toRightOf="@id/user_imageview_icon"
+            android:background="@drawable/shape_corner_border"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/user_textview_observers"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="关注： 0"
+                android:textColor="@color/defaultTextColor" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/dis_behind_verticalside" />
+
+            <TextView
+                android:id="@+id/user_textview_fans"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="粉丝： 0"
+                android:textColor="@color/defaultTextColor" />
+        </LinearLayout>
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:paddingLeft="20dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -86,34 +125,20 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:lineSpacingExtra="2dp"
-            android:text="2013-9-1"
+            android:text="20130901"
             android:textColor="@color/defaultTextColor" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/shape_corner_border"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:paddingLeft="20dp" >
 
-        <TextView
-            android:id="@+id/user_textview_e_p"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_marginTop="6dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="v望："
-            android:textColor="@color/defaultTextColor" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/dis_behind_verticalside" />
-
-        <TextView
+       <TextView
             android:id="@+id/user_textview_e_m"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -123,13 +148,32 @@
             android:gravity="center"
             android:text="v币："
             android:textColor="@color/defaultTextColor" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/dis_behind_verticalside" />
+
+        
+         <TextView
+            android:id="@+id/user_textview_e_p"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="v望："
+            android:textColor="@color/defaultTextColor" />
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:paddingTop="8dp" >
+        android:paddingBottom="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="5dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -170,13 +214,36 @@
             android:textSize="@dimen/user_alert_size" />
     </FrameLayout>
     
-    <Button
-        android:id="@+id/button_add_user"
+     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/back_submit_style"
-        android:text="@string/add_user" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal" >
+	    
+	    <Button
+	        android:id="@+id/button_add_user"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:layout_marginBottom="5dp"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginTop="0dp"
+	        android:background="@drawable/back_submit_style"
+	        android:text="@string/observ" />
+	    
+	    <Button
+	        android:id="@+id/button_send_message"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:layout_marginBottom="5dp"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginTop="0dp"
+	        android:background="@drawable/back_submit_style"
+	        android:text="@string/send_message" />
+	    </LinearLayout>
 
 </LinearLayout>

@@ -1,51 +1,56 @@
 package com.tee686.view;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
+import org.apache.http.message.BasicNameValuePair;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONArray;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.GridView;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 import com.casit.tee686.R;
+import com.readystatesoftware.viewbadger.BadgeView;
+import com.tee686.activity.UserFanActivity;
 import com.tee686.activity.UserLoginActivity;
+import com.tee686.activity.UserObserverActivity;
+import com.tee686.activity.UserPubContentsActivity;
+import com.tee686.config.Constants;
+import com.tee686.config.Urls;
+import com.tee686.entity.PubContent;
+import com.tee686.entity.Observer;
 import com.tee686.entity.UserInfoItem;
+import com.tee686.https.HttpUtils;
 import com.tee686.utils.ImageUtil;
+import com.tee686.utils.IntentUtil;
 import com.tee686.utils.ImageUtil.ImageCallback;
 import com.tee686.utils.UserHeadUtil;
 
@@ -53,15 +58,25 @@ import com.tee686.utils.UserHeadUtil;
 public class UserIntroFragment extends Fragment {
 	UserInfoItem mUserInfoItem;
 	private ImageView img;
+	private ImageView info_img;
 	private TextView txtName;
 	private TextView txtRegTime;
 	private TextView txtEP;
 	private TextView txtEM;
-	private GridView gvGrid;
+	private TextView content;
+	private TextView level;
+	private TextView observers;
+	private TextView fans;
+	private LinearLayout layout;
 	SimpleAdapter mAdapter;
-	private List<Map<String, Object>> mList;
 	private Context mContext;
 	private byte[] data;
+	private PubContent pubContent;
+	private List<Observer> listobservers = new ArrayList<Observer>();
+	private List<Observer> listfans = new ArrayList<Observer>();
+	private BadgeView fanBadgeView;
+	private Set<String> tags = new HashSet<String>();
+//	private BadgeView ObserveBadgeView;
 //	private String[] items = new String[] { "选择本地图片", "拍照" };
 	SharedPreferences share;
 	LayoutInflater inflater;
@@ -86,16 +101,38 @@ public class UserIntroFragment extends Fragment {
 		mContext = inflater.getContext();
 		View v = inflater.inflate(R.layout.user_center_intro_fragment, null);
 		initControl(v);
-//		initGridView();
+//		initGridView();		
 		setControl();
+		String url2 = String.format(Urls.USER_RECENTLY_PUBLISH, mUserInfoItem.getUsername());
+		new PubAsyncTask().execute(url2);
 		return v;
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if(!listobservers.isEmpty()) {
+			listobservers.clear();
+		}
+		if(!listfans.isEmpty()) {
+			listfans.clear();
+		}
+		String url1 = String.format(Urls.USER_OBSERVER+"?uname=%s", mUserInfoItem.getUsername());
+		new CheckObserverTask().execute(url1);
+		String url3 = String.format(Urls.USER_OBSERVER+"?username=%s", mUserInfoItem.getUsername());
+		new CheckFanTask().execute(url3);
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Constants.ReceiverAction.CHECK_NEW_FAN);
+		getActivity().registerReceiver(checkNewReceiver, filter);
+		
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putByteArray("bitmap", data);
-		
+		tags.clear();
 	}
 	
 
@@ -116,8 +153,15 @@ public class UserIntroFragment extends Fragment {
 		txtRegTime = (TextView) v.findViewById(R.id.user_textview_reg_time);
 		txtEP = (TextView) v.findViewById(R.id.user_textview_e_p);
 		txtEM = (TextView) v.findViewById(R.id.user_textview_e_m);
-		gvGrid = (GridView) v.findViewById(R.id.user_gridview_medal);
+		content = (TextView) v.findViewById(R.id.user_textView_add);
+		level = (TextView) v.findViewById(R.id.user_textview_level);
+		observers = (TextView) v.findViewById(R.id.user_textview_observers);
+		fans = (TextView) v.findViewById(R.id.user_textview_fans);
+		info_img = (ImageView) v.findViewById(R.id.iv_user_info_img);
 		share = getActivity().getSharedPreferences(UserLoginActivity.SharedName, 0);
+		layout = (LinearLayout) v.findViewById(R.id.ll_badgeview);
+		fanBadgeView = new BadgeView(getActivity(), layout);
+//		ObserveBadgeView = new BadgeView(getActivity(), observers);
 	}
 
 	/*private void initGridView() {
@@ -166,8 +210,18 @@ public class UserIntroFragment extends Fragment {
 	private void setControl() {
 		txtName.setText(mUserInfoItem.getUsername());
 		txtRegTime.setText(mUserInfoItem.getRegtime());
-		txtEP.setText(getString(R.string.user_center_e_coin, mUserInfoItem.getTp()));
-		txtEM.setText(getString(R.string.user_center_e_reputation,  mUserInfoItem.getTm()));		
+		txtEP.setText(getString(R.string.user_center_e_reputation, mUserInfoItem.getTp()));
+		txtEM.setText(getString(R.string.user_center_e_coin,  mUserInfoItem.getTm()));
+		if(mUserInfoItem.getTp()>=100) {
+			level.setText(R.string.user_center_lecturer);
+		} else if(mUserInfoItem.getTp()>=50) {
+			level.setText(R.string.user_center_assistant);
+		}
+		Editor editor = share.edit();
+		editor.putInt(UserLoginActivity.LEVEL, mUserInfoItem.getTp());
+		editor.putInt(UserLoginActivity.MONEY, mUserInfoItem.getTm());
+		editor.putString(UserLoginActivity.PIC, mUserInfoItem.getHeadimgurl());
+		editor.commit();
 		String imgUrl = share.getString(UserLoginActivity.PIC, "");
 		if(null != imgUrl && !"".equals(imgUrl)) {			
 			new imgAsyncTask().execute(imgUrl);			
@@ -302,5 +356,182 @@ public class UserIntroFragment extends Fragment {
 			img.setBackgroundDrawable(drawable);
 		}
 	}*/
+	class PubAsyncTask extends AsyncTask<String, Void, PubContent> {
+
+		private String result;
+		@Override
+		protected PubContent doInBackground(String... params) {
+			try {
+				result = HttpUtils.getByHttpClient(getActivity(), params[0]);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				pubContent = new ObjectMapper().readValue(result, PubContent.class);
+			} catch (JsonParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return pubContent;
+		}
+		
+		@Override
+		protected void onPostExecute(PubContent result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result!=null) {
+				content.setText(result.getContent());
+				if(result.getImageFile()!=null) {
+					ImageUtil.setThumbnailView(result.getImageFile(), UserIntroFragment.this.info_img,
+							getActivity(), callback, true);
+				}
+				content.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						IntentUtil.start_activity(
+								getActivity(), UserPubContentsActivity.class,
+								new BasicNameValuePair("uname", pubContent.getUsername()));
+					}
+				});
+			}
+		}
+		
+	}
 	
+	ImageCallback callback = new ImageCallback() {
+
+		@Override
+		public void loadImage(Bitmap bitmap, String imagePath) {
+			// TODO Auto-generated method stub
+			try {
+				ImageView img = (ImageView) info_img.findViewWithTag(imagePath);
+				img.setImageBitmap(bitmap);
+			} catch (NullPointerException ex) {
+				Log.e("error", "ImageView = null");
+			}
+		}
+	};
+	
+	class CheckObserverTask extends AsyncTask<String, Void, Integer> {
+
+		private String result;
+		@Override
+		protected Integer doInBackground(String... params) {
+			try {
+				result = HttpUtils.getByHttpClient(getActivity(), params[0]);
+				StringBuilder sb = new StringBuilder(result);
+				result = sb.deleteCharAt(result.lastIndexOf(",")).toString();
+//				share.edit().putString("pubContents", result).commit();		
+				JSONArray jsonArray = new JSONArray(result);
+				for(int i=0; i<jsonArray.length(); i++) {
+					String json = jsonArray.getString(i);
+					Observer observer = new ObjectMapper().readValue(json, Observer.class);
+					listobservers.add(observer);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return listobservers.size();
+		}
+		@Override
+		protected void onPostExecute(Integer result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result!=null) {
+				observers.setText("关注："+result);
+				observers.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						IntentUtil.start_activity(
+								getActivity(), UserObserverActivity.class,
+								new BasicNameValuePair("uname", mUserInfoItem.getUsername()));
+					}
+				});
+				
+			}
+		}		
+	}
+	
+	class CheckFanTask extends AsyncTask<String, Void, List<Observer>> {
+
+		private String result;
+		@Override
+		protected List<Observer> doInBackground(String... params) {
+			try {
+				result = HttpUtils.getByHttpClient(getActivity(), params[0]);
+				StringBuilder sb = new StringBuilder(result);
+				result = sb.deleteCharAt(result.lastIndexOf(",")).toString();
+//				share.edit().putString("pubContents", result).commit();		
+				JSONArray jsonArray = new JSONArray(result);
+				for(int i=0; i<jsonArray.length(); i++) {
+					String json = jsonArray.getString(i);
+					Observer observer = new ObjectMapper().readValue(json, Observer.class);
+					listfans.add(observer);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return listfans;
+		}
+		@Override
+		protected void onPostExecute(List<Observer> result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result!=null) {
+				fans.setText("粉丝："+result.size());
+				fans.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						fanBadgeView.hide(true);
+						IntentUtil.start_activity(
+								getActivity(), UserFanActivity.class,
+								new BasicNameValuePair("uname", mUserInfoItem.getUsername()));
+					}
+				});
+				for(Observer observer : result) {
+					tags.add(observer.getUname()+"_fans");
+				}
+				JPushInterface.setAliasAndTags(getActivity(),
+						share.getString(UserLoginActivity.UID, "tee"), tags,
+						new TagAliasCallback() {
+
+							@Override
+							public void gotResult(int code, String alias,
+									Set<String> tags) {
+								// TODO Auto-generated method stub
+								switch (code) {
+								case 0:
+									Log.d("alias", "set alias success");
+								default:
+									Log.d("alias", "errorCode:" + code);
+								}
+							}
+						});
+			}
+		}		
+	}
+	
+	BroadcastReceiver checkNewReceiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			// badgeView.setBackgroundResource(R.drawable.umeng_xp_point_selected);
+			fanBadgeView.setText(String.valueOf(intent.getIntExtra("num", 0)));
+			fanBadgeView.show(true);
+		}
+	};
 }

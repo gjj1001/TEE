@@ -96,7 +96,7 @@
                         android:id="@+id/iv_me_rvio"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/me_rvio640"
+                        android:src="@drawable/me_rvio"
                         android:visibility="visible" />
 
                 </LinearLayout>

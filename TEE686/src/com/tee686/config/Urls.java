@@ -18,6 +18,8 @@ public class Urls {
 	public static final String BLOGS_LIST = BASIC_URL + "/blog?k=lists";
 	public static final String NEWS_LIST = BASIC_URL + "/news?k=lists";
 	public static final String WIKI_LIST = BASIC_URL + "/wiki?k=lists";
+	
+	public static final String CHECK_NEW_PUBCONTENT = BASIC_URL + "/CheckNewPubContentServlet";
 
 	/**
 	 * searchURL
@@ -27,11 +29,21 @@ public class Urls {
 	public static final String USER_LOGIN = BASIC_URL + "/UserloginServlet?uname=%s&pwd=%s";
 	public static final String USER_REGISTER = BASIC_URL + "/UserRegisterServlet";
 	public static final String USER_INFO = BASIC_URL + "/UserInfoServlet?uname=%s";
+	public static final String USER_LEVEL = BASIC_URL + "/UserLevelServlet?uname=%s&num=%s";
 	public static final String USER_PUBLISH = BASIC_URL + "/UserPublishServlet";
-	public static final String USER_UPLOAD_IMAGE = BASIC_URL + "/UserUploadImageServlet";
+	public static final String USER_DELETE_PUBLISH = BASIC_URL + "/UserDeletePubServlet?sendtime=%s";
 	public static final String USER_DOAWLOAD_IMAGE = BASIC_URL + "/UserDownloadImageServlet";
 	public static final String USER_COMMENT = BASIC_URL + "/UserCommentServlet";
 	public static final String USER_COMMENT_DATA = BASIC_URL + "/UserCommentServlet?pubtime=%s";
+	public static final String USER_RECENTLY_PUBLISH = BASIC_URL + "/UserRecentlyPubServlet?uname=%s";
+	public static final String USER_COLLECTION = BASIC_URL + "/UserCollectionServlet";
+	public static final String USER_REPLY = BASIC_URL + "/UserReplyServlet";
+	public static final String USER_CONVERSATION = BASIC_URL + "/UserConversationServlet";
+	public static final String USER_CONTEXT = BASIC_URL + "/UserConTextServlet";
+	public static final String USER_NOTIFY_FANS = BASIC_URL + "/UserNotifyFansServlet";
+	public static final String USER_OBSERVER = BASIC_URL + "/UserObserverServlet";
+	public static final String USER_MESSAGE = BASIC_URL + "/UserMessageServlet";
+	public static final String USER_FAN = BASIC_URL + "/UserFanServlet";
 
 	/**
 	 * 1 k 2 act 3 model 4 itemid

@@ -10,6 +10,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -32,16 +33,19 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import cn.jpush.android.api.JPushInterface;
 
 import com.casit.tee686.R;
 import com.tee686.config.Urls;
 import com.tee686.entity.Comment;
+import com.tee686.entity.Message;
 import com.tee686.https.HttpUtils;
 import com.tee686.ui.base.BaseActivity;
 import com.tee686.utils.DateUtil;
 import com.tee686.utils.ImageUtil;
 import com.tee686.utils.ImageUtil.ImageCallback;
 import com.tee686.utils.IntentUtil;
+import com.tee686.utils.DetailPopupWindow;
 
 public class BulletinDetailActivity extends BaseActivity {
 
@@ -59,13 +63,17 @@ public class BulletinDetailActivity extends BaseActivity {
 	private String pubtime;
 	private String headimage;
 	private String uname;
+	private String author;
 	private String imagefile;
+	private String pubContent;
 	private String result;
 	private List<Comment> mComments = new ArrayList<Comment>();
 	
 	SharedPreferences share;
+	Bundle bundle;
 	private String userComment;
-	
+	private Comment comment;
+	Message message = new Message();
 	
 	
 	@Override
@@ -77,8 +85,7 @@ public class BulletinDetailActivity extends BaseActivity {
 		initSharePreference();
 		title.setText("公告内容");
 		ok.setVisibility(View.GONE);
-		Intent intent = getIntent();
-		getStringExtra(intent);
+		getFromBundle();			
 		userComment = String.format(Urls.USER_COMMENT_DATA, pubtime);
 		new DataAsyncTask().execute(userComment);		
 		
@@ -100,7 +107,13 @@ public class BulletinDetailActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(!editText.getText().toString().equals("")) {
+				if(!share.contains(UserLoginActivity.UID)) {
+					showShortToast("请先登录后再评论");					
+				} else if(editText.getText().toString().equals("")) {
+					showShortToast("请输入评论内容");
+				} else if((comment!=null)?(editText.getText().toString().contains(comment.getUsername())):false) {
+					new SendMsgTask().execute(Urls.USER_REPLY);
+				} else {
 					new CommentAsyncTask().execute(Urls.USER_COMMENT);
 				}
 			}
@@ -141,7 +154,45 @@ public class BulletinDetailActivity extends BaseActivity {
 			}
 		});
 	}
+	
 
+	/*private void initMessage() {
+		message.setBitmap(headimage);
+		message.setSend_ctn(pubContent);
+		message.setSend_date(comtime);
+		message.setSend_person(uname);
+	}*/
+
+	private void getFromBundle() {
+		Intent intent = getIntent();
+        bundle = intent.getExtras();
+        if(bundle.containsKey(JPushInterface.EXTRA_NOTIFICATION_TITLE)) {
+        	String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+     		try {
+     			JSONObject json = new JSONObject(extras);
+     			pubtime = json.optString("pubtime");
+     			headimage = json.optString("headimage");
+     			imagefile = json.optString("imagefile");
+     			uname = json.optString("author");
+     			pubContent = json.optString("pubcontent");
+     		} catch (JSONException e) {			
+     			e.printStackTrace();
+     		}
+     		
+     		this.username.setText(uname);
+    		this.content.setText(pubContent);
+    		if(!headimage.equals("")) {
+    			ImageUtil.setThumbnailView(headimage, this.userhead, this, callback2, true);
+    		}
+    		if(imagefile!=null) {
+    			ImageUtil.setThumbnailView(imagefile, this.imgfile, this, callback3, true);
+    		}
+        } else {
+        	getStringExtra(intent);
+        }
+       
+	}
+	
 	private void initSharePreference() {
 		// TODO Auto-generated method stub
 		share = getSharedPreferences(UserLoginActivity.SharedName, MODE_PRIVATE);
@@ -155,10 +206,11 @@ public class BulletinDetailActivity extends BaseActivity {
 		headimage = intent.getStringExtra("userhead");
 		imagefile = intent.getStringExtra("imagefile");
 		uname = intent.getStringExtra("username");
-		String content = intent.getStringExtra("content");
+		author = uname;
+		pubContent = intent.getStringExtra("content");
 		
 		this.username.setText(uname);
-		this.content.setText(content);
+		this.content.setText(pubContent);
 		if(!headimage.equals("")) {
 			ImageUtil.setThumbnailView(headimage, this.userhead, this, callback2, true);
 		}
@@ -250,7 +302,7 @@ public class BulletinDetailActivity extends BaseActivity {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			Comment comment = comList.get(position);
+			final Comment comment = comList.get(position);
 			ViewHolder viewHolder;
 			convertView = null;
 			convertView = getLayoutInflater().inflate(R.layout.bulletin_detail_adapter, null);
@@ -267,7 +319,7 @@ public class BulletinDetailActivity extends BaseActivity {
 			 /*else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}*/
-			viewHolder.tvContent.setText(comment.getContent());
+			viewHolder.tvContent.setText(comment.getComContent());
 			viewHolder.tvSendtime.setText(comment.getComtime());
 			viewHolder.tvUsername.setText(comment.getUsername());
 //			viewHolder.ivHeadimage.setTag(pubContent.getHeadimage());
@@ -280,7 +332,16 @@ public class BulletinDetailActivity extends BaseActivity {
 				}
 				
 			}		
-			
+			viewHolder.ivHeadimage.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					IntentUtil.start_activity(BulletinDetailActivity.this, UserInfoActivity.class,
+							new BasicNameValuePair("userhead", comment.getHeadimage()), 
+							new BasicNameValuePair("username", comment.getUsername()));
+				}
+			});
 			
 			return convertView;
 		}
@@ -390,16 +451,37 @@ public class BulletinDetailActivity extends BaseActivity {
 				adapter = new DetailAdapter(result);
 				bdListView.setAdapter(adapter);
 				bdListView.setSelection(result.size()-1);
-//				mAdapter.appendToList(result);				
-				bdListView.setOnItemClickListener(new OnItemClickListener() {
+//				mAdapter.appendToList(result);	
+				if(share.getInt(UserLoginActivity.LEVEL, 0)>=100) {
+					bdListView.setOnItemClickListener(new OnItemClickListener() {
 
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						// TODO Auto-generated method stub
-						
-					}
-				});
+						@Override
+						public void onItemClick(AdapterView<?> parent, View view,
+								int position, long id) {
+							comment = (Comment) adapter.getItem(position);
+							List<String> tabs = new ArrayList<String>();
+							tabs.add("回复");
+							tabs.add("删除");
+							DetailPopupWindow<String> util = new DetailPopupWindow<String>(BulletinDetailActivity.this, 
+									 comment, share, adapter, adapter.comList, editText);
+							util.showActionWindow(view, tabs);
+						}
+					});
+				} else {
+					bdListView.setOnItemClickListener(new OnItemClickListener() {
+
+						@Override
+						public void onItemClick(AdapterView<?> parent, View view,
+								int position, long id) {
+							comment = (Comment) adapter.getItem(position);
+							List<String> tabs = new ArrayList<String>();
+							tabs.add("回复");
+							DetailPopupWindow<String> util = new DetailPopupWindow<String>(BulletinDetailActivity.this, 
+									 comment, share, adapter, adapter.comList, editText);
+							util.showActionWindow(view, tabs);
+						}
+					});
+				}
 				
 			} else {
 				showShortToast("没有评论");				
@@ -413,8 +495,8 @@ public class BulletinDetailActivity extends BaseActivity {
 
 		@Override
 		protected String doInBackground(String... params) {
-			Comment value = new Comment(headimage, editText.getText().toString(),
-					uname, pubtime, DateUtil.getCurrentDateTime());
+			Comment value = new Comment(share.getString(UserLoginActivity.PIC, ""), editText.getText().toString(),
+					share.getString(UserLoginActivity.UID, ""), pubtime, DateUtil.getCurrentDateTime(),null, null, null, null);
 			return HttpUtils.postByHttpURLConnection(params[0], value);	
 		}
 
@@ -422,10 +504,18 @@ public class BulletinDetailActivity extends BaseActivity {
 		protected void onPostExecute(String result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			showShortToast(result);
-			editText.setText("");
-//			adapter.notifyDataSetChanged();
-			new DataAsyncTask().execute(userComment);
+			if(result!=null) {
+				showShortToast(result);
+				editText.setText("");
+				mComments.clear();
+//				adapter.notifyDataSetChanged();
+				new DataAsyncTask().execute(userComment);
+				String url = String.format(Urls.USER_LEVEL, share.getString(UserLoginActivity.UID, ""), 1);
+				new UpdateTmAsyncTask().execute(url);
+			} else {
+				showShortToast("网络连接失败，请稍后再试");
+			}
+			
 		}
 		
 	}
@@ -439,5 +529,57 @@ public class BulletinDetailActivity extends BaseActivity {
 		return super.onKeyDown(keyCode, event);
 	}
 	
+	public class UpdateTmAsyncTask extends AsyncTask<String, Void, String> {	
+		
+		@Override
+		protected String doInBackground(String... params) {
+			try {
+				result = HttpUtils.getByHttpClient(BulletinDetailActivity.this, params[0]);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			return result;		
+			
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result!=null) {
+				showShortToast(result);
+			}
+		}
+	}
 	
+	class SendMsgTask extends AsyncTask<String, Void, String> {
+		@Override
+		protected String doInBackground(String... params) {
+			Comment value = new Comment(share.getString(UserLoginActivity.PIC, ""), editText.getText().toString(),
+					share.getString(UserLoginActivity.UID, ""), pubtime, DateUtil.getCurrentDateTime(),
+					comment.getUsername(), imagefile, pubContent, author);
+			return HttpUtils.postByHttpURLConnection(params[0], value);	
+		}
+		
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(!"".equals(result)) {
+				editText.setText("");
+				mComments.clear();
+				showShortToast(result);				
+//				adapter.notifyDataSetChanged();
+				new DataAsyncTask().execute(userComment);
+				//回复v币加1
+				String url = String.format(Urls.USER_LEVEL, share.getString(UserLoginActivity.UID, ""), 1);
+				new UpdateTmAsyncTask().execute(url);
+			} else {
+				showShortToast("此用户已注销，暂时不能回复");
+			}
+		}
+		
+	}
 }
