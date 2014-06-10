@@ -7,8 +7,11 @@ public class Observer {
 	private String headimg;//关注者头像
 	private String headimage;//被关注者头像
 	private Integer uid;
+<<<<<<< HEAD
 	private long msgtime;//最近会话时间
 	private boolean ifmsg = false;//是否有会话
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 	
 	public String getUname() {
 		return uname;
@@ -42,6 +45,7 @@ public class Observer {
 	public void setHeadimg(String headimg) {
 		this.headimg = headimg;
 	}
+<<<<<<< HEAD
 	public long getMsgtime() {
 		return msgtime;
 	}
@@ -54,6 +58,8 @@ public class Observer {
 	public void setIfmsg(boolean ifmsg) {
 		this.ifmsg = ifmsg;
 	}
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 	
 	
 	

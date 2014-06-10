@@ -32,9 +32,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 import com.lee.pullrefresh.ui.PullToRefreshBase;
 import com.lee.pullrefresh.ui.PullToRefreshListView;
 import com.lee.pullrefresh.ui.PullToRefreshBase.OnRefreshListener;
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 import com.tee686.activity.UserCenterActivity;
 import com.tee686.config.Urls;
 import com.tee686.entity.Collection;
@@ -109,6 +112,7 @@ public class BulletinActivity extends BaseActivity {
 				e.printStackTrace();
 			}	
 			if(!mPubContents.isEmpty()) {
+<<<<<<< HEAD
 				mListItems.clear();
 				if(mCurIndex<mPubContents.size()){
 					mListItems.addAll(mPubContents.subList(0, mCurIndex));
@@ -119,6 +123,10 @@ public class BulletinActivity extends BaseActivity {
 				
 //				mAdapter.appendToList(result);	
 				lv = mPullListView.getRefreshableView();	
+=======
+				mAdapter = new MyAdapter(mPubContents);
+//				mAdapter.appendToList(result);		
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 				lv.setAdapter(mAdapter);
 				lv.setOnItemClickListener(new OnItemClickListener() {
 
@@ -196,6 +204,7 @@ public class BulletinActivity extends BaseActivity {
 							BulletinPopupWindow<String> util = new BulletinPopupWindow<String>(BulletinActivity.this, 
 									pubContent, share, mAdapter, mAdapter.pubContents);
 							util.showActionWindow(view, tabs);
+<<<<<<< HEAD
 							return true; 
 						}
 					});
@@ -239,6 +248,23 @@ public class BulletinActivity extends BaseActivity {
 				loadFailed.setVisibility(View.VISIBLE);
 			}
 			
+=======
+							return true;
+						}
+					});
+				} 
+				
+				listContent.setVisibility(View.VISIBLE);
+				loadFailed.setVisibility(View.GONE);
+//				result.clear();
+			} else if(result.isEmpty()) {
+				showShortToast("未发表公告");
+				listContent.setVisibility(View.VISIBLE);
+				loadFailed.setVisibility(View.GONE);
+			}
+		} else {
+			new DataAsyncTask().execute(Urls.USER_DOAWLOAD_IMAGE);
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 		}		
 				/*new SimpleAdapter(this, mlist, R.layout.bulletin_board, new String[] {"userhead", 
 				"bulletincontent", "username", "image", "sendtime"}, new int[] {R.id.iv_userhead, 
@@ -266,6 +292,7 @@ public class BulletinActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				if(share.contains(UserLoginActivity.UID)) {	
+<<<<<<< HEAD
 //					if(share.getInt(UserLoginActivity.LEVEL, 0)>=50) {
 						IntentUtil.start_activity(BulletinActivity.this, EditActivity.class);
 //						defaultFinish();
@@ -273,6 +300,14 @@ public class BulletinActivity extends BaseActivity {
 //					else {
 //						showShortToast("学员不能发布公告");
 //					}
+=======
+					if(share.getInt(UserLoginActivity.LEVEL, 0)>=50) {
+						IntentUtil.start_activity(BulletinActivity.this, EditActivity.class);
+//						defaultFinish();
+					} else {
+						showShortToast("学员不能发布公告");
+					}
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 				}else {
 					showShortToast("请先登录");
 				}
@@ -387,7 +422,13 @@ public class BulletinActivity extends BaseActivity {
 	 * @author Jason
 	 *获得列表数据
 	 */
+<<<<<<< HEAD
 	class DataAsyncTask extends AsyncTask<String, Void, List<PubContent>> {		
+=======
+	class DataAsyncTask extends AsyncTask<String, Void, List<PubContent>> {
+
+		private List<PubContent> mPubContents = new ArrayList<PubContent>();
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 		
 		@Override
 		protected void onPreExecute() {
@@ -530,6 +571,7 @@ public class BulletinActivity extends BaseActivity {
 						}
 					});
 				} 
+<<<<<<< HEAD
 				mPullListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
 		            @Override
 		            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -554,6 +596,9 @@ public class BulletinActivity extends BaseActivity {
 		        setLastUpdateTime();
 		        
 //		        mPullListView.doPullRefreshing(true, 500);
+=======
+				
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 				listContent.setVisibility(View.VISIBLE);
 				loadFailed.setVisibility(View.GONE);
 //				result.clear();
@@ -597,6 +642,7 @@ public class BulletinActivity extends BaseActivity {
 		}
 		
 	}
+<<<<<<< HEAD
 	
 	private class GetDataTask extends AsyncTask<String, Void, List<PubContent>> {
 
@@ -760,12 +806,15 @@ public class BulletinActivity extends BaseActivity {
             super.onPostExecute(result);
         }
     }
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
 		outState.putString("result", result);
+<<<<<<< HEAD
 		if (mRunningTask != null && mRunningTask.isCancelled() == false) {
 			mRunningTask.cancel(false);
 			mRunningTask = null;
@@ -789,6 +838,10 @@ public class BulletinActivity extends BaseActivity {
         return mDateFormat.format(new Date(time));
     }
 
+=======
+	}
+
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 	ImageCallback callback = new ImageCallback() {
 
 		@Override

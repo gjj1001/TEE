@@ -48,6 +48,7 @@ public class IndexActivity extends BaseActivity {
 		initSharedPreference();
 		imgBrand = (ImageView)findViewById(R.id.image_brand);
         imgBrand.setOnClickListener(enterListener);	
+<<<<<<< HEAD
 //		play = (Button) findViewById(R.id.button1);
 //		play.setOnClickListener(new OnClickListener() {
 //			
@@ -57,6 +58,9 @@ public class IndexActivity extends BaseActivity {
 //						cn.wodong.capturevideo.MainActivity.class);
 //			}
 //		});
+=======
+		
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
 		UmengUpdateAgent.setUpdateAutoPopup(true);
 		UmengUpdateAgent.update(this);
@@ -88,11 +92,14 @@ public class IndexActivity extends BaseActivity {
 	private void initSharedPreference() {
 		// TODO Auto-generated method stub
 		share = getSharedPreferences(UserLoginActivity.SharedName, MODE_PRIVATE);
+<<<<<<< HEAD
 		if(!share.contains(UserLoginActivity.KEY)) {
 			Intent intent = new Intent(this, Guide2Activity.class);
 //			intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 			startActivity(intent);
 		}
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 	}
 
 	@Override

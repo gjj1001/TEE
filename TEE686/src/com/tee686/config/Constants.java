@@ -22,6 +22,9 @@ public class Constants {
 	public static final class ReceiverAction {
 		public static final String CHECK_NEW_PUB = "com.tee686.checkPub";
 		public static final String CHECK_NEW_FAN = "com.tee686.checkfan";
+<<<<<<< HEAD
 		public static final String CHECK_NEW_MSG = "com.tee686.checkMsg";
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 	}
 }

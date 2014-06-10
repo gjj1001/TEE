@@ -3,7 +3,6 @@ package com.tee686.activity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -35,7 +34,10 @@ import com.tee686.https.NetWorkHelper;
 import com.tee686.indicator.PageIndicator;
 import com.tee686.ui.base.BaseFragmentActivity;
 import com.tee686.utils.IntentUtil;
+<<<<<<< HEAD
 import com.tee686.view.UserCollectFragment;
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 import com.tee686.view.UserCollectionFragment;
 import com.tee686.view.UserIntroFragment;
 import com.tee686.view.UserLogOutFragment;
@@ -276,8 +278,13 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 				return;
 			}
 			
+<<<<<<< HEAD
 			mTabsAdapter.addTab(getString(R.string.user_center_my_Collect),
 					new UserCollectFragment(UserCenterActivity.this));		
+=======
+//			mTabsAdapter.addTab(getString(R.string.user_center_my_Collect),
+//					new UserCollectFragment(UserCenterActivity.this));		
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 			mTabsAdapter.addTab(getString(R.string.user_center_collection),
 					new UserCollectionFragment(UserCenterActivity.this));
 			mTabsAdapter.addTab(getString(R.string.user_center_my_Intro),
@@ -312,11 +319,19 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 			case 0: 
 				ImgLeft.setVisibility(8);				
 				break;
+<<<<<<< HEAD
 			case 1:
 				ImgRight.setVisibility(0);	
 				ImgLeft.setVisibility(0);
 				break;
 			case 3:
+=======
+//			case 1:
+//				ImgRight.setVisibility(0);	
+//				ImgLeft.setVisibility(0);
+//				break;
+			case 2:
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 				ImgRight.setVisibility(8);				
 				break;
 			default:
@@ -334,9 +349,13 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.btn_community:
+<<<<<<< HEAD
 				if(badgeView.isShown()) {
 					badgeView.hide(true);
 				}
+=======
+				badgeView.hide(true);
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 				IntentUtil.start_activity(UserCenterActivity.this, BulletinActivity.class);
 				finish();
 				break;
@@ -381,6 +400,38 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 			contentTask.cancel(true);
 		}
  	    
+	}
+
+	BroadcastReceiver checkNewReceiver = new BroadcastReceiver() {
+		
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub			
+//			badgeView.setBackgroundResource(R.drawable.umeng_xp_point_selected);
+			badgeView.setText(String.valueOf(intent.getIntExtra("num", 0)));
+			badgeView.show(true);
+		}
+	};
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if(NetWorkHelper.isNetworkAvailable(this)) {
+			Intent intent = new Intent(this, CheckNewService.class);
+			startService(intent);
+		}		
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Constants.ReceiverAction.CHECK_NEW_PUB);
+		registerReceiver(checkNewReceiver, filter);
+       
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		unregisterReceiver(checkNewReceiver);
 	}
 
 	BroadcastReceiver checkNewReceiver = new BroadcastReceiver() {

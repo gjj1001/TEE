@@ -107,6 +107,7 @@ public class CheckNewService extends Service {
 			}
 				
 		}, 0);
+<<<<<<< HEAD
 		
 		timer.schedule(new TimerTask() {
 			String result;
@@ -144,6 +145,8 @@ public class CheckNewService extends Service {
 			}
 				
 		}, 0);
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 		return super.onStartCommand(intent, flags, startId);
 	}
 

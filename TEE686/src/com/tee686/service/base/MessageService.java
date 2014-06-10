@@ -21,21 +21,30 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+<<<<<<< HEAD
 import cn.wodong.capturevideo.MainActivity;
 
 import com.tee686.activity.ReplyActivity;
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 import com.tee686.config.Urls;
 import com.tee686.db.MessageDbHelper.MessageColumns;
 import com.tee686.entity.Message;
 
 import android.content.Context;
+<<<<<<< HEAD
 import android.content.Intent;
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 import android.widget.Toast;
 
 public class MessageService {
 	private Context context;
+<<<<<<< HEAD
 	private String audioFlag = "false";
 	private String vedioFlag = "false";
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 //	private String user;
 //	private Socket socket;
 //	private DataOutputStream output;
@@ -215,11 +224,16 @@ public class MessageService {
 	 * @throws Exception 
 	 */
 	public void sendRecordMsg(File file, long recordTime, String reply_person, String send_date,
+<<<<<<< HEAD
 			String send_person, String bitmap, int flag) throws Exception{
+=======
+			String send_person, String bitmap) throws Exception{
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 		FileInputStream inputStream = null;
 		HttpURLConnection conn = null;
 		int length = 0;
 		try {
+<<<<<<< HEAD
 			switch (flag) {
 			case 1://上传语音
 				audioFlag = "true";
@@ -382,6 +396,86 @@ public class MessageService {
 			}			
 			
 			
+=======
+			// 将语音流以字符串形式存储下来
+			String audioFlag = "no";
+			HttpClient client = new DefaultHttpClient();
+			// 设置上传参数
+			List<NameValuePair> formparams = new ArrayList<NameValuePair>();
+			formparams.add(new BasicNameValuePair("audioflag", audioFlag));
+			formparams.add(new BasicNameValuePair("recordtime", Long.toString(recordTime)));
+			formparams.add(new BasicNameValuePair("reply_person", reply_person));
+			formparams.add(new BasicNameValuePair("send_person", send_person));
+			formparams.add(new BasicNameValuePair("bitmap", bitmap));
+			formparams.add(new BasicNameValuePair("send_date", send_date));
+			HttpPost post = new HttpPost(Urls.USER_CONVERSATION);	
+			UrlEncodedFormEntity entity;
+			try {
+				entity = new UrlEncodedFormEntity(formparams, "UTF-8");
+				post.addHeader("Accept",
+						"text/javascript, text/html, application/xml, text/xml");
+				post.addHeader("Accept-Charset", "GBK,utf-8;q=0.7,*;q=0.3");
+				post.addHeader("Accept-Encoding", "gzip,deflate,sdch");
+				post.addHeader("Connection", "Keep-Alive");
+				post.addHeader("Cache-Control", "no-cache");
+				post.addHeader("Content-Type",
+						"application/x-www-form-urlencoded");
+				post.setEntity(entity);
+				HttpResponse response = client.execute(post);
+				HttpEntity e = response.getEntity();
+				if (200 == response.getStatusLine().getStatusCode()) {
+					client.getConnectionManager().shutdown();
+//					Toast.makeText(context, EntityUtils.toString(e), Toast.LENGTH_SHORT).show();
+				} else {
+					client.getConnectionManager().shutdown();
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			//上传音频文件
+			inputStream = new FileInputStream(file);
+			/*String flagLine = ContentFlag.RECORD_FLAG + file.getName();
+			//写入标识行
+			output.writeUTF(flagLine);
+			//写入语音时间
+			output.writeLong(recordTime);
+			byte[] buffer = new byte[2048];
+			int length = 0;
+			//写入文件的大小
+			output.writeInt((int) file.length());*/
+			
+			try {
+				URL url = new URL(Urls.USER_CONVERSATION);
+				conn = (HttpURLConnection) url.openConnection();
+				conn.setDoOutput(true);
+				conn.setUseCaches(false);
+				conn.setDoInput(true);
+				conn.setRequestMethod("POST");
+				conn.setReadTimeout(5000);
+				conn.setRequestProperty("Content-Type",	"text/plain; charset=UTF-8");
+				conn.setRequestProperty("Content-Length", String.valueOf(file.length()));
+				DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
+				byte[] buffer = new byte[2048];
+				while ((length = inputStream.read(buffer)) != -1) {
+					dos.write(buffer, 0, length);
+				}
+				dos.flush();
+				dos.close();
+				if (conn.getResponseCode() == 200) {
+//					Toast.makeText(context, "语音发送成功", Toast.LENGTH_SHORT).show();
+				}
+
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				conn.disconnect();
+			}
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 			
 		} catch (Exception e) {
 			throw new Exception();

@@ -42,7 +42,10 @@ public class RecordPlayThread extends Thread{
 			} else {
 				in = new FileInputStream(path);
 			}
+<<<<<<< HEAD
 			sleep(1000);
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 			BufferedInputStream dis = new BufferedInputStream(in);
 			byte[] buffer = new byte[bufferSize];
 			// 由于AudioTrack播放的是流，所以，我们需要一边播放一边读取
@@ -53,7 +56,13 @@ public class RecordPlayThread extends Thread{
 				// 然后将数据写入到AudioTrack中
 				track.write(buffer, 0, length);
 			}
+<<<<<<< HEAD
 			
+=======
+			track.stop();
+			track.release();
+			track = null;
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 			Log.i(ContentFlag.TAG, "play is over");
 			sleep(1000);
 			runFlag = false;
@@ -62,9 +71,12 @@ public class RecordPlayThread extends Thread{
 		} catch (Exception e) {
 			Log.i(ContentFlag.TAG, "thread is closed");
 			e.printStackTrace();
+<<<<<<< HEAD
 		} finally {
 			track.stop();
 			track.release();
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 			track = null;
 		}
 	

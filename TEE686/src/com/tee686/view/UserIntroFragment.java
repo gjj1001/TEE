@@ -41,7 +41,10 @@ import com.casit.tee686.R;
 import com.readystatesoftware.viewbadger.BadgeView;
 import com.tee686.activity.UserFanActivity;
 import com.tee686.activity.UserLoginActivity;
+<<<<<<< HEAD
 import com.tee686.activity.UserMessageActivity;
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 import com.tee686.activity.UserObserverActivity;
 import com.tee686.activity.UserPubContentsActivity;
 import com.tee686.config.Constants;
@@ -68,7 +71,10 @@ public class UserIntroFragment extends Fragment {
 	private TextView level;
 	private TextView observers;
 	private TextView fans;
+<<<<<<< HEAD
 	private TextView msgs;
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 	private LinearLayout layout;
 	SimpleAdapter mAdapter;
 	private Context mContext;
@@ -108,7 +114,13 @@ public class UserIntroFragment extends Fragment {
 		View v = inflater.inflate(R.layout.user_center_intro_fragment, null);
 		initControl(v);
 //		initGridView();		
+<<<<<<< HEAD
 		setControl();		
+=======
+		setControl();
+		String url2 = String.format(Urls.USER_RECENTLY_PUBLISH, mUserInfoItem.getUsername());
+		new PubAsyncTask().execute(url2);
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 		return v;
 	}
 
@@ -116,9 +128,12 @@ public class UserIntroFragment extends Fragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+<<<<<<< HEAD
 		String url2 = String.format(Urls.USER_RECENTLY_PUBLISH, mUserInfoItem.getUsername());
 		pubTask = new PubAsyncTask();
 		pubTask.execute(url2);
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 		if(!listobservers.isEmpty()) {
 			listobservers.clear();
 		}
@@ -126,11 +141,17 @@ public class UserIntroFragment extends Fragment {
 			listfans.clear();
 		}
 		String url1 = String.format(Urls.USER_OBSERVER+"?uname=%s", mUserInfoItem.getUsername());
+<<<<<<< HEAD
 		checkObserverTask = new CheckObserverTask();
 		checkObserverTask.execute(url1);
 		String url3 = String.format(Urls.USER_OBSERVER+"?username=%s", mUserInfoItem.getUsername());
 		checkFanTask = new CheckFanTask();
 		checkFanTask.execute(url3);
+=======
+		new CheckObserverTask().execute(url1);
+		String url3 = String.format(Urls.USER_OBSERVER+"?username=%s", mUserInfoItem.getUsername());
+		new CheckFanTask().execute(url3);
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Constants.ReceiverAction.CHECK_NEW_FAN);
 		getActivity().registerReceiver(checkNewReceiver, filter);
@@ -166,7 +187,10 @@ public class UserIntroFragment extends Fragment {
 		level = (TextView) v.findViewById(R.id.user_textview_level);
 		observers = (TextView) v.findViewById(R.id.user_textview_observers);
 		fans = (TextView) v.findViewById(R.id.user_textview_fans);
+<<<<<<< HEAD
 		msgs = (TextView) v.findViewById(R.id.user_textview_msgs);
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 		info_img = (ImageView) v.findViewById(R.id.iv_user_info_img);
 		share = getActivity().getSharedPreferences(UserLoginActivity.SharedName, 0);
 		layout = (LinearLayout) v.findViewById(R.id.ll_badgeview);
@@ -383,9 +407,12 @@ public class UserIntroFragment extends Fragment {
 		private String result;
 		@Override
 		protected PubContent doInBackground(String... params) {
+<<<<<<< HEAD
 			if(isCancelled()) {
 				return null;
 			}
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 			try {
 				result = HttpUtils.getByHttpClient(getActivity(), params[0]);
 			} catch (Exception e) {
@@ -451,9 +478,12 @@ public class UserIntroFragment extends Fragment {
 		private String result;
 		@Override
 		protected Integer doInBackground(String... params) {
+<<<<<<< HEAD
 			if(isCancelled()) {
 				return null;
 			}
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 			try {
 				result = HttpUtils.getByHttpClient(getActivity(), params[0]);
 				StringBuilder sb = new StringBuilder(result);
@@ -486,6 +516,7 @@ public class UserIntroFragment extends Fragment {
 								new BasicNameValuePair("uname", mUserInfoItem.getUsername()));
 					}
 				});
+<<<<<<< HEAD
 				for(Observer observer : listobservers) {
 					tags.add(observer.getUsername()+"_fans");
 				}
@@ -505,6 +536,9 @@ public class UserIntroFragment extends Fragment {
 								}
 							}
 						});
+=======
+				
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 			}
 		}		
 	}
@@ -514,9 +548,12 @@ public class UserIntroFragment extends Fragment {
 		private String result;
 		@Override
 		protected List<Observer> doInBackground(String... params) {
+<<<<<<< HEAD
 			if(isCancelled()) {
 				return null;
 			}
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 			try {
 				result = HttpUtils.getByHttpClient(getActivity(), params[0]);
 				StringBuilder sb = new StringBuilder(result);
@@ -544,15 +581,23 @@ public class UserIntroFragment extends Fragment {
 					
 					@Override
 					public void onClick(View v) {
+<<<<<<< HEAD
 						if(fanBadgeView.isShown()) {
 							fanBadgeView.hide(true);
 						}						
+=======
+						fanBadgeView.hide(true);
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 						IntentUtil.start_activity(
 								getActivity(), UserFanActivity.class,
 								new BasicNameValuePair("uname", mUserInfoItem.getUsername()));
 					}
 				});
+<<<<<<< HEAD
 				/*for(Observer observer : result) {
+=======
+				for(Observer observer : result) {
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 					tags.add(observer.getUname()+"_fans");
 				}
 				JPushInterface.setAliasAndTags(getActivity(),
@@ -570,7 +615,11 @@ public class UserIntroFragment extends Fragment {
 									Log.d("alias", "errorCode:" + code);
 								}
 							}
+<<<<<<< HEAD
 						});*/
+=======
+						});
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 			}
 		}		
 	}
@@ -581,6 +630,7 @@ public class UserIntroFragment extends Fragment {
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
 			// badgeView.setBackgroundResource(R.drawable.umeng_xp_point_selected);
+<<<<<<< HEAD
 			if(intent.getBooleanExtra("msg", false)) {
 				fanBadgeView.setText(String.valueOf(intent.getIntExtra("num", 0)));
 				fanBadgeView.show(true);
@@ -608,4 +658,10 @@ public class UserIntroFragment extends Fragment {
 			checkFanTask.cancel(true);
 		}
 	}
+=======
+			fanBadgeView.setText(String.valueOf(intent.getIntExtra("num", 0)));
+			fanBadgeView.show(true);
+		}
+	};
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 }

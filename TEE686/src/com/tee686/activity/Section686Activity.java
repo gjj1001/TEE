@@ -135,7 +135,11 @@ public class Section686Activity extends Activity{
                 // TODO Auto-generated method stub
             	if(true) {
 	                forEx();
+<<<<<<< HEAD
 	                spinner.setSelection(0, true); 
+=======
+	                spinner.setSelection(0, true);
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
             	}/* else {
             		payForEx();
             		spinner.setSelection(0, true);

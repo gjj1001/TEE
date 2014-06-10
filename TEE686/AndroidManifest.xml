@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.casit.tee686"
+<<<<<<< HEAD
     android:versionCode="8"
     android:versionName="3.0.2"
     android:installLocation="auto" >
+=======
+    android:versionCode="6"
+    android:versionName="3.0" >
+
+    <!-- android:installLocation="auto" -->
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 
     <uses-permission android:name="com.casit.tee686.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
@@ -22,10 +29,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     
     <uses-feature android:name="android.hardware.camera" android:required="false"/>
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 
     <!-- Push service 运行需要的权限 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -68,7 +78,7 @@
         </activity>
         <activity
             android:name="com.tee686.activity.MainActivity"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
@@ -292,6 +302,7 @@
         </activity>
         <activity
             android:name="com.tee686.activity.UserObserverActivity"
+<<<<<<< HEAD
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
@@ -302,11 +313,14 @@
         </activity>
         <activity
             android:name="com.tee686.activity.UserMessageActivity"
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
+<<<<<<< HEAD
             android:name="com.tee686.activity.DisclaimerActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
@@ -336,6 +350,11 @@
             android:name="com.tee686.activity.RecordVedioActivity"
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
+=======
+            android:name="com.tee686.activity.UserFanActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity android:name="com.umeng.fb.ConversationActivity" />

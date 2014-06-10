@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 import org.apache.http.message.BasicNameValuePair;
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -59,7 +62,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import cn.jpush.android.api.JPushInterface;
+<<<<<<< HEAD
 import cn.wodong.capturevideo.MainActivity;
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 
 import com.casit.tee686.R;
 import com.tee686.adapter.ChatMsgViewAdapter;
@@ -68,7 +74,10 @@ import com.tee686.config.ContentFlag;
 import com.tee686.config.Urls;
 import com.tee686.entity.Message;
 import com.tee686.https.HttpUtils;
+<<<<<<< HEAD
 import com.tee686.https.NetWorkHelper;
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 import com.tee686.service.base.MessageService;
 import com.tee686.service.base.RecordPlayService;
 import com.tee686.ui.base.BaseActivity;
@@ -76,7 +85,10 @@ import com.tee686.utils.ConversationPopupWindow;
 import com.tee686.utils.DateUtil;
 import com.tee686.utils.ExpressionUtil;
 import com.tee686.utils.FileDealTool;
+<<<<<<< HEAD
 import com.tee686.utils.IntentUtil;
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 import com.tee686.utils.SystemConstant;
 
 public class ReplyActivity extends BaseActivity {
@@ -88,7 +100,10 @@ public class ReplyActivity extends BaseActivity {
 	private ImageView gohome;
 	private Button btn_send;
 	private Button btn_record;
+<<<<<<< HEAD
 	private Button btn_video;
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 	private ImageButton btn_open_record;
 	private Dialog progressDialog;
 	private Dialog recordDialog;
@@ -289,6 +304,7 @@ public class ReplyActivity extends BaseActivity {
         btn_send.setOnClickListener(new SendBtnClickListener());
         btn_record = (Button) findViewById(R.id.btn_start_record);
         btn_record.setOnTouchListener(new MyRecordTouchListener());
+<<<<<<< HEAD
         btn_video = (Button) findViewById(R.id.bt_video);
         btn_video.setOnClickListener(new OnClickListener() {
 			
@@ -302,6 +318,8 @@ public class ReplyActivity extends BaseActivity {
 				finish();
 			} 
 		});
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
         recordDialog = new Dialog(this, R.style.dialog);
         recordDialog.setContentView(record_view);
         recordSendDialog = new Dialog(this, R.style.dialog);
@@ -381,8 +399,11 @@ public class ReplyActivity extends BaseActivity {
 	protected void onPause() {
 		super.onPause();
 	}
+<<<<<<< HEAD
 	
 	
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 	/**
 	 * 语音UI变更
 	 * @param
@@ -398,6 +419,7 @@ public class ReplyActivity extends BaseActivity {
 		}).start();
 	}*/
     
+<<<<<<< HEAD
 //    @Override
 //	protected void onResume() {
 //		// TODO Auto-generated method stub
@@ -408,6 +430,9 @@ public class ReplyActivity extends BaseActivity {
 //	}
 
 	/**
+=======
+    /**
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
      * 打开语音聊天页面
      * @param view
      */
@@ -512,7 +537,11 @@ public class ReplyActivity extends BaseActivity {
 									String send_date = DateUtil.getCurrentDateTime();
 									msgService.sendRecordMsg(file, recordTime, uname, send_date, 
 											share.getString(UserLoginActivity.UID, ""), 
+<<<<<<< HEAD
 											share.getString(UserLoginActivity.PIC, ""), 1);
+=======
+											share.getString(UserLoginActivity.PIC, ""));
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 									Message message = new Message("", share.getString(UserLoginActivity.UID, ""), 
 											send_date, share.getString(UserLoginActivity.PIC, ""),
 											uname);

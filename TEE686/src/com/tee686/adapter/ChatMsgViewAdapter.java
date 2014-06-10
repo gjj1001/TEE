@@ -5,18 +5,27 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.casit.tee686.R;
+<<<<<<< HEAD
 import com.tee686.activity.RecordVedioActivity;
 import com.tee686.config.ContentFlag;
 import com.tee686.entity.Message;
 import com.tee686.https.NetWorkHelper;
+=======
+import com.tee686.config.ContentFlag;
+import com.tee686.entity.Message;
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 import com.tee686.service.base.RecordPlayService;
 import com.tee686.utils.ExpressionUtil;
 import com.tee686.utils.ImageUtil;
 import com.tee686.utils.ImageUtil.ImageCallback;
 
+<<<<<<< HEAD
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+=======
+import android.content.Context;
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
@@ -31,7 +40,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+<<<<<<< HEAD
 import android.widget.Toast;
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 /**
  * 聊天页面ListView内容适配器
  */
@@ -104,15 +116,22 @@ public class ChatMsgViewAdapter extends BaseAdapter{
 	    SpannableString spannableString = ExpressionUtil.getExpressionString(context, msg.getSend_ctn()); 
 	    TextView tvContent = (TextView) viewHolder.msgBgView.findViewById(R.id.tv_chatcontent);
 	    final ImageView ivPlay = (ImageView) viewHolder.msgBgView.findViewById(R.id.iv_play_voice);
+<<<<<<< HEAD
 	    ImageView  ivVedio = (ImageView) viewHolder.msgBgView.findViewById(R.id.iv_vedioplay);
 	    tvContent.setText(spannableString);
 	    if(msg.isIfyuyin()){
 	    	ivPlay.setVisibility(View.VISIBLE);
 	    	ivVedio.setVisibility(View.GONE);
+=======
+	    tvContent.setText(spannableString);
+	    if(msg.isIfyuyin()){
+	    	ivPlay.setVisibility(View.VISIBLE);
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 		    //处理语音消息的单击事件
 		    viewHolder.msgBgView.setOnClickListener(new View.OnClickListener() {
 				@SuppressWarnings("static-access")
 				public void onClick(View v) {
+<<<<<<< HEAD
 					try {
 						if(NetWorkHelper.isMobileDataEnable(context) || NetWorkHelper.isWifiDataEnable(context)) {
 							final String path = msg.getRecord_path();
@@ -181,11 +200,48 @@ public class ChatMsgViewAdapter extends BaseAdapter{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}					
+=======
+					final String path = msg.getRecord_path();
+					if(null!= path && !"".equals(path)){
+						try {
+							if(currMsgId.equals(msg.getSend_person())){
+								Log.i(ContentFlag.TAG, "playService.ifThreadRun:"+playService.ifThreadRun());
+							}
+							if(currMsgId.equals(msg.getSend_person()) && playService.ifThreadRun()) {
+								playService.stop();
+								return;
+							}
+							//根据类型选择左右不同的动画
+							final int type = getItemViewType(position);
+							if(type == 0){
+								ivPlay.setBackgroundResource(R.drawable.chatto_voice_play_frame);
+							}else{
+								ivPlay.setBackgroundResource(R.drawable.chatfrom_voice_play_frame);
+							}
+							final AnimationDrawable animation = (AnimationDrawable) ivPlay.getBackground();
+							//播放动画
+							final long recordTime = msg.getRecordTime();
+							currMsgId = msg.getSend_person();
+							playService.play(path, animation, ivPlay, type);
+							context.getMainLooper().myQueue().addIdleHandler(new IdleHandler() {
+								public boolean queueIdle() {
+									timer.schedule(new RecordTimeTask(animation, ivPlay, type), recordTime);
+									return false;
+								}
+							});
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 				}
 			});
 	    }else{
 	    	ivPlay.setVisibility(View.GONE);
+<<<<<<< HEAD
 	    	ivVedio.setVisibility(View.GONE);
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 	    	viewHolder.msgBgView.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 				}

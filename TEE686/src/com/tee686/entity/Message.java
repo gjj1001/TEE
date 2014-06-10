@@ -111,6 +111,7 @@ public class Message {
 	public void setReply_person(String reply_person) {
 		this.reply_person = reply_person;
 	}
+<<<<<<< HEAD
 
 	public boolean isIfvedio() {
 		return ifvedio;
@@ -119,5 +120,7 @@ public class Message {
 	public void setIfVedio(boolean ifvedio) {
 		this.ifvedio = ifvedio;
 	}
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 	
 }

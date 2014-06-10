@@ -1,15 +1,22 @@
 package com.tee686.service.base;
 
+<<<<<<< HEAD
 import java.util.Timer;
 import java.util.TimerTask;
 
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 import com.casit.tee686.R;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.widget.ImageView;
 
 public class RecordPlayService {
+<<<<<<< HEAD
 		private static AnimationDrawable animation = null;
+=======
+		private AnimationDrawable animation = null;
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 		private ImageView ivPlay = null;
 		private int type;
 		private RecordPlayThread thread;
@@ -19,6 +26,7 @@ public class RecordPlayService {
 				thread.setRunFlag(false);
 				stopAnimatin();
 			}
+<<<<<<< HEAD
 			RecordPlayService.animation = animation;
 			this.ivPlay = ivPlay;
 			this.type = type;
@@ -34,6 +42,16 @@ public class RecordPlayService {
 					RecordPlayService.animation.start();
 				}
 			}, 1000);
+=======
+			this.animation = animation;
+			this.ivPlay = ivPlay;
+			this.type = type;
+			thread = new RecordPlayThread();
+			animation.start();
+			thread.setPath(path);
+			thread.setRunFlag(true);
+			thread.start();
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 		}
 		//停止播放
 		public void stop(){

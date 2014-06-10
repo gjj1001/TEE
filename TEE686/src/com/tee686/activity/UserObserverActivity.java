@@ -15,7 +15,10 @@ import com.casit.tee686.R;
 import com.tee686.config.Urls;
 import com.tee686.entity.Observer;
 import com.tee686.https.HttpUtils;
+<<<<<<< HEAD
 import com.tee686.https.NetWorkHelper;
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 import com.tee686.ui.base.BaseActivity;
 import com.tee686.utils.ImageUtil;
 import com.tee686.utils.IntentUtil;
@@ -138,6 +141,7 @@ public class UserObserverActivity extends BaseActivity {
 				loadFailed.setVisibility(View.VISIBLE);
 			}
 		} else {
+<<<<<<< HEAD
 			if(NetWorkHelper.checkNetState(this)) {
 				url1 = String.format(Urls.USER_OBSERVER+"?uname=%s", intent.getStringExtra("uname"));
 				new DataAsyncTask().execute(url1);
@@ -147,6 +151,10 @@ public class UserObserverActivity extends BaseActivity {
 				loadFailed.setVisibility(View.VISIBLE);
 			}
 			
+=======
+			url1 = String.format(Urls.USER_OBSERVER+"?uname=%s", intent.getStringExtra("uname"));
+			new DataAsyncTask().execute(url1);
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 		}
 		
 		
@@ -164,6 +172,7 @@ public class UserObserverActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
+<<<<<<< HEAD
 				if(NetWorkHelper.checkNetState(UserObserverActivity.this)) {
 					new DataAsyncTask().execute(url1);
 				} else {
@@ -171,6 +180,10 @@ public class UserObserverActivity extends BaseActivity {
 					listContent.setVisibility(View.GONE);
 					loadFailed.setVisibility(View.VISIBLE);
 				}				
+=======
+				// TODO Auto-generated method stub
+				new DataAsyncTask().execute(url1);
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
 			}
 		});
 	}

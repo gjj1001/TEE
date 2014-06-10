@@ -487,6 +487,16 @@ public class UserLoginActivity extends BaseActivity {
 		});		
 
 	}
+	
+	/*@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if(NetWorkHelper.isNetworkAvailable(this)) {
+			Intent intent = new Intent(this, CheckNewService.class);
+			startService(intent);
+		}		
+	}*/
 
 	@Override
 	public void onDestroy() {

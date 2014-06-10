@@ -64,6 +64,7 @@
 	            		android:textSize="15sp"
 	            		android:textColor="#ff000000"
 					/>
+<<<<<<< HEAD
 
  					<ImageView
  					    android:id="@+id/iv_vedioplay"
@@ -72,6 +73,8 @@
  					    android:visibility="gone"
  					    android:src="@drawable/ic_media_video_poster" />
 
+=======
+>>>>>>> 3b3581198e1fec9c4dfce8620d803bfe29827f12
  				</LinearLayout>
  				
 	            <TextView
