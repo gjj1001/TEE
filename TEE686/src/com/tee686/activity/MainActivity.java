@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
     private ImageView iv3 = null;
     private ImageView iv4 = null;
 //    private ImageButton ib = null;
-//    private Dialog dialog;
+//    private Dialog dialog; 
 //    private View dialogView = null;
 //    private VideoView vv =null;
 //    private final Timer timer = new Timer();

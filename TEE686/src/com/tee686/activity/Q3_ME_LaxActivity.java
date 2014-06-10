@@ -24,7 +24,7 @@ public class Q3_ME_LaxActivity extends Activity{
 		this.setContentView(R.layout.q1_me_lax);
 		
 		MediaController mc = new MediaController(this);  
-		vv = (VideoView)findViewById(R.id.vv_q1_me_lax);
+		vv = (VideoView)findViewById(R.id.vv_q1_me_lax); 
 
 		vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.q3_me_lax));
 

@@ -10,10 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import cn.jpush.android.api.JPushInterface;
+
 import com.casit.tee686.R;
 import com.tee686.ui.base.BaseActivity;
+import com.tee686.utils.IntentUtil;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
 
@@ -21,6 +24,7 @@ import com.umeng.update.UmengUpdateAgent;
 
 public class IndexActivity extends BaseActivity {
 	private ImageView imgBrand;		
+//	private Button play;		
 	protected String mAppId;
 	protected String mUserId;
 	protected String mChannelId;
@@ -44,7 +48,15 @@ public class IndexActivity extends BaseActivity {
 		initSharedPreference();
 		imgBrand = (ImageView)findViewById(R.id.image_brand);
         imgBrand.setOnClickListener(enterListener);	
-		
+//		play = (Button) findViewById(R.id.button1);
+//		play.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				IntentUtil.startActivity(IndexActivity.this, 
+//						cn.wodong.capturevideo.MainActivity.class);
+//			}
+//		});
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
 		UmengUpdateAgent.setUpdateAutoPopup(true);
 		UmengUpdateAgent.update(this);
@@ -74,11 +86,12 @@ public class IndexActivity extends BaseActivity {
 	}
 
 	private void initSharedPreference() {
-		share = getSharedPreferences(UserLoginActivity.SharedName, MODE_PRIVATE);			
+		// TODO Auto-generated method stub
+		share = getSharedPreferences(UserLoginActivity.SharedName, MODE_PRIVATE);
 		if(!share.contains(UserLoginActivity.KEY)) {
 			Intent intent = new Intent(this, Guide2Activity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 			startActivity(intent);
-//				overridePendingTransition(R.anim.zoomin, R.anim.zoomout);			
 		}
 	}
 
@@ -105,6 +118,28 @@ public class IndexActivity extends BaseActivity {
 				overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
 				break;
 			case R.id.login:
+				/*showAlertDialog("免责申明", "本APP所载的各种信息和数据等仅供参考，禁止涉及对用户隐私信息的一切讨论，本APP所载的观点和评论仅代表用户的个人立场，用户据此发生的一切纠纷与本公司无关。本APP公告栏中的信息资料皆为用户个人发表，本公司并 不对相关资料的准确性、充足性或完整性做出任何保证，也不对相关资料的任何错误或遗漏负任何法律责任。", "同意", "不同意", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent intent1 = new Intent(IndexActivity.this, UserLoginActivity.class);
+						startActivity(intent1);
+						overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+					}
+				}, new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						mAlertDialog.dismiss();
+					}
+					
+				}, new DialogInterface.OnDismissListener() {
+					
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						mAlertDialog.dismiss();
+					}
+				});*/
 				Intent intent1 = new Intent(IndexActivity.this, UserLoginActivity.class);
 				startActivity(intent1);
 				overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);

@@ -18,7 +18,6 @@ public class RecordPlayService {
 			if(null!= thread && thread.isRunFlag()){
 				thread.setRunFlag(false);
 				stopAnimatin();
-				return;
 			}
 			RecordPlayService.animation = animation;
 			this.ivPlay = ivPlay;
@@ -29,12 +28,12 @@ public class RecordPlayService {
 			thread.start();
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask() {
+				
 				@Override
 				public void run() {
 					RecordPlayService.animation.start();
 				}
 			}, 1000);
-			
 		}
 		//停止播放
 		public void stop(){
@@ -52,7 +51,7 @@ public class RecordPlayService {
 			}
 			if(null!= animation){
 				animation.stop();
-				animation = null; 
+				animation = null;
 			}
 		}
 		

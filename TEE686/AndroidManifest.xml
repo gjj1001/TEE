@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.casit.tee686"
-    android:versionCode="6"
-    android:versionName="3.0" >
-
-    <!-- android:installLocation="auto" -->
+    android:versionCode="8"
+    android:versionName="3.0.2"
+    android:installLocation="auto" >
 
     <uses-permission android:name="com.casit.tee686.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
@@ -23,6 +22,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
 
     <!-- Push service 运行需要的权限 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -47,7 +50,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" 
+        android:hardwareAccelerated="@bool/config_hardwareAccelerated">
         <uses-library android:name="android.test.runner" />
 
         <activity
@@ -64,7 +68,7 @@
         </activity>
         <activity
             android:name="com.tee686.activity.MainActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
@@ -249,7 +253,7 @@
             android:name="com.tee686.activity.DisplayActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
@@ -288,12 +292,16 @@
         </activity>
         <activity
             android:name="com.tee686.activity.UserObserverActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
             android:name="com.tee686.activity.UserFanActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="com.tee686.activity.UserMessageActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
@@ -315,6 +323,20 @@
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name="cn.wodong.capturevideo.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:process=":record"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="com.tee686.activity.RecordVedioActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity android:name="com.umeng.fb.ConversationActivity" />
         <activity android:name="com.umeng.fb.ContactActivity" />
@@ -455,16 +477,7 @@
         <meta-data
             android:name="JPUSH_APPKEY"
             android:value="0c6565d21d7f600ba059b4c6" />
-
-        <receiver android:name="com.casit.tee686.XlistView" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/xlist_view_info" />
-        </receiver>
+        
     </application>
 
 </manifest>

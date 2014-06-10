@@ -41,6 +41,7 @@ import com.casit.tee686.R;
 import com.readystatesoftware.viewbadger.BadgeView;
 import com.tee686.activity.UserFanActivity;
 import com.tee686.activity.UserLoginActivity;
+import com.tee686.activity.UserMessageActivity;
 import com.tee686.activity.UserObserverActivity;
 import com.tee686.activity.UserPubContentsActivity;
 import com.tee686.config.Constants;
@@ -67,6 +68,7 @@ public class UserIntroFragment extends Fragment {
 	private TextView level;
 	private TextView observers;
 	private TextView fans;
+	private TextView msgs;
 	private LinearLayout layout;
 	SimpleAdapter mAdapter;
 	private Context mContext;
@@ -80,6 +82,10 @@ public class UserIntroFragment extends Fragment {
 //	private String[] items = new String[] { "选择本地图片", "拍照" };
 	SharedPreferences share;
 	LayoutInflater inflater;
+	
+	private PubAsyncTask pubTask;
+	private CheckObserverTask checkObserverTask;
+	private CheckFanTask checkFanTask;
 	
 	/* 头像名称   
     private static final String IMAGE_FILE_NAME = "faceImage.jpg";   
@@ -102,9 +108,7 @@ public class UserIntroFragment extends Fragment {
 		View v = inflater.inflate(R.layout.user_center_intro_fragment, null);
 		initControl(v);
 //		initGridView();		
-		setControl();
-		String url2 = String.format(Urls.USER_RECENTLY_PUBLISH, mUserInfoItem.getUsername());
-		new PubAsyncTask().execute(url2);
+		setControl();		
 		return v;
 	}
 
@@ -112,6 +116,9 @@ public class UserIntroFragment extends Fragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		String url2 = String.format(Urls.USER_RECENTLY_PUBLISH, mUserInfoItem.getUsername());
+		pubTask = new PubAsyncTask();
+		pubTask.execute(url2);
 		if(!listobservers.isEmpty()) {
 			listobservers.clear();
 		}
@@ -119,9 +126,11 @@ public class UserIntroFragment extends Fragment {
 			listfans.clear();
 		}
 		String url1 = String.format(Urls.USER_OBSERVER+"?uname=%s", mUserInfoItem.getUsername());
-		new CheckObserverTask().execute(url1);
+		checkObserverTask = new CheckObserverTask();
+		checkObserverTask.execute(url1);
 		String url3 = String.format(Urls.USER_OBSERVER+"?username=%s", mUserInfoItem.getUsername());
-		new CheckFanTask().execute(url3);
+		checkFanTask = new CheckFanTask();
+		checkFanTask.execute(url3);
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Constants.ReceiverAction.CHECK_NEW_FAN);
 		getActivity().registerReceiver(checkNewReceiver, filter);
@@ -157,6 +166,7 @@ public class UserIntroFragment extends Fragment {
 		level = (TextView) v.findViewById(R.id.user_textview_level);
 		observers = (TextView) v.findViewById(R.id.user_textview_observers);
 		fans = (TextView) v.findViewById(R.id.user_textview_fans);
+		msgs = (TextView) v.findViewById(R.id.user_textview_msgs);
 		info_img = (ImageView) v.findViewById(R.id.iv_user_info_img);
 		share = getActivity().getSharedPreferences(UserLoginActivity.SharedName, 0);
 		layout = (LinearLayout) v.findViewById(R.id.ll_badgeview);
@@ -228,6 +238,18 @@ public class UserIntroFragment extends Fragment {
 		} 
 		/*ImageUtil.setThumbnailView(imgUrl, img, mContext,
 				new myImageCallBack(), true);*/
+		msgs.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(fanBadgeView.isShown()) {
+					fanBadgeView.hide(true);
+				}
+				IntentUtil.start_activity(
+						getActivity(), UserMessageActivity.class,
+						new BasicNameValuePair("uname", mUserInfoItem.getUsername()));
+			}
+		});
 	}
 
 	/**
@@ -361,6 +383,9 @@ public class UserIntroFragment extends Fragment {
 		private String result;
 		@Override
 		protected PubContent doInBackground(String... params) {
+			if(isCancelled()) {
+				return null;
+			}
 			try {
 				result = HttpUtils.getByHttpClient(getActivity(), params[0]);
 			} catch (Exception e) {
@@ -426,6 +451,9 @@ public class UserIntroFragment extends Fragment {
 		private String result;
 		@Override
 		protected Integer doInBackground(String... params) {
+			if(isCancelled()) {
+				return null;
+			}
 			try {
 				result = HttpUtils.getByHttpClient(getActivity(), params[0]);
 				StringBuilder sb = new StringBuilder(result);
@@ -458,7 +486,25 @@ public class UserIntroFragment extends Fragment {
 								new BasicNameValuePair("uname", mUserInfoItem.getUsername()));
 					}
 				});
-				
+				for(Observer observer : listobservers) {
+					tags.add(observer.getUsername()+"_fans");
+				}
+				JPushInterface.setAliasAndTags(getActivity(),
+						share.getString(UserLoginActivity.UID, "tee"), tags,
+						new TagAliasCallback() {
+
+							@Override
+							public void gotResult(int code, String alias,
+									Set<String> tags) {
+								// TODO Auto-generated method stub
+								switch (code) {
+								case 0:
+									Log.d("alias", "set alias success");
+								default:
+									Log.d("alias", "errorCode:" + code);
+								}
+							}
+						});
 			}
 		}		
 	}
@@ -468,6 +514,9 @@ public class UserIntroFragment extends Fragment {
 		private String result;
 		@Override
 		protected List<Observer> doInBackground(String... params) {
+			if(isCancelled()) {
+				return null;
+			}
 			try {
 				result = HttpUtils.getByHttpClient(getActivity(), params[0]);
 				StringBuilder sb = new StringBuilder(result);
@@ -495,13 +544,15 @@ public class UserIntroFragment extends Fragment {
 					
 					@Override
 					public void onClick(View v) {
-						fanBadgeView.hide(true);
+						if(fanBadgeView.isShown()) {
+							fanBadgeView.hide(true);
+						}						
 						IntentUtil.start_activity(
 								getActivity(), UserFanActivity.class,
 								new BasicNameValuePair("uname", mUserInfoItem.getUsername()));
 					}
 				});
-				for(Observer observer : result) {
+				/*for(Observer observer : result) {
 					tags.add(observer.getUname()+"_fans");
 				}
 				JPushInterface.setAliasAndTags(getActivity(),
@@ -519,7 +570,7 @@ public class UserIntroFragment extends Fragment {
 									Log.d("alias", "errorCode:" + code);
 								}
 							}
-						});
+						});*/
 			}
 		}		
 	}
@@ -530,8 +581,31 @@ public class UserIntroFragment extends Fragment {
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
 			// badgeView.setBackgroundResource(R.drawable.umeng_xp_point_selected);
-			fanBadgeView.setText(String.valueOf(intent.getIntExtra("num", 0)));
-			fanBadgeView.show(true);
+			if(intent.getBooleanExtra("msg", false)) {
+				fanBadgeView.setText(String.valueOf(intent.getIntExtra("num", 0)));
+				fanBadgeView.show(true);
+			} else {
+				fanBadgeView.setText(String.valueOf(intent.getIntExtra("num", 0)));
+				fanBadgeView.setBadgePosition(BadgeView.POSITION_CENTER);
+				fanBadgeView.show(true);
+			}
+			
 		}
 	};
+	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		getActivity().unregisterReceiver(checkNewReceiver);
+		if (pubTask != null && pubTask.getStatus() == AsyncTask.Status.RUNNING) {
+			pubTask.cancel(true);
+		}
+		if (checkObserverTask != null && checkObserverTask.getStatus() == AsyncTask.Status.RUNNING) {
+			checkObserverTask.cancel(true);
+		}
+		if (checkFanTask != null && checkFanTask.getStatus() == AsyncTask.Status.RUNNING) {
+			checkFanTask.cancel(true);
+		}
+	}
 }

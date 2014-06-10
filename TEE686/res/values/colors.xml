@@ -13,6 +13,10 @@
     <color name="TextColorBlack">#FF000000</color>
     <color name="transparent">#00FF00FF</color>
     <color name="backColor">#2000</color>
+    <color name="solid_black">#ff000000</color>
+    <color name="bg_capture_progress">#ff000000</color>
+    <color name="vine_green">#ff00b589</color>
+    <color name="capture_background">#ff000000</color>
     
     <color name="detail_bgColor">#f5f5f5</color>
     <color name="defaultTextColor">#666</color>

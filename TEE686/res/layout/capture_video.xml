@@ -1,0 +1,134 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_cab_done_holo_dark"
+    tools:context=".MainActivity" >
+
+    <RelativeLayout
+        android:id="@id/root_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <RelativeLayout
+            android:id="@id/top_mask"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/capture_top_mask" >
+
+            <cn.wodong.capturevideo.ProgressView
+                android:id="@id/progress"
+                android:layout_width="fill_parent"
+                android:layout_height="48.0dip"
+                android:background="@color/bg_capture_progress" />
+
+            <LinearLayout
+                android:id="@id/cancel"
+                android:layout_width="56.0dip"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:onClick="onBackPressed" >
+
+                <Button
+                    android:layout_width="32.0dip"
+                    android:layout_height="32.0dip"
+                    android:background="@drawable/btn_capture_x"
+                    android:onClick="onBackPressed" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="56.0dip"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:gravity="center" >
+
+                <!--
+                      TextView
+                    android:id="@id/press"
+                    android:layout_width="32.0dip"
+                    android:layout_height="32.0dip"
+                    android:background="@drawable/btn_capture_ghost">
+                -->
+
+                <Button
+                    android:id="@id/switchCamera"
+                    android:layout_width="32.dip"
+                    android:layout_height="32dip"
+                    android:background="@drawable/btn_capture_front_facing_camera"
+                    android:onClick="onCameraSwitchPressed" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_ok"
+                android:layout_width="56.0dip"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_cab_done_holo_dark"
+                android:gravity="center"
+                android:onClick="onOkPressed"
+                android:visibility="invisible" />
+
+            <LinearLayout
+                android:id="@id/finishLayOut"
+                android:layout_width="56.0dip"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:onClick="onFinishPressed"
+                android:visibility="visible" >
+
+                <Button
+                    android:id="@id/finishButton"
+                    android:layout_width="32.0dip"
+                    android:layout_height="32.0dip"
+                    android:background="@drawable/btn_capture_arrow"
+                    android:onClick="onFinishPressed" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <cn.wodong.capturevideo.MySurfaceView
+            android:id="@id/cameraView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/top_mask"
+            android:layout_centerInParent="true" />
+
+        <VideoView
+            android:id="@id/mediaShow"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/top_mask"
+            android:layout_centerInParent="true" />
+
+        <RelativeLayout
+            android:id="@id/bottom_mask"
+            android:layout_width="fill_parent"
+            android:layout_height="100.0dip"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@color/capture_background" >
+
+            <LinearLayout
+                android:id="@id/camera_features"
+                style="@style/CameraFeatureLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="51.0dip"
+                android:orientation="horizontal"
+                android:paddingTop="9.0dip" >
+
+                <Button
+                    android:layout_width="32.dip"
+                    android:layout_height="32dip"
+                    android:background="@drawable/btn_capture_front_facing_camera"
+                    android:onClick="onCameraSwitchPressed"
+                    android:visibility="invisible" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

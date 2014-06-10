@@ -21,12 +21,12 @@ public class RecordPlayThread extends Thread{
 	public RecordPlayThread() {
 		bufferSize = AudioTrack.getMinBufferSize(
 				SystemConstant.SAMPLE_RATE_IN_HZ,
-				SystemConstant.CHANNEL_CONFIG_OUT,
+				SystemConstant.CHANNEL_CONFIG_IN,
 				SystemConstant.AUDIO_FORMAT);
 		track = new AudioTrack(AudioManager.STREAM_MUSIC,
 				SystemConstant.SAMPLE_RATE_IN_HZ,
-				SystemConstant.CHANNEL_CONFIG_OUT,
-				SystemConstant.AUDIO_FORMAT, bufferSize*4,
+				SystemConstant.CHANNEL_CONFIG_IN,
+				SystemConstant.AUDIO_FORMAT, bufferSize*2,
 				AudioTrack.MODE_STREAM);
 	}
 	public void run() {
@@ -38,11 +38,11 @@ public class RecordPlayThread extends Thread{
 				conn.setConnectTimeout(5000);
 				conn.setReadTimeout(5000);
 				conn.connect();
-				in = conn.getInputStream();
+				in = conn.getInputStream();				
 			} else {
 				in = new FileInputStream(path);
-			}		
-			sleep(1000); 
+			}
+			sleep(1000);
 			BufferedInputStream dis = new BufferedInputStream(in);
 			byte[] buffer = new byte[bufferSize];
 			// 由于AudioTrack播放的是流，所以，我们需要一边播放一边读取
@@ -53,9 +53,7 @@ public class RecordPlayThread extends Thread{
 				// 然后将数据写入到AudioTrack中
 				track.write(buffer, 0, length);
 			}
-//			track.stop();
-//			track.release();
-//			track = null;
+			
 			Log.i(ContentFlag.TAG, "play is over");
 			sleep(1000);
 			runFlag = false;
@@ -63,7 +61,7 @@ public class RecordPlayThread extends Thread{
 			dis.close();
 		} catch (Exception e) {
 			Log.i(ContentFlag.TAG, "thread is closed");
-			e.printStackTrace();			
+			e.printStackTrace();
 		} finally {
 			track.stop();
 			track.release();

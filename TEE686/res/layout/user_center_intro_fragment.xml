@@ -10,7 +10,8 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dp"
+        android:layout_weight="3" >
 
         <ImageView
             android:id="@+id/user_imageview_icon"
@@ -91,13 +92,30 @@
                 android:gravity="center"
                 android:text="粉丝： 0"
                 android:textColor="@color/defaultTextColor" />
+            
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/dis_behind_verticalside" />
+            
+            <TextView
+                android:id="@+id/user_textview_msgs"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="私信"
+                android:textColor="@color/defaultTextColor" />
         </LinearLayout>
 
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="horizontal" >
 
         <TextView
@@ -120,8 +138,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="5dp"
+        android:layout_weight="1"
         android:background="@drawable/shape_corner_border"
         android:orientation="horizontal" >
 
@@ -156,8 +175,9 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="10dp"
+        android:layout_weight="3"
         android:paddingBottom="10dp"
         android:paddingTop="5dp" >
 

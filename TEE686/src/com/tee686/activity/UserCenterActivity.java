@@ -3,6 +3,7 @@ package com.tee686.activity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -23,6 +24,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.casit.tee686.R;
 import com.readystatesoftware.viewbadger.BadgeView;
 import com.tee686.config.Constants;
@@ -33,6 +35,7 @@ import com.tee686.https.NetWorkHelper;
 import com.tee686.indicator.PageIndicator;
 import com.tee686.ui.base.BaseFragmentActivity;
 import com.tee686.utils.IntentUtil;
+import com.tee686.view.UserCollectFragment;
 import com.tee686.view.UserCollectionFragment;
 import com.tee686.view.UserIntroFragment;
 import com.tee686.view.UserLogOutFragment;
@@ -60,6 +63,8 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 	private SharedPreferences share;
 
 	private UserInfoItem mUserInfoItem;
+	private Intent intent;
+	private ContentAsyncTask contentTask;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -134,12 +139,18 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				new ContentAsyncTask().execute(String.format(Urls.USER_INFO, share.getString(UID, "")));
+				if(NetWorkHelper.checkNetState(UserCenterActivity.this)) {
+					mTabsAdapter = new TabPageAdapter(UserCenterActivity.this);
+					mViewPager.setAdapter(mTabsAdapter);
+					mIndicator.setViewPager(mViewPager);
+					contentTask = new ContentAsyncTask();
+					contentTask.execute(String.format(Urls.USER_INFO, share.getString(UID, "")));
+					loadFaillayout.setVisibility(View.GONE);
+				}				
 			}
 		});
 		mViewPager = (ViewPager) findViewById(R.id.user_pager);
-		mViewPager.setOffscreenPageLimit(2);
+		mViewPager.setOffscreenPageLimit(3);
 		mIndicator = (PageIndicator) findViewById(R.id.user_indicator);
 		mIndicator
 				.setOnPageChangeListener(new IndicatorOnPageChangedListener());
@@ -156,7 +167,8 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 		mViewPager.setAdapter(mTabsAdapter);
 		mIndicator.setViewPager(mViewPager);
 		String url = String.format(Urls.USER_INFO, share.getString(UID, ""));
-		new ContentAsyncTask().execute(url);
+		contentTask = new ContentAsyncTask();
+		contentTask.execute(url);
 	}
 
 	// [end]
@@ -199,6 +211,7 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 
 	public class ContentAsyncTask extends AsyncTask<String, Void, UserInfoItem> {		
 
+		private volatile boolean running = true;
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
@@ -208,6 +221,9 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 
 		@Override
 		protected UserInfoItem doInBackground(String... params) {
+			if(isCancelled()) {
+				return null;
+			}
 			try {
 				result = HttpUtils.getByHttpClient(UserCenterActivity.this, params[0]);
 			} catch (Exception e1) {
@@ -232,6 +248,19 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 		}
 
 		@Override
+		protected void onCancelled() {
+			// TODO Auto-generated method stub
+			super.onCancelled();
+			loadLayout.setVisibility(View.GONE);
+			UserLogOutFragment fragment = new UserLogOutFragment(
+					UserCenterActivity.this, true);
+
+			mTabsAdapter.addTab(
+					getString(R.string.user_center_get_info_error),
+					fragment);
+		}
+
+		@Override
 		protected void onPostExecute(UserInfoItem result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
@@ -247,8 +276,8 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 				return;
 			}
 			
-//			mTabsAdapter.addTab(getString(R.string.user_center_my_Collect),
-//					new UserCollectFragment(UserCenterActivity.this));		
+			mTabsAdapter.addTab(getString(R.string.user_center_my_Collect),
+					new UserCollectFragment(UserCenterActivity.this));		
 			mTabsAdapter.addTab(getString(R.string.user_center_collection),
 					new UserCollectionFragment(UserCenterActivity.this));
 			mTabsAdapter.addTab(getString(R.string.user_center_my_Intro),
@@ -256,7 +285,7 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 			mTabsAdapter.addTab(getString(R.string.user_center_exit),
 					new UserLogOutFragment(UserCenterActivity.this, false));
 			mTabsAdapter.notifyDataSetChanged();
-			mViewPager.setCurrentItem(1);
+			mViewPager.setCurrentItem(2);
 		}
 	}
 
@@ -283,11 +312,11 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 			case 0: 
 				ImgLeft.setVisibility(8);				
 				break;
-//			case 1:
-//				ImgRight.setVisibility(0);	
-//				ImgLeft.setVisibility(0);
-//				break;
-			case 2:
+			case 1:
+				ImgRight.setVisibility(0);	
+				ImgLeft.setVisibility(0);
+				break;
+			case 3:
 				ImgRight.setVisibility(8);				
 				break;
 			default:
@@ -305,7 +334,9 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.btn_community:
-				badgeView.hide(true);
+				if(badgeView.isShown()) {
+					badgeView.hide(true);
+				}
 				IntentUtil.start_activity(UserCenterActivity.this, BulletinActivity.class);
 				finish();
 				break;
@@ -321,14 +352,15 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 			finish();
 			break;
 		}
-	}
+	}	
+	
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if(NetWorkHelper.isNetworkAvailable(this)) {
-			Intent intent = new Intent(this, CheckNewService.class);
+		if(NetWorkHelper.checkNetState(this)) {
+			intent = new Intent(this, CheckNewService.class);
 			startService(intent);
 		}		
 		IntentFilter filter = new IntentFilter();
@@ -342,6 +374,13 @@ public class UserCenterActivity extends BaseFragmentActivity implements
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		unregisterReceiver(checkNewReceiver);
+		intent = new Intent(this, CheckNewService.class);
+ 	    stopService(intent);
+		if (contentTask != null
+				&& contentTask.getStatus() == AsyncTask.Status.RUNNING) {
+			contentTask.cancel(true);
+		}
+ 	    
 	}
 
 	BroadcastReceiver checkNewReceiver = new BroadcastReceiver() {

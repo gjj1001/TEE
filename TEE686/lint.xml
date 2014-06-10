@@ -2,7 +2,12 @@
 <lint>
     <issue id="ExtraTranslation" severity="ignore" />
     <issue id="MissingTranslation" severity="ignore" />
-    <issue id="NewApi" severity="ignore" />
+    <issue id="NotSibling">
+        <ignore path="res/layout/ums_order_item.xml" />
+    </issue>
+    <issue id="ResAuto">
+        <ignore path="res/layout/user_center_activity.xml" />
+    </issue>
     <issue id="TypographyDashes" severity="ignore" />
     <issue id="ValidFragment">
         <ignore path="src/com/tee686/view/UserCollectFragment.java" />

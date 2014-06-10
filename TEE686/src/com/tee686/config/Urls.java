@@ -39,11 +39,13 @@ public class Urls {
 	public static final String USER_COLLECTION = BASIC_URL + "/UserCollectionServlet";
 	public static final String USER_REPLY = BASIC_URL + "/UserReplyServlet";
 	public static final String USER_CONVERSATION = BASIC_URL + "/UserConversationServlet";
+	public static final String USER_CAPTUREVEDIO = BASIC_URL + "/UserCaptureVedioServlet";
 	public static final String USER_CONTEXT = BASIC_URL + "/UserConTextServlet";
 	public static final String USER_NOTIFY_FANS = BASIC_URL + "/UserNotifyFansServlet";
 	public static final String USER_OBSERVER = BASIC_URL + "/UserObserverServlet";
 	public static final String USER_MESSAGE = BASIC_URL + "/UserMessageServlet";
 	public static final String USER_FAN = BASIC_URL + "/UserFanServlet";
+	public static final String RECENTLY_PUSHMESSAGE = BASIC_URL + "/RecentPushMessageServlet";
 
 	/**
 	 * 1 k 2 act 3 model 4 itemid

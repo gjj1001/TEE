@@ -12,13 +12,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import com.casit.tee686.R;
+import com.tee686.activity.UserObserverActivity.DataAsyncTask;
 import com.tee686.config.Urls;
 import com.tee686.entity.Observer;
 import com.tee686.https.HttpUtils;
+import com.tee686.https.NetWorkHelper;
 import com.tee686.ui.base.BaseActivity;
 import com.tee686.utils.ImageUtil;
 import com.tee686.utils.IntentUtil;
 import com.tee686.utils.ImageUtil.ImageCallback;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -117,8 +120,15 @@ public class UserFanActivity extends BaseActivity {
 				loadFailed.setVisibility(View.VISIBLE);
 			}
 		} else {
-			url1 = String.format(Urls.USER_OBSERVER+"?username=%s", intent.getStringExtra("uname"));
-			new DataAsyncTask().execute(url1);
+			if(NetWorkHelper.checkNetState(this)) {
+				url1 = String.format(Urls.USER_OBSERVER+"?username=%s", intent.getStringExtra("uname"));
+				new DataAsyncTask().execute(url1);
+			} else {
+				showShortToast("网络连接问题,请稍后再试");
+				listContent.setVisibility(View.GONE);
+				loadFailed.setVisibility(View.VISIBLE);
+			}
+			
 		}		
 		
 		goback.setOnClickListener(new OnClickListener() {
@@ -135,8 +145,13 @@ public class UserFanActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				new DataAsyncTask().execute(url1);
+				if(NetWorkHelper.checkNetState(UserFanActivity.this)) {
+					new DataAsyncTask().execute(url1);
+				} else {
+					showShortToast("网络连接问题，请稍后再试");
+					listContent.setVisibility(View.GONE);
+					loadFailed.setVisibility(View.VISIBLE);
+				}
 			}
 		});
 	}

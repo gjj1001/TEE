@@ -18,6 +18,7 @@ import com.tee686.utils.IntentUtil;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
@@ -90,9 +91,27 @@ public class UserRegisterActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub				
+				showAlertDialog("免责申明", "本APP所载的各种信息和数据等仅供参考，禁止涉及对用户隐私信息的一切讨论，本APP所载的观点和评论仅代表用户的个人立场，用户据此发生的一切纠纷与本公司无关。本APP公告栏中的信息资料皆为用户个人发表，本公司并不对相关资料的准确性、充足性或完整性做出任何保证，也不对相关资料的任何错误或遗漏负任何法律责任。", "同意", "不同意", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						checkUsername(username.getText().toString(), pwd.getText().toString());
+					}
+				}, new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						finish();
+					}
+					
+				}, new DialogInterface.OnDismissListener() {
+					
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						mAlertDialog.dismiss();
+					}
+				});
 				
-				checkUsername(username.getText().toString(), pwd.getText().toString());
 			}
 		});
 		
@@ -121,7 +140,7 @@ public class UserRegisterActivity extends BaseActivity {
 			return;
 		}
 		// String loginUser = String.format(Urls.USER_LOGIN, name, pwd);
-		new RegisterAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Urls.USER_REGISTER);
+		new RegisterAsyncTask().execute( Urls.USER_REGISTER);
 	}
 
 	private void initSharedPreference() {

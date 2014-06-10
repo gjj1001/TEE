@@ -1,16 +1,16 @@
 package com.tee686.activity;
 
-import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.http.message.BasicNameValuePair;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONArray;
-import org.json.JSONException;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -31,11 +32,15 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.lee.pullrefresh.ui.PullToRefreshBase;
+import com.lee.pullrefresh.ui.PullToRefreshListView;
+import com.lee.pullrefresh.ui.PullToRefreshBase.OnRefreshListener;
 import com.tee686.activity.UserCenterActivity;
 import com.tee686.config.Urls;
 import com.tee686.entity.Collection;
 import com.tee686.entity.PubContent;
 import com.tee686.https.HttpUtils;
+import com.tee686.https.NetWorkHelper;
 import com.tee686.utils.ImageUtil;
 import com.tee686.utils.ImageUtil.ImageCallback;
 import com.tee686.utils.ImageUtil.ImageCallback1;
@@ -55,20 +60,39 @@ public class BulletinActivity extends BaseActivity {
 	private LinearLayout listContent;
 	private LinearLayout loadFailed;
 	private ListView lv;
+    private PullToRefreshListView mPullListView;
 //	private List<Map<String, Object>> mlist;
 	private MyAdapter mAdapter;
 	SharedPreferences share;	
 	Context context;
 	private String result;
+	private boolean mIsStart = true;
+    private int mCurIndex = 0;
+    private static final int mLoadDataCount = 50;
+    @SuppressLint("SimpleDateFormat")
+	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
+    private List<PubContent> mPubContents = new ArrayList<PubContent>();
+    private LinkedList<PubContent> mListItems = new LinkedList<PubContent>();
 	
+    private DataAsyncTask dataTask;
+    private GetDataTask getTask;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
-		setContentView(R.layout.bulletin);			
+		mPullListView = new PullToRefreshListView(this);
+		setContentView(R.layout.bulletin);	
+		mPullListView.setPullLoadEnabled(false);
+        mPullListView.setScrollLoadEnabled(true);
+        mCurIndex = mLoadDataCount;
 		initControl();
 		mCommunity.setVisibility(View.GONE);	
 		initSharePreferences();	
+		listContent.removeAllViews();
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+				new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT,
+						LayoutParams.MATCH_PARENT));
+		listContent.addView(mPullListView, layoutParams);
 		new CheckCacheTask().execute();		
 		if(savedInstanceState!=null) {
 			result = savedInstanceState.getString("result");			
@@ -85,8 +109,16 @@ public class BulletinActivity extends BaseActivity {
 				e.printStackTrace();
 			}	
 			if(!mPubContents.isEmpty()) {
-				mAdapter = new MyAdapter(mPubContents);
-//				mAdapter.appendToList(result);		
+				mListItems.clear();
+				if(mCurIndex<mPubContents.size()){
+					mListItems.addAll(mPubContents.subList(0, mCurIndex));
+					mAdapter = new MyAdapter(mListItems);
+				} else {
+					mAdapter = new MyAdapter(mPubContents);
+				}
+				
+//				mAdapter.appendToList(result);	
+				lv = mPullListView.getRefreshableView();	
 				lv.setAdapter(mAdapter);
 				lv.setOnItemClickListener(new OnItemClickListener() {
 
@@ -164,21 +196,49 @@ public class BulletinActivity extends BaseActivity {
 							BulletinPopupWindow<String> util = new BulletinPopupWindow<String>(BulletinActivity.this, 
 									pubContent, share, mAdapter, mAdapter.pubContents);
 							util.showActionWindow(view, tabs);
-							return true;
+							return true; 
 						}
 					});
 				} 
-				
+				mPullListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+		            @Override
+		            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+		                mIsStart = true;
+		                getTask = new GetDataTask();
+		                getTask.execute(Urls.USER_DOAWLOAD_IMAGE);
+		            }
+
+		            @Override
+		            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+		                mIsStart = false;
+		                getTask = new GetDataTask();
+		                getTask.execute(Urls.USER_DOAWLOAD_IMAGE);
+		            }
+		        });
+		        setLastUpdateTime();
+		        
+//		        mPullListView.doPullRefreshing(true, 500);
 				listContent.setVisibility(View.VISIBLE);
 				loadFailed.setVisibility(View.GONE);
 //				result.clear();
-			} else if(result.isEmpty()) {
+			} else if("".equals(result)) {
 				showShortToast("未发表公告");
 				listContent.setVisibility(View.VISIBLE);
 				loadFailed.setVisibility(View.GONE);
+			} else {
+				listContent.setVisibility(View.GONE);
+				loadFailed.setVisibility(View.VISIBLE);
 			}
 		} else {
-			new DataAsyncTask().execute(Urls.USER_DOAWLOAD_IMAGE);
+			if(NetWorkHelper.checkNetState(this)) {
+				dataTask = new DataAsyncTask();
+				dataTask.execute(Urls.USER_DOAWLOAD_IMAGE);
+			} else {
+				showShortToast("获取数据失败");
+				listContent.setVisibility(View.GONE);
+				loadFailed.setVisibility(View.VISIBLE);
+			}
+			
 		}		
 				/*new SimpleAdapter(this, mlist, R.layout.bulletin_board, new String[] {"userhead", 
 				"bulletincontent", "username", "image", "sendtime"}, new int[] {R.id.iv_userhead, 
@@ -206,12 +266,13 @@ public class BulletinActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				if(share.contains(UserLoginActivity.UID)) {	
-					if(share.getInt(UserLoginActivity.LEVEL, 0)>=50) {
+//					if(share.getInt(UserLoginActivity.LEVEL, 0)>=50) {
 						IntentUtil.start_activity(BulletinActivity.this, EditActivity.class);
 //						defaultFinish();
-					} else {
-						showShortToast("学员不能发布公告");
-					}
+//					} 
+//					else {
+//						showShortToast("学员不能发布公告");
+//					}
 				}else {
 					showShortToast("请先登录");
 				}
@@ -326,9 +387,7 @@ public class BulletinActivity extends BaseActivity {
 	 * @author Jason
 	 *获得列表数据
 	 */
-	class DataAsyncTask extends AsyncTask<String, Void, List<PubContent>> {
-
-		private List<PubContent> mPubContents = new ArrayList<PubContent>();
+	class DataAsyncTask extends AsyncTask<String, Void, List<PubContent>> {		
 		
 		@Override
 		protected void onPreExecute() {
@@ -339,7 +398,9 @@ public class BulletinActivity extends BaseActivity {
 
 		@Override
 		protected List<PubContent> doInBackground(String... params) {			
-			
+			if(isCancelled()) {
+				return null;
+			}
 			try {				
 				result = HttpUtils.getByHttpClient(BulletinActivity.this, params[0]);	
 				StringBuilder sb = new StringBuilder(result);
@@ -352,8 +413,8 @@ public class BulletinActivity extends BaseActivity {
 					mPubContents.add(pubContent);
 				}
 				
-			
 			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 				mAlertDialog.dismiss();
 			}
@@ -375,10 +436,19 @@ public class BulletinActivity extends BaseActivity {
 		protected void onPostExecute(List<PubContent> result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			mAlertDialog.dismiss();
+			if(mAlertDialog.isShowing()) {
+				mAlertDialog.dismiss();
+			}			
 			if(!result.isEmpty()) {
-				mAdapter = new MyAdapter(result);
-//				mAdapter.appendToList(result);		
+				if(mCurIndex<result.size()){
+					mListItems.addAll(result.subList(0, mCurIndex));
+					mAdapter = new MyAdapter(mListItems);
+				} else {
+					mAdapter = new MyAdapter(result);
+				}
+				
+//				mAdapter.appendToList(result);	
+				lv = mPullListView.getRefreshableView();
 				lv.setAdapter(mAdapter);
 				lv.setOnItemClickListener(new OnItemClickListener() {
 
@@ -460,7 +530,30 @@ public class BulletinActivity extends BaseActivity {
 						}
 					});
 				} 
-				
+				mPullListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+		            @Override
+		            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+		                mIsStart = true;
+		                getTask = new GetDataTask();
+		                getTask.execute(Urls.USER_DOAWLOAD_IMAGE);
+		            }
+
+		            @Override
+		            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+		                mIsStart = false;
+		                if(mCurIndex<mPubContents.size()) {
+		                	getTask = new GetDataTask();
+		                	getTask.execute(Urls.USER_DOAWLOAD_IMAGE);
+		                } else {
+		                	mPullListView.onPullDownRefreshComplete();
+		                    mPullListView.onPullUpRefreshComplete();
+		                    mPullListView.setHasMoreData(false);
+		                }
+		            }
+		        });
+		        setLastUpdateTime();
+		        
+//		        mPullListView.doPullRefreshing(true, 500);
 				listContent.setVisibility(View.VISIBLE);
 				loadFailed.setVisibility(View.GONE);
 //				result.clear();
@@ -504,13 +597,197 @@ public class BulletinActivity extends BaseActivity {
 		}
 		
 	}
+	
+	private class GetDataTask extends AsyncTask<String, Void, List<PubContent>> {
+
+        @Override
+        protected List<PubContent> doInBackground(String... params) {
+            // Simulates a background job.
+        	if(isCancelled()) {
+				return null;
+			}
+        	try {
+            	Thread.sleep(2000);
+            } catch (InterruptedException e) {
+            }
+            try {				
+				result = "";
+            	result = HttpUtils.getByHttpClient(BulletinActivity.this, params[0]);	
+				StringBuilder sb = new StringBuilder(result);
+				result = sb.deleteCharAt(result.lastIndexOf(",")).toString();
+//				share.edit().putString("pubContents", result).commit();		
+				JSONArray jsonArray = new JSONArray(result);
+            	mPubContents.clear();
+				for(int i=0; i<jsonArray.length(); i++) {
+					String json = jsonArray.getString(i);
+					PubContent pubContent = new ObjectMapper().readValue(json, PubContent.class);
+					mPubContents.add(pubContent);
+				}
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			/*for(PubContent pubContent : mPubContents) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("userhead", pubContent.getHeadimage());
+				map.put("bulletincontent", pubContent.getContent());
+				map.put("username", pubContent.getUsername());
+				map.put("image", pubContent.getImageFile());
+				map.put("sendtime", pubContent.getSendtime());
+				mlist.add(map);
+			}*/ 
+			
+			
+			return mPubContents;
+        }
+
+        @Override
+        protected void onPostExecute(List<PubContent> result) {
+            boolean hasMoreData = true;
+            if (mIsStart) {
+            	mListItems.clear();
+            	if(mCurIndex<result.size()){
+					mListItems.addAll(result.subList(0, mCurIndex));
+            		mAdapter = new MyAdapter(mListItems);
+				} else {
+					mAdapter = new MyAdapter(result);
+				}
+            	lv.setAdapter(mAdapter);
+				lv.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						// TODO Auto-generated method stub
+						PubContent pubContent = (PubContent) mAdapter.getItem(position);
+						IntentUtil.startActivity(BulletinActivity.this, BulletinDetailActivity.class,
+								new BasicNameValuePair("sendtime", pubContent.getSendtime()),
+								new BasicNameValuePair("userhead", pubContent.getHeadimage()),
+								new BasicNameValuePair("imagefile", pubContent.getImageFile()),
+								new BasicNameValuePair("username", pubContent.getUsername()),
+								new BasicNameValuePair("content", pubContent.getContent()),
+								new BasicNameValuePair("position", String.valueOf(position)));
+					}
+				});
+				//权限管理：讲师以上级别才能拥有删除权限
+				if(share.getInt(UserLoginActivity.LEVEL, 0)>=100) {
+					lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+						@Override
+						public boolean onItemLongClick(AdapterView<?> parent,
+								View view, int position, long id) {
+							PubContent pubContent = (PubContent) mAdapter.getItem(position);
+							List<String> tabs = new ArrayList<String>();
+							tabs.add("收藏");
+							tabs.add("删除");
+							BulletinPopupWindow<String> util = new BulletinPopupWindow<String>(BulletinActivity.this, 
+									pubContent, share, mAdapter, mAdapter.pubContents);
+							util.showActionWindow(view, tabs);
+							return true;
+						}
+					});
+				} else {
+					lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+						@Override
+						public boolean onItemLongClick(AdapterView<?> parent,
+								View view, int position, long id) {
+							/*final PubContent pubContent = (PubContent) mAdapter.getItem(position);
+							final AlertDialog.Builder builder = new AlertDialog.Builder(BulletinActivity.this);
+					        final AlertDialog ad = builder.create();
+					        ad.show();        
+					        builder.setMessage("是否要收藏此条公告?").setPositiveButton("是", new DialogInterface.OnClickListener() {
+					            @Override
+					            public void onClick(DialogInterface dialogInterface, int i) {
+					         	   ad.dismiss();				         	  
+					         	   if(share.contains(UserLoginActivity.UID)) {
+					         		   Collection collection = new Collection();
+					         		   collection.setContent(pubContent.getContent());
+					         		   collection.setHeadimage(pubContent.getHeadimage());
+					         		   collection.setImageFile(pubContent.getImageFile());
+					         		   collection.setSendtime(pubContent.getSendtime());
+					         		   collection.setUsername(pubContent.getUsername());
+					         		   collection.setUname(share.getString(UserLoginActivity.UID, ""));
+					         		   new CollectionTask().execute(collection);
+					         	   } else {
+					         		   showShortToast("请先登录后再收藏");
+					         	   }
+					            }
+					        }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+					            @Override
+					            public void onClick(DialogInterface dialogInterface, int i) {
+					                ad.dismiss();
+					            }
+					        });
+					        //dialog.setCancelable(true);
+					        builder.show();
+					        return true;*/
+							PubContent pubContent = (PubContent) mAdapter.getItem(position);
+							List<String> tabs = new ArrayList<String>();
+							tabs.add("收藏");
+//							tabs.add("删除");
+							BulletinPopupWindow<String> util = new BulletinPopupWindow<String>(BulletinActivity.this, 
+									pubContent, share, mAdapter, mAdapter.pubContents);
+							util.showActionWindow(view, tabs);
+							return true;
+						}
+					});
+				} 
+                showShortToast("内容刷新完成");
+            } else {
+                int start = mCurIndex;
+                int end = mCurIndex + mLoadDataCount;
+                if (end >= result.size()) {
+                    end = result.size();
+                    hasMoreData = false;
+                }
+                
+                for (int i = start; i < end; ++i) {
+                	mListItems.add(result.get(i));
+                }
+                
+                mCurIndex = end;
+                mAdapter.notifyDataSetChanged();
+            }
+            
+           
+            mPullListView.onPullDownRefreshComplete();
+            mPullListView.onPullUpRefreshComplete();
+            mPullListView.setHasMoreData(hasMoreData);
+            setLastUpdateTime();
+
+            super.onPostExecute(result);
+        }
+    }
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
 		outState.putString("result", result);
+		if (mRunningTask != null && mRunningTask.isCancelled() == false) {
+			mRunningTask.cancel(false);
+			mRunningTask = null;
+		}
+		if (mAlertDialog != null) {
+			mAlertDialog.dismiss();
+			mAlertDialog = null;
+		}
 	}
+
+	private void setLastUpdateTime() {
+        String text = formatDateTime(System.currentTimeMillis());
+        mPullListView.setLastUpdatedLabel(text);
+    }
+
+    private String formatDateTime(long time) {
+        if (0 == time) {
+            return "";
+        }
+        
+        return mDateFormat.format(new Date(time));
+    }
 
 	ImageCallback callback = new ImageCallback() {
 
@@ -636,4 +913,18 @@ public class BulletinActivity extends BaseActivity {
 			public TextView tvSendtime;
 		}
 	}
+
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		if (dataTask != null && dataTask.getStatus() == AsyncTask.Status.RUNNING) {
+			dataTask.cancel(true);
+		}
+		if (getTask != null && getTask.getStatus() == AsyncTask.Status.RUNNING) {
+			getTask.cancel(true);
+		}
+	}
+
+		
 }

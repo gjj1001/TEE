@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="root_layout" type="id">false</item>
+    <item name="top_mask" type="id">false</item>
+    <item name="progress" type="id">false</item>
+    <item name="cancel" type="id">false</item>
+    <item name="finishLayOut" type="id">false</item>
+    <item name="finishButton" type="id">false</item>
+    <item name="cameraView" type="id">false</item>
+    <item name="mediaShow" type="id">false</item>
+    <item name="press" type="id">false</item>
+    <item name="bottom_mask" type="id">false</item>
+    <item name="camera_features" type="id">false</item>
+    <item name="switchCamera" type="id">false</item>
+
+</resources>

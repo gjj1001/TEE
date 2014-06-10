@@ -1,10 +1,13 @@
 package com.tee686.activity;
 
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -172,8 +175,7 @@ public class UserLoginActivity extends BaseActivity {
 		loginUser = String.format(Urls.USER_LOGIN,
 				name, pwd);
 
-		new LoginAsyncTask().executeOnExecutor(
-				AsyncTask.THREAD_POOL_EXECUTOR, loginUser);
+		new LoginAsyncTask().execute(loginUser);
 	}
 
 	private void initSharePreferences() {
@@ -184,13 +186,28 @@ public class UserLoginActivity extends BaseActivity {
 			editPwd.setText(share.getString(PWD, ""));
 		}
 		if(!share.contains(KEY)) {
-			Intent intent = new Intent(this, DisclaimerActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-			startActivity(intent);
-//			overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+			showAlertDialog("温馨提示", "首次登陆请点击下方的按钮使用QQ或者微博账号登陆^_^", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					mAlertDialog.dismiss();
+				}
+			}, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					mAlertDialog.dismiss();
+				}
+			}, new DialogInterface.OnDismissListener() {
+				
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					mAlertDialog.dismiss();
+				}
+			});
 		}
 	}
- 
+
 	/**
 	 * 
 	 */
@@ -219,21 +236,46 @@ public class UserLoginActivity extends BaseActivity {
 					public void onSuccess(FrontiaUser result) {						
 						mSinaWeiboToken = result.getAccessToken();	
 						userinfo(mSinaWeiboToken);
-									
+						showAlertDialog("温馨提示", "正在登陆请稍后...");
+						Timer timer = new Timer();
+						timer.schedule(new TimerTask() {
+							
+							@Override
+							public void run() {
+								if (null!=username) {
+//									showLongToast("第三方帐号登录成功,请完善其他信息");
+									Editor edit = getSharedPreferences(SharedName, MODE_PRIVATE)
+											.edit();
+									edit.putString(UID, username);
+									edit.putString(KEY, key);
+									edit.putString(BIR, birthday);
+									edit.putString(PVC, province);
+									edit.putString(CITY, city);
+									edit.putString(SEX, sex.name().toLowerCase(Locale.ENGLISH)); 
+									edit.putString(PIC, picurl);
+									edit.putString(PLA, platform);
+									edit.commit();
+									Intent intent = new Intent(UserLoginActivity.this, UserRegisterActivity.class);
+									intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+									startActivity(intent);
+									finish(); 
+								} 
+							}
+						}, 3000);
 //						Toast.makeText(UserLoginActivity.this, "用户名:"+username, Toast.LENGTH_SHORT).show();
-						new RegisterAsyncTask()
-								.executeOnExecutor(
-										AsyncTask.THREAD_POOL_EXECUTOR, username);
+//						new RegisterAsyncTask().execute( username);
 					}
 
 					@Override
 					public void onFailure(int errorCode, String errorMessage) {
+						mAlertDialog.dismiss();
 						Toast.makeText(UserLoginActivity.this, "登陆失败",
 								Toast.LENGTH_SHORT).show();
 					}
 
 					@Override
 					public void onCancel() {
+						mAlertDialog.dismiss();
 						Toast.makeText(UserLoginActivity.this, "登陆取消",
 								Toast.LENGTH_SHORT).show();
 					}
@@ -256,20 +298,46 @@ public class UserLoginActivity extends BaseActivity {
 						 * Log.d("SocialLogin", log);*/						
 						mQQToken = result.getAccessToken();	
 						userinfo(mQQToken);
-								
+						showAlertDialog("温馨提示", "正在登陆请稍后...");
+						Timer timer = new Timer();
+						timer.schedule(new TimerTask() {
+							
+							@Override
+							public void run() {
+								if (null!=username) {
+//									showLongToast("第三方帐号登录成功,请完善其他信息");
+									Editor edit = getSharedPreferences(SharedName, MODE_PRIVATE)
+											.edit();
+									edit.putString(UID, username);
+									edit.putString(KEY, key);
+									edit.putString(BIR, birthday);
+									edit.putString(PVC, province);
+									edit.putString(CITY, city);
+									edit.putString(SEX, sex.name().toLowerCase(Locale.ENGLISH)); 
+									edit.putString(PIC, picurl);
+									edit.putString(PLA, platform);
+									edit.commit();
+									Intent intent = new Intent(UserLoginActivity.this, UserRegisterActivity.class);
+									intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+									startActivity(intent);
+									finish();
+								} 
+							}
+						}, 3000);		
 //						Toast.makeText(UserLoginActivity.this, "用户名:"+username, Toast.LENGTH_SHORT).show();
-						new RegisterAsyncTask().executeOnExecutor(
-								AsyncTask.THREAD_POOL_EXECUTOR, username);
+//						new RegisterAsyncTask().execute(username);
 					}
 
 					@Override
 					public void onFailure(int errorCode, String errorMessage) {
+						mAlertDialog.dismiss();
 						Toast.makeText(UserLoginActivity.this, "登陆失败",
 								Toast.LENGTH_SHORT).show();
 					}
 
 					@Override
 					public void onCancel() {
+						mAlertDialog.dismiss();
 						Toast.makeText(UserLoginActivity.this, "登陆取消",
 								Toast.LENGTH_SHORT).show();
 					}
@@ -419,6 +487,28 @@ public class UserLoginActivity extends BaseActivity {
 		});		
 
 	}
+
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		if (mRunningTask != null && mRunningTask.isCancelled() == false) {
+			mRunningTask.cancel(false);
+			mRunningTask = null;
+		}
+		if (mAlertDialog != null) {
+			mAlertDialog.dismiss();
+			mAlertDialog = null;
+		}
+	}
+	
+	
 	
 	/*@Override
 	protected void onResume() {

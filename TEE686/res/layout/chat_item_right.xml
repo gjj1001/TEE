@@ -54,6 +54,14 @@
 	            	android:focusable="true"
 	            	android:id="@+id/chat_msg_bg"
  				>
+
+ 					<ImageView
+ 					    android:id="@+id/iv_vedioplay"
+ 					    android:layout_width="wrap_content"
+ 					    android:layout_height="wrap_content"
+ 					    android:visibility="gone"
+ 					    android:src="@drawable/ic_media_video_poster" />
+
  					<TextView 
 	            		android:id="@+id/tv_chatcontent" 
 	           			android:layout_width="wrap_content"

@@ -119,57 +119,65 @@
                 android:layout_height="0dp"
                 android:layout_weight="2" >
 
-
-
-            <LinearLayout
-                    android:id="@+id/q2_me_rvio_s1"
+            <ScrollView
+	    			android:scrollbars="vertical" 
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:visibility="visible"
-                    android:background="@color/gray"
-                    android:layout_weight="2">
+                    android:layout_height="match_parent" >
+	            <LinearLayout
+	                    android:id="@+id/q2_me_rvio_s1"
+	                    android:layout_width="match_parent"
+	                    android:layout_height="match_parent"
+	                    android:orientation="vertical"
+	                    android:visibility="visible"
+	                    android:background="@color/gray"
+	                    android:layout_weight="2">
+	
+	                <TextView
+	                        android:id="@+id/q2_me_rvio_s1tv"
+	                        android:layout_width="match_parent"
+	                        android:layout_height="0.0dip"
+	                        android:layout_weight="2"
+	                        android:maxLines="50"
+	                        android:singleLine="false"
+	                        android:text="@string/me_rvio_q2text"
+	                        android:textAppearance="?android:attr/textAppearanceMedium"
+	                        android:textColor="@color/black"/>
+	
+	            </LinearLayout>
+	        </ScrollView>
 
-                <TextView
-                        android:id="@+id/q2_me_rvio_s1tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.0dip"
-                        android:layout_weight="2"
-                        android:maxLines="50"
-                        android:singleLine="false"
-                        android:text="@string/me_rvio_q2text"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/black"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:id="@+id/q2_me_rvio_s2"
+             <ScrollView
+	    			android:scrollbars="vertical" 
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:visibility="invisible"
-                    android:background="@color/gray">
-
-                <TextView
-                        android:id="@+id/q2_me_rvio_s2tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.0dip"
-                        android:layout_weight="2"
-                        android:maxLines="50"
-                        android:singleLine="false"
-                        android:text="@string/me_rvio_q4text"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/black"/>
-
-            </LinearLayout>
+                    android:layout_height="match_parent" >
+	            <LinearLayout
+	                    android:id="@+id/q2_me_rvio_s2"
+	                    android:layout_width="match_parent"
+	                    android:layout_height="match_parent"
+	                    android:orientation="vertical"
+	                    android:visibility="invisible"
+	                    android:background="@color/gray">
+	
+	                <TextView
+	                        android:id="@+id/q2_me_rvio_s2tv"
+	                        android:layout_width="match_parent"
+	                        android:layout_height="0.0dip"
+	                        android:layout_weight="2"
+	                        android:maxLines="50"
+	                        android:singleLine="false"
+	                        android:text="@string/me_rvio_q4text"
+	                        android:textAppearance="?android:attr/textAppearanceMedium"
+	                        android:textColor="@color/black"/>
+	
+	            </LinearLayout>
+	        </ScrollView>
 
             <LinearLayout
                     android:id="@+id/q2_me_rvio_s3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:visibility="invisible"
+                    android:visibility="gone"
                     android:background="@color/gray">
 
                 <TextView

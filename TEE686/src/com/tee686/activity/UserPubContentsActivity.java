@@ -65,6 +65,7 @@ public class UserPubContentsActivity extends BaseActivity {
 		setContentView(R.layout.user_pub_contents);
 		initControl();
 		title.setText("个人动态");
+		title.setBackgroundResource(0);
 		initSharePreferences();	
 		Intent intent = getIntent();
 		uname = intent.getStringExtra("uname");
@@ -98,7 +99,7 @@ public class UserPubContentsActivity extends BaseActivity {
 	private void initControl() {
 		lv = (ListView) findViewById(R.id.lv_pub_contents);
 		gohome = (ImageView) findViewById(R.id.details_imageview_gohome);
-		title = (TextView) findViewById(R.id.details_textview_title);
+		title = (TextView) findViewById(R.id.tv_detail_title);
 		listContent = (LinearLayout) findViewById(R.id.list_content);
 		loadFailed = (LinearLayout) findViewById(R.id.view_load_fail);
 		refresh = (Button) findViewById(R.id.bn_refresh);

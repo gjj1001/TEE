@@ -9,7 +9,8 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3"
         android:paddingLeft="20dp"
         android:paddingTop="5dp" >
 
@@ -107,7 +108,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="horizontal"
         android:paddingLeft="20dp" >
 
@@ -131,9 +133,10 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_weight="1"
         android:background="@drawable/shape_corner_border"
         android:orientation="horizontal"
         android:paddingLeft="20dp" >
@@ -169,7 +172,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:paddingBottom="5dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
@@ -215,11 +219,12 @@
     </FrameLayout>
     
      <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="horizontal" >
+         android:layout_width="fill_parent"
+         android:layout_height="0dp"
+         android:layout_marginLeft="20dp"
+         android:layout_marginRight="20dp"
+         android:layout_weight="1"
+         android:orientation="horizontal" >
 	    
 	    <Button
 	        android:id="@+id/button_add_user"

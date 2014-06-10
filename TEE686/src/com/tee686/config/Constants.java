@@ -22,5 +22,6 @@ public class Constants {
 	public static final class ReceiverAction {
 		public static final String CHECK_NEW_PUB = "com.tee686.checkPub";
 		public static final String CHECK_NEW_FAN = "com.tee686.checkfan";
+		public static final String CHECK_NEW_MSG = "com.tee686.checkMsg";
 	}
 }

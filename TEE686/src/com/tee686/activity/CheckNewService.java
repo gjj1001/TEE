@@ -107,6 +107,43 @@ public class CheckNewService extends Service {
 			}
 				
 		}, 0);
+		
+		timer.schedule(new TimerTask() {
+			String result;
+			private List<Observer> listmsgs = new ArrayList<Observer>();
+			@Override
+			public void run() {
+				try {
+					result = HttpUtils.getByHttpClient(CheckNewService.this, Urls.USER_OBSERVER+"?username="
+							+share.getString(UserLoginActivity.UID, "")+"&ifmsg=true");
+					StringBuilder sb = new StringBuilder(result);
+					result = sb.deleteCharAt(result.lastIndexOf(",")).toString();
+//					share.edit().putString("pubContents", result).commit();		
+					JSONArray jsonArray = new JSONArray(result);
+					for(int i=0; i<jsonArray.length(); i++) {
+						String json = jsonArray.getString(i);
+						Observer observer = new ObjectMapper().readValue(json, Observer.class);
+						listmsgs.add(observer);
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(result!=null) {
+					diff = share.getInt("msgtotal", 0);
+					share.edit().putInt("msgtotal", listmsgs.size()).commit();
+					diff = listmsgs.size() - diff;
+					if(diff>0) {
+						Intent intent = new Intent();
+						intent.setAction(Constants.ReceiverAction.CHECK_NEW_MSG);
+						intent.putExtra("num", diff);
+						intent.putExtra("msg", true);
+						sendBroadcast(intent);
+					}
+				}
+			}
+				
+		}, 0);
 		return super.onStartCommand(intent, flags, startId);
 	}
 

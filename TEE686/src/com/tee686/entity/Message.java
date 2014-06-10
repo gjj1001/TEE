@@ -14,6 +14,7 @@ public class Message {
 	private String send_date;
 	private String record_path;
 	private boolean ifyuyin = false; // 是否是语音消息
+	private boolean ifvedio = false; // 是否是视频消息
 	private long recordTime; // 语音消息持续的时间
 	private String bitmap; //用户头像
 	private String msgId;
@@ -109,6 +110,14 @@ public class Message {
 
 	public void setReply_person(String reply_person) {
 		this.reply_person = reply_person;
+	}
+
+	public boolean isIfvedio() {
+		return ifvedio;
+	}
+
+	public void setIfVedio(boolean ifvedio) {
+		this.ifvedio = ifvedio;
 	}
 	
 }

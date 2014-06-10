@@ -64,6 +64,14 @@
 	            		android:textSize="15sp"
 	            		android:textColor="#ff000000"
 					/>
+
+ 					<ImageView
+ 					    android:id="@+id/iv_vedioplay"
+ 					    android:layout_width="wrap_content"
+ 					    android:layout_height="wrap_content"
+ 					    android:visibility="gone"
+ 					    android:src="@drawable/ic_media_video_poster" />
+
  				</LinearLayout>
  				
 	            <TextView

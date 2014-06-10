@@ -325,6 +325,14 @@ public class EditActivity extends BaseActivity {
 			outState.putParcelable("image", cropBitmap);
 		}
 		outState.putString("content", content.getText().toString());
+		if (mRunningTask != null && mRunningTask.isCancelled() == false) {
+			mRunningTask.cancel(false);
+			mRunningTask = null;
+		}
+		if (mAlertDialog != null) {
+			mAlertDialog.dismiss();
+			mAlertDialog = null;
+		}
 	}
 	
 	/**
@@ -605,15 +613,13 @@ public class EditActivity extends BaseActivity {
                 post.setEntity(entity);
                 HttpResponse response = client.execute(post);               
                 HttpEntity e = response.getEntity();                
-                if (200 == response.getStatusLine().getStatusCode()) {
-                	client.getConnectionManager().shutdown();    
+                if (200 == response.getStatusLine().getStatusCode()) {   
                 	return EntityUtils.toString(e);
-                } else {
-                	client.getConnectionManager().shutdown();                    	
-                }
-                
+                }                 
         } catch (Exception e) {
                 e.printStackTrace();
+        } finally {
+        	client.getConnectionManager().shutdown();
         }
 		return "图片上传失败";
 	}

@@ -3,6 +3,7 @@
 
     <string name="app_name">TEE教学</string>
     <string name="action_settings">关于</string>
+    <string name="action_help">帮助</string>
     <string name="feedback">联系我们</string>
     <string name="login">用户登陆</string>
     <string name="hello_world">Hello world!</string>
@@ -56,7 +57,7 @@
     <string name="tip_input">输入框内容不能为空！</string>
     <string name="user_3rdloginInfo_error">获取第三方账号信息失败，请再次点击同一登录按钮。</string>
     <string name="about_intro">[应用简介]\n维思模-TEE Mobile由四川大学华西医院和中科院成都信息技术股份有限公司联合研发，与目前已有的维思模-TEE Simulator模拟教学平台构成一个完整的产品体系，在经食管超声模拟教学培训体系中具有重要作用。\n本产品包含四川大学华西医院推荐的四个TEE标准切面，用户通过四象限图像可以同时浏览3D模型图、超声图以及切面图，再结合适当的文字说明和音频介绍，可以得到良好的学习体验。本产品既可用于老师对小组进行教学，也可以用于学生自学和复习。</string>
-    <string name="disclaimer"> 本APP所载的各种信息和数据等仅供参考，禁止涉及对用户隐私信息的一切讨论，本APP所载的观点和评论仅代表用户的个人立场，用户据此发生的一切纠纷与本公司无关。 本APP公告栏中的资料信息皆为用户个人发表，公司并不对相关资料的准确性、充足性或完整性做出任何保证，也不对相关资料的任何错误或遗漏负任何法律责任。</string>
+    <string name="disclaimer">本APP所载的各种信息和数据等仅供参考，禁止涉及对用户隐私信息的一切讨论，本APP所载的观点和评论仅代表用户的个人立场，用户据此发生的一切纠纷与本公司无关。本APP公告栏中的信息资料皆为用户个人发表，本公司并 不对相关资料的准确性、充足性或完整性做出任何保证，也不对相关资料的任何错误或遗漏负任何法律责任。</string>
     <string name="about_thanks">[声明]\n维思模-TEE Mobile由四川大学华西医院和中科院成都信息技术股份有限公司联合研发，与目前已有的维思模-TEE Simulator模拟教学平台构成一个完整的产品体系，本产品作为维思模-TEE Simulator模拟教学平台的相应补充。</string>
     <string name="about_contact">研发单位:\n中科院成都信息技术股份有限公司\n四川大学华西医院\n联系电话:\n(028)85249933-8309	(028)85423593</string>
 
@@ -209,7 +210,37 @@
     <string name="xlistview_footer_hint_normal">查看更多</string>
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
     <string name="press_again_exit">再按一次退出</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_text">TEE</string>
     <string name="add_widget">Add widget</string>
+    
+    <string name="pushmsg_center_no_more_msg">已经到底啦</string>
+    <string name="pushmsg_center_pull_up_text">松开加载更多</string>
+    <string name="pushmsg_center_pull_down_text">下拉可以刷新</string>
+    <string name="pushmsg_center_pull_release_text">松开获取更多</string>
+    <string name="pushmsg_center_pull_down_update_time">最后更新时间 : </string>
+    <string name="pushmsg_center_load_more_ongoing_text">正在加载中</string>
+    <string name="xsearch_loading">正在加载中…</string>
+
+    <!-- 加载图片失败时的提示文本 -->
+    <string name="picture_load_image_failed">点击屏幕，重新加载</string>
+    <!-- 加载中提示 -->
+    <string name="picture_image_loading">正在加载…</string>
+    
+    <!-- 下拉刷新和上拉加载更多的文本 -->
+    <string name="pull_to_refresh_header_hint_normal">@string/pushmsg_center_pull_down_text</string>
+    <string name="pull_to_refresh_header_hint_normal2">上拉可以刷新</string>
+    <string name="pull_to_refresh_header_hint_ready">松开后刷新</string>
+    <string name="pull_to_refresh_header_hint_loading">@string/pushmsg_center_load_more_ongoing_text</string>
+    <string name="pull_to_refresh_header_last_time">@string/pushmsg_center_pull_down_update_time</string>
+    <string name="pull_to_refresh_footer_hint_ready">松开载入更多</string>
+    <string name="pull_to_refresh_refreshing_label">@string/pull_to_refresh_header_hint_loading</string>
+    <string name="pull_to_refresh_no_more_data">@string/pushmsg_center_no_more_msg</string>
+    <string name="pull_to_refresh_network_error">网络不给力，请检查网络</string>
+    
+    <!-- 图片保存的文字 -->
+    <string name="picture_save_succeed">图片已保存到相册</string>
+    <string name="picture_save_fail">保存图片失败</string>
+    <string name="picture_next_album">下一组：</string>
+    <string name="picture_previous_album">上一组：</string>
 
 </resources>

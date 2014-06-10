@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.message.BasicNameValuePair;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -58,6 +59,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import cn.jpush.android.api.JPushInterface;
+import cn.wodong.capturevideo.MainActivity;
 
 import com.casit.tee686.R;
 import com.tee686.adapter.ChatMsgViewAdapter;
@@ -66,6 +68,7 @@ import com.tee686.config.ContentFlag;
 import com.tee686.config.Urls;
 import com.tee686.entity.Message;
 import com.tee686.https.HttpUtils;
+import com.tee686.https.NetWorkHelper;
 import com.tee686.service.base.MessageService;
 import com.tee686.service.base.RecordPlayService;
 import com.tee686.ui.base.BaseActivity;
@@ -73,6 +76,7 @@ import com.tee686.utils.ConversationPopupWindow;
 import com.tee686.utils.DateUtil;
 import com.tee686.utils.ExpressionUtil;
 import com.tee686.utils.FileDealTool;
+import com.tee686.utils.IntentUtil;
 import com.tee686.utils.SystemConstant;
 
 public class ReplyActivity extends BaseActivity {
@@ -84,6 +88,7 @@ public class ReplyActivity extends BaseActivity {
 	private ImageView gohome;
 	private Button btn_send;
 	private Button btn_record;
+	private Button btn_video;
 	private ImageButton btn_open_record;
 	private Dialog progressDialog;
 	private Dialog recordDialog;
@@ -284,6 +289,19 @@ public class ReplyActivity extends BaseActivity {
         btn_send.setOnClickListener(new SendBtnClickListener());
         btn_record = (Button) findViewById(R.id.btn_start_record);
         btn_record.setOnTouchListener(new MyRecordTouchListener());
+        btn_video = (Button) findViewById(R.id.bt_video);
+        btn_video.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ReplyActivity.this, MainActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+				intent.putExtra("reply_person", uname);
+				startActivity(intent);
+				overridePendingTransition(R.anim.push_left_in, R.anim.hold);
+				finish();
+			} 
+		});
         recordDialog = new Dialog(this, R.style.dialog);
         recordDialog.setContentView(record_view);
         recordSendDialog = new Dialog(this, R.style.dialog);
@@ -363,6 +381,8 @@ public class ReplyActivity extends BaseActivity {
 	protected void onPause() {
 		super.onPause();
 	}
+	
+	
 	/**
 	 * 语音UI变更
 	 * @param
@@ -378,7 +398,16 @@ public class ReplyActivity extends BaseActivity {
 		}).start();
 	}*/
     
-    /**
+//    @Override
+//	protected void onResume() {
+//		// TODO Auto-generated method stub
+//		super.onResume();
+//		String url1 = String.format(Urls.USER_MESSAGE+"?send_person=%s&reply_person=%s", 
+// 				share.getString(UserLoginActivity.UID, ""), uname);
+// 		new DataAsyncTask().execute(url1);
+//	}
+
+	/**
      * 打开语音聊天页面
      * @param view
      */
@@ -483,7 +512,7 @@ public class ReplyActivity extends BaseActivity {
 									String send_date = DateUtil.getCurrentDateTime();
 									msgService.sendRecordMsg(file, recordTime, uname, send_date, 
 											share.getString(UserLoginActivity.UID, ""), 
-											share.getString(UserLoginActivity.PIC, ""));
+											share.getString(UserLoginActivity.PIC, ""), 1);
 									Message message = new Message("", share.getString(UserLoginActivity.UID, ""), 
 											send_date, share.getString(UserLoginActivity.PIC, ""),
 											uname);
@@ -791,7 +820,6 @@ public class ReplyActivity extends BaseActivity {
 			} finally {
 				audioRecord.stop();
 				audioRecord.release();
-				audioRecord = null;
 //					output.close();
 			}
 		}

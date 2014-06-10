@@ -30,6 +30,14 @@
     android:id="@+id/bottom_input"
     android:layout_marginTop="0dp"
     >
+
+     <Button
+         android:id="@+id/bt_video"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center"
+         android:background="@android:drawable/ic_media_play" />
+
 	<ImageButton  
     	android:layout_width="wrap_content" 
     	android:layout_height="wrap_content" 
@@ -40,6 +48,7 @@
     	android:layout_marginLeft="3dp"
     	android:id="@+id/btn_open_record"
     />
+
    <LinearLayout 
  	android:orientation="horizontal"
     android:layout_width="fill_parent"
